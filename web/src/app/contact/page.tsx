@@ -1,0 +1,70 @@
+export const metadata = {
+  title: "Contact • The Island",
+};
+
+export default function ContactPage() {
+  return (
+    <div className="space-y-6">
+      <header>
+        <h1 className="text-3xl font-semibold">Contact</h1>
+        <p className="text-gray-700">Reach out to The Island on WART 95.5 FM.</p>
+      </header>
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <form
+          className="rounded-lg border bg-white/80 p-4 shadow-sm"
+          action="https://formspree.io/f/xbldkqvr"
+          method="POST"
+        >
+          <div className="grid grid-cols-1 gap-4">
+            <label className="block text-sm">
+              <span className="mb-1 block font-medium">Name</span>
+              <input name="name" required className="w-full rounded-md border px-3 py-2" />
+            </label>
+            <label className="block text-sm">
+              <span className="mb-1 block font-medium">Email</span>
+              <input name="email" type="email" required className="w-full rounded-md border px-3 py-2" />
+            </label>
+            <label className="block text-sm">
+              <span className="mb-1 block font-medium">Subject</span>
+              <input name="subject" required className="w-full rounded-md border px-3 py-2" />
+            </label>
+            <label className="block text-sm">
+              <span className="mb-1 block font-medium">Message</span>
+              <textarea name="message" required rows={6} className="w-full rounded-md border px-3 py-2" />
+            </label>
+            <button className="btn btn-primary" type="submit">Send</button>
+          </div>
+          <p className="mt-3 text-xs text-gray-600">
+            Prefer email? <a className="underline" href="mailto:music@theisland.radio.fm">music@theisland.radio.fm</a>
+          </p>
+        </form>
+
+        <section className="rounded-lg border bg-white/80 p-4 shadow-sm text-sm text-gray-700">
+          <h2 className="text-xl font-medium text-[--rasta-green]">Station Info</h2>
+          <dl className="mt-3 space-y-2">
+            <div>
+              <dt className="font-medium">Request Line</dt>
+              <dd>(555) 123-4567</dd>
+            </div>
+            <div>
+              <dt className="font-medium">Email</dt>
+              <dd><a className="underline" href="mailto:music@theisland.radio.fm">music@theisland.radio.fm</a></dd>
+            </div>
+            <div>
+              <dt className="font-medium">Social</dt>
+              <dd>
+                <ul className="list-inside list-disc">
+                  <li><a className="underline" href="https://instagram.com" target="_blank" rel="noreferrer noopener">Instagram</a></li>
+                  <li><a className="underline" href="https://facebook.com" target="_blank" rel="noreferrer noopener">Facebook</a></li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+

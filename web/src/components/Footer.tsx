@@ -1,0 +1,18 @@
+export function Footer() {
+  return (
+    <footer className="border-t bg-white/80">
+      <div className="container py-8 text-sm text-gray-700">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {new Date().getFullYear()} The Island • WART 95.5 FM · Madison County, NC
+          </p>
+          <p>
+            Fridays 6:30–8pm ET · DJ &quot;Dub Tractor&quot; · <a className="underline" href="/contact/">Contact</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+

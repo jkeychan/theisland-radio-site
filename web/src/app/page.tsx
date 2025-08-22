@@ -1,0 +1,43 @@
+export default function Home() {
+  return (
+    <div className="space-y-8">
+      <section aria-labelledby="hero-title" className="text-center">
+        <h1 id="hero-title" className="text-4xl sm:text-6xl font-[family-name:var(--font-righteous)] text-[--rasta-green]">
+          The Island
+        </h1>
+        <p className="mt-2 text-lg sm:text-xl">WART 95.5 FM • Madison County, NC</p>
+        <p className="mt-1 text-base sm:text-lg">DJ &quot;Dub Tractor&quot; — Fridays 6:30–8pm ET</p>
+        <div className="mt-6 flex justify-center gap-3">
+          <a className="btn btn-primary" href="https://wartfm.org/stream" target="_blank" rel="noreferrer noopener">
+            Listen Live
+          </a>
+          <a className="btn btn-secondary" href="/recordings/">
+            Recent Recordings
+          </a>
+        </div>
+      </section>
+
+      <section aria-labelledby="playlist-preview-title">
+        <div className="flex items-end justify-between">
+          <h2 id="playlist-preview-title" className="text-2xl font-semibold">Recent Playlists</h2>
+          <a className="text-[--rasta-red] underline underline-offset-4" href="/playlists/">View all</a>
+        </div>
+        <div id="playlist-preview" className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Hydrated with static data later */}
+          <article className="rounded-lg border bg-white/80 p-4 shadow-sm">
+            <h3 className="font-medium">2025-01-10</h3>
+            <p className="text-sm text-gray-600">Reggae Roots & Rocksteady</p>
+          </article>
+          <article className="rounded-lg border bg-white/80 p-4 shadow-sm">
+            <h3 className="font-medium">2024-12-20</h3>
+            <p className="text-sm text-gray-600">Holiday Ska Special</p>
+          </article>
+          <article className="rounded-lg border bg-white/80 p-4 shadow-sm">
+            <h3 className="font-medium">2024-12-13</h3>
+            <p className="text-sm text-gray-600">Dub Explorations</p>
+          </article>
+        </div>
+      </section>
+    </div>
+  );
+}

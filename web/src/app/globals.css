@@ -33,7 +33,13 @@
 }
 
 body {
-  background: var(--background);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--rasta-gold) 18%, transparent),
+    color-mix(in oklch, white 90%, transparent) 30%,
+    color-mix(in oklch, var(--rasta-green) 12%, transparent) 65%,
+    color-mix(in oklch, var(--rasta-red) 10%, transparent)
+  );
   color: var(--foreground);
 }
 
@@ -49,7 +55,7 @@ body {
 }
 
 .hero {
-  background-image: linear-gradient(180deg, rgba(245, 158, 11, 0.18), rgba(8, 145, 178, 0.12));
+  background-image: linear-gradient(180deg, rgba(245, 158, 11, 0.22), rgba(8, 145, 178, 0.14));
 }
 
 .card {
@@ -58,6 +64,13 @@ body {
 
 .card-accent {
   border-left: 4px solid var(--rasta-green);
+}
+
+.section-heading {
+  display: inline-block;
+  padding-bottom: 6px;
+  border-bottom: 4px solid transparent;
+  border-image: linear-gradient(to right, var(--rasta-red), var(--rasta-gold), var(--rasta-green)) 1;
 }
 
 .card-title {

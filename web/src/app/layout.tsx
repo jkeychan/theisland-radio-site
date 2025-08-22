@@ -61,6 +61,7 @@ export default function RootLayout({
             </Script>
           </>
         ) : null}
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <Header />
         <main className="pb-16 pt-6">
           <div className="container">{children}</div>

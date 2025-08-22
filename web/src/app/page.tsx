@@ -10,7 +10,7 @@ export default function Home() {
         </p>
         <p className="mt-1 text-base sm:text-lg">DJ &quot;Dub Tractor&quot; — Fridays 6:30–8pm ET</p>
         <div className="mt-6 flex justify-center gap-3">
-          <a className="btn btn-primary" href="https://wartfm.org/stream" target="_blank" rel="noreferrer noopener">
+          <a className="btn btn-live" href="https://station.voscast.com/5530050e0a38b/" target="_blank" rel="noreferrer noopener">
             Listen Live
           </a>
           <a className="btn btn-secondary" href="/recordings/">

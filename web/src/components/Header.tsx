@@ -18,15 +18,17 @@ export function Header() {
     <header className="border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="brand-gradient h-1 w-full" aria-hidden />
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="inline-flex items-baseline gap-2" aria-label="The Island home">
-          <span className="text-2xl font-[family-name:var(--font-righteous)] text-[--rasta-green]">
-            The Island
-          </span>
-          <a className="hidden sm:inline text-sm text-gray-600 underline-offset-4 hover:underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">
+        <div className="inline-flex items-baseline gap-3">
+          <Link href="/" className="inline-flex items-baseline gap-2" aria-label="The Island home">
+            <span className="text-2xl font-[family-name:var(--font-righteous)] text-[--rasta-green]">
+              The Island
+            </span>
+          </Link>
+          <a className="hidden sm:inline text-sm text-gray-700 underline-offset-4 hover:underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">
             WART 95.5 FM
           </a>
-        </Link>
-        <nav className="flex items-center gap-1" aria-label="Primary">
+        </div>
+        <nav className="flex items-center gap-2" aria-label="Primary">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -42,6 +44,14 @@ export function Header() {
               </Link>
             );
           })}
+          <a
+            href="https://station.voscast.com/5530050e0a38b/"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="btn btn-live hidden sm:inline-flex"
+          >
+            Listen Live
+          </a>
         </nav>
       </div>
     </header>

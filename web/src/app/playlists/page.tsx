@@ -8,8 +8,8 @@ export default function PlaylistsPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-3xl font-semibold">Playlists</h1>
-        <p className="text-gray-700">Archive of past shows organized by date.</p>
+        <h1 className="text-3xl font-semibold section-heading section-heading-light">Playlists</h1>
+        <p className="text-gray-200">Archive of past shows organized by date.</p>
       </header>
 
       <div className="grid grid-cols-1 gap-4">

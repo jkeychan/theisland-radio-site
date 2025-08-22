@@ -15,7 +15,7 @@ export function Header() {
   const pathname = usePathname() || "/";
 
   return (
-    <header className="border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <header className="border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 boxed">
       <div className="stripe-red w-full" aria-hidden />
       <div className="stripe-gold w-full" aria-hidden />
       <div className="container flex h-16 items-center justify-between">

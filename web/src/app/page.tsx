@@ -19,9 +19,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-labelledby="playlist-preview-title">
+      <section aria-labelledby="playlist-preview-title" className="mt-6">
         <div className="flex items-end justify-between">
-          <h2 id="playlist-preview-title" className="text-2xl font-semibold section-heading">Recent Playlists</h2>
+          <h2 id="playlist-preview-title" className="text-2xl font-semibold section-heading section-heading-light">Recent Playlists</h2>
           <a className="text-[--rasta-green] underline underline-offset-4" href="/playlists/">View all</a>
         </div>
         <div id="playlist-preview" className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

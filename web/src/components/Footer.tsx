@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="border-t bg-white/80">
+    <footer className="border-t bg-white/80 boxed">
       <div className="stripe-red w-full" aria-hidden />
       <div className="stripe-gold w-full" aria-hidden />
       <div className="container py-8 text-sm text-gray-700">

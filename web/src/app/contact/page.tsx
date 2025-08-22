@@ -6,8 +6,8 @@ export default function ContactPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-3xl font-semibold">Contact</h1>
-        <p className="text-gray-700">Reach out to The Island on WART 95.5 FM.</p>
+        <h1 className="text-3xl font-semibold section-heading section-heading-light">Contact</h1>
+        <p className="text-theme-gold">Reach out to The Island on WART 95.5 FM.</p>
       </header>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -38,7 +38,7 @@ export default function ContactPage() {
           {/* Email intentionally hidden from the page to avoid indexing */}
         </form>
 
-        <section className="rounded-lg border bg-white/80 p-4 shadow-sm text-sm text-gray-700">
+        <section className="rounded-lg border bg-white/80 p-4 shadow-sm text-sm text-theme-gold">
           <h2 className="text-xl font-medium text-[--rasta-green]">Station Info</h2>
           <dl className="mt-3 space-y-2">
             <div>

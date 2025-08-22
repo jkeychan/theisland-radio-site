@@ -6,7 +6,7 @@ export default function Home() {
           The Island
         </h1>
         <p className="mt-2 text-lg sm:text-xl">
-          <a className="underline-offset-4 hover:underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">WART 95.5 FM</a> • Madison County, NC
+          <a className="underline-offset-4 hover:underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">WART 95.5 FM</a> • <a className="underline-offset-4 hover:underline" href="https://madisoncountyarts.com/" target="_blank" rel="noreferrer noopener">Madison County, NC</a>
         </p>
         <p className="mt-1 text-base sm:text-lg">DJ Dub Tractor — Fridays 6:30–8pm ET</p>
         <div className="mt-6 flex justify-center gap-3">
@@ -27,16 +27,16 @@ export default function Home() {
         <div id="playlist-preview" className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Hydrated with static data later */}
           <article className="card card-accent p-4">
-            <h3 className="font-medium">2025-01-10</h3>
-            <p className="text-sm text-gray-600">Reggae Roots & Rocksteady</p>
+            <h3 className="font-medium text-theme-gold">2025-01-10</h3>
+            <p className="text-sm text-theme-gold">Reggae Roots & Rocksteady</p>
           </article>
           <article className="card card-accent p-4">
-            <h3 className="font-medium">2024-12-20</h3>
-            <p className="text-sm text-gray-600">Holiday Ska Special</p>
+            <h3 className="font-medium text-theme-gold">2024-12-20</h3>
+            <p className="text-sm text-theme-gold">Holiday Ska Special</p>
           </article>
           <article className="card card-accent p-4">
-            <h3 className="font-medium">2024-12-13</h3>
-            <p className="text-sm text-gray-600">Dub Explorations</p>
+            <h3 className="font-medium text-theme-gold">2024-12-13</h3>
+            <p className="text-sm text-theme-gold">Dub Explorations</p>
           </article>
         </div>
       </section>

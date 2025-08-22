@@ -97,7 +97,8 @@ body {
 }
 
 .muted {
-  @apply text-sm text-gray-600;
+  @apply text-sm;
+  color: var(--rasta-gold);
 }
 
 .btn {
@@ -129,3 +130,5 @@ body {
 .container {
   @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
 }
+
+.text-theme-gold { color: var(--rasta-gold); }

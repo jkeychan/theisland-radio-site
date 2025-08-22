@@ -1,0 +1,13 @@
+.cursor/**
+web/node_modules/
+web/.next/
+web/out/
+web/build/
+web/dist/
+web/*.log
+**/.DS_Store
+.env
+.env.local
+.env.*.local
+*.env
+

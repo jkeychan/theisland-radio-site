@@ -16,7 +16,8 @@ export function Header() {
 
   return (
     <header className="border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="brand-gradient h-1 w-full" aria-hidden />
+      <div className="stripe-red w-full" aria-hidden />
+      <div className="stripe-gold w-full" aria-hidden />
       <div className="container flex h-16 items-center justify-between">
         <div className="inline-flex items-baseline gap-3">
           <Link href="/" className="inline-flex items-baseline gap-2" aria-label="The Island home">

@@ -9,6 +9,7 @@
   --island-sand: #F4E4BC;
   --island-ocean: #0891B2;
   --island-sunset: #F97316;
+  --deep-green: #0f2f1f;
 }
 
 @theme inline {
@@ -32,14 +33,12 @@
   }
 }
 
+html, body { overflow-x: hidden; }
+
 body {
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklch, var(--rasta-gold) 18%, transparent),
-    color-mix(in oklch, white 90%, transparent) 30%,
-    color-mix(in oklch, var(--rasta-green) 12%, transparent) 65%,
-    color-mix(in oklch, var(--rasta-red) 10%, transparent)
-  );
+  background: radial-gradient(60% 100% at 50% 0%, color-mix(in oklab, var(--rasta-gold) 10%, transparent), transparent 60%),
+              radial-gradient(50% 100% at 20% 100%, color-mix(in oklab, var(--rasta-green) 12%, transparent), transparent 70%),
+              var(--deep-green);
   color: var(--foreground);
 }
 
@@ -59,6 +58,12 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+@media (max-width: 640px), (prefers-reduced-data: reduce) {
+  .hero {
+    background-image: linear-gradient(180deg, rgba(245, 158, 11, 0.22), rgba(8, 145, 178, 0.14));
+  }
 }
 
 .card {
@@ -92,9 +97,9 @@ body {
   @apply bg-[--rasta-green] text-white hover:bg-emerald-600 focus-visible:ring-[--rasta-green] focus-visible:ring-offset-background;
 }
 
-.btn-secondary {
-  @apply bg-[--rasta-gold] text-black hover:bg-amber-500 focus-visible:ring-[--rasta-gold] focus-visible:ring-offset-background;
-}
+.btn-secondary { background-color: var(--rasta-gold); color: #000000; }
+.btn-secondary:hover { background-color: #d97706; }
+.btn-secondary:focus-visible { outline: 2px solid var(--rasta-gold); outline-offset: 2px; }
 
 .btn-live {
   background-color: var(--rasta-red);

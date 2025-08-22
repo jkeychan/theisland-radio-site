@@ -35,9 +35,7 @@ export default function ContactPage() {
             </label>
             <button className="btn btn-primary" type="submit">Send</button>
           </div>
-          <p className="mt-3 text-xs text-gray-600">
-            Prefer email? <a className="underline" href="mailto:music@theisland.radio.fm">music@theisland.radio.fm</a>
-          </p>
+          {/* Email intentionally hidden from the page to avoid indexing */}
         </form>
 
         <section className="rounded-lg border bg-white/80 p-4 shadow-sm text-sm text-gray-700">
@@ -48,17 +46,8 @@ export default function ContactPage() {
               <dd>(555) 123-4567</dd>
             </div>
             <div>
-              <dt className="font-medium">Email</dt>
-              <dd><a className="underline" href="mailto:music@theisland.radio.fm">music@theisland.radio.fm</a></dd>
-            </div>
-            <div>
-              <dt className="font-medium">Social</dt>
-              <dd>
-                <ul className="list-inside list-disc">
-                  <li><a className="underline" href="https://instagram.com" target="_blank" rel="noreferrer noopener">Instagram</a></li>
-                  <li><a className="underline" href="https://facebook.com" target="_blank" rel="noreferrer noopener">Facebook</a></li>
-                </ul>
-              </dd>
+              <dt className="font-medium">Station Website</dt>
+              <dd><a className="underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">WART 95.5 FM</a></dd>
             </div>
           </dl>
         </section>

@@ -37,6 +37,22 @@ body {
   color: var(--foreground);
 }
 
+.brand-gradient {
+  background-image: linear-gradient(to right, var(--rasta-red), var(--rasta-gold), var(--rasta-green));
+}
+
+.card {
+  @apply rounded-lg border bg-white/90 shadow-sm transition-shadow hover:shadow;
+}
+
+.card-title {
+  @apply text-xl font-medium;
+}
+
+.muted {
+  @apply text-sm text-gray-600;
+}
+
 .btn {
   @apply inline-flex items-center justify-center rounded-md px-4 py-2 font-medium shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
 }

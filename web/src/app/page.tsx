@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div className="space-y-8">
-      <section aria-labelledby="hero-title" className="text-center hero rounded-xl py-8">
+      <section aria-labelledby="hero-title" className="text-center hero rounded-xl py-12 text-white">
         <h1 id="hero-title" className="text-4xl sm:text-6xl font-[family-name:var(--font-righteous)] heading-rasta">
           The Island
         </h1>

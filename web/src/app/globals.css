@@ -41,8 +41,23 @@ body {
   background-image: linear-gradient(to right, var(--rasta-red), var(--rasta-gold), var(--rasta-green));
 }
 
+.heading-rasta {
+  background-image: linear-gradient(90deg, var(--rasta-red), var(--rasta-gold), var(--rasta-green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero {
+  background-image: linear-gradient(180deg, rgba(245, 158, 11, 0.18), rgba(8, 145, 178, 0.12));
+}
+
 .card {
   @apply rounded-lg border bg-white/90 shadow-sm transition-shadow hover:shadow;
+}
+
+.card-accent {
+  border-left: 4px solid var(--rasta-green);
 }
 
 .card-title {
@@ -66,7 +81,17 @@ body {
 }
 
 .btn-live {
-  @apply bg-[--rasta-red] text-white hover:bg-red-600 focus-visible:ring-[--rasta-red] focus-visible:ring-offset-background;
+  background-color: var(--rasta-red);
+  color: #ffffff;
+}
+
+.btn-live:hover {
+  background-color: #dc2626; /* Tailwind red-600 */
+}
+
+.btn-live:focus-visible {
+  outline: 2px solid var(--rasta-red);
+  outline-offset: 2px;
 }
 
 .container {

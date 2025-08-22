@@ -14,7 +14,7 @@ export default function EventsPage() {
 
       <div className="grid grid-cols-1 gap-4">
         {events.map((e) => (
-          <article key={e.id} className="rounded-lg border bg-white/80 p-4 shadow-sm">
+          <article key={e.id} className="card card-accent p-4">
             <h2 className="text-xl font-medium">{e.title}</h2>
             <p className="text-sm text-gray-600">{e.date}</p>
             <div className="text-sm text-gray-700">

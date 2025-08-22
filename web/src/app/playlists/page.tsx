@@ -14,7 +14,7 @@ export default function PlaylistsPage() {
 
       <div className="grid grid-cols-1 gap-4">
         {playlists.map((p) => (
-          <article key={p.id} className="rounded-lg border bg-white/80 p-4 shadow-sm">
+          <article key={p.id} className="card card-accent p-4">
             <h2 className="text-xl font-medium">{p.id} — {p.title}</h2>
             {p.description ? (
               <p className="text-sm text-gray-600">{p.description}</p>

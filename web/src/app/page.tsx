@@ -1,8 +1,8 @@
 export default function Home() {
   return (
     <div className="space-y-8">
-      <section aria-labelledby="hero-title" className="text-center">
-        <h1 id="hero-title" className="text-4xl sm:text-6xl font-[family-name:var(--font-righteous)] text-[--rasta-green]">
+      <section aria-labelledby="hero-title" className="text-center hero rounded-xl py-8">
+        <h1 id="hero-title" className="text-4xl sm:text-6xl font-[family-name:var(--font-righteous)] heading-rasta">
           The Island
         </h1>
         <p className="mt-2 text-lg sm:text-xl">
@@ -26,15 +26,15 @@ export default function Home() {
         </div>
         <div id="playlist-preview" className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Hydrated with static data later */}
-          <article className="card p-4">
+          <article className="card card-accent p-4">
             <h3 className="font-medium">2025-01-10</h3>
             <p className="text-sm text-gray-600">Reggae Roots & Rocksteady</p>
           </article>
-          <article className="card p-4">
+          <article className="card card-accent p-4">
             <h3 className="font-medium">2024-12-20</h3>
             <p className="text-sm text-gray-600">Holiday Ska Special</p>
           </article>
-          <article className="card p-4">
+          <article className="card card-accent p-4">
             <h3 className="font-medium">2024-12-13</h3>
             <p className="text-sm text-gray-600">Dub Explorations</p>
           </article>

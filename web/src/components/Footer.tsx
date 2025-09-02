@@ -9,7 +9,7 @@ export function Footer() {
             © {new Date().getFullYear()} The Island • <a className="underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">WART 95.5 FM</a> · Madison County, NC
           </p>
           <p>
-            Fridays 6:30–8pm ET · DJ Dub Tractor · <a className="underline" href="/contact/">Contact</a>
+            <span className="font-semibold">Fridays 6:30–8pm ET</span> · DJ Dub Tractor · <a className="underline" href="/contact/">Contact</a>
           </p>
         </div>
       </div>

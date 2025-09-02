@@ -19,20 +19,9 @@ export function Header() {
       <div className="stripe-red w-full" aria-hidden />
       <div className="stripe-gold w-full" aria-hidden />
       <div className="container flex h-16 items-center justify-between">
-        <div className="inline-flex items-baseline gap-3">
-          <Link href="/" className="inline-flex items-baseline gap-2" aria-label="The Island home">
-            <span className="text-2xl font-[family-name:var(--font-righteous)]">
-              <span style={{ color: "var(--rasta-red)" }}>T</span>
-              <span style={{ color: "var(--rasta-gold)" }}>h</span>
-              <span style={{ color: "var(--rasta-green)" }}>e</span>
-              <span> </span>
-              <span style={{ color: "var(--rasta-red)" }}>I</span>
-              <span style={{ color: "var(--rasta-gold)" }}>s</span>
-              <span style={{ color: "var(--rasta-green)" }}>l</span>
-              <span style={{ color: "var(--rasta-red)" }}>a</span>
-              <span style={{ color: "var(--rasta-gold)" }}>n</span>
-              <span style={{ color: "var(--rasta-green)" }}>d</span>
-            </span>
+        <div className="inline-flex items-center gap-3">
+          <Link href="/" className="inline-flex items-center gap-2" aria-label="The Island home">
+            <img src="/images/dub-tractor-theisland-logo-transparent.png" alt="The Island logo" className="h-8 w-auto" />
           </Link>
           <a className="hidden sm:inline text-sm text-theme-gold underline-offset-4 hover:underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">
             WART 95.5 FM

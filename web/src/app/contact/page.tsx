@@ -41,11 +41,8 @@ export default function ContactPage() {
           {/* Email intentionally hidden from the page to avoid indexing */}
         </form>
 
-        <section className="rounded-lg border card-dark p-4 shadow-sm text-sm text-theme-gold h-full">
-          <div className="flex items-center gap-3">
-            <img src="/images/dub-tractor-theisland-logo.png" alt="The Island logo" className="h-10 w-auto" />
-            <h2 className="text-xl font-medium text-white">Station Info</h2>
-          </div>
+        <section className="rounded-lg border card-dark p-4 shadow-sm text-sm text-theme-gold h-full flex flex-col">
+          <h2 className="text-xl font-medium text-white">Station Info</h2>
           <dl className="mt-3 space-y-2">
             <div>
               <dt className="font-medium">Request Line</dt>
@@ -56,6 +53,13 @@ export default function ContactPage() {
               <dd><a className="underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">WART 95.5 FM</a></dd>
             </div>
           </dl>
+          <div className="mt-auto">
+            <img
+              src="/images/dub-tractor-theisland-logo.png"
+              alt="The Island logo"
+              className="w-full h-56 sm:h-72 object-contain mx-auto drop-shadow"
+            />
+          </div>
         </section>
       </div>
     </div>

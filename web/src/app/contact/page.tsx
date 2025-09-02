@@ -8,6 +8,18 @@ export default function ContactPage() {
       <header>
         <h1 className="text-3xl font-semibold section-heading section-heading-light">Contact</h1>
         <p className="text-theme-gold">Reach out to The Island on WART 95.5 FM.</p>
+        <dl className="mt-2 text-sm flex flex-wrap gap-x-8 gap-y-1">
+          <div>
+            <dt className="font-medium text-white">Request Line</dt>
+            <dd className="text-theme-gold">828-222-6317</dd>
+          </div>
+          <div>
+            <dt className="font-medium text-white">Station Website</dt>
+            <dd className="text-theme-gold">
+              <a className="underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">WART 95.5 FM</a>
+            </dd>
+          </div>
+        </dl>
       </header>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 items-stretch">
@@ -41,18 +53,7 @@ export default function ContactPage() {
           {/* Email intentionally hidden from the page to avoid indexing */}
         </form>
 
-        <section className="relative overflow-hidden rounded-lg border card-dark p-4 shadow-sm text-sm text-theme-gold h-full">
-          <h2 className="text-xl font-medium text-white relative z-10">Station Info</h2>
-          <dl className="mt-3 space-y-2 relative z-10">
-            <div>
-              <dt className="font-medium">Request Line</dt>
-              <dd>828-222-6317</dd>
-            </div>
-            <div>
-              <dt className="font-medium">Station Website</dt>
-              <dd><a className="underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">WART 95.5 FM</a></dd>
-            </div>
-          </dl>
+        <section className="relative overflow-hidden rounded-lg border card-dark p-0 shadow-sm h-full" aria-label="Station art">
           <div className="absolute inset-0 -z-0 opacity-90" style={{ backgroundImage: "url(/images/dub-tractor-theisland-logo-transparent-2.png)", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }} aria-hidden></div>
         </section>
       </div>

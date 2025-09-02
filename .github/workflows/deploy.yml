@@ -13,6 +13,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: github-pages
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,9 +29,9 @@ jobs:
 
       - name: Build site
         env:
-          NEXT_PUBLIC_PLAYLISTS_CSV_URL: ${{ vars.NEXT_PUBLIC_PLAYLISTS_CSV_URL }}
-          NEXT_PUBLIC_RECORDINGS_CSV_URL: ${{ vars.NEXT_PUBLIC_RECORDINGS_CSV_URL }}
-          NEXT_PUBLIC_TRACKS_CSV_URL: ${{ vars.NEXT_PUBLIC_TRACKS_CSV_URL }}
+          NEXT_PUBLIC_PLAYLISTS_CSV_URL: ${{ vars.NEXT_PUBLIC_PLAYLISTS_CSV_URL || secrets.NEXT_PUBLIC_PLAYLISTS_CSV_URL }}
+          NEXT_PUBLIC_RECORDINGS_CSV_URL: ${{ vars.NEXT_PUBLIC_RECORDINGS_CSV_URL || secrets.NEXT_PUBLIC_RECORDINGS_CSV_URL }}
+          NEXT_PUBLIC_TRACKS_CSV_URL: ${{ vars.NEXT_PUBLIC_TRACKS_CSV_URL || secrets.NEXT_PUBLIC_TRACKS_CSV_URL }}
         run: npm run build
         working-directory: web
 

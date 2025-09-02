@@ -10,7 +10,7 @@ export default function ContactPage() {
         <p className="text-theme-gold">Reach out to The Island on WART 95.5 FM.</p>
         <dl className="mt-2 text-sm flex flex-wrap gap-x-8 gap-y-1">
           <div>
-            <dt className="font-medium text-white">Request Line</dt>
+            <dt className="font-medium text-white">Text or Call the Request Line</dt>
             <dd className="text-theme-gold">828-222-6317</dd>
           </div>
           <div>

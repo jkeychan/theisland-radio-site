@@ -53,13 +53,16 @@ export default function ContactPage() {
               <dd><a className="underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">WART 95.5 FM</a></dd>
             </div>
           </dl>
-          <div className="mt-auto">
-            <img
-              src="/images/dub-tractor-theisland-logo.png"
-              alt="The Island logo"
-              className="w-full h-56 sm:h-72 object-contain mx-auto drop-shadow"
-            />
-          </div>
+          <div
+            className="mt-auto w-full h-56 sm:h-80 rounded-md"
+            style={{
+              backgroundImage: "url(/images/dub-tractor-theisland-logo-transparent.png)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+            aria-hidden
+          />
         </section>
       </div>
     </div>

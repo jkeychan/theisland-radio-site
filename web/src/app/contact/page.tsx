@@ -13,7 +13,7 @@ export default function ContactPage() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <form
           className="rounded-lg border card-dark p-4 shadow-sm"
-          action="https://formspree.io/f/xbldkqvr"
+          action="https://formspree.io/f/movnkqbe"
           method="POST"
         >
           <div className="grid grid-cols-1 gap-4">

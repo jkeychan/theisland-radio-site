@@ -10,9 +10,9 @@ export default function ContactPage() {
         <p className="text-theme-gold">Reach out to The Island on WART 95.5 FM.</p>
       </header>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 items-stretch">
         <form
-          className="rounded-lg border card-dark p-4 shadow-sm"
+          className="rounded-lg border card-dark p-4 shadow-sm h-full"
           action="https://formspree.io/f/movnkqbe"
           method="POST"
         >
@@ -41,7 +41,7 @@ export default function ContactPage() {
           {/* Email intentionally hidden from the page to avoid indexing */}
         </form>
 
-        <section className="rounded-lg border card-dark p-4 shadow-sm text-sm text-theme-gold">
+        <section className="rounded-lg border card-dark p-4 shadow-sm text-sm text-theme-gold h-full">
           <h2 className="text-xl font-medium text-white">Station Info</h2>
           <dl className="mt-3 space-y-2">
             <div>

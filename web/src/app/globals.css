@@ -79,6 +79,9 @@ body {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+.card-dark h2 { color: #ffffff; }
+.card-dark a { color: var(--rasta-gold); }
+
 .section-heading {
   display: inline-block;
   padding-bottom: 6px;

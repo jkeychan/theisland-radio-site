@@ -17,7 +17,7 @@ export default function PlaylistsPage() {
       <LatestTracksCard />
 
       <div>
-        <a className="inline-block underline underline-offset-4 text-[--rasta-gold]" href="/playlists/archive/">View previous playlists →</a>
+        <a className="inline-block underline underline-offset-4 text-white" href="/playlists/archive/">View previous playlists →</a>
       </div>
     </div>
   );

@@ -12,38 +12,41 @@ export default function ContactPage() {
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <form
-          className="rounded-lg border bg-white/80 p-4 shadow-sm"
+          className="rounded-lg border card-dark p-4 shadow-sm"
           action="https://formspree.io/f/xbldkqvr"
           method="POST"
         >
           <div className="grid grid-cols-1 gap-4">
             <label className="block text-sm">
-              <span className="mb-1 block font-medium">Name</span>
-              <input name="name" required className="w-full rounded-md border px-3 py-2" />
+              <span className="mb-1 block font-medium text-white">Name</span>
+              <input name="name" required className="w-full rounded-md border px-3 py-2 bg-white/90" />
             </label>
             <label className="block text-sm">
-              <span className="mb-1 block font-medium">Email</span>
-              <input name="email" type="email" required className="w-full rounded-md border px-3 py-2" />
+              <span className="mb-1 block font-medium text-white">Email</span>
+              <input name="email" type="email" required className="w-full rounded-md border px-3 py-2 bg-white/90" />
             </label>
             <label className="block text-sm">
-              <span className="mb-1 block font-medium">Subject</span>
-              <input name="subject" required className="w-full rounded-md border px-3 py-2" />
+              <span className="mb-1 block font-medium text-white">Subject</span>
+              <input name="subject" required className="w-full rounded-md border px-3 py-2 bg-white/90" />
             </label>
             <label className="block text-sm">
-              <span className="mb-1 block font-medium">Message</span>
-              <textarea name="message" required rows={6} className="w-full rounded-md border px-3 py-2" />
+              <span className="mb-1 block font-medium text-white">Message</span>
+              <textarea name="message" required rows={6} className="w-full rounded-md border px-3 py-2 bg-white/90" />
             </label>
             <button className="btn btn-primary" type="submit">Send</button>
+            {/* Silent recipient routing without exposing address */}
+            <input type="hidden" name="_subject" value="Contact Form Submission — The Island" />
+            <input type="hidden" name="_gotcha" />
           </div>
           {/* Email intentionally hidden from the page to avoid indexing */}
         </form>
 
-        <section className="rounded-lg border bg-white/80 p-4 shadow-sm text-sm text-theme-gold">
-          <h2 className="text-xl font-medium text-[--rasta-green]">Station Info</h2>
+        <section className="rounded-lg border card-dark p-4 shadow-sm text-sm text-theme-gold">
+          <h2 className="text-xl font-medium text-white">Station Info</h2>
           <dl className="mt-3 space-y-2">
             <div>
               <dt className="font-medium">Request Line</dt>
-              <dd>(555) 123-4567</dd>
+              <dd>828-222-6317</dd>
             </div>
             <div>
               <dt className="font-medium">Station Website</dt>

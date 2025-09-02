@@ -2,14 +2,18 @@
 
 import { useTracks } from "@/hooks/useTracks";
 
-export const LatestTracksCard = () => {
+type LatestTracksCardProps = {
+  title?: string;
+};
+
+export const LatestTracksCard = ({ title = "This Week’s Tracks" }: LatestTracksCardProps) => {
   const { data, loading } = useTracks();
   if (!process.env.NEXT_PUBLIC_TRACKS_CSV_URL) return null;
 
   return (
     <section aria-labelledby="latest-playlist-title">
       <article className="card card-accent card-dark p-4">
-        <h2 id="latest-playlist-title" className="text-xl font-medium text-white">This Week’s Tracks</h2>
+        <h2 id="latest-playlist-title" className="text-xl font-medium text-white">{title}</h2>
         {loading ? (
           <p className="mt-3 text-theme-gold">Loading…</p>
         ) : (

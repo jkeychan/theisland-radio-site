@@ -22,28 +22,6 @@ export default function Home() {
       </section>
 
       <TracksThisWeek />
-
-      <section aria-labelledby="playlist-preview-title" className="mt-6">
-        <div className="flex items-end justify-between">
-          <h2 id="playlist-preview-title" className="text-2xl font-semibold section-heading section-heading-light">Recent Playlists</h2>
-          <a className="text-[--rasta-green] underline underline-offset-4" href="/playlists/">View all</a>
-        </div>
-        <div id="playlist-preview" className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* Hydrated with static data later */}
-          <article className="card card-accent p-4">
-            <h3 className="font-medium text-theme-gold">2025-01-10</h3>
-            <p className="text-sm text-theme-gold">Reggae Roots & Rocksteady</p>
-          </article>
-          <article className="card card-accent p-4">
-            <h3 className="font-medium text-theme-gold">2024-12-20</h3>
-            <p className="text-sm text-theme-gold">Holiday Ska Special</p>
-          </article>
-          <article className="card card-accent p-4">
-            <h3 className="font-medium text-theme-gold">2024-12-13</h3>
-            <p className="text-sm text-theme-gold">Dub Explorations</p>
-          </article>
-        </div>
-      </section>
     </div>
   );
 }

@@ -11,10 +11,10 @@ export const TracksThisWeek = () => {
       {loading ? (
         <p className="mt-3 text-theme-gold">Loading…</p>
       ) : (
-        <ol className="mt-4 list-inside list-decimal space-y-1 text-sm">
+        <ol className="mt-4 list-inside list-decimal space-y-1 text-sm text-white/90">
           {data.map((t, i) => (
             <li key={`${t.artist}-${t.title}-${i}`}>
-              <span className="font-medium">{t.artist}</span>{t.artist && t.title ? " — " : ""}{t.title}
+              <span className="font-medium text-white">{t.artist}</span>{t.artist && t.title ? " — " : ""}{t.title}
               {t.album ? <span className="text-theme-gold"> ({t.album})</span> : null}
             </li>
           ))}

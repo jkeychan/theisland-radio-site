@@ -21,7 +21,7 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         <div className="inline-flex items-center gap-3">
           <Link href="/" className="inline-flex items-center gap-2" aria-label="The Island home">
-            <img src="/images/dub-tractor-theisland-logo-transparent.png" alt="The Island logo" className="h-8 w-auto" />
+            <img src="/images/dub-tractor-theisland-logo.png" alt="The Island logo" className="h-8 w-auto" />
           </Link>
           <a className="hidden sm:inline text-sm text-theme-gold underline-offset-4 hover:underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">
             WART 95.5 FM

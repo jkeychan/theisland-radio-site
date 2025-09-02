@@ -1,3 +1,6 @@
+import { TracksThisWeek } from "@/components/TracksThisWeek";
+import { LogoShowcase } from "@/components/LogoShowcase";
+
 export default function Home() {
   return (
     <div className="space-y-8">
@@ -18,6 +21,9 @@ export default function Home() {
           </a>
         </div>
       </section>
+
+      <TracksThisWeek />
+      <LogoShowcase />
 
       <section aria-labelledby="playlist-preview-title" className="mt-6">
         <div className="flex items-end justify-between">

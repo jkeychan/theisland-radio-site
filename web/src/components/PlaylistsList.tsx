@@ -1,28 +1,39 @@
 "use client";
 
 import { usePlaylists } from "@/hooks/usePlaylists";
+import type { Playlist } from "@/types/content";
 
-export function PlaylistsList() {
+type PlaylistsListProps = {
+  showAll?: boolean;
+};
+
+export function PlaylistsList({ showAll = false }: PlaylistsListProps) {
   const { data } = usePlaylists();
-  // Ensure we show ONLY the most recent playlist in a single card
-  const latest = [...data].sort((a, b) => (a.id < b.id ? 1 : -1))[0];
-  if (!latest) return null;
+
+  const playlistsToRender: Playlist[] = showAll
+    ? [...data].sort((a, b) => (a.id < b.id ? 1 : -1))
+    : [...data].sort((a, b) => (a.id < b.id ? 1 : -1)).slice(0, 1);
+
+  if (playlistsToRender.length === 0) return null;
+
   return (
     <div className="grid grid-cols-1 gap-4">
-      <article className="card card-accent p-4">
-        <h2 className="text-xl font-medium">{latest.id} — {latest.title}</h2>
-        {latest.description ? (
-          <p className="text-sm text-theme-gold">{latest.description}</p>
-        ) : null}
-        <ol className="mt-3 list-inside list-decimal space-y-1 text-sm">
-          {latest.tracks.map((t, i) => (
-            <li key={i}>
-              <span className="font-medium">{t.artist}</span> — {t.title}
-              {t.album ? <span className="text-theme-gold"> ({t.album})</span> : null}
-            </li>
-          ))}
-        </ol>
-      </article>
+      {playlistsToRender.map((p) => (
+        <article key={p.id} className="card card-accent p-4">
+          <h2 className="text-xl font-medium">{p.id} — {p.title}</h2>
+          {p.description ? (
+            <p className="text-sm text-theme-gold">{p.description}</p>
+          ) : null}
+          <ol className="mt-3 list-inside list-decimal space-y-1 text-sm">
+            {p.tracks.map((t, i) => (
+              <li key={i}>
+                <span className="font-medium">{t.artist}</span> — {t.title}
+                {t.album ? <span className="text-theme-gold"> ({t.album})</span> : null}
+              </li>
+            ))}
+          </ol>
+        </article>
+      ))}
     </div>
   );
 }

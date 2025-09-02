@@ -13,6 +13,10 @@ export default function PlaylistsPage() {
       </header>
 
       <PlaylistsList />
+
+      <div>
+        <a className="inline-block underline underline-offset-4 text-[--rasta-gold]" href="/playlists/archive/">View previous playlists →</a>
+      </div>
     </div>
   );
 }

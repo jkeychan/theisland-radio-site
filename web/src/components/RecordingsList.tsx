@@ -4,6 +4,14 @@ import { useRecordings } from "@/hooks/useRecordings";
 
 export function RecordingsList() {
   const { data } = useRecordings();
+  if (!data || data.length === 0) {
+    return (
+      <div className="card card-accent card-dark p-6">
+        <h2 className="text-xl font-medium text-white">Recordings coming soon</h2>
+        <p className="mt-2 text-theme-gold">We’ll post recent shows here once the archive is live.</p>
+      </div>
+    );
+  }
   return (
     <div className="grid grid-cols-1 gap-4">
       {data.map((r) => (

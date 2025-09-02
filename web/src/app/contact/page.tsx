@@ -41,9 +41,9 @@ export default function ContactPage() {
           {/* Email intentionally hidden from the page to avoid indexing */}
         </form>
 
-        <section className="rounded-lg border card-dark p-4 shadow-sm text-sm text-theme-gold h-full flex flex-col">
-          <h2 className="text-xl font-medium text-white">Station Info</h2>
-          <dl className="mt-3 space-y-2">
+        <section className="relative overflow-hidden rounded-lg border card-dark p-4 shadow-sm text-sm text-theme-gold h-full">
+          <h2 className="text-xl font-medium text-white relative z-10">Station Info</h2>
+          <dl className="mt-3 space-y-2 relative z-10">
             <div>
               <dt className="font-medium">Request Line</dt>
               <dd>828-222-6317</dd>
@@ -53,7 +53,7 @@ export default function ContactPage() {
               <dd><a className="underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">WART 95.5 FM</a></dd>
             </div>
           </dl>
-          {/* Image removed per request; keeping text-only card for now */}
+          <div className="absolute inset-0 -z-0 opacity-90" style={{ backgroundImage: "url(/images/dub-tractor-theisland-logo-transparent-2.png)", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }} aria-hidden></div>
         </section>
       </div>
     </div>

@@ -12,24 +12,31 @@ export default function EventsPage() {
         <p className="text-theme-gold">Local Madison County music and community happenings.</p>
       </header>
 
-      <div className="grid grid-cols-1 gap-4">
-        {events.map((e) => (
-          <article key={e.id} className="card card-accent p-4">
-            <h2 className="text-xl font-medium">{e.title}</h2>
-            <p className="text-sm text-theme-gold">{e.date}</p>
-            <div className="text-sm text-theme-gold">
-              {e.venue ? <span>{e.venue}</span> : null}
-              {e.location ? <span> · {e.location}</span> : null}
-            </div>
-            {e.description ? <p className="mt-2">{e.description}</p> : null}
-            {e.url ? (
-              <a className="mt-3 inline-block text-[--rasta-red] underline underline-offset-4" href={e.url} target="_blank" rel="noreferrer noopener">
-                More info
-              </a>
-            ) : null}
-          </article>
-        ))}
-      </div>
+      {events.length === 0 ? (
+        <div className="card card-accent card-dark p-6">
+          <h2 className="text-xl font-medium text-white">No upcoming events</h2>
+          <p className="mt-2 text-theme-gold">Check back soon for local concerts and community happenings.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-4">
+          {events.map((e) => (
+            <article key={e.id} className="card card-accent p-4">
+              <h2 className="text-xl font-medium">{e.title}</h2>
+              <p className="text-sm text-theme-gold">{e.date}</p>
+              <div className="text-sm text-theme-gold">
+                {e.venue ? <span>{e.venue}</span> : null}
+                {e.location ? <span> · {e.location}</span> : null}
+              </div>
+              {e.description ? <p className="mt-2">{e.description}</p> : null}
+              {e.url ? (
+                <a className="mt-3 inline-block text-[--rasta-red] underline underline-offset-4" href={e.url} target="_blank" rel="noreferrer noopener">
+                  More info
+                </a>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

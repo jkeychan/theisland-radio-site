@@ -1,4 +1,5 @@
 import { PlaylistsList } from "@/components/PlaylistsList";
+import { LatestTracksCard } from "@/components/LatestTracksCard";
 
 export const metadata = {
   title: "Playlists • The Island",
@@ -12,7 +13,8 @@ export default function PlaylistsPage() {
         <p className="text-theme-gold">Archive of past shows organized by date.</p>
       </header>
 
-      <PlaylistsList />
+      {/* Use the same Google Sheet source as the homepage */}
+      <LatestTracksCard />
 
       <div>
         <a className="inline-block underline underline-offset-4 text-[--rasta-gold]" href="/playlists/archive/">View previous playlists →</a>

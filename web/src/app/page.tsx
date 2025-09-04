@@ -4,11 +4,6 @@ export default function Home() {
   return (
     <div className="space-y-8">
       <section aria-labelledby="hero-title" className="text-center hero rounded-xl py-12 text-white">
-        <img
-          src="/images/dub-tractor-theisland-logo.png"
-          alt="The Island logo"
-          className="mx-auto mb-4 h-16 sm:h-20 w-auto drop-shadow"
-        />
         <h1 id="hero-title" className="text-4xl sm:text-6xl font-[family-name:var(--font-righteous)] heading-rasta">
           The Island
         </h1>
@@ -21,7 +16,7 @@ export default function Home() {
             Listen Live
           </a>
           <a className="btn btn-secondary" href="/recordings/">
-            Recent Recordings
+            Show Archive
           </a>
         </div>
       </section>

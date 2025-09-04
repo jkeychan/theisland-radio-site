@@ -23,8 +23,13 @@ export default function ContactPage() {
       </header>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 items-stretch">
+        {/* On mobile, show the art between details and the form by ordering first in DOM for lg, and below header via responsive order classes */}
+        <section className="relative overflow-hidden rounded-lg border card-dark p-0 shadow-sm h-48 sm:h-64 lg:h-full order-2 lg:order-none" aria-label="Station art">
+          <div className="absolute inset-0 -z-0 opacity-90" style={{ backgroundImage: "url(/images/dub-tractor-theisland-logo-transparent-2.png)", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }} aria-hidden></div>
+        </section>
+
         <form
-          className="rounded-lg border card-dark p-4 shadow-sm h-full"
+          className="rounded-lg border card-dark p-4 shadow-sm h-full order-3 lg:order-none"
           action="https://formspree.io/f/movnkqbe"
           method="POST"
         >
@@ -52,10 +57,6 @@ export default function ContactPage() {
           </div>
           {/* Email intentionally hidden from the page to avoid indexing */}
         </form>
-
-        <section className="relative overflow-hidden rounded-lg border card-dark p-0 shadow-sm h-full" aria-label="Station art">
-          <div className="absolute inset-0 -z-0 opacity-90" style={{ backgroundImage: "url(/images/dub-tractor-theisland-logo-transparent-2.png)", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }} aria-hidden></div>
-        </section>
       </div>
     </div>
   );

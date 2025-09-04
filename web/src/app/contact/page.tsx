@@ -24,8 +24,12 @@ export default function ContactPage() {
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 items-stretch">
         {/* On mobile, show the art between details and the form by ordering first in DOM for lg, and below header via responsive order classes */}
-        <section className="relative overflow-hidden rounded-lg border card-dark p-0 shadow-sm h-48 sm:h-64 lg:h-full order-2 lg:order-none" aria-label="Station art">
-          <div className="absolute inset-0 -z-0 opacity-90" style={{ backgroundImage: "url(/images/dub-tractor-theisland-logo-transparent-2.png)", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }} aria-hidden></div>
+        <section className="rounded-lg border card-dark p-2 shadow-sm h-48 sm:h-64 lg:h-full order-2 lg:order-none flex items-center justify-center" aria-label="Station art">
+          <img
+            src="/images/dub-tractor-theisland-logo-transparent-2.png"
+            alt="Dub Tractor artwork"
+            className="max-h-full w-auto object-contain"
+          />
         </section>
 
         <form

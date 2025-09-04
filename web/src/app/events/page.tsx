@@ -14,8 +14,18 @@ export default function EventsPage() {
 
       {events.length === 0 ? (
         <div className="card card-accent card-dark p-6">
-          <h2 className="text-xl font-medium text-white">No upcoming events</h2>
-          <p className="mt-2 text-theme-gold">Check back soon for local concerts and community happenings.</p>
+          <h2 className="text-xl font-medium text-white">Marshall, NC Community Events Calendar</h2>
+          <p className="mt-2 text-theme-gold">
+            <a 
+              href="https://exploremarshallnc.com/event-calendar/" 
+              target="_blank" 
+              rel="noreferrer noopener"
+              className="text-[--rasta-red] underline underline-offset-4 hover:text-[--rasta-gold] transition-colors duration-200"
+              aria-label="Visit Marshall, NC Community Events Calendar (opens in new tab)"
+            >
+              https://exploremarshallnc.com/event-calendar/
+            </a>
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4">

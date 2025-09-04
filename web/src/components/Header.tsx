@@ -4,11 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { href: "/", label: "Home" },
+  { href: "/contact/", label: "Contact" },
   { href: "/playlists/", label: "Playlists" },
   { href: "/recordings/", label: "Recordings" },
   { href: "/events/", label: "Events" },
-  { href: "/contact/", label: "Contact" },
 ];
 
 export function Header() {
@@ -28,6 +27,14 @@ export function Header() {
           </a>
         </div>
         <nav className="flex items-center gap-1 sm:gap-2 overflow-x-auto whitespace-nowrap min-w-0 ml-2" aria-label="Primary">
+          <a
+            href="https://station.voscast.com/5530050e0a38b/"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="btn btn-live inline-flex"
+          >
+            Listen Live
+          </a>
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -43,14 +50,6 @@ export function Header() {
               </Link>
             );
           })}
-          <a
-            href="https://station.voscast.com/5530050e0a38b/"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="btn btn-live hidden sm:inline-flex"
-          >
-            Listen Live
-          </a>
         </nav>
       </div>
     </header>

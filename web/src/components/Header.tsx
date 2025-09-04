@@ -18,8 +18,8 @@ export function Header() {
     <header className="border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 boxed">
       <div className="stripe-red w-full" aria-hidden />
       <div className="stripe-gold w-full" aria-hidden />
-      <div className="container flex h-16 items-center justify-between">
-        <div className="inline-flex items-center gap-3">
+      <div className="container flex items-center justify-between h-auto py-2 sm:h-16 sm:py-0">
+        <div className="inline-flex items-center gap-3 shrink-0">
           <Link href="/" className="inline-flex items-center gap-2" aria-label="The Island home">
             <img src="/images/dub-tractor-theisland-logo.png" alt="The Island logo" className="h-10 w-auto" />
           </Link>
@@ -27,14 +27,14 @@ export function Header() {
             WART 95.5 FM
           </a>
         </div>
-        <nav className="flex items-center gap-2" aria-label="Primary">
+        <nav className="flex items-center gap-1 sm:gap-2 overflow-x-auto whitespace-nowrap min-w-0 ml-2" aria-label="Primary">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-3 py-2 rounded-md text-sm font-medium hover:bg-[--island-sand] ${
+                className={`px-2 sm:px-3 py-2 rounded-md text-sm font-medium hover:bg-[--island-sand] ${
                   isActive ? "text-white" : "text-theme-gold"
                 }`}
                 aria-current={isActive ? "page" : undefined}

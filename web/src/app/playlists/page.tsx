@@ -1,4 +1,3 @@
-import { PlaylistsList } from "@/components/PlaylistsList";
 import { LatestTracksCard } from "@/components/LatestTracksCard";
 
 export const metadata = {

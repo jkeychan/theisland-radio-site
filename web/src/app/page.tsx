@@ -10,7 +10,8 @@ export default function Home() {
         <p className="mt-2 text-lg sm:text-xl">
           <a className="underline-offset-4 hover:underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">WART 95.5 FM</a> • <a className="underline-offset-4 hover:underline" href="https://madisoncountyarts.com/" target="_blank" rel="noreferrer noopener">Madison County, NC</a>
         </p>
-        <p className="mt-1 text-base sm:text-lg">DJ Dub Tractor — Fridays 6:30–8pm ET</p>
+        <p className="mt-1 text-base sm:text-lg font-bold">DJ Dub Tractor — Fridays 6:30–8pm ET</p>
+        <p className="mt-2 text-sm sm:text-base italic">Cultivating positivity, unity, and community</p>
         <div className="mt-6 flex justify-center gap-3">
           <a className="btn btn-live" href="https://station.voscast.com/5530050e0a38b/" target="_blank" rel="noreferrer noopener">
             Listen Live

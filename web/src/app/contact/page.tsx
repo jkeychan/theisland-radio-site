@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Script from "next/script";
 
 const RECAPTCHA_SITE_KEY = "6LdDWMErAAAAAHXrUTKEYmc_WpT_VQPdG0mCnBTy";
@@ -9,6 +9,7 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [recaptchaReady, setRecaptchaReady] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   // Initialize reCAPTCHA when script loads
   const handleRecaptchaLoad = () => {
@@ -37,8 +38,17 @@ export default function ContactPage() {
       const token = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "contact_form" });
       console.log("reCAPTCHA token received:", token ? "Yes" : "No");
       
-      // Get form data
-      const form = event.currentTarget as HTMLFormElement;
+      // Get form data using ref
+      const form = formRef.current;
+      console.log("form from ref:", form);
+      console.log("form instanceof HTMLFormElement:", form instanceof HTMLFormElement);
+      
+      if (!form) {
+        console.error("Form ref is null");
+        setSubmitStatus("error");
+        return;
+      }
+      
       const formData = new FormData(form);
       formData.append("g-recaptcha-response", token);
 
@@ -114,6 +124,7 @@ export default function ContactPage() {
           </section>
 
           <form
+            ref={formRef}
             className="rounded-lg border card-dark p-4 shadow-sm h-full order-3 lg:order-none"
             onSubmit={handleSubmit}
           >

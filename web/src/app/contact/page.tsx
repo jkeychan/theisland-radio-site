@@ -38,7 +38,8 @@ export default function ContactPage() {
       console.log("reCAPTCHA token received:", token ? "Yes" : "No");
       
       // Get form data
-      const formData = new FormData(event.currentTarget);
+      const form = event.currentTarget as HTMLFormElement;
+      const formData = new FormData(form);
       formData.append("g-recaptcha-response", token);
 
       // Log form data for debugging
@@ -61,7 +62,7 @@ export default function ContactPage() {
 
       if (response.ok) {
         setSubmitStatus("success");
-        (event.target as HTMLFormElement).reset();
+        form.reset();
       } else {
         const errorText = await response.text();
         console.error("Formspree error response:", errorText);

@@ -8,6 +8,17 @@ const RECAPTCHA_SITE_KEY = "6LdDWMErAAAAAHXrUTKEYmc_WpT_VQPdG0mCnBTy";
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [recaptchaReady, setRecaptchaReady] = useState(false);
+
+  // Initialize reCAPTCHA when script loads
+  const handleRecaptchaLoad = () => {
+    if (window.grecaptcha) {
+      window.grecaptcha.ready(() => {
+        setRecaptchaReady(true);
+        console.log("reCAPTCHA ready");
+      });
+    }
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -15,12 +26,26 @@ export default function ContactPage() {
     setSubmitStatus("idle");
 
     try {
+      // Check if reCAPTCHA is loaded and ready
+      if (!window.grecaptcha || !recaptchaReady) {
+        console.error("reCAPTCHA not ready");
+        setSubmitStatus("error");
+        return;
+      }
+
       // Get reCAPTCHA token
       const token = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "contact_form" });
+      console.log("reCAPTCHA token received:", token ? "Yes" : "No");
       
       // Get form data
       const formData = new FormData(event.currentTarget);
       formData.append("g-recaptcha-response", token);
+
+      // Log form data for debugging
+      console.log("Form data being sent:");
+      for (const [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+      }
 
       // Submit to Formspree
       const response = await fetch("https://formspree.io/f/movnkqbe", {
@@ -31,10 +56,15 @@ export default function ContactPage() {
         },
       });
 
+      console.log("Response status:", response.status);
+      console.log("Response ok:", response.ok);
+
       if (response.ok) {
         setSubmitStatus("success");
         (event.target as HTMLFormElement).reset();
       } else {
+        const errorText = await response.text();
+        console.error("Formspree error response:", errorText);
         setSubmitStatus("error");
       }
     } catch (error) {
@@ -50,6 +80,7 @@ export default function ContactPage() {
       <Script
         src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`}
         strategy="afterInteractive"
+        onLoad={handleRecaptchaLoad}
       />
       
       <div className="space-y-6">
@@ -139,9 +170,9 @@ export default function ContactPage() {
               <button 
                 className="btn btn-primary" 
                 type="submit" 
-                disabled={isSubmitting}
+                disabled={isSubmitting || !recaptchaReady}
               >
-                {isSubmitting ? "Sending..." : "Send"}
+                {isSubmitting ? "Sending..." : !recaptchaReady ? "Loading..." : "Send"}
               </button>
               
               {/* Hidden fields for Formspree */}

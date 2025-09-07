@@ -74,6 +74,7 @@ export default function ContactPage() {
       setIsSubmitting(false);
     }
   };
+  
   return (
     <>
       {/* reCAPTCHA v3 Script */}
@@ -185,5 +186,3 @@ export default function ContactPage() {
     </>
   );
 }
-
-

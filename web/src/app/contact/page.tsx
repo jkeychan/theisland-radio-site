@@ -57,6 +57,13 @@ export default function ContactPage() {
       for (const [key, value] of formData.entries()) {
         console.log(`${key}: ${value}`);
       }
+      
+      // Also log individual form field values
+      console.log("Individual field values:");
+      console.log("name:", (form.elements.namedItem('name') as HTMLInputElement)?.value);
+      console.log("email:", (form.elements.namedItem('email') as HTMLInputElement)?.value);
+      console.log("subject:", (form.elements.namedItem('subject') as HTMLInputElement)?.value);
+      console.log("message:", (form.elements.namedItem('message') as HTMLTextAreaElement)?.value);
 
       // Submit to Formspree
       const response = await fetch("https://formspree.io/f/movnkqbe", {

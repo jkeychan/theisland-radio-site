@@ -88,7 +88,7 @@ export default function ContactPage() {
   
   return (
     <>
-      {/* reCAPTCHA v3 Script */}
+      {/* reCAPTCHA v3 Script - Standard API for Formspree compatibility */}
       <Script
         src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`}
         strategy="afterInteractive"

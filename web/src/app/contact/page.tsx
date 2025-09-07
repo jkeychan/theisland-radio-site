@@ -16,7 +16,6 @@ export default function ContactPage() {
     if (window.grecaptcha) {
       window.grecaptcha.ready(() => {
         setRecaptchaReady(true);
-        console.log("reCAPTCHA ready");
       });
     }
   };
@@ -36,12 +35,9 @@ export default function ContactPage() {
 
       // Get reCAPTCHA token
       const token = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "contact_form" });
-      console.log("reCAPTCHA token received:", token ? "Yes" : "No");
       
       // Get form data using ref
       const form = formRef.current;
-      console.log("form from ref:", form);
-      console.log("form instanceof HTMLFormElement:", form instanceof HTMLFormElement);
       
       if (!form) {
         console.error("Form ref is null");
@@ -64,19 +60,6 @@ export default function ContactPage() {
       
       formData.append("g-recaptcha-response", token);
 
-      // Log form data for debugging
-      console.log("Form data being sent:");
-      for (const [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-      }
-      
-      // Also log individual form field values
-      console.log("Individual field values:");
-      console.log("name:", (form.elements.namedItem('name') as HTMLInputElement)?.value);
-      console.log("email:", (form.elements.namedItem('email') as HTMLInputElement)?.value);
-      console.log("subject:", (form.elements.namedItem('subject') as HTMLInputElement)?.value);
-      console.log("message:", (form.elements.namedItem('message') as HTMLTextAreaElement)?.value);
-
       // Submit to Formspree
       const response = await fetch("https://formspree.io/f/movnkqbe", {
         method: "POST",
@@ -86,8 +69,6 @@ export default function ContactPage() {
         },
       });
 
-      console.log("Response status:", response.status);
-      console.log("Response ok:", response.ok);
 
       if (response.ok) {
         setSubmitStatus("success");

@@ -50,6 +50,18 @@ export default function ContactPage() {
       }
       
       const formData = new FormData(form);
+      
+      // Manually add form fields to ensure they're included
+      const nameField = form.elements.namedItem('name') as HTMLInputElement;
+      const emailField = form.elements.namedItem('email') as HTMLInputElement;
+      const subjectField = form.elements.namedItem('subject') as HTMLInputElement;
+      const messageField = form.elements.namedItem('message') as HTMLTextAreaElement;
+      
+      if (nameField?.value) formData.set('name', nameField.value);
+      if (emailField?.value) formData.set('email', emailField.value);
+      if (subjectField?.value) formData.set('subject', subjectField.value);
+      if (messageField?.value) formData.set('message', messageField.value);
+      
       formData.append("g-recaptcha-response", token);
 
       // Log form data for debugging

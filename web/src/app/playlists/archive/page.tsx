@@ -13,10 +13,10 @@ export default function PlaylistsArchivePage() {
         <p className="text-theme-gold">All past shows, newest first.</p>
       </header>
 
-      {/* First card shows the current week's tracks from the same Google Sheet */}
+      {/* First card shows the current week's tracks from Google Sheets */}
       <LatestTracksCard title="Current Playlist" />
 
-      {/* Then show historical playlists from data/CSV source */}
+      {/* Then show historical playlists from static data */}
       <PlaylistsList showAll />
     </div>
   );

@@ -19,8 +19,8 @@ export function PlaylistsList({ showAll = false }: PlaylistsListProps) {
   return (
     <div className="grid grid-cols-1 gap-4">
       {playlistsToRender.map((p) => (
-        <article key={p.id} className="card card-accent p-4">
-          <h2 className="text-xl font-medium">{p.id} — {p.title}</h2>
+        <article key={p.id} className="card card-dark p-4">
+          <h2 className="text-xl font-medium">{p.title}</h2>
           {p.description ? (
             <p className="text-sm text-theme-gold">{p.description}</p>
           ) : null}

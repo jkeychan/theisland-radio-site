@@ -24,10 +24,10 @@ export function PlaylistsList({ showAll = false }: PlaylistsListProps) {
           {p.description ? (
             <p className="text-sm text-theme-gold">{p.description}</p>
           ) : null}
-          <ol className="mt-3 list-inside list-decimal space-y-1 text-sm">
+          <ol className="mt-3 list-inside list-decimal space-y-1 text-sm text-white">
             {p.tracks.map((t, i) => (
               <li key={i}>
-                <span className="font-medium">{t.artist}</span> — {t.title}
+                <span className="font-medium text-white">{t.artist}</span> — <span className="text-white">{t.title}</span>
                 {t.album ? <span className="text-theme-gold"> ({t.album})</span> : null}
               </li>
             ))}

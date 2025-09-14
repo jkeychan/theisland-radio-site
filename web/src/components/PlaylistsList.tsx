@@ -5,14 +5,23 @@ import type { Playlist } from "@/types/content";
 
 type PlaylistsListProps = {
   showAll?: boolean;
+  excludeCurrent?: boolean;
 };
 
-export function PlaylistsList({ showAll = false }: PlaylistsListProps) {
+export function PlaylistsList({ showAll = false, excludeCurrent = false }: PlaylistsListProps) {
   const { data } = usePlaylists();
 
-  const playlistsToRender: Playlist[] = showAll
-    ? [...data].sort((a, b) => (a.id < b.id ? 1 : -1))
-    : [...data].sort((a, b) => (a.id < b.id ? 1 : -1)).slice(0, 1);
+  let playlistsToRender: Playlist[] = [...data].sort((a, b) => (a.id < b.id ? 1 : -1));
+  
+  // If excluding current, remove the most recent playlist
+  if (excludeCurrent && playlistsToRender.length > 0) {
+    playlistsToRender = playlistsToRender.slice(1);
+  }
+  
+  // If not showing all, only show the first one
+  if (!showAll) {
+    playlistsToRender = playlistsToRender.slice(0, 1);
+  }
 
   if (playlistsToRender.length === 0) return null;
 

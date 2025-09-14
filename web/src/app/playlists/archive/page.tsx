@@ -1,5 +1,4 @@
 import { PlaylistsList } from "@/components/PlaylistsList";
-import { LatestTracksCard } from "@/components/LatestTracksCard";
 
 export const metadata = {
   title: "Playlists Archive • The Island",
@@ -13,11 +12,8 @@ export default function PlaylistsArchivePage() {
         <p className="text-theme-gold">All past shows, newest first.</p>
       </header>
 
-      {/* First card shows the current week's tracks from Google Sheets */}
-      <LatestTracksCard title="Current Playlist" />
-
-      {/* Then show historical playlists from static data */}
-      <PlaylistsList showAll />
+      {/* Show historical playlists from static data, excluding the current one */}
+      <PlaylistsList showAll excludeCurrent />
     </div>
   );
 }

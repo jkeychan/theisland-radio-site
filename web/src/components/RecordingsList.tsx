@@ -7,8 +7,21 @@ export function RecordingsList() {
   if (!data || data.length === 0) {
     return (
       <div className="card card-accent card-dark p-6">
-        <h2 className="text-xl font-medium text-white">Recordings coming soon</h2>
-        <p className="mt-2 text-theme-gold">We’ll post recent shows here once the archive is live.</p>
+        <h2 className="text-xl font-medium text-white">The Island Radio Archive</h2>
+        <p className="mt-2 text-theme-gold">
+          Listen to past episodes of The Island radio show on Archive.org.
+        </p>
+        <div className="mt-4">
+          <a 
+            href="https://archive.org/details/@dubtractor/lists/1/the-island-wart-fm-radio-archive" 
+            target="_blank" 
+            rel="noreferrer noopener"
+            className="btn btn-primary"
+            aria-label="Visit The Island Radio Archive on Archive.org (opens in new tab)"
+          >
+            Visit Archive.org Collection
+          </a>
+        </div>
       </div>
     );
   }

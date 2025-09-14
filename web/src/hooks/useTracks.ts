@@ -10,29 +10,22 @@ export const useTracks = (): { data: Track[]; loading: boolean } => {
 
   useEffect(() => {
     const url = process.env.NEXT_PUBLIC_TRACKS_CSV_URL;
-    console.log("CSV URL:", url); // Debug: check if URL is set
     if (!url) return;
     let cancelled = false;
     setLoading(true);
     fetch(url, { cache: "no-store" })
       .then((r) => r.text())
-      .then((text) => {
-        console.log("Raw CSV text:", text.substring(0, 200)); // Debug: show first 200 chars
-        return parseCsv(text);
-      })
+      .then((text) => parseCsv(text))
       .then((rows) => {
         if (cancelled) return;
-        console.log("Parsed CSV rows:", rows.slice(0, 3)); // Debug: show first 3 rows
-        // Expected headers: Title, Artist, Album, Time (case-insensitive)
+        // Expected headers: Title, Artist, Album (case-insensitive)
         const normalized = rows.map((r) => {
           // Try common header names
           const title = r.Title || r.Name || r.Song || "";
           const artist = r.Artist || r.Artists || "";
           const album = r.Album || r.Record || r.Release || "";
-          const time = r.Time || r.Duration || "";
-          return { title, artist, album: album || undefined, time: time || undefined } as Track;
+          return { title, artist, album: album || undefined } as Track;
         }).filter((t) => t.title || t.artist);
-        console.log("Normalized tracks:", normalized.slice(0, 3)); // Debug: show first 3 tracks
         setData(normalized);
       })
       .catch((error) => {

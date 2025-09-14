@@ -22,7 +22,6 @@ export const LatestTracksCard = ({ title = "This Week’s Tracks" }: LatestTrack
               <li key={`${t.artist}-${t.title}-${i}`}>
                 <span className="font-medium text-white">{t.artist}</span>{t.artist && t.title ? " — " : ""}{t.title}
                 {t.album ? <span className="text-theme-gold"> ({t.album})</span> : null}
-                {t.time ? <span className="text-theme-gold ml-2">[{t.time}]</span> : null}
               </li>
             ))}
           </ol>

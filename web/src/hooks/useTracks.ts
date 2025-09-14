@@ -23,13 +23,14 @@ export const useTracks = (): { data: Track[]; loading: boolean } => {
       .then((rows) => {
         if (cancelled) return;
         console.log("Parsed CSV rows:", rows.slice(0, 3)); // Debug: show first 3 rows
-        // Expected headers: Name, Artist, Album (case-insensitive)
+        // Expected headers: Title, Artist, Album, Time (case-insensitive)
         const normalized = rows.map((r) => {
           // Try common header names
-          const title = r.Name || r.Title || r.Song || "";
+          const title = r.Title || r.Name || r.Song || "";
           const artist = r.Artist || r.Artists || "";
           const album = r.Album || r.Record || r.Release || "";
-          return { title, artist, album: album || undefined } as Track;
+          const time = r.Time || r.Duration || "";
+          return { title, artist, album: album || undefined, time: time || undefined } as Track;
         }).filter((t) => t.title || t.artist);
         console.log("Normalized tracks:", normalized.slice(0, 3)); // Debug: show first 3 tracks
         setData(normalized);

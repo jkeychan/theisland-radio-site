@@ -2,6 +2,7 @@ export type Track = {
   artist: string;
   title: string;
   album?: string;
+  time?: string;
   links?: {
     spotify?: string;
     appleMusic?: string;

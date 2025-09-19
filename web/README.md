@@ -56,7 +56,28 @@ NEXT_PUBLIC_TRACKS_CSV_URL=https://docs.google.com/spreadsheets/d/1vOa_wABqG7n3I
 
 The site will prefer the remote CSV feeds when the env vars are set, and fall back to local `src/data/*.ts` arrays otherwise.
 
+## Weekly Playlist Updates
+
+### Quick Update Process (GitHub CLI)
+
+1. **Create new Google Sheet** for the week
+2. **Get CSV export URL**: `https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/export?format=csv&gid=0`
+3. **Update GitHub variable**:
+   ```bash
+   gh variable set NEXT_PUBLIC_TRACKS_CSV_URL --body "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/export?format=csv&gid=0"
+   ```
+4. **Trigger rebuild**:
+   ```bash
+   git commit --allow-empty -m "Update playlist"
+   git push origin main
+   ```
+
+### Alternative: GitHub Web Interface
+
+1. Go to **Settings** → **Secrets and variables** → **Actions** → **Variables** tab
+2. Update `NEXT_PUBLIC_TRACKS_CSV_URL` with your new CSV URL
+3. Push any commit to trigger rebuild
+
 ## Deploy on GitHub Pages
 
 The site is configured for static export and deployment to GitHub Pages.
-# Trigger rebuild for CSV URL test run

@@ -6,9 +6,10 @@ import type { Playlist } from "@/types/content";
 type PlaylistsListProps = {
   showAll?: boolean;
   excludeCurrent?: boolean;
+  limit?: number; // New prop to limit displayed playlists
 };
 
-export function PlaylistsList({ showAll = false, excludeCurrent = false }: PlaylistsListProps) {
+export function PlaylistsList({ showAll = false, excludeCurrent = false, limit }: PlaylistsListProps) {
   const { data } = usePlaylists();
 
   let playlistsToRender: Playlist[] = [...data].sort((a, b) => (a.id < b.id ? 1 : -1));
@@ -18,8 +19,13 @@ export function PlaylistsList({ showAll = false, excludeCurrent = false }: Playl
     playlistsToRender = playlistsToRender.slice(1);
   }
   
-  // If not showing all, only show the first one
-  if (!showAll) {
+  // Apply limit if specified
+  if (limit && limit > 0) {
+    playlistsToRender = playlistsToRender.slice(0, limit);
+  }
+  
+  // If not showing all and no limit specified, only show the first one
+  if (!showAll && !limit) {
     playlistsToRender = playlistsToRender.slice(0, 1);
   }
 

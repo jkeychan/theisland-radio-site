@@ -30,7 +30,7 @@ export const playlists: Playlist[] = [
       { artist: "Augustus Pablo", title: "Cassava Piece (79 Style)", album: "Original Rockers" },
       { artist: "The Architect", title: "Dreader Than Dread", album: "Foundations" },
       { artist: "L'Entourloop, Blackout JA, Tippa Irie", title: "Fi Di Yut", album: "La clarté dans la confusion" },
-      { artist: "L' Entourloop, Chali 2na", title: "Get Back", album: "La clarté dans la confusion" }
+      { artist: "L'Entourloop, Chali 2na", title: "Get Back", album: "La clarté dans la confusion" }
     ]
   },
   {

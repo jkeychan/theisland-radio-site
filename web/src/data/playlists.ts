@@ -2,6 +2,36 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2025-09-19",
+    title: "September 19, 2025",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Val Bennett", title: "The Russians Are Coming", album: "The Bunny 'Striker' Lee Story" },
+      { artist: "Burning Spear", title: "Marcus Garvey", album: "Harder Than The Best" },
+      { artist: "Jackie Mittoo", title: "Drum Song", album: "Champion In The Arena [aka Show Case Vol 3][aka The Jackie Mittoo Showcase]" },
+      { artist: "Little Roy", title: "Blackbird", album: "Tafari Earth Uprising" },
+      { artist: "Heptones", title: "Cool Rasta", album: "Trojan Roots Box Set" },
+      { artist: "The Aggrolites", title: "Don't Let me Down [Live]", album: "Unleashed Live Vol. 1" },
+      { artist: "Mungos Hi Fi, Eve Lazarus, Max Romeo", title: "Babylon Raid", album: "More Fyah" },
+      { artist: "Capleton", title: "Jah Jah City", album: "More Fire" },
+      { artist: "Barnabas", title: "Ear Say Dub", album: "Nexus Dub" },
+      { artist: "Joe Gibbs & The Professionals", title: "Satta Amassa Gana Version", album: "Serial Dub" },
+      { artist: "U Roy", title: "Natty Rebel", album: "Original DJ" },
+      { artist: "Ranking Barnabas", title: "Roast Fish & Stout", album: "The Cold Crusher" },
+      { artist: "Zenzile", title: "Wa Dem a Go Do Riddim", album: "Irie Ites Meets Zenzile" },
+      { artist: "Scientist & Jah Thomas", title: "Barnabas Dub", album: "Jah Thomas Meets Scientists In A Dub Conference" },
+      { artist: "Supercat", title: "Cry Fi Di Youth", album: "Si Boops Deh" },
+      { artist: "Richie Spice", title: "Youth Dem Cold", album: "In the Streets To Africa" },
+      { artist: "Black Uhuru", title: "Guess Who's Coming To Dinner", album: "Guess Who's Coming To Dinner ." },
+      { artist: "Frankie Paul", title: "Pass The Tu-Sheng Peng", album: "Pass The Tu-Sheng Peng" },
+      { artist: "Tony Tuff", title: "Come Fe Mash It", album: "The Biggest Dancehall Anthems (1979-1982)" },
+      { artist: "iNi Kamoze", title: "Hot Stepper", album: "Down in Jamaica: 40 Years of VP Records" },
+      { artist: "Beenie Man", title: "Who Am I", album: "Many Moods of Moses" },
+      { artist: "Peter Tosh", title: "Stepping Razor", album: "Equal Rights" },
+      { artist: "Wailing Souls", title: "Fire House Rock", album: "Firehouse Rock" }
+    ]
+  },
+  {
     id: "2025-09-12",
     title: "September 12, 2025",
     description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",

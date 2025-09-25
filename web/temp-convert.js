@@ -1,24 +1,3 @@
-#!/bin/bash
-
-# Simple script to convert Google Sheets CSV to playlist format
-# Usage: ./add-playlist.sh "CSV_URL" "PLAYLIST_ID" "PLAYLIST_TITLE" "DESCRIPTION"
-
-CSV_URL="$1"
-PLAYLIST_ID="$2"
-PLAYLIST_TITLE="$3"
-DESCRIPTION="$4"
-
-if [ -z "$CSV_URL" ] || [ -z "$PLAYLIST_ID" ] || [ -z "$PLAYLIST_TITLE" ]; then
-    echo "Usage: ./add-playlist.sh \"CSV_URL\" \"PLAYLIST_ID\" \"PLAYLIST_TITLE\" \"DESCRIPTION\""
-    echo "Example: ./add-playlist.sh \"https://docs.google.com/spreadsheets/d/1rbh5p0X0u-DU9UkCIr9TuQT64Q95_zL2xTBofs5jne4/export?format=csv&gid=0\" \"2025-09-19\" \"September 19, 2025\" \"Dub Tractor's Island vibes\""
-    exit 1
-fi
-
-echo "Converting playlist: $PLAYLIST_TITLE"
-echo "CSV URL: $CSV_URL"
-
-# Create a temporary Node.js script
-cat > temp-convert.js << 'EOF'
 const https = require('https');
 
 async function fetchCSV(url) {
@@ -136,14 +115,3 @@ ${tracks.map(t => `    { artist: "${t.artist}", title: "${t.title}"${t.album ? `
 }
 
 main();
-EOF
-
-# Run the conversion
-node temp-convert.js "$CSV_URL" "$PLAYLIST_ID" "$PLAYLIST_TITLE" "$DESCRIPTION"
-
-# Clean up
-rm temp-convert.js
-
-echo ""
-echo "Copy the output above and paste it at the beginning of the playlists array in src/data/playlists.ts"
-echo "Then commit and push to update the archive!"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Script from "next/script";
 
 const RECAPTCHA_SITE_KEY = "6LdDWMErAAAAAHXrUTKEYmc_WpT_VQPdG0mCnBTy";
@@ -10,6 +10,37 @@ export default function ContactPage() {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [recaptchaReady, setRecaptchaReady] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+
+  // Cleanup reCAPTCHA elements when component unmounts
+  useEffect(() => {
+    return () => {
+      // Remove reCAPTCHA badge and any other reCAPTCHA elements
+      const recaptchaBadge = document.querySelector('.grecaptcha-badge');
+      if (recaptchaBadge) {
+        recaptchaBadge.remove();
+      }
+      
+      // Remove any reCAPTCHA iframes
+      const recaptchaIframes = document.querySelectorAll('iframe[src*="recaptcha"]');
+      recaptchaIframes.forEach(iframe => iframe.remove());
+      
+      // Remove any reCAPTCHA scripts
+      const recaptchaScripts = document.querySelectorAll('script[src*="recaptcha"]');
+      recaptchaScripts.forEach(script => script.remove());
+      
+      // Remove any reCAPTCHA containers or overlays
+      const recaptchaContainers = document.querySelectorAll('[id*="recaptcha"]');
+      recaptchaContainers.forEach(container => container.remove());
+      
+      // Clear the global grecaptcha object
+      if (typeof window !== 'undefined' && window.grecaptcha) {
+        delete window.grecaptcha;
+      }
+      
+      // Reset the ready state
+      setRecaptchaReady(false);
+    };
+  }, []);
 
   // Initialize reCAPTCHA when script loads
   const handleRecaptchaLoad = () => {

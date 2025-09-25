@@ -34,7 +34,7 @@ export default function ContactPage() {
       
       // Clear the global grecaptcha object
       if (typeof window !== 'undefined' && window.grecaptcha) {
-        delete window.grecaptcha;
+        (window as any).grecaptcha = undefined;
       }
       
       // Reset the ready state

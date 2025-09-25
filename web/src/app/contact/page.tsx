@@ -34,6 +34,7 @@ export default function ContactPage() {
       
       // Clear the global grecaptcha object
       if (typeof window !== 'undefined' && window.grecaptcha) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (window as any).grecaptcha = undefined;
       }
       

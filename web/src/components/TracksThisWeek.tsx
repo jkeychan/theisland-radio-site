@@ -7,7 +7,7 @@ export const TracksThisWeek = () => {
   if (!process.env.NEXT_PUBLIC_TRACKS_CSV_URL) return null;
   return (
     <section aria-labelledby="tracks-title" className="mt-8">
-      <h2 id="tracks-title" className="text-2xl font-semibold section-heading section-heading-light">This Week's Tracks</h2>
+      <h2 id="tracks-title" className="text-2xl font-semibold section-heading section-heading-light">This Week&apos;s Tracks</h2>
       {loading ? (
         <p className="mt-3 text-theme-gold">Loading…</p>
       ) : (

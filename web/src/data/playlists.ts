@@ -2,6 +2,64 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2025-10-03",
+    title: "October 3, 2025",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Dub Specialist", title: "Jucks Incorporation.flac", album: "Jucks Inc Pt. I" },
+      { artist: "Errol Holt", title: "A You Lick Me First", album: "Rastafari Time" },
+      { artist: "Hugh Mundell", title: "Cant Pop No Style", album: "Blackman's Foundation" },
+      { artist: "Scientist", title: "Dance Of The Vampires", album: "Rids the World of the Curse of the Evil Vampire" },
+      { artist: "Wackies All Stars", title: "Dubmatic", album: "African Roots Act 3: Strictly Dubwise" },
+      { artist: "Revolutionaries", title: "Top Rank Dub", album: "Dub Plate Specials (At Channel One)" },
+      { artist: "Jahtari and Pupajim", title: "International Farmer", album: "Clause Four - Jahtarian Dubbers Vol. 2" },
+      { artist: "Ranking Dread", title: "Give Them Dub", album: "Ranking Dread In Dub" },
+      { artist: "Young Kulcha, Irie Ites, Naram", title: "Come Pick Me Up", album: "Single" },
+      { artist: "Aggrovators", title: "Dreams of Dub", album: "Dance Hall Style Dub" },
+      { artist: "Selassie I Rockers", title: "Thirty Pieces Of Dub", album: "Thirty Pieces Of Dub" },
+      { artist: "Keith Foundation and Black Disciples", title: "They Never Dub", album: "Hi Yo" },
+      { artist: "Mad Professor", title: "Hi-Jacked To Jamaica", album: "RAS Portraits: Mad Professor" },
+      { artist: "Linval Thompson", title: "No Other Woman", album: "The Early Sessions (1974-1982)" },
+      { artist: "King Tubby", title: "Zion Dub", album: "Dub Reggae" },
+      { artist: "Lacksley Castell", title: "Morning Glory", album: "Morning Glory" },
+      { artist: "Mr. Vegas", title: "Heads High", album: "Mr Vegas: The Hits" },
+      { artist: "King Tubby and Augustus Pablo", title: "King Tubby Meets Rockers Uptown", album: "King Tubby Meets Rockers Uptown" },
+      { artist: "Max Romeo and Lee Perry", title: "Rasta Bandwagon", album: "Reggae Anthology: Niney the Observer - Roots With Quality" },
+      { artist: "The Congos", title: "Fisherman", album: "Heart of the Congos" },
+      { artist: "Reggae Crusaders", title: "Bring the Couchie Come", album: "Reggae Anthology: Niney the Observer - Roots With Quality" },
+      { artist: "Niney the Observer", title: "Blood and Fire", album: "Reggae Anthology: Niney the Observer - Roots with Quality" },
+      { artist: "The Heptones", title: "Sea of Love", album: "On Top" }
+    ]
+  },
+  {
+    id: "2025-09-26",
+    title: "September 26, 2025",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Jackie Mittoo", title: "Darker Shade Of Black", album: "Beginner's Guide To Reggae (Disc 1) Warming Up" },
+      { artist: "Badoo", title: "Rocking of the 5000", album: "Xtras: Rock With Papa Madoo" },
+      { artist: "Althea & Donna", title: "Uptown Top Ranking", album: "Uptown Top Ranking" },
+      { artist: "Alo Wala", title: "Ace of Space", album: "Cityboy" },
+      { artist: "Yaadcore and Fred Locks", title: "Sufferation (Dub)", album: "Single" },
+      { artist: "OBF Michael Prophet and Iration Steppas", title: "Protection", album: "Single" },
+      { artist: "Augustus Pablo", title: "Young Generation Dub", album: "King Tubbys Meets Rockers Uptown [Bonus Tracks]" },
+      { artist: "Pachyman", title: "All Night Long", album: "El Sonido Nuevo de" },
+      { artist: "Barrington Levy", title: "Black Rose Version", album: "When the Dances Were Changing (Hitbound Selection)" },
+      { artist: "Prince Fatty and Little Roy", title: "Roof Over My Dub", album: "Supersize" },
+      { artist: "Brian & Tony Gold", title: "Pass Me A Dub Plate", album: "The Rhythm King" },
+      { artist: "L'Entourloop", title: "Florilege", album: "La clarte dans la confusion" },
+      { artist: "The Hempolics", title: "Love to Sing", album: "Single" },
+      { artist: "Musical Youth", title: "Pass the Dutchie", album: "Anthology" },
+      { artist: "Scientist and Hempress Sativa", title: "Rock It Ina Dub", album: "Scientist meets Hempress Sativa in Dub" },
+      { artist: "Major Lazer", title: "Jessica", album: "Free the Universe" },
+      { artist: "Midnight RIders, Naram", title: "Bobby Was a Gangster", album: "Midnight RIders Meets Naram Rhythm Section" },
+      { artist: "Miniman", title: "Inna Di Dance", album: "Back to Roots" },
+      { artist: "Sylford Walker & Welton Irie", title: "Lamb's Bread", album: "Beginner's Guide To Reggae (Disc 1) Warming Up" },
+      { artist: "Thriakis Dub Destroyer and Sensi T", title: "Faya Ago Burn Dem", album: "The Galactic Journey" },
+      { artist: "No Doubt feat Lady Saw", title: "Underneath It All", album: "Rock Steady" }
+    ]
+  },
+{
     id: "2025-09-19",
     title: "September 19, 2025",
     description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
@@ -88,6 +146,5 @@ export const playlists: Playlist[] = [
       { artist: "Junior Murvin", title: "Police & Thieves", album: "Cut Throat" },
       { artist: "Clement Irie", title: "Kolo Ko", album: "Greensleeves Sampler 03" }
     ]
-  }
+  },
 ];
-

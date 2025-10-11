@@ -2,37 +2,6 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
-    id: "2025-10-10",
-    title: "October 10, 2025",
-    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
-    tracks: [
-      { artist: "Prince Jammy", title: "Waterfront Gang War", album: "Dub: Original Bass Culture" },
-      { artist: "Papa Tullo", title: "Get Ready And Reggae", album: "Dancehall Stylee" },
-      { artist: "Derajah, The 18th Parallel", title: "Row Fisherman", album: "Prosperity" },
-      { artist: "The 18th Parallel, Roberto Sanchez, The Viceroys, Lone Ranger", title: "Pothole Invasion", album: "Dub Avalanche (Vol. 1)" },
-      { artist: "Keith Hudson & The Soul Syndicate", title: "Black Heart", album: "Heavyweight Sound: A Blood And Fire Sampler" },
-      { artist: "Joe Higgs", title: "Lay A Foundation", album: "Heavy Reggae (Best of The London Based Sioux Label)" },
-      { artist: "Easy Star All Stars", title: "Time Version", album: "Dub Side Of The Moon" },
-      { artist: "Jah Thomas", title: "Dancehall Connection", album: "Dancehall Stylee" },
-      { artist: "Sublime and Scientist", title: "Caress Me Down - Español Dub", album: "Sublime Meets Scientist & Mad Professor Inna LBC" },
-      { artist: "Marcus I, aDUBta, Black Oak Roots Allstars", title: "Mr. Money Man", album: "Mr. Money Man" },
-      { artist: "The Upsetters", title: "Kasha Macka Dub", album: "Blackboard Jungle Dub" },
-      { artist: "Poet and The Roots", title: "It Dread Inna Ingalan (For George Lindo)", album: "Dead Beat An' Blood" },
-      { artist: "Scientist", title: "Scientist At His Best", album: "Fatman presents Twin Spin" },
-      { artist: "Puppa Djoul and Lone Ranger", title: "Stand the dub", album: "Can't Stand The Pressure" },
-      { artist: "Cultural Roots", title: "Hell a go pop 12\" mix", album: "Hell a go pop" },
-      { artist: "Leroy Smart", title: "Too Much Pressure", album: "Dancehall Stylee" },
-      { artist: "King Tubby & The Aggrovators", title: "Natty Version", album: "Dub Explosion: 22 Roots Classics" },
-      { artist: "Diego & The Sons Of Jah", title: "Jah Jah Ital", album: "Babylon A Fall Down" },
-      { artist: "Viceroys", title: "Heart Made Of Stone", album: "Sly And Robbie Present Taxi" },
-      { artist: "Gregory Isaacs", title: "Slave Driver", album: "Sly and Robbie present Gregory Isaacs" },
-      { artist: "Sly Dunbar", title: "Hot You're Hot", album: "Sly And Robbie Present Taxi" },
-      { artist: "Sly & Robbie", title: "Crazy Baldhead", album: "Riddim: The Best Of Sly & Robbie" },
-      { artist: "Sly & Robbie", title: "A Roots This A Dub", album: "Master of Ceremony Dub" },
-      { artist: "Loopey", title: "Who The Cap Fit - lofi", album: "Lofi Tribute To The Legend - Vol. 1" }
-    ]
-  },
-{
     id: "2025-10-03",
     title: "October 3, 2025",
     description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",

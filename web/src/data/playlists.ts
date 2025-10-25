@@ -2,6 +2,34 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2025-10-24",
+    title: "October 24, 2025",
+    description: "Dub Tractor's Island vibes",
+    tracks: [
+      { artist: "Culture", title: "Knotty Dub", album: "Culture in Dub" },
+      { artist: "Creation Rockers", title: "Let's Make Waves", album: "Let's Make Waves" },
+      { artist: "The Abyssinians", title: "This Land Is For Everyone - Dub", album: "Satta Dub: The Abyssinians In Dub" },
+      { artist: "Al Campbell, Sly & Robbie", title: "Declaration Of Rights - Extended Edit", album: "Declaration Of Rights" },
+      { artist: "Roy Cousins and the Royals", title: "Peace and Love", album: "Pick up the Pieces" },
+      { artist: "Bitty McLean", title: "Walk Away from Love - Remix", album: "Peckings Presents Old Skool Young Blood,  Vol. 1" },
+      { artist: "Dubus, Joseph Cotton, Scientist", title: "Free Up Mexico", album: "The Greatest Of All Time" },
+      { artist: "Toyan", title: "Overseas Posse", album: "How The West Was Won" },
+      { artist: "Prince Fatty, Shniece McMenamin", title: "Black Rabbit", album: "Black Rabbit" },
+      { artist: "Well Charged", title: "Total Dub - 2000 Digital Remaster", album: "Vital Dub" },
+      { artist: "Ijahman Levi", title: "Jah Heavy Load", album: "Haile I Hymn (Chapter One)" },
+      { artist: "Linton Kwesi Johnson", title: "Bass Culture", album: "Bass Culture" },
+      { artist: "Barrington Levy", title: "Sholin Temple Dub", album: "In Dub" },
+      { artist: "Dub Garden", title: "Colors Dub", album: "Doctor Wind in Dub" },
+      { artist: "Barry Brown", title: "Things in Life", album: "Legend" },
+      { artist: "The Frightnrs, Victor Axelrod", title: "Gotta Find a Way Version", album: "More to Say Versions" },
+      { artist: "Reggae New Som", title: "Pancadão New Som - Melô de Menina Bonita ou Terbaru", album: "Pancadão New Som - Melô de Menina Bonita ou Terbaru" },
+      { artist: "Audrey Hall", title: "One Dance Won't Do", album: "What One 'riddim' Can Do" },
+      { artist: "King Tubby", title: "Roots Of Dub", album: "The Roots Of Dub" },
+      { artist: "Cham", title: "Ghetto Story", album: "Ghetto Story" },
+      { artist: "The Abyssinians", title: "African Race - Original Jamaican Mix", album: "Satta Massagana (Original Jamaican Mixes) [Deluxe Edition]" }
+    ]
+  },
+  {
     id: "2025-10-17",
     title: "October 17, 2025",
     description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",

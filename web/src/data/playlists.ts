@@ -2,6 +2,33 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2025-10-31",
+    title: "October 31, 2025",
+    description: "Dub Tractor's Island vibes",
+    tracks: [
+      { artist: "The Revolutionaries", title: "37 Orange Street", album: "Dubb Everlasting" },
+      { artist: "Reggae Regular", title: "Where Is Jah", album: "Dread Meets Greensleeves - A Westside Revolution" },
+      { artist: "Zoe Devlin Love;Tim Hutton", title: "Caroline, No", album: "Caroline No" },
+      { artist: "Aswad", title: "Can't Stand The Pressure", album: "Aswad" },
+      { artist: "Alpha Blondy", title: "I Wish You Were Here", album: "Jah Victory" },
+      { artist: "KIDDUS I", title: "Graduation In Zion", album: "Rockers: Graduation In Zion 1978-1980" },
+      { artist: "Wild Belle", title: "Love Like This", album: "Isles" },
+      { artist: "Bitty McLean", title: "Never let me dub", album: "On Bond Street" },
+      { artist: "VC", title: "By His Deeds", album: "Strictly The Best Vol. 46" },
+      { artist: "Junior Delahaye", title: "Sitting In The Park", album: "Showcase" },
+      { artist: "Hollie Cook", title: "Superdub", album: "Superstar b/w Superdub" },
+      { artist: "Gregory Isaacs", title: "Loving Pauper", album: "Special Guest" },
+      { artist: "Ijahman Levi", title: "Bob & Friends Over There", album: "Inside Out" },
+      { artist: "The Techniques", title: "It's You I Love", album: "Classics" },
+      { artist: "Native;Lee Scratch Perry", title: "Late September in May", album: "Black Ark Showcase 1977" },
+      { artist: "Prince Buster", title: "Nothing Takes the Place of You", album: "Judge Dread" },
+      { artist: "Horace Andy", title: "Straight to Hell", album: "Straight to Hell" },
+      { artist: "Mungo's Hi Fi;Cian Finn", title: "Go Lassie", album: "Puffers Choice, Vol. 3" },
+      { artist: "Junior Byles;Kojak & Liza", title: "Dreadlocks Time/ Fist To Fist", album: "Joe Gibbs 12 Reggae Discomix Vol. 4" },
+      { artist: "Junior Murvin", title: "Roots Train", album: "Police & Thieves" }
+    ]
+  },
+  {
     id: "2025-10-24",
     title: "October 24, 2025",
     description: "Dub Tractor's Island vibes",

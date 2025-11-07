@@ -2,6 +2,38 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2025-11-07",
+    title: "November 7, 2025",
+    description: "Dub Tractor's Island vibes",
+    tracks: [
+      { artist: "Scientist, Hempress Sativa", title: "Rock It Ina Dub", album: "Scientist Meets Hempress Sativa in Dub" },
+      { artist: "Buccaneer", title: "Bad Man Story", album: "Da Opera" },
+      { artist: "Ninjaman", title: "Time Is Serious", album: "Reggae Anthology: Anything Test Dead" },
+      { artist: "Mungo's Hi Fi, YT Reggae", title: "Serious Time", album: "Serious Time" },
+      { artist: "Cham, Alicia Keys", title: "Ghetto Story Chapter 2 (feat. Alicia Keys)", album: "Ghetto Story (Explicit Content U.S. Version)" },
+      { artist: "Junior Reid", title: "One Blood", album: "One Blood" },
+      { artist: "Born Jamericans", title: "Boom Shak A-Tack", album: "The Best Of Born Jamericans" },
+      { artist: "Simma, YT Reggae, Escape Roots", title: "Weapon Of Dub", album: "Weapon Of Choice" },
+      { artist: "Buju Banton", title: "Bad Boys and Police", album: "Bad Boys and Police" },
+      { artist: "O.B.F, Charlie P", title: "Sixteen Tons of Pressure", album: "Sixteen Tons of Pressure" },
+      { artist: "Mr. Williamz, Specialist Moss, SHY FX", title: "Sound Killa, Pt. 2 (Featuring SHY FX & Specialist Moss)", album: "Sound Killa, Pt. 2" },
+      { artist: "Voltage, Strategy, Specialist Moss", title: "Tell Dem", album: "Tell Dem" },
+      { artist: "Alpha Steppa, Nai-Jah", title: "Asking Dub", album: "Asking Why" },
+      { artist: "Alpha Steppa, Nai-Jah, Pupajim, Ras Tinny", title: "Dub Taking Over", album: "Nature Taking Over" },
+      { artist: "Dub Dynasty, Alpha Steppa, Alpha & Omega, Ras Tinny", title: "Holy Cow", album: "Holy Cow" },
+      { artist: "Dubcreator", title: "Jericho", album: "Relick Series Hornified" },
+      { artist: "Hi Grade Hi-Fi, Richie Culture", title: "Long Long Road (Never Walk Dub)", album: "Long Long Road (Never Walk Dub)" },
+      { artist: "Chronixx", title: "Here Comes Trouble", album: "Dread & Terrible" },
+      { artist: "Damian Marley", title: "Welcome To Jamrock", album: "Welcome to Jamrock" },
+      { artist: "King Kong, Massive B, Bobby Konders", title: "The Herb", album: "The Herb" },
+      { artist: "Protoje, Lila Iké", title: "In Bloom (feat. Lila Iké)", album: "In Search Of Lost Time" },
+      { artist: "Duane Stephenson", title: "Cool Runnings", album: "Dangerously Roots - Journey From August Town" },
+      { artist: "Congo Natty", title: "Nu Beginingz", album: "Jungle Revolution" },
+      { artist: "SHY FX, Liam Bailey", title: "Soon Come (feat. Liam Bailey)", album: "Soon Come (feat. Liam Bailey)" },
+      { artist: "Tenor Saw", title: "Golden Hen", album: "Tenor Saw Meets Nitty Gritty" }
+    ]
+  },
+  {
     id: "2025-10-31",
     title: "October 31, 2025",
     description: "Dub Tractor's Island vibes",

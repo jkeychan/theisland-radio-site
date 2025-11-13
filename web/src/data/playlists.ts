@@ -2,6 +2,37 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2025-11-14",
+    title: "November 14, 2025",
+    description: "Dub Tractor's Island vibes",
+    tracks: [
+      { artist: "Scientist", title: "Ambush at High Noon (YK’s Last Stand)", album: "KONG" },
+      { artist: "Perfect Giddimani", title: "Boom Draw Dub", album: "Sinky Beatz" },
+      { artist: "Daddy Freddy", title: "Listen to this", album: "African French Poet" },
+      { artist: "Cool Tone Brown", title: "Wish Me Well - Dub Version", album: "Wish Me Well: Dub Versions + Remixes" },
+      { artist: "Dennis Alcapone", title: "El Paso", album: "Forever Version (Deluxe Version)" },
+      { artist: "King Tubby", title: "Dubbing It Right", album: "Love Reggae: Volume Nineteen" },
+      { artist: "Ticklah", title: "Two Face", album: "Ticklah vs. Axelrod" },
+      { artist: "John Frum", title: "Shreveport Shuffle", album: "Jahtarian Dubbers Vol. 2" },
+      { artist: "Mungo's Hi Fi", title: "Rules of the Dance - Kahn Remix", album: "Charlie P" },
+      { artist: "Voltage", title: "Smokers Dub", album: "Specialist Moss" },
+      { artist: "Voltage", title: "Go Down Low", album: "Basslayerz" },
+      { artist: "Prince Fatty", title: "For Me You Are - Mungo's Hi Fi Mix", album: "Mungo's Hi Fi" },
+      { artist: "T>I", title: "Rude Boi Style", album: "Kontakt" },
+      { artist: "Blackout JA", title: "No Mafia", album: "Barry Brown" },
+      { artist: "SELF CONTROL", title: "DUB RANKING", album: "Ranking Joe" },
+      { artist: "Harny Roots", title: "Angry - Dub Version", album: "Sons de Vida" },
+      { artist: "Marrow Records All Stars", title: "Look", album: "Ranking Joe" },
+      { artist: "Yabby You", title: "Deliver the Dub", album: "Yabby You Meets the Aggrovators At King Tubby's Studio" },
+      { artist: "Prince Far I", title: "The Right Way", album: "The Arabs" },
+      { artist: "Massive Attack", title: "Karmacoma", album: "Mad Professor" },
+      { artist: "Christoph El Truento", title: "give me dub", album: "peace maker dub" },
+      { artist: "Emapea", title: "Rudeboy", album: "Reflection" },
+      { artist: "Afrikan Warriors", title: "Explosion Dub 2nd Mix - Dub", album: "Dubplate Box, Vol. 2" },
+      { artist: "Dennis Alcapone", title: "Run Run", album: "Forever Version (Deluxe Version)" }
+    ]
+  },
+  {
     id: "2025-11-07",
     title: "November 7, 2025",
     description: "Dub Tractor's Island vibes",

@@ -28,7 +28,8 @@ export const playlists: Playlist[] = [
       { artist: "Biblical, Good Over Evil, Go A Chant", title: "Ancient Future Dub", album: "Ancient Future" },
       { artist: "Teej", title: "Silencio", album: "Silencio / Nemesis" },
       { artist: "Irie Yute", title: "Cornaz Dub", album: "Cornaz Dub" },
-      { artist: "Dub Judah, Dennis Rootical", title: "Better To Be Good", album: "Better To Be Good" }
+      { artist: "Dub Judah, Dennis Rootical", title: "Better To Be Good", album: "Better To Be Good" },
+      { artist: "DPRTNDRP", title: "Faya Blazin", album: "What Ya Mean EP" }
     ]
   },
   {

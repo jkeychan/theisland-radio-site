@@ -2,6 +2,36 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2025-11-21",
+    title: "November 21, 2025",
+    description: "",
+    tracks: [
+      { artist: "The Aggrovators", title: "Dub Is Shining", album: "Kaya Dub" },
+      { artist: "Scientist, PLEXXDUB", title: "Like the Colors of a Rainbow", album: "Like the Colors of a Rainbow" },
+      { artist: "Stinging Ray, Irie Ites, The Ligerians", title: "Don't Let Dem Dub", album: "Don't Let Dem" },
+      { artist: "Cyndi Lauper", title: "Witness", album: "She's So Unusual" },
+      { artist: "Dub Dynasty, Brain Damage, Tenastelin, Alpha Steppa, Alpha & Omega", title: "Dub World", album: "Spirit World" },
+      { artist: "Linval Thompson, Roberto Sanchez", title: "Not Follow Fashion Dub", album: "Marijuana Sessions In Dub" },
+      { artist: "Mr. Vegas", title: "Melissa", album: "Melissa" },
+      { artist: "Delroy Wilson, King Tubby, Dillinger", title: "Obeah Bath Version", album: "Sunshine Dubs & Versions" },
+      { artist: "O.B.F, Charlie P", title: "Trees", album: "LAVA" },
+      { artist: "Miles DeVoe", title: "Soundclash Jungle", album: "Some Jungle Dubs" },
+      { artist: "Waeys, Sylla", title: "If Not Me", album: "If Not Me / Backhanded Wobbler" },
+      { artist: "Perfect Giddimani, Sinky Beatz", title: "Weed Wi Want Dub", album: "Burnhard Spliffington (B.A.K.E) Bachelor Of Arts In Kush Education" },
+      { artist: "Burning Spear", title: "Civilized Reggae", album: "Harder Than The Best" },
+      { artist: "Barry Brown, King Tubby", title: "Politician / Killa Dub", album: "Barry Brown 12 Inch Collection Playlist" },
+      { artist: "Freddie McGregor", title: "Chant It Down [Extended]", album: "Reggae Anthology: Niney The Observer - Roots With Quality" },
+      { artist: "Hugh Mundell", title: "Rastafari's Call", album: "Blackman's Foundation" },
+      { artist: "Bob Marley & The Wailers", title: "Jamming", album: "Legend (Deluxe Edition)" },
+      { artist: "Junior Delgado", title: "What's the Matter With the People", album: "Sons of Slaves" },
+      { artist: "King Tubby", title: "Hijack The Barber", album: "Sound System FM: Reggae & Roots In Session" },
+      { artist: "Biblical, Good Over Evil, Go A Chant", title: "Ancient Future Dub", album: "Ancient Future" },
+      { artist: "Teej", title: "Silencio", album: "Silencio / Nemesis" },
+      { artist: "Irie Yute", title: "Cornaz Dub", album: "Cornaz Dub" },
+      { artist: "Dub Judah, Dennis Rootical", title: "Better To Be Good", album: "Better To Be Good" }
+    ]
+  },
+  {
     id: "2025-11-14",
     title: "November 14, 2025",
     description: "Dub Tractor's Island vibes",

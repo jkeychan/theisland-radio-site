@@ -19,13 +19,13 @@ jobs:
       security-events: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
         with:
           persist-credentials: false
 
       - name: Install zizmor
         id: install-zizmor
-        uses: jaxxstorm/action-install-gh-release@v1.8.0
+        uses: jaxxstorm/action-install-gh-release@1e02892ca46fae0062342f787ed9d6dae25aedae
         with:
           repo: zizmorcore/zizmor
           tag: latest

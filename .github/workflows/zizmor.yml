@@ -25,20 +25,24 @@ jobs:
         with:
           repo: zizmorcore/zizmor
           tag: latest
-          rename-to: zizmor
 
       - name: Run zizmor
         run: |
           echo "PATH: ${PATH}"
           echo "Checking for zizmor..."
+          # The action installs to a cached location, check common paths
           if command -v zizmor >/dev/null 2>&1; then
             zizmor .github/workflows
+          elif [ -f "/opt/hostedtoolcache/zizmorcore/zizmor/latest/linux-x64/zizmor" ]; then
+            /opt/hostedtoolcache/zizmorcore/zizmor/latest/linux-x64/zizmor .github/workflows
           elif [ -f "${HOME}/.local/bin/zizmor" ]; then
             "${HOME}/.local/bin/zizmor" .github/workflows
           elif [ -f "./zizmor" ]; then
             ./zizmor .github/workflows
           else
             echo "Error: zizmor binary not found"
+            echo "Checking common installation paths..."
+            find /opt/hostedtoolcache -name "zizmor" 2>/dev/null || true
             exit 1
           fi
 

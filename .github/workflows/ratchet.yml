@@ -1,0 +1,52 @@
+name: Workflow Security and Linting
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/**'
+
+jobs:
+  ratchet:
+    name: Ratchet - Version Pinning Check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install ratchet
+        id: install-ratchet
+        uses: jaxxstorm/action-install-gh-release@v1.8.0
+        with:
+          repo: sethvargo/ratchet
+          tag: latest
+
+      - name: Run ratchet
+        run: |
+          echo "PATH: ${PATH}"
+          echo "Checking for ratchet..."
+          if command -v ratchet >/dev/null 2>&1; then
+            RATCHET_CMD="ratchet"
+          elif [ -f "${HOME}/.local/bin/ratchet" ]; then
+            RATCHET_CMD="${HOME}/.local/bin/ratchet"
+          elif [ -f "./ratchet" ]; then
+            RATCHET_CMD="./ratchet"
+          else
+            echo "Error: ratchet binary not found"
+            exit 1
+          fi
+          echo "Running: ${RATCHET_CMD} lint on workflow files"
+          find .github/workflows -name "*.yml" -o -name "*.yaml" | while read -r file; do
+            echo "Checking: ${file}"
+            "${RATCHET_CMD}" lint "${file}"
+          done
+          echo "Ratchet lint completed successfully"
+

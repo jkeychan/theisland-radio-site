@@ -2,6 +2,34 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2025-12-05",
+    title: "December 5, 2025",
+    description: "Dub Tractor's Island vibes",
+    tracks: [
+      { artist: "Dub Shepherds", title: "Ram Dub", album: "Mango Tree Showcase" },
+      { artist: "Jimmy Cliff", title: "Wonderful World, Beautiful People", album: "The Best Of Jimmy Cliff" },
+      { artist: "Jimmy Cliff", title: "You Can Get It If You Really Want", album: "The Best Of Jimmy Cliff" },
+      { artist: "Chronixx", title: "Exile", album: "Exile" },
+      { artist: "Mr Eazi", title: "Dance Pon Me", album: "Dance Pon Me" },
+      { artist: "DubXanne", title: "Walking on the Moon - Walking on the Dub", album: "The Police in Dub" },
+      { artist: "L'Entourloop;Eesah;Hollow Point;Danny English;Bunny General;Echo Minott;Triston Palma", title: "Muffin Kings", album: "Muffin Kings" },
+      { artist: "Aston Barrett Jr.;Dennis Thompson", title: "Rastafari Dub", album: "Rastafari Dub" },
+      { artist: "Bass Culture Players;Old John", title: "War Refugees", album: "War Refugees" },
+      { artist: "Hornin' All Star", title: "Dub for Fam's", album: "Jam Stars Salute, Vol. 1" },
+      { artist: "Dan Matic;Ranking Joe", title: "Breadfruit Dub", album: "Dan Matic Meets Ranking Joe - Algah Riddim & Dub" },
+      { artist: "Dub Judah;Kibir La Amlak", title: "Best Foot Forward", album: "Best Foot Forward" },
+      { artist: "Chopstick Dubplate;DJ Gaw", title: "Soundboy Gone - DJ Gaw Remix", album: "Soundboy Gone" },
+      { artist: "Top Cat;Serial Killaz", title: "Friend in Need - Serial Killaz Remix", album: "Return of the Champion Deejay" },
+      { artist: "Danny T & Tradesman;Earl 16;Bim One", title: "Distraction Trap - Bim One Remix", album: "Rebuilt for Sound" },
+      { artist: "Prince Alla;Zero Ziba", title: "WORLD POLLUTION (feat. ZERO ZIBA) - extended version", album: "WORLD POLLUTION (feat. ZERO ZIBA) [extended version]" },
+      { artist: "Truesounds;Chukki Starr", title: "Last Forever (Vocation Riddim) - Dub Cavern & Grasshoper Dub", album: "Last Forever (Vocation Riddim)" },
+      { artist: "Kirk Diamond;Finn;Lord Fury", title: "Trinity", album: "Dread" },
+      { artist: "Step-A-Dub;Ansata;Lana Sounds", title: "Dub Now", album: "Right Now Riddim" },
+      { artist: "Yami Bolo", title: "Bad Boi", album: "Don One the Sound of Brooklyn" },
+      { artist: "Dubglow", title: "LoFi Roots", album: "LoFi HiFi (Dusty Dub and Chill)" }
+    ]
+  },
+  {
     id: "2025-11-21",
     title: "November 21, 2025",
     description: "",

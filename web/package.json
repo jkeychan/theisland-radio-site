@@ -12,7 +12,7 @@
   "dependencies": {
     "react": "19.2.1",
     "react-dom": "19.2.1",
-    "next": "15.5.7"
+    "next": "15.5.9"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
@@ -22,7 +22,7 @@
     "@tailwindcss/postcss": "^4",
     "tailwindcss": "^4",
     "eslint": "^9",
-    "eslint-config-next": "15.5.7",
+    "eslint-config-next": "15.5.9",
     "@eslint/eslintrc": "^3"
   }
 }

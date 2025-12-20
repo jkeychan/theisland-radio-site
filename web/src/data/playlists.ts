@@ -2,6 +2,34 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2025-12-12",
+    title: "December 12, 2025",
+    description: "Dub Tractor's Island vibes",
+    tracks: [
+      { artist: "Gregory Morris", title: "No Ice Cream Dub", album: "Universal Love Showcase" },
+      { artist: "Bobby Ellis, The Revolutionaries", title: "Stormy Weather - 12 Mix", album: "Different Fashion: High Note Dancehall 1979-1981" },
+      { artist: "Ivan Lee, Lee Scratch Perry", title: "Karate Dub", album: "Upsetter Kids Forever" },
+      { artist: "Mungo's Hi Fi, Charlie P", title: "Got The Vibes", album: "Soundsystem Champions 2" },
+      { artist: "Mungo's Hi Fi, Solo Banton", title: "Bubble N Wine", album: "Soundsystem Champions 2" },
+      { artist: "Dubglow", title: "LoFi Steppers", album: "LoFi HiFi (Dusty Dub and Chill)" },
+      { artist: "Antidoping, Rebeca Lane", title: "Flor del Desierto (feat. Rebeca Lane)", album: "Flor del Desierto (feat. Rebeca Lane)" },
+      { artist: "Adrian Sherwood, African Head Charge, Speakers Corner Quartet", title: "Garden Of Inspiration", album: "Barbican Heights" },
+      { artist: "The Deli", title: "Central Park Stroll", album: "Central Park Stroll" },
+      { artist: "Deenucka, Junior Reid", title: "Silver & Gold", album: "COR - PUS Vol. 1" },
+      { artist: "Mr. Williamz, Topcat", title: "Rocking Style", album: "Soundkilla Mindset" },
+      { artist: "Pressure Busspipe, Capleton", title: "Gunman Town", album: "Gunman Town" },
+      { artist: "Lila Iké", title: "Where I'm Coming From", album: "The ExPerience" },
+      { artist: "Lion D, Irie Ites", title: "Alert", album: "Alert" },
+      { artist: "Hemsley Morris", title: "Stay Loose", album: "All Aboard The C.N. Express: Rock Steady & Boss Reggae Sounds From 1967 & 1968" },
+      { artist: "The Dynamites", title: "Sha La La (To the End)", album: "Kingston Town" },
+      { artist: "O.B.F, Pupajim", title: "The Vibe", album: "MIXXTAPE" },
+      { artist: "Kotoa", title: "Earthwise", album: "Earthwise EP" },
+      { artist: "Mungo's Hi Fi, Eva Lazarus", title: "Amsterdam - Flight Mode Mix", album: "Soundsystem Champions 2" },
+      { artist: "Roots Radics, Green Lion", title: "Curse of the Damned!", album: "Dancehall of Horrors" },
+      { artist: "Massive Attack, Tracey Thorn, Mad Professor", title: "Protection - Radiation For The Nation Mix", album: "Protection" }
+    ]
+  },
+  {
     id: "2025-12-05",
     title: "December 5, 2025",
     description: "Dub Tractor's Island vibes",

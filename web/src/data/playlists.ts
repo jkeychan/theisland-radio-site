@@ -2,6 +2,36 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2025-09-19",
+    title: "September 19, 2025",
+    description: "Dub Tractor's Island vibes",
+    tracks: [
+      { artist: "Scientist", title: "- Rubber Foot", album: "Introducing The Scientist" },
+      { artist: "Scientist", title: "- Jungle", album: "Introducing The Scientist" },
+      { artist: "Aswad", title: "Natural Aggression", album: "New Chapter Of Dub" },
+      { artist: "Tippa Lee, Naram", title: "Time Hard", album: "Tippa Lee meets the Naram Rhythm Section - Musically Bad" },
+      { artist: "Dubglow", title: "Sailers Wheel", album: "LoFi Roots, Boots And Carrot Juice" },
+      { artist: "Supermax", title: "I Night Pulse Over Babylon", album: "Cosmic Love" },
+      { artist: "Tenna Star, Meditative Sounds, Jah Works", title: "Flying Eagle Dub", album: "Fly Like An Eagle" },
+      { artist: "Livity Allstars", title: "Universel Forståelse", album: "Livity Allstars" },
+      { artist: "Echoing Melodies", title: "Hushed Harmonies", album: "Serene Reverie" },
+      { artist: "Jazzwad", title: "Lead us Dub", album: "Showcase, Vol. 14: In Roots" },
+      { artist: "Crown-Lites", title: "Pistils at Dusk", album: "Return to the Forest of the Black Marigold" },
+      { artist: "Tapper Zukie", title: "Spiritual War Riddim", album: "Spiritual War" },
+      { artist: "Sid Bucknor", title: "Harbour View", album: "Harbour View" },
+      { artist: "Akae Beka, Protoje", title: "Mek A Menshun (feat. Protoje)", album: "Mek A Menshun" },
+      { artist: "Mykal Rose", title: "Throw Some Stone - Megadub Mix", album: "Deeper Roots" },
+      { artist: "Big Youth", title: "Lion's Den Remix - Remix", album: "Deeper Roots" },
+      { artist: "Sly & Robbie", title: "King of Kings riddim", album: "King of Kings EP" },
+      { artist: "iNi Kamoze", title: "Hot Stepper", album: "Down In Jamaica: 40 Years of VP Records" },
+      { artist: "Bob Andy, Mad Professor", title: "Devastation Dub", album: "Bob Andy's Dub Book (As Revealed to Mad Professor)" },
+      { artist: "The Abyssinians", title: "I and I - Original Jamaican Mix", album: "Satta Massagana (Original Jamaican Mixes) [Deluxe Edition]" },
+      { artist: "Lee Scratch Perry", title: "Ruffer Dub", album: "Lee Scratch Perry & Friends: Back to the Ark" },
+      { artist: "Burning Spear", title: "Pieces of Dub", album: "Living Dub Volume Two" },
+      { artist: "Jonnygo Figure", title: "Vinyl Lover Dub", album: "Crucial Showcase (Extended)" }
+    ]
+  },
+  {
     id: "2025-12-12",
     title: "December 12, 2025",
     description: "Dub Tractor's Island vibes",

@@ -87,10 +87,11 @@ function convertToPipeDelimited(csvData) {
   const headerRow = 'Title | Artist | Album';
   
   // Convert to pipe-delimited format
+  // Support multiple header naming conventions (Spotify/Apple export vs generic)
   const pipeDelimitedLines = records.map(record => {
-    const title = record.Title || record.title || '';
-    const artist = record.Artist || record.artist || '';
-    const album = record.Album || record.album || '';
+    const title = record.Title || record.title || record['Track Name'] || '';
+    const artist = record.Artist || record.artist || record['Artist Name(s)'] || '';
+    const album = record.Album || record.album || record['Album Name'] || '';
     
     // Format: Title | Artist | Album
     return `${title} | ${artist} | ${album}`;

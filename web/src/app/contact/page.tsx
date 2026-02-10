@@ -3,7 +3,10 @@
 import { useState, useRef, useEffect } from "react";
 import Script from "next/script";
 
-const RECAPTCHA_SITE_KEY = "6LdDWMErAAAAAHXrUTKEYmc_WpT_VQPdG0mCnBTy";
+const RECAPTCHA_SITE_KEY =
+  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "6LdDWMErAAAAAHXrUTKEYmc_WpT_VQPdG0mCnBTy";
+const FORMSPREE_ENDPOINT =
+  process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "https://formspree.io/f/movnkqbe";
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -93,7 +96,7 @@ export default function ContactPage() {
       formData.append("g-recaptcha-response", token);
 
       // Submit to Formspree
-      const response = await fetch("https://formspree.io/f/movnkqbe", {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         body: formData,
         headers: {
@@ -127,87 +130,103 @@ export default function ContactPage() {
         onLoad={handleRecaptchaLoad}
       />
       
-      <div className="space-y-6">
-        <header>
-          <h1 className="text-3xl font-semibold section-heading section-heading-light">Contact</h1>
-          <p className="text-theme-gold">Reach out to The Island on WART 95.5 FM.</p>
-          <dl className="mt-2 text-sm flex flex-wrap gap-x-8 gap-y-1">
+      <div className="space-y-12 py-12 sm:py-16 relative z-10">
+        <header className="space-y-4 text-center">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold section-heading section-heading-light">
+            Contact
+          </h1>
+          <p className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-white/90 font-[family-name:var(--font-island-moments)]">
+            Reach out to The Island on WART 95.5 FM.
+          </p>
+          <dl className="mt-6 text-base sm:text-lg flex flex-wrap justify-center gap-x-8 gap-y-3">
             <div>
-              <dt className="font-medium text-white">Text or Call the Request Line</dt>
-              <dd className="text-theme-gold">828-222-6317</dd>
+              <dt className="font-semibold text-white">Text or Call the Request Line</dt>
+              <dd className="text-theme-gold font-medium">828-222-6317</dd>
             </div>
             <div>
-              <dt className="font-medium text-white">Station Website</dt>
+              <dt className="font-semibold text-white">Station Website</dt>
               <dd className="text-theme-gold">
-                <a className="underline" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">WART 95.5 FM</a>
+                <a className="underline font-medium hover:text-theme-red transition-colors" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">WART 95.5 FM</a>
               </dd>
             </div>
           </dl>
         </header>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 items-stretch">
-          {/* On mobile, show the art between details and the form by ordering first in DOM for lg, and below header via responsive order classes */}
-          <section className="rounded-lg border card-dark p-2 shadow-sm h-48 sm:h-64 lg:h-full order-2 lg:order-none flex items-center justify-center" aria-label="Station art">
-            <img
-              src="/images/dub-tractor-theisland-logo-transparent-2.png"
-              alt="Dub Tractor artwork"
-              className="max-h-full w-auto object-contain"
-            />
-          </section>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 items-start">
+          <div className="order-2 lg:order-none flex items-start justify-center lg:justify-start" aria-label="Station art">
+            <picture>
+              <source srcSet="/images/hero-animation-trimmed.webp" type="image/webp" />
+              <img
+                src="/images/hero-animation-trimmed.gif"
+                alt="Dub Tractor animation"
+                className="w-auto h-auto"
+              />
+            </picture>
+          </div>
 
           <form
             ref={formRef}
-            className="rounded-lg border card-dark p-4 shadow-sm h-full order-3 lg:order-none"
+            className="card h-full order-3 lg:order-none"
             onSubmit={handleSubmit}
           >
-            <div className="grid grid-cols-1 gap-4">
-              <label className="block text-sm">
-                <span className="mb-1 block font-medium text-white">Name</span>
+            <div className="grid grid-cols-1 gap-5">
+              <label className="block">
+                <span className="mb-2 block font-semibold text-white">Name</span>
                 <input 
                   name="name" 
                   required 
-                  className="w-full rounded-md border px-3 py-2 bg-white/90" 
+                  className="w-full rounded-lg border-2 border-white/30 px-4 py-3 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:border-theme-gold focus:outline-none transition-colors" 
                   disabled={isSubmitting}
                 />
               </label>
-              <label className="block text-sm">
-                <span className="mb-1 block font-medium text-white">Email</span>
+              <label className="block">
+                <span className="mb-2 block font-semibold text-white">Email</span>
                 <input 
                   name="email" 
                   type="email" 
                   required 
-                  className="w-full rounded-md border px-3 py-2 bg-white/90" 
+                  className="w-full rounded-lg border-2 border-white/30 px-4 py-3 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:border-theme-gold focus:outline-none transition-colors" 
                   disabled={isSubmitting}
                 />
               </label>
-              <label className="block text-sm">
-                <span className="mb-1 block font-medium text-white">Subject</span>
+              <label className="block">
+                <span className="mb-2 block font-semibold text-white">Subject</span>
                 <input 
                   name="subject" 
                   required 
-                  className="w-full rounded-md border px-3 py-2 bg-white/90" 
+                  className="w-full rounded-lg border-2 border-white/30 px-4 py-3 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:border-theme-gold focus:outline-none transition-colors" 
                   disabled={isSubmitting}
                 />
               </label>
-              <label className="block text-sm">
-                <span className="mb-1 block font-medium text-white">Message</span>
+              <label className="block">
+                <span className="mb-2 block font-semibold text-white">Message</span>
                 <textarea 
                   name="message" 
                   required 
                   rows={6} 
-                  className="w-full rounded-md border px-3 py-2 bg-white/90" 
+                  className="w-full rounded-lg border-2 border-white/30 px-4 py-3 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:border-theme-gold focus:outline-none transition-colors" 
                   disabled={isSubmitting}
                 />
               </label>
               
               {/* Status Messages */}
               {submitStatus === "success" && (
-                <div className="p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
+                <div
+                  className="p-3 bg-green-100 border border-green-400 text-green-700 rounded-md"
+                  role="status"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
                   Message sent successfully! We&apos;ll get back to you soon.
                 </div>
               )}
               {submitStatus === "error" && (
-                <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
+                <div
+                  className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-md"
+                  role="alert"
+                  aria-live="assertive"
+                  aria-atomic="true"
+                >
                   There was an error sending your message. Please try again.
                 </div>
               )}

@@ -14,66 +14,80 @@ Key routes: `/`, `/playlists/`, `/playlists/archive/`, `/playlists/archive/all`,
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Build and Export
+## Development
+
+### Running Tests
+
+```bash
+# Unit tests
+npm test
+
+# Watch mode
+npm run test:watch
+
+# Coverage report
+npm run test:coverage
+
+# E2E tests (requires dev server running)
+npm run test:e2e
+```
+
+### Build and Export
 
 ```bash
 npm run build
 npx next export
 ```
 
-Deployment via GitHub Actions publishes `out/` to `gh-pages`.
+Deployment via GitHub Actions automatically publishes `out/` to GitHub Pages when pushing to main branch.
 
-## Data via Google Sheets (CSV)
-
-Set the following env vars (in repo secrets or `.env.local` for local):
-
-```bash
-
-NEXT_PUBLIC_TRACKS_CSV_URL=https://docs.google.com/spreadsheets/d/<SHEET_ID>/export?format=csv&gid=<TAB_GID>
-```
-
-### URL Format Examples:
-
-**Recommended format** (cleaner CSV export):
-```bash
-NEXT_PUBLIC_TRACKS_CSV_URL=https://docs.google.com/spreadsheets/d/15PgCEAXbdRBukiUXpRh3BDP9jwER4mzJfKslA51ort4/export?format=csv&gid=0
-```
-
-**Alternative format** (also works):
-```bash
-NEXT_PUBLIC_TRACKS_CSV_URL=https://docs.google.com/spreadsheets/d/1vOa_wABqG7n3IXNoAb7uGfSzstaj_Q8A8YOmB4K7Cp0/gviz/tq?tqx=out:csv&gid=1654309709
-```
-
-### Notes:
-- Replace `<SHEET_ID>` with your Google Sheet id
-- The `/export?format=csv&gid=` format works better with Google Sheets table formatting
-- Headers expected:
-  - Playlists: `id,title,description,tracks` (tracks can be newline- or semicolon-separated lines like `Artist - Title (Album)`)
-
-
-The site will prefer the remote CSV feeds when the env vars are set, and fall back to local `src/data/*.ts` arrays otherwise.
 
 ## Weekly Playlist Updates
 
-### Quick Update Process (GitHub CLI)
+The site uses Google Sheets to manage weekly playlists. Each week, a new publicly readable Google Sheet is created with the playlist data.
 
-1. **Create new Google Sheet** for the week
-2. **Get CSV export URL**: `https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/export?format=csv&gid=0`
-3. **Update GitHub variable**:
+### Google Sheet Format
+
+The sheet must have these columns:
+- `Title` - Song title
+- `Artist` - Artist name
+- `Album` - Album name (optional, shown in parentheses)
+- `Duration (ms)` - Track duration in milliseconds (optional)
+
+### CSV Export URL Format
+
+The Google Sheet must be publicly readable and exported as CSV using this format:
+
+```
+https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv
+```
+
+**Example URL:**
+```
+https://docs.google.com/spreadsheets/d/1x1RHBr3OcxPwe6YSCdNCQMxDB9BF3tmvyKvgwif3vTc/export?format=csv
+```
+
+**Note:** The sheet changes each week, so you'll need to update the `NEXT_PUBLIC_TRACKS_CSV_URL` environment variable with the new week's sheet URL.
+
+### Updating the Weekly Playlist
+
+1. **Create or update Google Sheet** with the week's playlist
+2. **Make sheet publicly readable**: Share → "Anyone with the link can view"
+3. **Get CSV export URL**: Use format `https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv`
+4. **Update GitHub variable** (via CLI):
    ```bash
-   gh variable set NEXT_PUBLIC_TRACKS_CSV_URL --body "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/export?format=csv&gid=0"
+   gh variable set NEXT_PUBLIC_TRACKS_CSV_URL --body "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/export?format=csv"
    ```
-4. **Trigger rebuild**:
+5. **Or via GitHub Web Interface**:
+   - Go to **Settings** → **Secrets and variables** → **Actions** → **Variables** tab
+   - Update `NEXT_PUBLIC_TRACKS_CSV_URL` with your new CSV URL
+6. **Trigger rebuild** (if needed):
    ```bash
-   git commit --allow-empty -m "Update playlist"
-   git push origin main
+   git commit --allow-empty -m "Update current week playlist CSV"
+   git push
    ```
 
-### Alternative: GitHub Web Interface
-
-1. Go to **Settings** → **Secrets and variables** → **Actions** → **Variables** tab
-2. Update `NEXT_PUBLIC_TRACKS_CSV_URL` with your new CSV URL
-3. Push any commit to trigger rebuild
+The site will automatically fetch and display tracks from the CSV URL when `NEXT_PUBLIC_TRACKS_CSV_URL` is set. If the environment variable is not set, the site will fall back to local `src/data/*.ts` arrays.
 
 ## Weekly Playlist Archival Workflow
 

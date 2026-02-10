@@ -1,0 +1,89 @@
+name: Validate Playlist Updates
+
+on:
+  pull_request:
+    paths:
+      - 'web/src/data/playlists.ts'
+      - 'web/scripts/**'
+  push:
+    branches: [main]
+    paths:
+      - 'web/src/data/playlists.ts'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        working-directory: web
+        run: npm ci
+
+      - name: Validate playlist format
+        working-directory: web
+        run: |
+          # Check that playlists.ts is valid TypeScript
+          npx tsc --noEmit src/data/playlists.ts
+          
+          # Basic validation: check that file exports playlists array
+          node -e "
+            const fs = require('fs');
+            const content = fs.readFileSync('src/data/playlists.ts', 'utf8');
+            if (!content.includes('export const playlists')) {
+              console.error('Error: playlists.ts must export a playlists array');
+              process.exit(1);
+            }
+            if (!content.includes('type Playlist')) {
+              console.error('Error: playlists.ts should use Playlist type');
+              process.exit(1);
+            }
+            console.log('✅ Playlist format validation passed');
+          "
+
+      - name: Check for duplicate playlist IDs
+        working-directory: web
+        run: |
+          node -e "
+            const fs = require('fs');
+            const content = fs.readFileSync('src/data/playlists.ts', 'utf8');
+            const idMatches = content.matchAll(/id: ['\"]([^'\"]+)['\"]/g);
+            const ids = Array.from(idMatches, m => m[1]);
+            const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
+            if (duplicates.length > 0) {
+              console.error('❌ Error: Duplicate playlist IDs found:', [...new Set(duplicates)]);
+              process.exit(1);
+            }
+            console.log('✅ No duplicate playlist IDs found');
+          "
+
+      - name: Validate playlist structure
+        working-directory: web
+        run: |
+          node -e "
+            const fs = require('fs');
+            const content = fs.readFileSync('src/data/playlists.ts', 'utf8');
+            
+            // Check that playlists have required fields
+            const playlistMatches = content.matchAll(/id: ['\"]([^'\"]+)['\"][^}]*title: ['\"]([^'\"]+)['\"]/gs);
+            let count = 0;
+            for (const match of playlistMatches) {
+              count++;
+            }
+            
+            if (count === 0) {
+              console.error('❌ Error: No playlists found in file');
+              process.exit(1);
+            }
+            
+            console.log(\`✅ Found \${count} playlist(s)\`);
+          "
+

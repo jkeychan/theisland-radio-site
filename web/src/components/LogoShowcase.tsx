@@ -12,7 +12,7 @@ export const LogoShowcase = () => {
       <h2 id="logos-title" className="text-2xl font-semibold section-heading section-heading-light">Logos</h2>
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
         {candidates.map((src) => (
-          <div key={src} className="card p-4 flex items-center justify-center bg-white/60">
+          <div key={src} className="card p-4 flex items-center justify-center">
             <img src={src} alt="Dub Tractor logo" className="max-h-40 w-auto" />
           </div>
         ))}

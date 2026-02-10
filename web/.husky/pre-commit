@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run linting
+npm run lint || exit 1
+
+# Run type checking
+npx tsc --noEmit || exit 1
+
+# Run tests if jest config exists
+if [ -f "jest.config.js" ] || [ -f "jest.config.ts" ]; then
+  npm test -- --bail --findRelatedTests --passWithNoTests || exit 1
+fi

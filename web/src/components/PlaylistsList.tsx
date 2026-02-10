@@ -6,7 +6,7 @@ import type { Playlist } from "@/types/content";
 type PlaylistsListProps = {
   showAll?: boolean;
   excludeCurrent?: boolean;
-  limit?: number; // New prop to limit displayed playlists
+  limit?: number;
 };
 
 export function PlaylistsList({ showAll = false, excludeCurrent = false, limit }: PlaylistsListProps) {
@@ -14,17 +14,14 @@ export function PlaylistsList({ showAll = false, excludeCurrent = false, limit }
 
   let playlistsToRender: Playlist[] = [...data].sort((a, b) => (a.id < b.id ? 1 : -1));
   
-  // If excluding current, remove the most recent playlist
   if (excludeCurrent && playlistsToRender.length > 0) {
     playlistsToRender = playlistsToRender.slice(1);
   }
   
-  // Apply limit if specified
   if (limit && limit > 0) {
     playlistsToRender = playlistsToRender.slice(0, limit);
   }
   
-  // If not showing all and no limit specified, only show the first one
   if (!showAll && !limit) {
     playlistsToRender = playlistsToRender.slice(0, 1);
   }
@@ -32,18 +29,26 @@ export function PlaylistsList({ showAll = false, excludeCurrent = false, limit }
   if (playlistsToRender.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-1 gap-4">
+    <div className="grid grid-cols-1 gap-8 sm:gap-10">
       {playlistsToRender.map((p) => (
-        <article key={p.id} className="card card-dark p-4">
-          <h2 className="text-xl font-medium">{p.title}</h2>
-          {p.description ? (
-            <p className="text-sm text-theme-gold">{p.description}</p>
-          ) : null}
-          <ol className="mt-3 list-inside list-decimal space-y-1 text-sm text-white">
+        <article key={p.id} className="card">
+          <div className="mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-white font-[family-name:var(--font-reggae-one)]">{p.title}</h2>
+            {p.description ? (
+              <p className="text-2xl sm:text-3xl lg:text-4xl text-white/80 font-[family-name:var(--font-island-moments)]">{p.description}</p>
+            ) : null}
+          </div>
+          <ol className="list-inside list-decimal space-y-3 sm:space-y-4 text-base sm:text-lg text-white/90">
             {p.tracks.map((t, i) => (
-              <li key={i}>
-                <span className="font-medium text-white">{t.artist}</span> — <span className="text-white">{t.title}</span>
-                {t.album ? <span className="text-theme-gold"> ({t.album})</span> : null}
+              <li key={i} className="leading-relaxed">
+                <span className="font-bold text-white">{t.artist}</span>
+                {t.artist && t.title ? (
+                  <span className="text-white/70"> — </span>
+                ) : null}
+                <span className="text-white/90">{t.title}</span>
+                {t.album ? (
+                  <span className="text-theme-gold font-medium"> ({t.album})</span>
+                ) : null}
               </li>
             ))}
           </ol>

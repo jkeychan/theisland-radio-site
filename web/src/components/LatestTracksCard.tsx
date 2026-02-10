@@ -13,7 +13,7 @@ export const LatestTracksCard = ({ title = "This Week’s Tracks" }: LatestTrack
   return (
     <section aria-labelledby="latest-playlist-title">
       <article className="card card-accent card-dark p-4">
-        <h2 id="latest-playlist-title" className="text-xl font-medium text-white">{title}</h2>
+        <h2 id="latest-playlist-title" className="text-xl font-medium text-white font-[family-name:var(--font-reggae-one)]">{title}</h2>
         {loading ? (
           <p className="mt-3 text-theme-gold">Loading…</p>
         ) : (

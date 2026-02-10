@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Validate commit message format
+commit_msg=$(cat "$1")
+
+# Check if subject line is too long (warn if >72, error if >100)
+subject_line=$(echo "$commit_msg" | head -n1)
+subject_length=${#subject_line}
+
+if [ "$subject_length" -gt 100 ]; then
+  echo "❌ Error: Commit subject line is too long ($subject_length chars). Keep it under 50 characters."
+  exit 1
+elif [ "$subject_length" -gt 72 ]; then
+  echo "⚠️  Warning: Commit subject line is long ($subject_length chars). Consider keeping it under 50 characters."
+fi
+
+# Check if body exists (warn if missing)
+if [ "$(echo "$commit_msg" | wc -l)" -lt 3 ]; then
+  echo "⚠️  Warning: Commit message body is missing or too short. Please add detailed explanation of what changed and why."
+fi
+
+# Check for common bad commit message patterns
+if echo "$subject_line" | grep -qiE "^(fix|update|change|wip|test)"; then
+  if [ "$subject_length" -lt 10 ]; then
+    echo "⚠️  Warning: Commit subject is too vague. Be more specific about what was changed."
+  fi
+fi
+

@@ -26,12 +26,30 @@ jobs:
         run: npm ci
         working-directory: web
 
+      - name: Debug environment variables
+        run: |
+          echo "Checking environment variables..."
+          if [ -z "$NEXT_PUBLIC_RECAPTCHA_SITE_KEY" ]; then
+            echo "⚠️ NEXT_PUBLIC_RECAPTCHA_SITE_KEY is not set"
+          else
+            echo "✅ NEXT_PUBLIC_RECAPTCHA_SITE_KEY is set (length: ${#NEXT_PUBLIC_RECAPTCHA_SITE_KEY})"
+          fi
+          if [ -z "$NEXT_PUBLIC_FORMSPREE_FORM_ID" ]; then
+            echo "⚠️ NEXT_PUBLIC_FORMSPREE_FORM_ID is not set"
+          else
+            echo "✅ NEXT_PUBLIC_FORMSPREE_FORM_ID is set (length: ${#NEXT_PUBLIC_FORMSPREE_FORM_ID})"
+          fi
+        env:
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ vars.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
+          NEXT_PUBLIC_FORMSPREE_FORM_ID: ${{ vars.NEXT_PUBLIC_FORMSPREE_FORM_ID }}
+
       - name: Build
         run: npm run build
         working-directory: web
         env:
           NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ vars.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
           NEXT_PUBLIC_FORMSPREE_FORM_ID: ${{ vars.NEXT_PUBLIC_FORMSPREE_FORM_ID }}
+          NEXT_PUBLIC_GA_ID: ${{ vars.NEXT_PUBLIC_GA_ID }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

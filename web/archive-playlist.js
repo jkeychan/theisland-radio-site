@@ -91,6 +91,14 @@ function parseCsv(text) {
   return out;
 }
 
+// Escape string for use in JavaScript/TypeScript string literals
+// Escapes backslashes first, then quotes to prevent injection
+function escapeString(str) {
+  return str
+    .replace(/\\/g, '\\\\')  // Escape backslashes first
+    .replace(/"/g, '\\"');   // Then escape double quotes
+}
+
 // Generate TypeScript playlist object
 function generatePlaylistObject(records, playlistId, playlistTitle) {
     const tracks = records.map(record => {
@@ -98,12 +106,12 @@ function generatePlaylistObject(records, playlistId, playlistTitle) {
     const artist = record.Artist || record.artist || '';
     const album = record.Album || record.album || '';
     
-    return `      { artist: "${artist.replace(/"/g, '\\"')}", title: "${title.replace(/"/g, '\\"')}", album: "${album.replace(/"/g, '\\"')}" }`;
+    return `      { artist: "${escapeString(artist)}", title: "${escapeString(title)}", album: "${escapeString(album)}" }`;
   }).join(',\n');
 
   return `  {
-    id: "${playlistId}",
-    title: "${playlistTitle}",
+    id: "${escapeString(playlistId)}",
+    title: "${escapeString(playlistTitle)}",
     description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
     tracks: [
 ${tracks}

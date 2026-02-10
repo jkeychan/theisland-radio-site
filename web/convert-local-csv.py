@@ -52,12 +52,14 @@ def generate_typescript(playlist):
         tracks_ts.append(
             f'    {{ artist: "{track["artist"]}", title: "{track["title"]}"{album_part} }}')
 
+    newline = '\n'
+    tracks_str = (',' + newline).join(tracks_ts)
     return f"""{{
   id: "{playlist['id']}",
   title: "{playlist['title']}",
   description: "{playlist['description']}",
   tracks: [
-{',\n'.join(tracks_ts)}
+{tracks_str}
   ]
 }}"""
 

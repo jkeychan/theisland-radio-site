@@ -6,7 +6,11 @@ import Script from "next/script";
 const RECAPTCHA_SITE_KEY =
   process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "6LdDWMErAAAAAHXrUTKEYmc_WpT_VQPdG0mCnBTy";
 const FORMSPREE_ENDPOINT =
-  process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "https://formspree.io/f/movnkqbe";
+  process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ??
+  (process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID
+    ? `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID}`
+    : "https://formspree.io/f/movnkqbe");
+const contactFormConfigured = Boolean(RECAPTCHA_SITE_KEY && FORMSPREE_ENDPOINT);
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -123,13 +127,14 @@ export default function ContactPage() {
   
   return (
     <>
-      {/* reCAPTCHA v3 Script - Standard API for Formspree compatibility */}
-      <Script
-        src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`}
-        strategy="afterInteractive"
-        onLoad={handleRecaptchaLoad}
-      />
-      
+      {contactFormConfigured && (
+        <Script
+          src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`}
+          strategy="afterInteractive"
+          onLoad={handleRecaptchaLoad}
+        />
+      )}
+
       <div className="space-y-12 py-12 sm:py-16 relative z-10">
         <header className="space-y-4 text-center">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold section-heading section-heading-light">
@@ -164,6 +169,13 @@ export default function ContactPage() {
             </picture>
           </div>
 
+          {!contactFormConfigured ? (
+            <div className="rounded-lg border card-dark p-6 flex items-center justify-center">
+              <p className="text-theme-gold text-center">
+                Contact form is not configured. Set <code className="text-white">NEXT_PUBLIC_RECAPTCHA_SITE_KEY</code> and <code className="text-white">NEXT_PUBLIC_FORMSPREE_FORM_ID</code> in your environment (see <code className="text-white">.env.example</code>).
+              </p>
+            </div>
+          ) : (
           <form
             ref={formRef}
             className="card h-full order-3 lg:order-none"
@@ -244,6 +256,7 @@ export default function ContactPage() {
               <input type="hidden" name="_gotcha" />
             </div>
           </form>
+          )}
         </div>
       </div>
     </>

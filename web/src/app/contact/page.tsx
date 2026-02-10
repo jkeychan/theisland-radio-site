@@ -3,7 +3,9 @@
 import { useState, useRef, useEffect } from "react";
 import Script from "next/script";
 
-const RECAPTCHA_SITE_KEY = "6LdDWMErAAAAAHXrUTKEYmc_WpT_VQPdG0mCnBTy";
+const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
+const formspreeFormId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID ?? "";
+const contactFormConfigured = Boolean(recaptchaSiteKey && formspreeFormId);
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,7 +68,7 @@ export default function ContactPage() {
       }
 
       // Get reCAPTCHA token
-      const token = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "contact_form" });
+      const token = await window.grecaptcha.execute(recaptchaSiteKey, { action: "contact_form" });
       
       // Get form data using ref
       const form = formRef.current;
@@ -93,7 +95,7 @@ export default function ContactPage() {
       formData.append("g-recaptcha-response", token);
 
       // Submit to Formspree
-      const response = await fetch("https://formspree.io/f/movnkqbe", {
+      const response = await fetch(`https://formspree.io/f/${formspreeFormId}`, {
         method: "POST",
         body: formData,
         headers: {
@@ -120,13 +122,14 @@ export default function ContactPage() {
   
   return (
     <>
-      {/* reCAPTCHA v3 Script - Standard API for Formspree compatibility */}
-      <Script
-        src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`}
-        strategy="afterInteractive"
-        onLoad={handleRecaptchaLoad}
-      />
-      
+      {contactFormConfigured && (
+        <Script
+          src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
+          strategy="afterInteractive"
+          onLoad={handleRecaptchaLoad}
+        />
+      )}
+
       <div className="space-y-6">
         <header>
           <h1 className="text-3xl font-semibold section-heading section-heading-light">Contact</h1>
@@ -146,7 +149,6 @@ export default function ContactPage() {
         </header>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 items-stretch">
-          {/* On mobile, show the art between details and the form by ordering first in DOM for lg, and below header via responsive order classes */}
           <section className="rounded-lg border card-dark p-2 shadow-sm h-48 sm:h-64 lg:h-full order-2 lg:order-none flex items-center justify-center" aria-label="Station art">
             <img
               src="/images/dub-tractor-theisland-logo-transparent-2.png"
@@ -155,6 +157,13 @@ export default function ContactPage() {
             />
           </section>
 
+          {!contactFormConfigured ? (
+            <div className="rounded-lg border card-dark p-6 flex items-center justify-center">
+              <p className="text-theme-gold text-center">
+                Contact form is not configured. Set <code className="text-white">NEXT_PUBLIC_RECAPTCHA_SITE_KEY</code> and <code className="text-white">NEXT_PUBLIC_FORMSPREE_FORM_ID</code> in your environment (see <code className="text-white">.env.example</code>).
+              </p>
+            </div>
+          ) : (
           <form
             ref={formRef}
             className="rounded-lg border card-dark p-4 shadow-sm h-full order-3 lg:order-none"
@@ -225,6 +234,7 @@ export default function ContactPage() {
               <input type="hidden" name="_gotcha" />
             </div>
           </form>
+          )}
         </div>
       </div>
     </>

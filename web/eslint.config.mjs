@@ -26,6 +26,20 @@ const eslintConfig = [
       "@next/next/no-img-element": "off",
     },
   },
+  // Node/CLI scripts: allow CommonJS require and console
+  {
+    files: [
+      "scripts/**/*.js",
+      "jest.config.js",
+      "archive-playlist.js",
+      "csv-to-archive-converter.js",
+    ],
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+      "import/no-commonjs": "off",
+      "no-console": "off",
+    },
+  },
 ];
 
 export default eslintConfig;

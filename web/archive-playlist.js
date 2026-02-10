@@ -275,7 +275,7 @@ function main() {
     }
 
     // Use existing converter logic
-    const { parseCsv: parseCsvFromModule, convertToPipeDelimited } = require('./csv-to-archive-converter.js');
+    const { convertToPipeDelimited } = require('./csv-to-archive-converter.js');
     const pipeDelimitedOutput = convertToPipeDelimited(csvContent);
 
     // Generate Archive.org filename

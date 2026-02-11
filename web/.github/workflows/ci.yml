@@ -31,7 +31,7 @@ jobs:
 
       - name: Run type check
         working-directory: web
-        run: npx tsc --noEmit
+        run: npx tsc --noEmit -p tsconfig.typecheck.json
 
       - name: Run unit tests
         working-directory: web

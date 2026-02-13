@@ -764,6 +764,52 @@ body::after {
   font-weight: 200;
 }
 
+/* Listen Live button with pulse and glow */
+.listen-live-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #000;
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.2s;
+  font-family: var(--font-reggae-one);
+}
+
+.pulse-indicator {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  background: #ff4500;
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-indicator {
+    animation: none;
+  }
+}
+
 /* Skip link: screen-reader only until focused */
 .skip-link {
   position: absolute;

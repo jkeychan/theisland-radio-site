@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { TracksThisWeek } from "@/components/TracksThisWeek";
+import { AnimatedSection } from "@/components/AnimatedSection";
+import { ScrollReveal } from "@/components/ScrollReveal";
+import { ListenLiveButton } from "@/components/ListenLiveButton";
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -94,6 +97,7 @@ export default function Home() {
 
   return (
     <div className="space-y-24 sm:space-y-32">
+      <AnimatedSection delay={0.1}>
       <section aria-labelledby="hero-title" className="text-center hero rounded-none text-white relative overflow-hidden">
         {/* Background image layer */}
         <div 
@@ -157,15 +161,7 @@ export default function Home() {
             </p>
           </div>
           <div className="mt-14 flex flex-col sm:flex-row justify-center gap-6">
-            <a 
-              className="btn btn-live text-lg sm:text-xl px-12 py-6 rounded-full font-bold shadow-[0_4px_20px_rgba(220,38,38,0.5)] hover:shadow-[0_6px_30px_rgba(220,38,38,0.7)]" 
-              href="https://station.voscast.com/5530050e0a38b/" 
-              target="_blank" 
-              rel="noreferrer noopener"
-              aria-label="Listen to The Island live on WART 95.5 FM"
-            >
-              Listen Live
-            </a>
+            <ListenLiveButton href="https://station.voscast.com/5530050e0a38b/" />
             <a 
               className="btn btn-secondary text-lg sm:text-xl px-12 py-6 rounded-full font-bold shadow-[0_4px_20px_rgba(245,158,11,0.4)] hover:shadow-[0_6px_30px_rgba(245,158,11,0.6)]" 
               href="/recordings/"
@@ -176,10 +172,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </AnimatedSection>
 
+      <ScrollReveal direction="up">
       <div className="py-16 sm:py-24 relative z-10">
         <TracksThisWeek />
       </div>
+      </ScrollReveal>
     </div>
   );
 }

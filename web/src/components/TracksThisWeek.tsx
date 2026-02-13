@@ -1,6 +1,7 @@
 "use client";
 
 import { useTracks } from "@/hooks/useTracks";
+import { TracksPlaceholder } from "@/components/TracksPlaceholder";
 
 export const TracksThisWeek = () => {
   const { data, loading } = useTracks();
@@ -21,7 +22,7 @@ export const TracksThisWeek = () => {
         </div>
       ) : data.length === 0 ? (
         <div className="card p-12 text-center">
-          <p className="text-white/70">No tracks available this week.</p>
+          <TracksPlaceholder />
         </div>
       ) : (
         <article className="card-playlist relative overflow-hidden">

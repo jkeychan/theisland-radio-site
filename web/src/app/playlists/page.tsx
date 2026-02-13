@@ -1,4 +1,5 @@
 import { PlaylistsList } from "@/components/PlaylistsList";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const metadata = {
   title: "Playlists • The Island",
@@ -6,6 +7,7 @@ export const metadata = {
 
 export default function PlaylistsPage() {
   return (
+    <ScrollReveal direction="up">
     <div className="space-y-12 py-12 sm:py-16 relative z-10">
       <header className="space-y-4 text-center">
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold section-heading section-heading-light">
@@ -28,6 +30,7 @@ export default function PlaylistsPage() {
         </a>
       </div>
     </div>
+    </ScrollReveal>
   );
 }
 

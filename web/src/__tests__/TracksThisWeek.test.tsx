@@ -46,7 +46,8 @@ describe('TracksThisWeek', () => {
   it('renders empty state when no tracks', () => {
     (useTracks as jest.Mock).mockReturnValue({ data: [], loading: false, error: null });
     render(<TracksThisWeek />);
-    expect(screen.getByText('No tracks available this week.')).toBeInTheDocument();
+    expect(screen.getByText(/Tune in Friday 6:30pm ET/)).toBeInTheDocument();
+    expect(screen.getByText(/Browse Past Shows/)).toBeInTheDocument();
   });
 });
 

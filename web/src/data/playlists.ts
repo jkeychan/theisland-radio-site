@@ -34,6 +34,38 @@ export const playlists: Playlist[] = [
     ]
   },
 {
+    id: "2026-02-13",
+    title: "February 13, 2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "King Tubby", title: "Bag a Wire Dub", album: "Jamaican Independence 50th Anniversary" },
+      { artist: "Charlie P, O.B.F", title: "Bittersweet", album: "Bittersweet" },
+      { artist: "Ijahman Levi", title: "I Am a Levi", album: "Soul Warrior - I Am Levi" },
+      { artist: "Mafia & Fluxy, Patrixx Aba Ariginal", title: "Solomonic Rise", album: "Soundsystem Dubwize" },
+      { artist: "The Wailers", title: "Soul Rebel (Dub)", album: "Dub Marley" },
+      { artist: "MIlton Henry", title: "Crisis", album: "Branches and Leaves (Showcase Album)" },
+      { artist: "Josey Wales", title: "No Bother Tax Me", album: "The Outlaw" },
+      { artist: "Dubmatix", title: "Champion Sound", album: "Atomic Subsonic" },
+      { artist: "Jim the Boss, The HiFi Rockers", title: "Birthday Party", album: "Dub in HiFi" },
+      { artist: "Dubmatix, Gappy Ranks", title: "Roll Dem (Roots Dub Mix)", album: "Roll Dem (Versions)" },
+      { artist: "Count Dubula", title: "Ancient Spliff", album: "The Rise Of Count Dubula" },
+      { artist: "Roll & Record, Peter Youthman", title: "Dem a Try to Divide Us", album: "Dem a Try to Divide Us" },
+      { artist: "Rhythm & Sound", title: "See Mi Yah", album: "See Mi Yah" },
+      { artist: "Coldcut, On-U Sound, Ce'Cile, Toddla T, Adrian Sherwood", title: "Make Up Your Mind", album: "Outside The Echo Chamber" },
+      { artist: "Butch Cassidy Sound System", title: "Brothers and Sisters", album: "Butches Brew" },
+      { artist: "Butch Cassidy Sound System", title: "Butches Brew Take Two", album: "Dubs and Rarities" },
+      { artist: "Pablo All Stars", title: "Park Lane Special", album: "Original Rockers" },
+      { artist: "The Aggrovators", title: "Step It Up In Dub", album: "Dubbing At King Tubby's" },
+      { artist: "Dubtendo, GameChops", title: "Dragoon Badman Dub", album: "Dubtendo" },
+      { artist: "Roots LoFi, Cali Dubs, Flanør, Homson, Israel Vibration", title: "mother nature", album: "Roots" },
+      { artist: "Roots LoFi, 2f U-Flow, Flanør", title: "Pacific Echoes- Lofi Reggae", album: "Pacific Echoes - Lofi Reggae" },
+      { artist: "Mr. Williamz, Reggae Roast", title: "We Run The Scene - Sound System Mix", album: "We Run The Scene (Sound System Mix)" },
+      { artist: "Major Lazer, Machel Montano", title: "Champagne", album: "Champagne" },
+      { artist: "Voltage, Hurrian, Kenny Ken, Eccleton Jarrett, Dan-I", title: "Dub Box", album: "Dub Box / Gangsta Ish" },
+      { artist: "Brother Culture, Ondubground", title: "Some A Dem", album: "Some A Dem" }
+    ]
+  },
+{
   id: "2026-02-06",
   title: "February 6, 2026",
   description: "Dub Tractor's Island vibes",

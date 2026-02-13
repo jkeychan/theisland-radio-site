@@ -89,9 +89,20 @@ if ! head -1 "$CSV_FILENAME" | grep -qi "title\|artist"; then
   exit 1
 fi
 
-# 2. Run archive-playlist.js
-echo "📝 Updating playlists.ts..."
+# 2. Run archive-playlist.js (updates playlists.ts + generates Archive.org pipe-delimited file)
+echo "📝 Updating playlists.ts and generating Archive.org format..."
 node archive-playlist.js "$CSV_FILENAME" --date "$PLAYLIST_DATE"
+
+# 2b. Ensure Archive.org pipe-delimited file exists and report its path
+ARCHIVE_FILENAME="The Island ${PLAYLIST_TITLE}_archive.txt"
+ARCHIVE_PATH="${SCRIPT_DIR}/${ARCHIVE_FILENAME}"
+if [ -f "$ARCHIVE_PATH" ]; then
+  echo ""
+  echo "📋 Archive.org playlist ready: $ARCHIVE_PATH"
+  echo "   Copy the contents to paste into your Archive.org item description."
+else
+  echo "⚠️  Expected Archive.org file not found: $ARCHIVE_PATH"
+fi
 
 if [ "$SKIP_PUSH" = true ]; then
   echo ""
@@ -120,3 +131,6 @@ fi
 
 echo ""
 echo "✅ All done! Deploy will pick up the new playlist automatically."
+if [ -f "$ARCHIVE_PATH" ]; then
+  echo "📋 For Archive.org: $ARCHIVE_PATH"
+fi

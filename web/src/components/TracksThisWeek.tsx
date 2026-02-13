@@ -6,6 +6,7 @@ import { TracksPlaceholder } from "@/components/TracksPlaceholder";
 export const TracksThisWeek = () => {
   const { data, loading } = useTracks();
   if (!process.env.NEXT_PUBLIC_TRACKS_CSV_URL) return null;
+  const tracks = data ?? [];
   return (
     <section aria-labelledby="tracks-title" className="space-y-8">
       <div className="text-center space-y-3">
@@ -20,7 +21,7 @@ export const TracksThisWeek = () => {
         <div className="card p-12 text-center">
           <p className="text-theme-gold text-xl">Loading tracks…</p>
         </div>
-      ) : data.length === 0 ? (
+      ) : tracks.length === 0 ? (
         <div className="card p-12 text-center">
           <TracksPlaceholder />
         </div>
@@ -31,7 +32,7 @@ export const TracksThisWeek = () => {
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-transparent via-island-green/10 to-transparent rounded-tr-full opacity-50"></div>
           
           <ol className="list-inside list-decimal space-y-4 text-base sm:text-lg text-white relative z-10">
-            {data.map((t, i) => (
+            {tracks.map((t, i) => (
               <li 
                 key={`${t.artist}-${t.title}-${i}`}
                 className="leading-relaxed hover:text-white/80 transition-colors"

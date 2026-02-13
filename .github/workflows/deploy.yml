@@ -80,9 +80,15 @@ jobs:
           else
             echo "✅ NEXT_PUBLIC_FORMSPREE_FORM_ID is set (length: ${#NEXT_PUBLIC_FORMSPREE_FORM_ID})"
           fi
+          if [ -z "$NEXT_PUBLIC_TRACKS_CSV_URL" ]; then
+            echo "⚠️ NEXT_PUBLIC_TRACKS_CSV_URL is not set - homepage will not show This Week's Tracks"
+          else
+            echo "✅ NEXT_PUBLIC_TRACKS_CSV_URL is set"
+          fi
         env:
           NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ vars.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
           NEXT_PUBLIC_FORMSPREE_FORM_ID: ${{ vars.NEXT_PUBLIC_FORMSPREE_FORM_ID }}
+          NEXT_PUBLIC_TRACKS_CSV_URL: ${{ vars.NEXT_PUBLIC_TRACKS_CSV_URL || secrets.NEXT_PUBLIC_TRACKS_CSV_URL }}
 
       - name: Build site
         env:

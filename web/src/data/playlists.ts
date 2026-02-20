@@ -2,6 +2,37 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-02-20",
+    title: "February 20, 2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Homson", title: "So Much Trouble In The World - lofi", album: "Lofi Tribute To The Legend - Vol. II" },
+      { artist: "Mungo's Hi Fi, Mr. Williamz", title: "Musically Mad", album: "Forward Ever" },
+      { artist: "Mungo's Hi Fi, Aziza Jaye", title: "So It Go", album: "That Thing" },
+      { artist: "Blakkamoore, Yungg Trip, Subatomic Sound System", title: "Stress Free - Remix", album: "Stress Free (Remixes)" },
+      { artist: "Mungo's Hi Fi, Brother Culture", title: "Ing", album: "Mungo's Hi Fi Meets Brother Culture" },
+      { artist: "Bim Sherman", title: "Station Dub", album: "Station Dub" },
+      { artist: "Pachyman", title: "Sugar On My Tounge - Dub", album: "Naive Melodies" },
+      { artist: "Brother Culture, Derrick Sound", title: "Behold The Lion", album: "Behold The Lion" },
+      { artist: "The Revolutionaries", title: "Dutch Man", album: "Dutch Man Dub" },
+      { artist: "Sly & Robbie, Tenor Saw", title: "Roll Is Called - 7-inch Dub Version", album: "Roll Is Called" },
+      { artist: "The Skints, Tippa Irie, Horseman", title: "This Town", album: "FM" },
+      { artist: "Rodney P, The People's Army, Mighty Moe", title: "Live Up (feat. The People's Army & Mighty Moe)", album: "Live Up" },
+      { artist: "Radikal Guru, Cian Finn", title: "Sound System - Original Mix", album: "Digitalizer Riddim" },
+      { artist: "Dreadsquad", title: "A Wah Do Dub", album: "A Wah Do Dem" },
+      { artist: "AJ Tracey, General Levy, Novelist", title: "Ladbroke Grove (Remix) [feat. General Levy & Novelist]", album: "Ladbroke Grove (Remix) [feat. General Levy & Novelist]" },
+      { artist: "Selecta J-Man, Aries, Blackout JA, Courtney Melody", title: "Ninja Mi Ninja", album: "Dancehall Extravaganza" },
+      { artist: "Cutty Ranks", title: "Liberation", album: "Penthouse Flashback Series: 90's Vol.7" },
+      { artist: "Zapya, Blackout JA", title: "Ruffadan", album: "Ruffadan" },
+      { artist: "Dubtendo, GameChops", title: "Green Chill Zone", album: "Dubtendo" },
+      { artist: "2f U-Flow", title: "Blowing Through The Air", album: "Natural Mystic" },
+      { artist: "Al Campbell, Bass Culture Players", title: "We Need Each Other Version", album: "Where Is The Love" },
+      { artist: "Joe Publik, Dubmatix", title: "Come Correct - Dubmatix Remix", album: "Come Correct (Dubmatix Remix)" },
+      { artist: "Roman Stewart", title: "Rice & Peas Dub", album: "The Wisdom of Solomon" },
+      { artist: "Bass Culture Players", title: "Love Dubwise Number 3", album: "Where Is The Love" }
+    ]
+  },
+{
     id: "2026-02-13",
     title: "February 13, 2026",
     description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",

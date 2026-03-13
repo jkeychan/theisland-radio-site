@@ -15,10 +15,8 @@ describe('Header', () => {
 
   it('renders navigation links', () => {
     render(<Header />);
+    expect(screen.getByText('Playlists / Recordings')).toBeInTheDocument();
     expect(screen.getByText('Contact')).toBeInTheDocument();
-    expect(screen.getByText('Playlists')).toBeInTheDocument();
-    expect(screen.getByText('Recordings')).toBeInTheDocument();
-    expect(screen.getByText('Events')).toBeInTheDocument();
   });
 
   it('renders Listen Live button', () => {

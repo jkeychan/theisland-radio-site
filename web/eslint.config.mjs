@@ -1,16 +1,17 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import { createRequire } from "module";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+// eslint-config-next 15 exports native flat configs — import directly to avoid
+// FlatCompat's JSON.stringify validator choking on eslint-plugin-react's circular refs.
+const nextConfig = require("eslint-config-next");
+const nextCoreWebVitals = require("eslint-config-next/core-web-vitals");
+const nextTypescript = require("eslint-config-next/typescript");
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...nextConfig,
+  ...nextCoreWebVitals,
+  ...nextTypescript,
   {
     ignores: [
       "node_modules/**",
@@ -24,6 +25,9 @@ const eslintConfig = [
     rules: {
       "no-console": ["warn", { allow: ["warn", "error"] }],
       "@next/next/no-img-element": "off",
+      // Setting loading/error state synchronously before an async call in useEffect
+      // is an established pattern; the rule is overly strict here.
+      "react-hooks/set-state-in-effect": "off",
     },
   },
   // Node/CLI scripts: allow CommonJS require and console

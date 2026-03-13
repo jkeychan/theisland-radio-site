@@ -2,9 +2,38 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-03-13",
+    title: "March 13, 2026",
+    tracks: [
+      { artist: "The Upsetters", title: "Underground", album: "Super Ape" },
+      { artist: "Dylan Judah, Scientist", title: "Loving Dub", album: "Loving Dub" },
+      { artist: "Groundation, Don Carlos, The Congos", title: "Babylon Rule Dem", album: "Hebron Gate" },
+      { artist: "Mungo's Hi Fi, Aziza Jaye", title: "That Dub - Doo Wop Mix", album: "That Thing" },
+      { artist: "Rhythm & Sound", title: "No Partial", album: "Rhythm & Sound" },
+      { artist: "Sammy Virji, Spice, Flowdan", title: "Match My Mood", album: "Same Day Cleaning" },
+      { artist: "Chase & Status, Bou, Flowdan, IRAH, Trigga, Takura", title: "Baddadan (feat. IRAH, Flowdan, Trigga & Takura)", album: "Baddadan (feat. IRAH, Flowdan, Trigga & Takura)" },
+      { artist: "Skrillex, Fred again.., Flowdan", title: "Rumble", album: "Quest For Fire" },
+      { artist: "Prince Fatty, Mungo's Hi Fi", title: "Under Arrest - Prince Fatty Mix", album: "Prince Fatty Versus Mungo's Hi Fi" },
+      { artist: "Alpha Steppa, Nai-Jah", title: "Mountains Dub", album: "Mountains Move" },
+      { artist: "Kanka", title: "On The Rhodes", album: "Abracadabra (Chapter 3)" },
+      { artist: "Linval Thompson, Roberto Sanchez, Lone Ark Riddim Force", title: "Fyah Ina Babylon", album: "Fyah Ina Babylon" },
+      { artist: "Miniman", title: "Memoria", album: "Memoria" },
+      { artist: "Skarra Mucci, Perfect Giddimani, Irie Ites", title: "Bomboclaat", album: "Stop That Sound Riddim" },
+      { artist: "Mungo's Hi Fi, Marina P", title: "Soma", album: "Soul Radio" },
+      { artist: "Roll & Record, William Spring, Pili Boyo", title: "King Ina Di Ring", album: "The Hidden Treasures of William Spring" },
+      { artist: "Jalifa", title: "Direction Dub", album: "Incient Ras" },
+      { artist: "Addis Pablo, Earl Sixteen", title: "Evolutionary Rockers", album: "In My Fathers House" },
+      { artist: "Lone Ark, The 18th Parallel", title: "Snake in the Grass", album: "Showcase Vol. 1" },
+      { artist: "Roots Makers", title: "morning prayer (riddim)", album: "Roots Makers" },
+      { artist: "Keith & Tex", title: "Do For Dub", album: "Do For Dub" },
+      { artist: "Joe Yorke, The Co-Operators", title: "Return of the Living Dead", album: "Living Dead" },
+      { artist: "Lo-End Dub", title: "Dubancholik - Original Mix", album: "Meltdown Dubs 11: Moments EP" }
+    ],
+  },
+  {
     id: "2026-02-20",
     title: "February 20, 2026",
-    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-february-20-2026",
     tracks: [
       { artist: "Homson", title: "So Much Trouble In The World - lofi", album: "Lofi Tribute To The Legend - Vol. II" },
       { artist: "Mungo's Hi Fi, Mr. Williamz", title: "Musically Mad", album: "Forward Ever" },
@@ -30,12 +59,12 @@ export const playlists: Playlist[] = [
       { artist: "Joe Publik, Dubmatix", title: "Come Correct - Dubmatix Remix", album: "Come Correct (Dubmatix Remix)" },
       { artist: "Roman Stewart", title: "Rice & Peas Dub", album: "The Wisdom of Solomon" },
       { artist: "Bass Culture Players", title: "Love Dubwise Number 3", album: "Where Is The Love" }
-    ]
+    ],
   },
-{
+  {
     id: "2026-02-13",
     title: "February 13, 2026",
-    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-february-13-2026",
     tracks: [
       { artist: "King Tubby", title: "Bag a Wire Dub", album: "Jamaican Independence 50th Anniversary" },
       { artist: "Charlie P, O.B.F", title: "Bittersweet", album: "Bittersweet" },
@@ -62,105 +91,41 @@ export const playlists: Playlist[] = [
       { artist: "Major Lazer, Machel Montano", title: "Champagne", album: "Champagne" },
       { artist: "Voltage, Hurrian, Kenny Ken, Eccleton Jarrett, Dan-I", title: "Dub Box", album: "Dub Box / Gangsta Ish" },
       { artist: "Brother Culture, Ondubground", title: "Some A Dem", album: "Some A Dem" }
-    ]
+    ],
   },
-{
-    id: "2026-02-13",
-    title: "February 13, 2026",
-    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+  {
+    id: "2026-02-06",
+    title: "February 6, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-february-6-2026",
     tracks: [
-      { artist: "King Tubby", title: "Bag a Wire Dub", album: "Jamaican Independence 50th Anniversary" },
-      { artist: "Charlie P, O.B.F", title: "Bittersweet", album: "Bittersweet" },
-      { artist: "Ijahman Levi", title: "I Am a Levi", album: "Soul Warrior - I Am Levi" },
-      { artist: "Mafia & Fluxy, Patrixx Aba Ariginal", title: "Solomonic Rise", album: "Soundsystem Dubwize" },
-      { artist: "The Wailers", title: "Soul Rebel (Dub)", album: "Dub Marley" },
-      { artist: "MIlton Henry", title: "Crisis", album: "Branches and Leaves (Showcase Album)" },
-      { artist: "Josey Wales", title: "No Bother Tax Me", album: "The Outlaw" },
-      { artist: "Dubmatix", title: "Champion Sound", album: "Atomic Subsonic" },
-      { artist: "Jim the Boss, The HiFi Rockers", title: "Birthday Party", album: "Dub in HiFi" },
-      { artist: "Dubmatix, Gappy Ranks", title: "Roll Dem (Roots Dub Mix)", album: "Roll Dem (Versions)" },
-      { artist: "Count Dubula", title: "Ancient Spliff", album: "The Rise Of Count Dubula" },
-      { artist: "Roll & Record, Peter Youthman", title: "Dem a Try to Divide Us", album: "Dem a Try to Divide Us" },
-      { artist: "Rhythm & Sound", title: "See Mi Yah", album: "See Mi Yah" },
-      { artist: "Coldcut, On-U Sound, Ce'Cile, Toddla T, Adrian Sherwood", title: "Make Up Your Mind", album: "Outside The Echo Chamber" },
-      { artist: "Butch Cassidy Sound System", title: "Brothers and Sisters", album: "Butches Brew" },
-      { artist: "Butch Cassidy Sound System", title: "Butches Brew Take Two", album: "Dubs and Rarities" },
-      { artist: "Pablo All Stars", title: "Park Lane Special", album: "Original Rockers" },
-      { artist: "The Aggrovators", title: "Step It Up In Dub", album: "Dubbing At King Tubby's" },
-      { artist: "Dubtendo, GameChops", title: "Dragoon Badman Dub", album: "Dubtendo" },
-      { artist: "Roots LoFi, Cali Dubs, Flanør, Homson, Israel Vibration", title: "mother nature", album: "Roots" },
-      { artist: "Roots LoFi, 2f U-Flow, Flanør", title: "Pacific Echoes- Lofi Reggae", album: "Pacific Echoes - Lofi Reggae" },
-      { artist: "Mr. Williamz, Reggae Roast", title: "We Run The Scene - Sound System Mix", album: "We Run The Scene (Sound System Mix)" },
-      { artist: "Major Lazer, Machel Montano", title: "Champagne", album: "Champagne" },
-      { artist: "Voltage, Hurrian, Kenny Ken, Eccleton Jarrett, Dan-I", title: "Dub Box", album: "Dub Box / Gangsta Ish" },
-      { artist: "Brother Culture, Ondubground", title: "Some A Dem", album: "Some A Dem" }
-    ]
+      { artist: "King Tubby", title: "Winter Dub", album: "King At The Control" },
+      { artist: "Emancipator", title: "Winter Dub", album: "Baralku" },
+      { artist: "Moodie and Blackslate", title: "Winter Dub", album: "Moodie in Dub, Vol 4 (feat. The JA and UK mixes of Blackslate)" },
+      { artist: "The Debonaires", title: "Winter Dub", album: "THE DEBONAIRES" },
+      { artist: "DP-6", title: "Winter Dub", album: "Archive B" },
+      { artist: "Timewarp Inc", title: "Winter Dub", album: "Look Within" },
+      { artist: "The Rollin' Deep", title: "Winter Chill", album: "Boomer's Lo Fi Reflections Volume 2" },
+      { artist: "Lofi Sleep Society, Lazy Bones, Chill Ghost", title: "Winter Lofi", album: "Winter Lofi" },
+      { artist: "DJ Mixoid", title: "Winter Dub", album: "Winterdub" },
+      { artist: "Yechidah", title: "Winter Dub Shelter - Original Mix", album: "Ethneomystica Vol. 2" },
+      { artist: "Christoph Spendel", title: "Winter Dub", album: "Electric Jazz" },
+      { artist: "Tellstar Readymade Music", title: "winter dub", album: "dubcrimes" },
+      { artist: "Lone Ark Riddim Force, Roberto Sanchez", title: "Sons & Daughers Dub", album: "Sons & Daughters" },
+      { artist: "Xana Romeo, Jallanzo, Max Romeo, Addis Pablo", title: "Dub Over All", album: "The Divine Dub" },
+      { artist: "Bim Sherman", title: "Ghetto Dub", album: "Ghetto Dub" },
+      { artist: "Hollie Cook", title: "Superstar", album: "Superstar b/w Superdub" },
+      { artist: "Mr. Williamz, Topcat", title: "Rocking Style", album: "Soundkilla Mindset" },
+      { artist: "Liam Bailey", title: "Cold & Clear", album: "Ekundayo" },
+      { artist: "Toddla T, Addis Pablo", title: "Foundation", album: "Foreign Light" },
+      { artist: "Walshy Fire, The Expanders, Randy Valentine", title: "Rubble Rebel (Champion)", album: "Walshy Fire & The Expanders Present Thanks For Life" },
+      { artist: "Kabaka Pyramid", title: "Can't Breathe (Genius T Remix)", album: "Can't Breathe (Genius T Remix)" },
+      { artist: "Kabaka Pyramid", title: "Nice Up The Dance", album: "Nice Up The Dance" }
+    ],
   },
-{
-    id: "2026-02-13",
-    title: "February 13, 2026",
-    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
-    tracks: [
-      { artist: "King Tubby", title: "Bag a Wire Dub", album: "Jamaican Independence 50th Anniversary" },
-      { artist: "Charlie P, O.B.F", title: "Bittersweet", album: "Bittersweet" },
-      { artist: "Ijahman Levi", title: "I Am a Levi", album: "Soul Warrior - I Am Levi" },
-      { artist: "Mafia & Fluxy, Patrixx Aba Ariginal", title: "Solomonic Rise", album: "Soundsystem Dubwize" },
-      { artist: "The Wailers", title: "Soul Rebel (Dub)", album: "Dub Marley" },
-      { artist: "MIlton Henry", title: "Crisis", album: "Branches and Leaves (Showcase Album)" },
-      { artist: "Josey Wales", title: "No Bother Tax Me", album: "The Outlaw" },
-      { artist: "Dubmatix", title: "Champion Sound", album: "Atomic Subsonic" },
-      { artist: "Jim the Boss, The HiFi Rockers", title: "Birthday Party", album: "Dub in HiFi" },
-      { artist: "Dubmatix, Gappy Ranks", title: "Roll Dem (Roots Dub Mix)", album: "Roll Dem (Versions)" },
-      { artist: "Count Dubula", title: "Ancient Spliff", album: "The Rise Of Count Dubula" },
-      { artist: "Roll & Record, Peter Youthman", title: "Dem a Try to Divide Us", album: "Dem a Try to Divide Us" },
-      { artist: "Rhythm & Sound", title: "See Mi Yah", album: "See Mi Yah" },
-      { artist: "Coldcut, On-U Sound, Ce'Cile, Toddla T, Adrian Sherwood", title: "Make Up Your Mind", album: "Outside The Echo Chamber" },
-      { artist: "Butch Cassidy Sound System", title: "Brothers and Sisters", album: "Butches Brew" },
-      { artist: "Butch Cassidy Sound System", title: "Butches Brew Take Two", album: "Dubs and Rarities" },
-      { artist: "Pablo All Stars", title: "Park Lane Special", album: "Original Rockers" },
-      { artist: "The Aggrovators", title: "Step It Up In Dub", album: "Dubbing At King Tubby's" },
-      { artist: "Dubtendo, GameChops", title: "Dragoon Badman Dub", album: "Dubtendo" },
-      { artist: "Roots LoFi, Cali Dubs, Flanør, Homson, Israel Vibration", title: "mother nature", album: "Roots" },
-      { artist: "Roots LoFi, 2f U-Flow, Flanør", title: "Pacific Echoes- Lofi Reggae", album: "Pacific Echoes - Lofi Reggae" },
-      { artist: "Mr. Williamz, Reggae Roast", title: "We Run The Scene - Sound System Mix", album: "We Run The Scene (Sound System Mix)" },
-      { artist: "Major Lazer, Machel Montano", title: "Champagne", album: "Champagne" },
-      { artist: "Voltage, Hurrian, Kenny Ken, Eccleton Jarrett, Dan-I", title: "Dub Box", album: "Dub Box / Gangsta Ish" },
-      { artist: "Brother Culture, Ondubground", title: "Some A Dem", album: "Some A Dem" }
-    ]
-  },
-{
-  id: "2026-02-06",
-  title: "February 6, 2026",
-  description: "Dub Tractor's Island vibes",
-  tracks: [
-    { artist: "King Tubby", title: "Winter Dub", album: "King At The Control" },
-    { artist: "Emancipator", title: "Winter Dub", album: "Baralku" },
-    { artist: "Moodie and Blackslate", title: "Winter Dub", album: "Moodie in Dub, Vol 4 (feat. The JA and UK mixes of Blackslate)" },
-    { artist: "The Debonaires", title: "Winter Dub", album: "THE DEBONAIRES" },
-    { artist: "DP-6", title: "Winter Dub", album: "Archive B" },
-    { artist: "Timewarp Inc", title: "Winter Dub", album: "Look Within" },
-    { artist: "The Rollin' Deep", title: "Winter Chill", album: "Boomer's Lo Fi Reflections Volume 2" },
-    { artist: "Lofi Sleep Society, Lazy Bones, Chill Ghost", title: "Winter Lofi", album: "Winter Lofi" },
-    { artist: "DJ Mixoid", title: "Winter Dub", album: "Winterdub" },
-    { artist: "Yechidah", title: "Winter Dub Shelter - Original Mix", album: "Ethneomystica Vol. 2" },
-    { artist: "Christoph Spendel", title: "Winter Dub", album: "Electric Jazz" },
-    { artist: "Tellstar Readymade Music", title: "winter dub", album: "dubcrimes" },
-    { artist: "Lone Ark Riddim Force, Roberto Sanchez", title: "Sons & Daughers Dub", album: "Sons & Daughters" },
-    { artist: "Xana Romeo, Jallanzo, Max Romeo, Addis Pablo", title: "Dub Over All", album: "The Divine Dub" },
-    { artist: "Bim Sherman", title: "Ghetto Dub", album: "Ghetto Dub" },
-    { artist: "Hollie Cook", title: "Superstar", album: "Superstar b/w Superdub" },
-    { artist: "Mr. Williamz, Topcat", title: "Rocking Style", album: "Soundkilla Mindset" },
-    { artist: "Liam Bailey", title: "Cold & Clear", album: "Ekundayo" },
-    { artist: "Toddla T, Addis Pablo", title: "Foundation", album: "Foreign Light" },
-    { artist: "Walshy Fire, The Expanders, Randy Valentine", title: "Rubble Rebel (Champion)", album: "Walshy Fire & The Expanders Present Thanks For Life" },
-    { artist: "Kabaka Pyramid", title: "Can't Breathe (Genius T Remix)", album: "Can't Breathe (Genius T Remix)" },
-    { artist: "Kabaka Pyramid", title: "Nice Up The Dance", album: "Nice Up The Dance" }
-  ]
-},
   {
     id: "2026-01-09",
     title: "January 9, 2026",
-    description: "Dub Tractor's Island Vibes",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-january-09-2026",
     tracks: [
       { artist: "Rapha Pico, Jah Works", title: "My Dub 45 - Version 1", album: "My 45" },
       { artist: "Bob Marley & The Wailers", title: "Who The Cap Fit", album: "Rastaman Vibration" },
@@ -185,42 +150,12 @@ export const playlists: Playlist[] = [
       { artist: "Burro Banton, Massive B", title: "Badder Den Dem", album: "Massive B Presents: No Borders Riddim" },
       { artist: "Breakage, SHY FX, Cesco, IRAH, Mr. Williamz", title: "Say Less (ft. IRAH & Mr Williamz) - Cesco Remix", album: "Say Less (ft. IRAH & Mr Williamz) [Cesco Remix]" },
       { artist: "Riddim Tuffa", title: "Dreadlocks Dub - Dub Mix", album: "Dreadlocks" }
-    ]
-  },
-  {
-    id: "2025-09-19",
-    title: "September 19, 2025",
-    description: "Dub Tractor's Island vibes",
-    tracks: [
-      { artist: "Scientist", title: "- Rubber Foot", album: "Introducing The Scientist" },
-      { artist: "Scientist", title: "- Jungle", album: "Introducing The Scientist" },
-      { artist: "Aswad", title: "Natural Aggression", album: "New Chapter Of Dub" },
-      { artist: "Tippa Lee, Naram", title: "Time Hard", album: "Tippa Lee meets the Naram Rhythm Section - Musically Bad" },
-      { artist: "Dubglow", title: "Sailers Wheel", album: "LoFi Roots, Boots And Carrot Juice" },
-      { artist: "Supermax", title: "I Night Pulse Over Babylon", album: "Cosmic Love" },
-      { artist: "Tenna Star, Meditative Sounds, Jah Works", title: "Flying Eagle Dub", album: "Fly Like An Eagle" },
-      { artist: "Livity Allstars", title: "Universel Forståelse", album: "Livity Allstars" },
-      { artist: "Echoing Melodies", title: "Hushed Harmonies", album: "Serene Reverie" },
-      { artist: "Jazzwad", title: "Lead us Dub", album: "Showcase, Vol. 14: In Roots" },
-      { artist: "Crown-Lites", title: "Pistils at Dusk", album: "Return to the Forest of the Black Marigold" },
-      { artist: "Tapper Zukie", title: "Spiritual War Riddim", album: "Spiritual War" },
-      { artist: "Sid Bucknor", title: "Harbour View", album: "Harbour View" },
-      { artist: "Akae Beka, Protoje", title: "Mek A Menshun (feat. Protoje)", album: "Mek A Menshun" },
-      { artist: "Mykal Rose", title: "Throw Some Stone - Megadub Mix", album: "Deeper Roots" },
-      { artist: "Big Youth", title: "Lion's Den Remix - Remix", album: "Deeper Roots" },
-      { artist: "Sly & Robbie", title: "King of Kings riddim", album: "King of Kings EP" },
-      { artist: "iNi Kamoze", title: "Hot Stepper", album: "Down In Jamaica: 40 Years of VP Records" },
-      { artist: "Bob Andy, Mad Professor", title: "Devastation Dub", album: "Bob Andy's Dub Book (As Revealed to Mad Professor)" },
-      { artist: "The Abyssinians", title: "I and I - Original Jamaican Mix", album: "Satta Massagana (Original Jamaican Mixes) [Deluxe Edition]" },
-      { artist: "Lee Scratch Perry", title: "Ruffer Dub", album: "Lee Scratch Perry & Friends: Back to the Ark" },
-      { artist: "Burning Spear", title: "Pieces of Dub", album: "Living Dub Volume Two" },
-      { artist: "Jonnygo Figure", title: "Vinyl Lover Dub", album: "Crucial Showcase (Extended)" }
-    ]
+    ],
   },
   {
     id: "2025-12-12",
     title: "December 12, 2025",
-    description: "Dub Tractor's Island vibes",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-december-12-2025",
     tracks: [
       { artist: "Gregory Morris", title: "No Ice Cream Dub", album: "Universal Love Showcase" },
       { artist: "Bobby Ellis, The Revolutionaries", title: "Stormy Weather - 12 Mix", album: "Different Fashion: High Note Dancehall 1979-1981" },
@@ -243,12 +178,12 @@ export const playlists: Playlist[] = [
       { artist: "Mungo's Hi Fi, Eva Lazarus", title: "Amsterdam - Flight Mode Mix", album: "Soundsystem Champions 2" },
       { artist: "Roots Radics, Green Lion", title: "Curse of the Damned!", album: "Dancehall of Horrors" },
       { artist: "Massive Attack, Tracey Thorn, Mad Professor", title: "Protection - Radiation For The Nation Mix", album: "Protection" }
-    ]
+    ],
   },
   {
     id: "2025-12-05",
     title: "December 5, 2025",
-    description: "Dub Tractor's Island vibes",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-december-05-2025",
     tracks: [
       { artist: "Dub Shepherds", title: "Ram Dub", album: "Mango Tree Showcase" },
       { artist: "Jimmy Cliff", title: "Wonderful World, Beautiful People", album: "The Best Of Jimmy Cliff" },
@@ -271,12 +206,12 @@ export const playlists: Playlist[] = [
       { artist: "Step-A-Dub;Ansata;Lana Sounds", title: "Dub Now", album: "Right Now Riddim" },
       { artist: "Yami Bolo", title: "Bad Boi", album: "Don One the Sound of Brooklyn" },
       { artist: "Dubglow", title: "LoFi Roots", album: "LoFi HiFi (Dusty Dub and Chill)" }
-    ]
+    ],
   },
   {
     id: "2025-11-21",
     title: "November 21, 2025",
-    description: "",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-november-21-2025",
     tracks: [
       { artist: "The Aggrovators", title: "Dub Is Shining", album: "Kaya Dub" },
       { artist: "Scientist, PLEXXDUB", title: "Like the Colors of a Rainbow", album: "Like the Colors of a Rainbow" },
@@ -302,12 +237,12 @@ export const playlists: Playlist[] = [
       { artist: "Irie Yute", title: "Cornaz Dub", album: "Cornaz Dub" },
       { artist: "Dub Judah, Dennis Rootical", title: "Better To Be Good", album: "Better To Be Good" },
       { artist: "DPRTNDRP", title: "Faya Blazin", album: "What Ya Mean EP" }
-    ]
+    ],
   },
   {
     id: "2025-11-14",
     title: "November 14, 2025",
-    description: "Dub Tractor's Island vibes",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-november-14-2025",
     tracks: [
       { artist: "Scientist", title: "Ambush at High Noon (YK’s Last Stand)", album: "KONG" },
       { artist: "Perfect Giddimani", title: "Boom Draw Dub", album: "Sinky Beatz" },
@@ -333,12 +268,12 @@ export const playlists: Playlist[] = [
       { artist: "Emapea", title: "Rudeboy", album: "Reflection" },
       { artist: "Afrikan Warriors", title: "Explosion Dub 2nd Mix - Dub", album: "Dubplate Box, Vol. 2" },
       { artist: "Dennis Alcapone", title: "Run Run", album: "Forever Version (Deluxe Version)" }
-    ]
+    ],
   },
   {
     id: "2025-11-07",
     title: "November 7, 2025",
-    description: "Dub Tractor's Island vibes",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-november-07-2025",
     tracks: [
       { artist: "Scientist, Hempress Sativa", title: "Rock It Ina Dub", album: "Scientist Meets Hempress Sativa in Dub" },
       { artist: "Buccaneer", title: "Bad Man Story", album: "Da Opera" },
@@ -365,12 +300,12 @@ export const playlists: Playlist[] = [
       { artist: "Congo Natty", title: "Nu Beginingz", album: "Jungle Revolution" },
       { artist: "SHY FX, Liam Bailey", title: "Soon Come (feat. Liam Bailey)", album: "Soon Come (feat. Liam Bailey)" },
       { artist: "Tenor Saw", title: "Golden Hen", album: "Tenor Saw Meets Nitty Gritty" }
-    ]
+    ],
   },
   {
     id: "2025-10-31",
     title: "October 31, 2025",
-    description: "Dub Tractor's Island vibes",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-october-31-2025",
     tracks: [
       { artist: "The Revolutionaries", title: "37 Orange Street", album: "Dubb Everlasting" },
       { artist: "Reggae Regular", title: "Where Is Jah", album: "Dread Meets Greensleeves - A Westside Revolution" },
@@ -392,12 +327,12 @@ export const playlists: Playlist[] = [
       { artist: "Mungo's Hi Fi;Cian Finn", title: "Go Lassie", album: "Puffers Choice, Vol. 3" },
       { artist: "Junior Byles;Kojak & Liza", title: "Dreadlocks Time/ Fist To Fist", album: "Joe Gibbs 12 Reggae Discomix Vol. 4" },
       { artist: "Junior Murvin", title: "Roots Train", album: "Police & Thieves" }
-    ]
+    ],
   },
   {
     id: "2025-10-24",
     title: "October 24, 2025",
-    description: "Dub Tractor's Island vibes",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-october-24-2025",
     tracks: [
       { artist: "Culture", title: "Knotty Dub", album: "Culture in Dub" },
       { artist: "Creation Rockers", title: "Let's Make Waves", album: "Let's Make Waves" },
@@ -420,12 +355,12 @@ export const playlists: Playlist[] = [
       { artist: "King Tubby", title: "Roots Of Dub", album: "The Roots Of Dub" },
       { artist: "Cham", title: "Ghetto Story", album: "Ghetto Story" },
       { artist: "The Abyssinians", title: "African Race - Original Jamaican Mix", album: "Satta Massagana (Original Jamaican Mixes) [Deluxe Edition]" }
-    ]
+    ],
   },
   {
     id: "2025-10-17",
     title: "October 17, 2025",
-    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    archiveUrl: "https://archive.org/details/the-island-with-dubtractor-october-17-2025",
     tracks: [
       { artist: "Roots Radics", title: "Attack", album: "Linval Presents Dub Landing Vol. 1" },
       { artist: "Frankie Paul, Sly & Robbie", title: "Alesha", album: "Alesha" },
@@ -447,13 +382,13 @@ export const playlists: Playlist[] = [
       { artist: "Subatomic Sound System, Yaadcore, Jah9", title: "Police in Helicopter (Dubstrumental Mix)", album: "Police in Helicopter" },
       { artist: "O.B.F", title: "Bad Dub", album: "Badminded People" },
       { artist: "L'Entourloop, Queen Omega", title: "Haffi Live", album: "Haffi Live" },
-      { artist: "The Bush Chemists", title: "Light Up Your Spliff", album: "Light Up Your Spliff" },
-    ]
+      { artist: "The Bush Chemists", title: "Light Up Your Spliff", album: "Light Up Your Spliff" }
+    ],
   },
-{
+  {
     id: "2025-10-10",
     title: "October 10, 2025",
-    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    archiveUrl: "https://archive.org/details/the-island-with-dubtractor-october-10-2025",
     tracks: [
       { artist: "Prince Jammy", title: "Waterfront Gang War", album: "Dub: Original Bass Culture" },
       { artist: "Papa Tullo", title: "Get Ready And Reggae", album: "Dancehall Stylee" },
@@ -469,7 +404,6 @@ export const playlists: Playlist[] = [
       { artist: "Poet and The Roots", title: "It Dread Inna Ingalan (For George Lindo)", album: "Dead Beat An' Blood" },
       { artist: "Scientist", title: "Scientist At His Best", album: "Fatman presents Twin Spin" },
       { artist: "Puppa Djoul and Lone Ranger", title: "Stand the dub", album: "Can't Stand The Pressure" },
-      { artist: "Cultural Roots", title: "Hell a go pop 12\" mix", album: "Hell a go pop" },
       { artist: "Leroy Smart", title: "Too Much Pressure", album: "Dancehall Stylee" },
       { artist: "King Tubby & The Aggrovators", title: "Natty Version", album: "Dub Explosion: 22 Roots Classics" },
       { artist: "Diego & The Sons Of Jah", title: "Jah Jah Ital", album: "Babylon A Fall Down" },
@@ -479,12 +413,12 @@ export const playlists: Playlist[] = [
       { artist: "Sly & Robbie", title: "Crazy Baldhead", album: "Riddim: The Best Of Sly & Robbie" },
       { artist: "Sly & Robbie", title: "A Roots This A Dub", album: "Master of Ceremony Dub" },
       { artist: "Loopey", title: "Who The Cap Fit - lofi", album: "Lofi Tribute To The Legend - Vol. 1" }
-    ]
+    ],
   },
-{
+  {
     id: "2025-10-03",
     title: "October 3, 2025",
-    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    archiveUrl: "https://archive.org/details/the-island-with-dubtractor-october-3-2025",
     tracks: [
       { artist: "Dub Specialist", title: "Jucks Incorporation.flac", album: "Jucks Inc Pt. I" },
       { artist: "Errol Holt", title: "A You Lick Me First", album: "Rastafari Time" },
@@ -509,12 +443,12 @@ export const playlists: Playlist[] = [
       { artist: "Reggae Crusaders", title: "Bring the Couchie Come", album: "Reggae Anthology: Niney the Observer - Roots With Quality" },
       { artist: "Niney the Observer", title: "Blood and Fire", album: "Reggae Anthology: Niney the Observer - Roots with Quality" },
       { artist: "The Heptones", title: "Sea of Love", album: "On Top" }
-    ]
+    ],
   },
   {
     id: "2025-09-26",
     title: "September 26, 2025",
-    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    archiveUrl: "https://archive.org/details/the-island-with-dubtractor-september-26-2025",
     tracks: [
       { artist: "Jackie Mittoo", title: "Darker Shade Of Black", album: "Beginner's Guide To Reggae (Disc 1) Warming Up" },
       { artist: "Badoo", title: "Rocking of the 5000", album: "Xtras: Rock With Papa Madoo" },
@@ -537,12 +471,12 @@ export const playlists: Playlist[] = [
       { artist: "Sylford Walker & Welton Irie", title: "Lamb's Bread", album: "Beginner's Guide To Reggae (Disc 1) Warming Up" },
       { artist: "Thriakis Dub Destroyer and Sensi T", title: "Faya Ago Burn Dem", album: "The Galactic Journey" },
       { artist: "No Doubt feat Lady Saw", title: "Underneath It All", album: "Rock Steady" }
-    ]
+    ],
   },
-{
+  {
     id: "2025-09-19",
     title: "September 19, 2025",
-    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    archiveUrl: "https://archive.org/details/the-island-with-dubtractor-september-19-2025",
     tracks: [
       { artist: "Val Bennett", title: "The Russians Are Coming", album: "The Bunny 'Striker' Lee Story" },
       { artist: "Burning Spear", title: "Marcus Garvey", album: "Harder Than The Best" },
@@ -567,12 +501,12 @@ export const playlists: Playlist[] = [
       { artist: "Beenie Man", title: "Who Am I", album: "Many Moods of Moses" },
       { artist: "Peter Tosh", title: "Stepping Razor", album: "Equal Rights" },
       { artist: "Wailing Souls", title: "Fire House Rock", album: "Firehouse Rock" }
-    ]
+    ],
   },
   {
     id: "2025-09-12",
     title: "September 12, 2025",
-    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    archiveUrl: "https://archive.org/details/the-island-with-dubtractor-september-12-2025",
     tracks: [
       { artist: "Scientist", title: "Gunman", album: "Meets the Roots Radics" },
       { artist: "Melodians", title: "Rivers Of Babylon", album: "The Harder They Come" },
@@ -599,12 +533,12 @@ export const playlists: Playlist[] = [
       { artist: "The Architect", title: "Dreader Than Dread", album: "Foundations" },
       { artist: "L'Entourloop, Blackout JA, Tippa Irie", title: "Fi Di Yut", album: "La clarté dans la confusion" },
       { artist: "L'Entourloop, Chali 2na", title: "Get Back", album: "La clarté dans la confusion" }
-    ]
+    ],
   },
   {
     id: "2025-09-05",
     title: "September 5, 2025",
-    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    archiveUrl: "https://archive.org/details/the-island-with-dubtractor-september-5-2025",
     tracks: [
       { artist: "Fatman Riddim Section", title: "80 000 Dubs", album: "In A Tenement Yard" },
       { artist: "Mungo's Hi Fi feat. Solo Banton", title: "Dancehall School", album: "Serious Time" },
@@ -625,6 +559,6 @@ export const playlists: Playlist[] = [
       { artist: "Yabby You", title: "Ackee And Bammy", album: "African Queen" },
       { artist: "Junior Murvin", title: "Police & Thieves", album: "Cut Throat" },
       { artist: "Clement Irie", title: "Kolo Ko", album: "Greensleeves Sampler 03" }
-    ]
+    ],
   },
 ];

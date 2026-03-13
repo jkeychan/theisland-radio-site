@@ -1,184 +1,214 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { TracksThisWeek } from "@/components/TracksThisWeek";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { ScrollReveal } from "@/components/ScrollReveal";
 import { ListenLiveButton } from "@/components/ListenLiveButton";
 
-export default function Home() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const gifRef = useRef<HTMLImageElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const [videoFailed, setVideoFailed] = useState(false);
-  const [isVideoVisible, setIsVideoVisible] = useState(true);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    const gif = gifRef.current;
-    const image = imageRef.current;
-    if (!video || !gif || !image) return;
-
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    const handleVideoError = () => {
-      console.error("Video error, falling back to GIF");
-      video.style.display = "none";
-      gif.style.display = "block";
-      setVideoFailed(true);
-      setIsVideoVisible(false);
-    };
-
-    const handleVideoCanPlay = async () => {
-      video.style.display = "block";
-      gif.style.display = "none";
-      setIsVideoVisible(true);
-      try {
-        if (isMobile) {
-          await new Promise((resolve) => setTimeout(resolve, 100));
-        }
-        await video.play();
-        video.loop = true;
-      } catch (error) {
-        console.error("Error playing video:", error);
-        if (isMobile) handleVideoError();
-      }
-    };
-
-    const handleVideoLoadedData = async () => {
-      try {
-        video.muted = true;
-        video.loop = true;
-        if (isMobile) {
-          video.setAttribute("playsinline", "true");
-          video.setAttribute("webkit-playsinline", "true");
-        }
-        await video.play();
-      } catch (error) {
-        console.error("Error playing video on load:", error);
-        if (isMobile) handleVideoError();
-      }
-    };
-
-    video.addEventListener("error", handleVideoError);
-    video.addEventListener("canplay", handleVideoCanPlay);
-    video.addEventListener("loadeddata", handleVideoLoadedData);
-
-    video.muted = true;
-    video.loop = true;
-    if (isMobile) {
-      video.setAttribute("playsinline", "true");
-      video.setAttribute("webkit-playsinline", "true");
-    }
-
-    video.play().catch((error) => {
-      console.error("Initial play failed:", error);
-      if (isMobile) {
-        setTimeout(() => {
-          if (video.paused) handleVideoError();
-        }, 1000);
-      }
-    });
-
-    return () => {
-      video.removeEventListener("error", handleVideoError);
-      video.removeEventListener("canplay", handleVideoCanPlay);
-      video.removeEventListener("loadeddata", handleVideoLoadedData);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (videoFailed) return;
-    const fadeInterval = setInterval(() => {
-      setIsVideoVisible((prev) => !prev);
-    }, 20000);
-    return () => clearInterval(fadeInterval);
-  }, [videoFailed]);
-
+function MetaStripe() {
   return (
-    <div className="space-y-24 sm:space-y-32">
-      <AnimatedSection delay={0.1}>
-      <section aria-labelledby="hero-title" className="text-center hero rounded-none text-white relative overflow-hidden">
-        {/* Background image layer */}
-        <div 
-          ref={imageRef}
-          className={`hero-background-image ${isVideoVisible ? 'fade-out' : 'fade-in'}`}
-        />
-        
-        {/* Background video */}
-        <div className={`hero-video-wrapper ${isVideoVisible ? 'fade-in' : 'fade-out'}`}>
-          <video 
-            ref={videoRef}
-            className="hero-video"
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            preload="auto"
-            aria-hidden="true"
-          >
-            <source src="/images/hero-video.mp4" type="video/mp4" />
-          </video>
-          <img 
-            ref={gifRef}
-            src="/images/hero-animation.gif" 
-            alt="" 
-            className="hero-video-fallback"
-            aria-hidden="true"
-          />
-        </div>
+    <span className="meta-stripe">
+      <span className="s-r" /><span className="s-g" /><span className="s-gr" />
+    </span>
+  );
+}
 
-        {/* Content overlay */}
-        <div className="relative z-10 space-y-10 px-6 py-28 sm:py-36 lg:py-40">
-          <h1 id="hero-title" className="text-7xl sm:text-8xl lg:text-9xl xl:text-[10rem] font-[family-name:var(--font-reggae-one)] heading-gradient text-balance leading-[0.9] drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
-            The Island
-          </h1>
-          <div className="space-y-5 max-w-4xl mx-auto">
-            <p className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-semibold text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)] font-[family-name:var(--font-exo-2)]" style={{ fontWeight: 300 }}>
-              <a 
-                className="underline-offset-4 hover:underline transition-all hover:text-white hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.8)]" 
-                href="https://wartfm.org" 
-                target="_blank" 
-                rel="noreferrer noopener"
-              >
-                WART 95.5 FM
-              </a>
-              <span className="mx-5 text-theme-gold text-3xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">•</span>
-              <a 
-                className="underline-offset-4 hover:underline transition-all hover:text-white hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.8)]" 
-                href="https://madisoncountyarts.com/" 
-                target="_blank" 
-                rel="noreferrer noopener"
-              >
-                Madison County, NC
-              </a>
-            </p>
-            <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)] font-[family-name:var(--font-exo-2)]" style={{ fontWeight: 300 }}>
-              DJ Dub Tractor — Fridays 6:30–8pm ET
-            </p>
-            <p className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white/95 max-w-3xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] font-[family-name:var(--font-island-moments)]">
-              Cultivating positivity, unity, and community
-            </p>
+export default function Home() {
+  return (
+    <div>
+      {/* ── Hero ── */}
+      <section
+        aria-labelledby="hero-title"
+        style={{
+          background: "var(--gold)",
+          display: "flex",
+          minHeight: "520px",
+        }}
+      >
+        {/* Left panel */}
+        <div
+          style={{
+            flex: 1,
+            padding: "68px 52px 60px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          {/* Eyebrow */}
+          <div
+            style={{
+              fontFamily: "var(--font-ui)",
+              fontSize: "11px",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "var(--gold-mid)",
+              marginBottom: "14px",
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
+            }}
+          >
+            <div className="stripe-badge">
+              <span className="s-r" />
+              <span className="s-g" />
+              <span className="s-gr" />
+            </div>
+            Dub · Reggae · Dancehall
           </div>
-          <div className="mt-14 flex flex-col sm:flex-row justify-center gap-6">
-            <ListenLiveButton href="https://station.voscast.com/5530050e0a38b/" />
-            <a 
-              className="btn btn-secondary text-lg sm:text-xl px-12 py-6 rounded-full font-bold shadow-[0_4px_20px_rgba(245,158,11,0.4)] hover:shadow-[0_6px_30px_rgba(245,158,11,0.6)]" 
-              href="/recordings/"
-              aria-label="Browse show archive"
-            >
+
+          {/* Title */}
+          <h1
+            id="hero-title"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 900,
+              fontSize: "clamp(100px, 13vw, 168px)",
+              lineHeight: 0.88,
+              letterSpacing: "-0.02em",
+              margin: 0,
+            }}
+          >
+            <span style={{ display: "block", color: "var(--gold-dark)" }}>THE</span>
+            <span style={{ display: "block", color: "var(--green)" }}>ISLAND</span>
+          </h1>
+
+          {/* Tagline */}
+          <p
+            style={{
+              fontFamily: "var(--font-body)",
+              fontStyle: "italic",
+              fontWeight: 200,
+              fontSize: "20px",
+              color: "var(--green)",
+              margin: "22px 0 14px",
+              lineHeight: 1.4,
+            }}
+          >
+            Cultivating positivity, unity, and community
+          </p>
+
+          {/* Meta */}
+          <p
+            style={{
+              fontFamily: "var(--font-ui)",
+              fontSize: "11px",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "var(--gold-mid)",
+              marginBottom: "32px",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            DJ Dub Tractor
+            <MetaStripe />
+            Fridays 6:30–8pm ET
+            <MetaStripe />
+            Madison County, NC
+          </p>
+
+          {/* CTA row */}
+          <div style={{ display: "flex", gap: "12px" }}>
+            <ListenLiveButton />
+            <a href="/playlists/" className="btn-secondary">
               Show Archive
             </a>
           </div>
         </div>
-      </section>
-      </AnimatedSection>
 
-      <ScrollReveal direction="up">
-      <div className="py-16 sm:py-24 relative z-10">
-        <TracksThisWeek />
+        {/* Right panel — static banner image */}
+        <div
+          style={{
+            flex: "0 0 40%",
+            minWidth: 0,
+            borderLeft: "3px solid var(--gold-dark)",
+            position: "relative",
+            overflow: "hidden",
+            backgroundImage: 'url("/images/main-banner.jpeg")',
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          {/* Left edge triple-stripe */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              bottom: 0,
+              width: "9px",
+              background:
+                "linear-gradient(180deg, var(--red) 0% 33%, var(--gold) 33% 66%, var(--green) 66% 100%)",
+              zIndex: 2,
+            }}
+          />
+
+          {/* Diagonal pinstripe overlay */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage:
+                "repeating-linear-gradient(-45deg, transparent 0px 20px, rgba(26,92,40,0.08) 20px 21px)",
+              zIndex: 1,
+            }}
+          />
+        </div>
+      </section>
+
+      {/* ── Wave break ── */}
+      <div className="stripe-bar-reversed" />
+
+      <div className="wave-break">
+        {/* Corner stripe SVG */}
+        <svg
+          style={{
+            position: "absolute",
+            right: 0,
+            bottom: 0,
+            width: 140,
+            height: 140,
+            overflow: "hidden",
+            pointerEvents: "none",
+          }}
+          viewBox="0 0 140 140"
+        >
+          <g transform="rotate(-38, 70, 70)">
+            <rect x="-20" y="30" width="200" height="12" fill="#B22020" opacity="0.6" />
+            <rect x="-20" y="46" width="200" height="12" fill="#C8A800" opacity="0.6" />
+            <rect x="-20" y="62" width="200" height="12" fill="#1A5C28" opacity="0.6" />
+          </g>
+        </svg>
+
+        {/* Wave SVG */}
+        <svg
+          style={{ position: "absolute", bottom: 0, width: "100%" }}
+          viewBox="0 0 1200 56"
+          preserveAspectRatio="none"
+          height="56"
+        >
+          <path
+            d="M0,0 L1200,0 L1200,18 Q900,32 600,18 Q300,4 0,18 Z"
+            fill="#B22020"
+            opacity="0.55"
+          />
+          <path
+            d="M0,18 Q300,4 600,18 Q900,32 1200,18 L1200,36 Q900,50 600,36 Q300,22 0,36 Z"
+            fill="#C8A800"
+            opacity="0.5"
+          />
+          <path
+            d="M0,36 Q300,22 600,36 Q900,50 1200,36 L1200,56 L0,56 Z"
+            fill="#1A5C28"
+            opacity="0.55"
+          />
+        </svg>
       </div>
-      </ScrollReveal>
+
+      {/* ── Tracks This Week ── */}
+      <TracksThisWeek />
     </div>
   );
 }

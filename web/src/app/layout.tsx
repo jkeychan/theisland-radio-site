@@ -1,37 +1,32 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Reggae_One, Island_Moments, Exo_2 } from "next/font/google";
+import { Nunito, DM_Mono, Exo_2 } from 'next/font/google'
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import Script from "next/script";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const nunito = Nunito({
+  subsets: ['latin'],
+  weight: ['800', '900'],
+  variable: '--font-nunito',
+  display: 'swap',
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const reggaeOne = Reggae_One({
-  variable: "--font-reggae-one",
-  subsets: ["latin"],
-  weight: "400",
-});
-
-const islandMoments = Island_Moments({
-  variable: "--font-island-moments",
-  subsets: ["latin"],
-  weight: "400",
-});
+const dmMono = DM_Mono({
+  subsets: ['latin'],
+  weight: ['300', '400'],
+  style: ['normal', 'italic'],
+  variable: '--font-dm-mono',
+  display: 'swap',
+})
 
 const exo2 = Exo_2({
-  variable: "--font-exo-2",
-  subsets: ["latin"],
-  weight: ["100", "200", "300"],
-});
+  subsets: ['latin'],
+  weight: ['200', '300', '400'],
+  style: ['normal', 'italic'],
+  variable: '--font-exo2',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: "The Island • WART 95.5 FM",
@@ -55,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${reggaeOne.variable} ${islandMoments.variable} ${exo2.variable} antialiased text-[--foreground]`}
+        className={`${nunito.variable} ${dmMono.variable} ${exo2.variable} antialiased`}
       >
         <a
           href="#main-content"
@@ -82,7 +77,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <Header />
         <main id="main-content" className="pb-0 min-h-[calc(100vh-200px)]">
-          <div className="container">{children}</div>
+          {children}
         </main>
         <Footer />
       </body>

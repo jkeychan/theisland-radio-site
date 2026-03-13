@@ -4,73 +4,143 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
+  { href: "/playlists/", label: "Playlists / Recordings" },
   { href: "/contact/", label: "Contact" },
-  { href: "/playlists/", label: "Playlists" },
-  { href: "/recordings/", label: "Recordings" },
-  { href: "/events/", label: "Events" },
 ];
 
 export function Header() {
   const pathname = usePathname() || "/";
 
   return (
-    <header className="bg-black/40 backdrop-blur-md sticky top-0 z-50 shadow-lg border-b-elegant overflow-hidden">
-      <div className="container flex items-center justify-between h-auto py-4 sm:h-24 sm:py-0 gap-4">
-        <div className="inline-flex items-center gap-4 shrink-0 min-w-0">
-          <Link 
-            href="/" 
-            className="inline-flex items-center gap-2 transition-opacity hover:opacity-80 shrink-0" 
-            aria-label="The Island home"
-          >
-            <img 
-              src="/images/dub-tractor-theisland-logo.png" 
-              alt="The Island logo" 
-              className="h-10 sm:h-12 w-auto brightness-110 contrast-110 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]" 
+    <header
+      style={{
+        background: "var(--gold-dark)",
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+      }}
+    >
+      {/* Main nav row */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          height: 58,
+          padding: "0 44px",
+        }}
+      >
+        {/* LEFT: logo + text */}
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            gap: 14,
+          }}
+        >
+          <Link href="/" aria-label="The Island home">
+            <img
+              src="/images/dub-tractor-theisland-logo.png"
+              alt="The Island logo"
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: "50%",
+                border: "2px solid var(--gold-deep)",
+                display: "block",
+              }}
             />
           </Link>
-          <a 
-            className="hidden sm:inline text-sm font-medium text-theme-gold underline-offset-4 hover:underline transition-colors font-[family-name:var(--font-reggae-one)] whitespace-nowrap" 
-            href="https://wartfm.org" 
-            target="_blank" 
-            rel="noreferrer noopener"
-          >
-            WART 95.5 FM
-          </a>
+          <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <span
+              style={{
+                fontFamily: "var(--font-ui)",
+                fontSize: 11,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                color: "var(--gold)",
+              }}
+            >
+              The Island
+            </span>
+            <a
+              href="https://wartfm.org"
+              target="_blank"
+              rel="noreferrer noopener"
+              style={{
+                fontFamily: "var(--font-ui)",
+                fontSize: 9,
+                letterSpacing: "0.1em",
+                color: "var(--gold-mid)",
+                textDecoration: "none",
+              }}
+            >
+              WART 95.5 FM
+            </a>
+          </div>
         </div>
-        <nav 
-          className="flex items-center gap-2 sm:gap-3 overflow-x-auto scrollbar-hide whitespace-nowrap min-w-0 flex-1 justify-end" 
+
+        {/* CENTER/RIGHT: nav links */}
+        <nav
           aria-label="Primary navigation"
+          style={{ display: "flex", alignItems: "center", gap: 30 }}
         >
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
+                style={{
+                  fontFamily: "var(--font-ui)",
+                  fontSize: 10,
+                  letterSpacing: "0.1em",
+                  color: isActive ? "var(--gold)" : "var(--gold-mid)",
+                  textDecoration: "none",
+                }}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+
+          {/* FAR RIGHT: Listen Live */}
           <a
             href="https://station.voscast.com/5530050e0a38b/"
             target="_blank"
             rel="noreferrer noopener"
-            className="btn btn-live inline-flex items-center justify-center shrink-0 text-xs sm:text-sm px-3 sm:px-5 py-1.5 sm:py-2 rounded-lg font-[family-name:var(--font-reggae-one)]"
             aria-label="Listen to The Island live"
+            style={{
+              marginLeft: 30,
+              background: "var(--red)",
+              color: "var(--gold-cream)",
+              fontFamily: "var(--font-ui)",
+              fontSize: 9,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              padding: "8px 16px",
+              display: "flex",
+              alignItems: "center",
+              gap: 7,
+              textDecoration: "none",
+            }}
           >
+            <span className="live-dot" />
             Listen Live
           </a>
-          {navItems.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`shrink-0 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 font-[family-name:var(--font-reggae-one)] ${
-                isActive 
-                  ? "text-white bg-black/20 backdrop-blur-sm" 
-                  : "text-theme-gold hover:bg-[--island-gold-subtle] hover:text-[--island-gold]"
-              }`}
-              aria-current={isActive ? "page" : undefined}
-            >
-              {item.label}
-            </Link>
-            );
-          })}
         </nav>
       </div>
+
+      {/* Bottom three-stripe accent */}
+      <div
+        aria-hidden
+        style={{
+          height: 7,
+          background:
+            "linear-gradient(90deg, var(--red) 0% 33.33%, var(--gold) 33.33% 66.66%, var(--green) 66.66% 100%)",
+        }}
+      />
     </header>
   );
 }
-
-

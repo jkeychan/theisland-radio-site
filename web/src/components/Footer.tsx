@@ -1,37 +1,83 @@
 export function Footer() {
   return (
-    <footer className="border-t-2 border-white/10 bg-gradient-to-b from-black/60 to-black/80 backdrop-blur-lg mt-auto relative z-10 font-[family-name:var(--font-exo-2)]" style={{ fontWeight: 200 }}>
-      <div className="stripe-red w-full opacity-60" aria-hidden />
-      <div className="stripe-gold w-full opacity-60" aria-hidden />
-      <div className="container py-10 sm:py-12">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between text-white/90">
-          <p className="text-sm sm:text-base tracking-wide text-balance leading-relaxed" style={{ fontWeight: 200 }}>
-            © {new Date().getFullYear()} The Island •{" "}
-            <a 
-              className="underline underline-offset-2 hover:text-[--island-gold] transition-colors duration-200" 
-              style={{ fontWeight: 300 }}
-              href="https://wartfm.org" 
-              target="_blank" 
-              rel="noreferrer noopener"
-            >
-              WART 95.5 FM
-            </a>
-            {" "}· Madison County, NC
-          </p>
-          <p className="text-sm sm:text-base tracking-wide text-balance leading-relaxed" style={{ fontWeight: 200 }}>
-            <span style={{ fontWeight: 300 }}>Fridays 6:30–8pm ET</span> · DJ Dub Tractor ·{" "}
-            <a 
-              className="underline underline-offset-2 hover:text-[--island-gold] transition-colors duration-200" 
-              style={{ fontWeight: 300 }}
-              href="/contact/"
-            >
-              Contact
-            </a>
-          </p>
+    <footer
+      style={{
+        background: "var(--gold-dark)",
+        position: "relative",
+        padding: "22px 44px",
+      }}
+    >
+      {/* Top three-stripe bar */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 7,
+          background:
+            "linear-gradient(90deg, var(--red) 0% 33.33%, var(--gold) 33.33% 66.66%, var(--green) 66.66% 100%)",
+        }}
+      />
+
+      {/* Content row */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          paddingTop: 7,
+        }}
+      >
+        {/* LEFT: copyright */}
+        <p
+          style={{
+            fontFamily: "var(--font-ui)",
+            fontSize: 9,
+            letterSpacing: "0.08em",
+            color: "var(--gold-mid)",
+            margin: 0,
+          }}
+        >
+          © 2026 The Island · WART 95.5 FM · Madison County, NC · DJ Dub Tractor
+        </p>
+
+        {/* RIGHT: links */}
+        <div
+          style={{
+            display: "flex",
+            gap: 24,
+            fontFamily: "var(--font-ui)",
+            fontSize: 9,
+            letterSpacing: "0.08em",
+            color: "var(--gold-mid)",
+          }}
+        >
+          <a
+            href="https://wartfm.org"
+            target="_blank"
+            rel="noreferrer noopener"
+            style={{ color: "var(--gold-mid)", textDecoration: "none" }}
+          >
+            wartfm.org
+          </a>
+          <a
+            href="https://archive.org/details/@dubtractor/lists/1/the-island-wart-fm-radio-archive"
+            target="_blank"
+            rel="noreferrer noopener"
+            style={{ color: "var(--gold-mid)", textDecoration: "none" }}
+          >
+            archive.org
+          </a>
+          <a
+            href="/contact/"
+            style={{ color: "var(--gold-mid)", textDecoration: "none" }}
+          >
+            contact
+          </a>
         </div>
       </div>
     </footer>
   );
 }
-
-

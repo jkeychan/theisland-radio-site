@@ -13,16 +13,8 @@ export type Playlist = {
   id: string; // ISO date string like 2025-01-10
   title: string;
   description?: string;
+  archiveUrl?: string; // archive.org recording URL
   tracks: Track[];
-};
-
-export type Recording = {
-  id: string; // slug
-  title: string;
-  date: string; // ISO date
-  audioUrl: string;
-  downloadUrl?: string;
-  description?: string;
 };
 
 export type EventItem = {

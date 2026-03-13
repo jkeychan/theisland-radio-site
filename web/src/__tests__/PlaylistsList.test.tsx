@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { PlaylistsList } from '@/components/PlaylistsList';
 import { usePlaylists } from '@/hooks/usePlaylists';
 
@@ -40,8 +40,11 @@ describe('PlaylistsList', () => {
     expect(screen.queryByText('November 7, 2025')).not.toBeInTheDocument();
   });
 
-  it('renders tracks for each playlist', () => {
+  it('renders tracks after expanding a playlist', () => {
     render(<PlaylistsList showAll={true} />);
+    // Tracks are hidden until accordion is opened
+    expect(screen.queryByText('Artist 1')).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText('November 14, 2025'));
     expect(screen.getByText('Artist 1')).toBeInTheDocument();
     expect(screen.getByText('Song 1')).toBeInTheDocument();
     expect(screen.getByText(/Album 1/)).toBeInTheDocument();
@@ -65,4 +68,3 @@ describe('PlaylistsList', () => {
     expect(container.firstChild).toBeNull();
   });
 });
-

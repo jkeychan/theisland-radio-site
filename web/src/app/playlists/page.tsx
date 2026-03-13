@@ -1,5 +1,4 @@
 import { PlaylistsList } from "@/components/PlaylistsList";
-import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const metadata = {
   title: "Playlists • The Island",
@@ -7,31 +6,30 @@ export const metadata = {
 
 export default function PlaylistsPage() {
   return (
-    <ScrollReveal direction="up">
-    <div className="space-y-12 py-12 sm:py-16 relative z-10">
-      <header className="space-y-4 text-center">
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold section-heading section-heading-light">
+    <div>
+      {/* Page header band */}
+      <div style={{
+        background: 'var(--gold-dark)',
+        padding: '40px 44px 32px',
+        position: 'relative',
+      }}>
+        {/* Three-stripe bottom border */}
+        <div style={{
+          position: 'absolute', bottom: 0, left: 0, right: 0, height: 6,
+          background: 'linear-gradient(90deg, var(--red) 0% 33%, var(--gold-deep) 33% 66%, var(--green) 66% 100%)'
+        }} />
+        <p style={{ fontFamily: 'var(--font-ui)', fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold-mid)', marginBottom: 8 }}>
+          The Island · WART 95.5 FM
+        </p>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(48px, 8vw, 80px)', lineHeight: 0.9, letterSpacing: '-0.02em', color: 'var(--gold)' }}>
           Playlists
         </h1>
-        <p className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-white/90 font-[family-name:var(--font-island-moments)]">
-          Archive of past shows organized by date.
-        </p>
-      </header>
+      </div>
 
-      <PlaylistsList showAll={false} />
-
-      <div className="pt-6 text-center">
-        <a 
-          className="inline-flex items-center gap-2 text-lg sm:text-xl font-medium underline underline-offset-4 text-white hover:text-theme-gold transition-colors font-[family-name:var(--font-reggae-one)]" 
-          href="/playlists/archive/"
-        >
-          View previous playlists
-          <span aria-hidden="true">→</span>
-        </a>
+      {/* Page body */}
+      <div style={{ background: 'var(--gold)', padding: 44 }}>
+        <PlaylistsList showAll={true} />
       </div>
     </div>
-    </ScrollReveal>
   );
 }
-
-

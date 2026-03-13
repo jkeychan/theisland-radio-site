@@ -1,7 +1,7 @@
 // Minimal CSV parser that supports quoted fields and commas/newlines within quotes.
 // Returns an array of records where the first row is treated as headers.
 
-export type CsvRecord = Record<string, string>;
+type CsvRecord = Record<string, string>;
 
 export function parseCsv(text: string): CsvRecord[] {
   const rows: string[][] = [];

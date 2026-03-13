@@ -1,5 +1,4 @@
 import { events } from "@/data/events";
-import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const metadata = {
   title: "Community Events • The Island",
@@ -7,72 +6,73 @@ export const metadata = {
 
 export default function EventsPage() {
   return (
-    <ScrollReveal direction="up">
-    <div className="space-y-12 py-12 sm:py-16 relative z-10">
-      <header className="space-y-4 text-center">
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold section-heading section-heading-light">
-          Community Events
-        </h1>
-        <p className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-white/90 font-[family-name:var(--font-island-moments)]">
-          Local Madison County music and community happenings.
+    <div>
+      {/* Page header band */}
+      <div style={{
+        background: 'var(--gold-dark)',
+        padding: '40px 44px 32px',
+        position: 'relative',
+      }}>
+        {/* Three-stripe bottom border */}
+        <div style={{
+          position: 'absolute', bottom: 0, left: 0, right: 0, height: 6,
+          background: 'linear-gradient(90deg, var(--red) 0% 33%, var(--gold-deep) 33% 66%, var(--green) 66% 100%)'
+        }} />
+        <p style={{ fontFamily: 'var(--font-ui)', fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold-mid)', marginBottom: 8 }}>
+          The Island · WART 95.5 FM
         </p>
-      </header>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(48px, 8vw, 80px)', lineHeight: 0.9, letterSpacing: '-0.02em', color: 'var(--gold)' }}>
+          Events
+        </h1>
+      </div>
 
-      {events.length === 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="card card-accent card-dark p-6">
-            <h2 className="text-xl font-medium text-white font-[family-name:var(--font-reggae-one)]">Marshall, NC Community Events Calendar</h2>
-            <p className="mt-2 text-theme-gold">
-              <a 
-                href="https://exploremarshallnc.com/event-calendar/" 
-                target="_blank" 
-                rel="noreferrer noopener"
-                className="text-[--island-red] underline underline-offset-4 hover:text-[--island-gold] transition-colors duration-200"
-                aria-label="Visit Marshall, NC Community Events Calendar (opens in new tab)"
-              >
-                https://exploremarshallnc.com/event-calendar/
-              </a>
+      {/* Page body */}
+      <div style={{ background: 'var(--gold)', padding: 44 }}>
+        {events.length === 0 ? (
+          <div style={{
+            background: 'var(--gold-cream)',
+            borderLeft: '6px solid transparent',
+            borderImage: 'linear-gradient(180deg, var(--red) 0% 33%, var(--gold-deep) 33% 66%, var(--green) 66% 100%) 1',
+            padding: '20px 20px 20px 26px',
+          }}>
+            <p style={{ fontFamily: 'var(--font-body)', color: 'var(--gold-mid)', margin: 0 }}>
+              No upcoming events. Stay tuned.
             </p>
           </div>
-          
-          <div className="card card-accent card-dark p-6">
-            <h2 className="text-xl font-medium text-white font-[family-name:var(--font-reggae-one)]">Madison County Community Learning Centers</h2>
-            <p className="mt-2 text-theme-gold">
-              <a 
-                href="https://www.madisoncclc.org/upcoming-events" 
-                target="_blank" 
-                rel="noreferrer noopener"
-                className="text-[--island-red] underline underline-offset-4 hover:text-[--island-gold] transition-colors duration-200"
-                aria-label="Visit Madison County Community Learning Centers Events (opens in new tab)"
-              >
-                https://www.madisoncclc.org/upcoming-events
-              </a>
-            </p>
+        ) : (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
+            {events.map((e) => (
+              <article key={e.id} style={{
+                background: 'var(--gold-cream)',
+                borderLeft: '6px solid transparent',
+                borderRight: '6px solid transparent',
+                borderImage: 'linear-gradient(180deg, var(--red) 0% 33%, var(--gold-deep) 33% 66%, var(--green) 66% 100%) 1',
+                padding: '20px 20px 20px 26px',
+              }}>
+                <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 20, color: 'var(--gold-dark)', margin: '0 0 4px' }}>{e.title}</h2>
+                <p style={{ fontFamily: 'var(--font-ui)', fontSize: 11, color: 'var(--gold-mid)', margin: '0 0 4px' }}>{e.date}</p>
+                <div style={{ fontFamily: 'var(--font-ui)', fontSize: 11, color: 'var(--gold-mid)' }}>
+                  {e.venue ? <span>{e.venue}</span> : null}
+                  {e.location ? <span> · {e.location}</span> : null}
+                </div>
+                {e.description ? (
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--gold-dark)', marginTop: 8 }}>{e.description}</p>
+                ) : null}
+                {e.url ? (
+                  <a
+                    style={{ display: 'inline-block', marginTop: 12, fontFamily: 'var(--font-ui)', fontSize: 11, color: 'var(--red)', textDecoration: 'underline' }}
+                    href={e.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    More info
+                  </a>
+                ) : null}
+              </article>
+            ))}
           </div>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 gap-4">
-          {events.map((e) => (
-            <article key={e.id} className="card card-accent p-4">
-              <h2 className="text-xl font-medium font-[family-name:var(--font-reggae-one)]">{e.title}</h2>
-              <p className="text-sm text-theme-gold">{e.date}</p>
-              <div className="text-sm text-theme-gold">
-                {e.venue ? <span>{e.venue}</span> : null}
-                {e.location ? <span> · {e.location}</span> : null}
-              </div>
-              {e.description ? <p className="mt-2">{e.description}</p> : null}
-              {e.url ? (
-                <a className="mt-3 inline-block text-[--island-red] underline underline-offset-4" href={e.url} target="_blank" rel="noreferrer noopener">
-                  More info
-                </a>
-              ) : null}
-            </article>
-          ))}
-        </div>
-      )}
+        )}
+      </div>
     </div>
-    </ScrollReveal>
   );
 }
-
-

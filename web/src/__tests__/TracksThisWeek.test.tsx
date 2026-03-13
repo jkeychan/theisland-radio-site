@@ -1,14 +1,25 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { TracksThisWeek } from '@/components/TracksThisWeek';
 import { useTracks } from '@/hooks/useTracks';
+import { usePlaylists } from '@/hooks/usePlaylists';
 
 jest.mock('@/hooks/useTracks');
+jest.mock('@/hooks/usePlaylists');
 
 const DEFAULT_CSV_URL = 'https://example.com/tracks.csv';
+
+const mockPlaylists = [
+  {
+    id: '2026-03-13',
+    title: 'March 13, 2026',
+    tracks: [{ artist: 'The Upsetters', title: 'Underground', album: 'Super Ape' }],
+  },
+];
 
 describe('TracksThisWeek', () => {
   beforeEach(() => {
     process.env.NEXT_PUBLIC_TRACKS_CSV_URL = DEFAULT_CSV_URL;
+    (usePlaylists as jest.Mock).mockReturnValue({ data: mockPlaylists });
   });
 
   afterEach(() => {
@@ -27,9 +38,9 @@ describe('TracksThisWeek', () => {
       { artist: 'Peter Tosh', title: 'Legalize It', album: undefined },
     ];
     (useTracks as jest.Mock).mockReturnValue({ data: mockTracks, loading: false, error: null });
-    
+
     render(<TracksThisWeek />);
-    
+
     await waitFor(() => {
       expect(screen.getByText('Bob Marley')).toBeInTheDocument();
       expect(screen.getByText('One Love')).toBeInTheDocument();
@@ -46,8 +57,6 @@ describe('TracksThisWeek', () => {
   it('renders empty state when no tracks', () => {
     (useTracks as jest.Mock).mockReturnValue({ data: [], loading: false, error: null });
     render(<TracksThisWeek />);
-    expect(screen.getByText(/Tune in Friday 6:30pm ET/)).toBeInTheDocument();
-    expect(screen.getByText(/Browse Past Shows/)).toBeInTheDocument();
+    expect(screen.getByText('No tracks yet — check back Friday')).toBeInTheDocument();
   });
 });
-

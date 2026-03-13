@@ -26,25 +26,25 @@ export default function ContactPage() {
       if (recaptchaBadge) {
         recaptchaBadge.remove();
       }
-      
+
       // Remove any reCAPTCHA iframes
       const recaptchaIframes = document.querySelectorAll('iframe[src*="recaptcha"]');
       recaptchaIframes.forEach(iframe => iframe.remove());
-      
+
       // Remove any reCAPTCHA scripts
       const recaptchaScripts = document.querySelectorAll('script[src*="recaptcha"]');
       recaptchaScripts.forEach(script => script.remove());
-      
+
       // Remove any reCAPTCHA containers or overlays
       const recaptchaContainers = document.querySelectorAll('[id*="recaptcha"]');
       recaptchaContainers.forEach(container => container.remove());
-      
+
       // Clear the global grecaptcha object
       if (typeof window !== 'undefined' && window.grecaptcha) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (window as any).grecaptcha = undefined;
       }
-      
+
       // Reset the ready state
       setRecaptchaReady(false);
     };
@@ -74,29 +74,29 @@ export default function ContactPage() {
 
       // Get reCAPTCHA token
       const token = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "contact_form" });
-      
+
       // Get form data using ref
       const form = formRef.current;
-      
+
       if (!form) {
         console.error("Form ref is null");
         setSubmitStatus("error");
         return;
       }
-      
+
       const formData = new FormData(form);
-      
+
       // Manually add form fields to ensure they're included
       const nameField = form.elements.namedItem('name') as HTMLInputElement;
       const emailField = form.elements.namedItem('email') as HTMLInputElement;
       const subjectField = form.elements.namedItem('subject') as HTMLInputElement;
       const messageField = form.elements.namedItem('message') as HTMLTextAreaElement;
-      
+
       if (nameField?.value) formData.set('name', nameField.value);
       if (emailField?.value) formData.set('email', emailField.value);
       if (subjectField?.value) formData.set('subject', subjectField.value);
       if (messageField?.value) formData.set('message', messageField.value);
-      
+
       formData.append("g-recaptcha-response", token);
 
       // Submit to Formspree
@@ -124,7 +124,7 @@ export default function ContactPage() {
       setIsSubmitting(false);
     }
   };
-  
+
   return (
     <>
       {contactFormConfigured && (
@@ -135,96 +135,100 @@ export default function ContactPage() {
         />
       )}
 
-      <div className="space-y-12 py-12 sm:py-16 relative z-10">
-        <header className="space-y-4 text-center">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold section-heading section-heading-light">
-            Contact
-          </h1>
-          <p className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-white/90 font-[family-name:var(--font-island-moments)]">
-            Reach out to The Island on WART 95.5 FM.
-          </p>
-          <dl className="mt-6 text-base sm:text-lg flex flex-wrap justify-center gap-x-8 gap-y-3">
-            <div>
-              <dt className="font-semibold text-white">Text or Call the Request Line</dt>
-              <dd className="text-theme-gold font-medium">828-222-6317</dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-white">Station Website</dt>
-              <dd className="text-theme-gold">
-                <a className="underline font-medium hover:text-theme-red transition-colors" href="https://wartfm.org" target="_blank" rel="noreferrer noopener">WART 95.5 FM</a>
-              </dd>
-            </div>
-          </dl>
-        </header>
+      {/* Page header band */}
+      <div style={{
+        background: 'var(--gold-dark)',
+        padding: '40px 44px 32px',
+        position: 'relative',
+      }}>
+        {/* Three-stripe bottom border */}
+        <div style={{
+          position: 'absolute', bottom: 0, left: 0, right: 0, height: 6,
+          background: 'linear-gradient(90deg, var(--red) 0% 33%, var(--gold-deep) 33% 66%, var(--green) 66% 100%)'
+        }} />
+        <p style={{ fontFamily: 'var(--font-ui)', fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold-mid)', marginBottom: 8 }}>
+          The Island · WART 95.5 FM
+        </p>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(48px, 8vw, 80px)', lineHeight: 0.9, letterSpacing: '-0.02em', color: 'var(--gold)' }}>
+          Contact
+        </h1>
+      </div>
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 items-start">
-          <div className="order-2 lg:order-none flex items-start justify-center lg:justify-start" aria-label="Station art">
-            <picture>
-              <source srcSet="/images/hero-animation-trimmed.webp" type="image/webp" />
-              <img
-                src="/images/hero-animation-trimmed.gif"
-                alt="Dub Tractor animation"
-                className="w-auto h-auto"
-              />
-            </picture>
-          </div>
+      {/* Page body */}
+      <div style={{ background: 'var(--gold)', padding: 44 }}>
+        <div style={{ maxWidth: 600, margin: '0 auto' }}>
+          <p style={{ fontFamily: 'var(--font-ui)', fontSize: 11, color: 'var(--gold-mid)', marginBottom: 32 }}>
+            Request line: 828-222-6317
+          </p>
 
           {!contactFormConfigured ? (
-            <div className="rounded-lg border card-dark p-6 flex items-center justify-center">
-              <p className="text-theme-gold text-center">
-                Contact form is not configured. Set <code className="text-white">NEXT_PUBLIC_RECAPTCHA_SITE_KEY</code> and <code className="text-white">NEXT_PUBLIC_FORMSPREE_FORM_ID</code> in your environment (see <code className="text-white">.env.example</code>).
-              </p>
+            <div style={{ background: 'var(--gold-cream)', padding: '16px 20px', fontFamily: 'var(--font-ui)', fontSize: 11, color: 'var(--gold-mid)' }}>
+              Contact form is not configured. Set <code>NEXT_PUBLIC_RECAPTCHA_SITE_KEY</code> and <code>NEXT_PUBLIC_FORMSPREE_FORM_ID</code> in your environment (see <code>.env.example</code>).
             </div>
           ) : (
-          <form
-            ref={formRef}
-            className="card h-full order-3 lg:order-none"
-            onSubmit={handleSubmit}
-          >
-            <div className="grid grid-cols-1 gap-5">
-              <label className="block">
-                <span className="mb-2 block font-semibold text-white">Name</span>
-                <input 
-                  name="name" 
-                  required 
-                  className="w-full rounded-lg border-2 border-white/30 px-4 py-3 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:border-theme-gold focus:outline-none transition-colors" 
+            <form ref={formRef} onSubmit={handleSubmit}>
+              <div style={{ marginBottom: 20 }}>
+                <label style={{ fontFamily: 'var(--font-ui)', fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--gold-mid)', display: 'block', marginBottom: 6 }}>
+                  Name
+                </label>
+                <input
+                  name="name"
+                  required
                   disabled={isSubmitting}
+                  style={{ width: '100%', background: 'var(--gold-cream)', border: '1.5px solid var(--gold-deep)', borderRadius: 0, padding: '12px 14px', fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--gold-dark)', outline: 'none', boxSizing: 'border-box' }}
+                  onFocus={e => (e.currentTarget.style.borderColor = 'var(--red)')}
+                  onBlur={e => (e.currentTarget.style.borderColor = 'var(--gold-deep)')}
                 />
-              </label>
-              <label className="block">
-                <span className="mb-2 block font-semibold text-white">Email</span>
-                <input 
-                  name="email" 
-                  type="email" 
-                  required 
-                  className="w-full rounded-lg border-2 border-white/30 px-4 py-3 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:border-theme-gold focus:outline-none transition-colors" 
+              </div>
+
+              <div style={{ marginBottom: 20 }}>
+                <label style={{ fontFamily: 'var(--font-ui)', fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--gold-mid)', display: 'block', marginBottom: 6 }}>
+                  Email
+                </label>
+                <input
+                  name="email"
+                  type="email"
+                  required
                   disabled={isSubmitting}
+                  style={{ width: '100%', background: 'var(--gold-cream)', border: '1.5px solid var(--gold-deep)', borderRadius: 0, padding: '12px 14px', fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--gold-dark)', outline: 'none', boxSizing: 'border-box' }}
+                  onFocus={e => (e.currentTarget.style.borderColor = 'var(--red)')}
+                  onBlur={e => (e.currentTarget.style.borderColor = 'var(--gold-deep)')}
                 />
-              </label>
-              <label className="block">
-                <span className="mb-2 block font-semibold text-white">Subject</span>
-                <input 
-                  name="subject" 
-                  required 
-                  className="w-full rounded-lg border-2 border-white/30 px-4 py-3 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:border-theme-gold focus:outline-none transition-colors" 
+              </div>
+
+              <div style={{ marginBottom: 20 }}>
+                <label style={{ fontFamily: 'var(--font-ui)', fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--gold-mid)', display: 'block', marginBottom: 6 }}>
+                  Subject
+                </label>
+                <input
+                  name="subject"
+                  required
                   disabled={isSubmitting}
+                  style={{ width: '100%', background: 'var(--gold-cream)', border: '1.5px solid var(--gold-deep)', borderRadius: 0, padding: '12px 14px', fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--gold-dark)', outline: 'none', boxSizing: 'border-box' }}
+                  onFocus={e => (e.currentTarget.style.borderColor = 'var(--red)')}
+                  onBlur={e => (e.currentTarget.style.borderColor = 'var(--gold-deep)')}
                 />
-              </label>
-              <label className="block">
-                <span className="mb-2 block font-semibold text-white">Message</span>
-                <textarea 
-                  name="message" 
-                  required 
-                  rows={6} 
-                  className="w-full rounded-lg border-2 border-white/30 px-4 py-3 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:border-theme-gold focus:outline-none transition-colors" 
+              </div>
+
+              <div style={{ marginBottom: 20 }}>
+                <label style={{ fontFamily: 'var(--font-ui)', fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--gold-mid)', display: 'block', marginBottom: 6 }}>
+                  Message
+                </label>
+                <textarea
+                  name="message"
+                  required
+                  rows={6}
                   disabled={isSubmitting}
+                  style={{ width: '100%', background: 'var(--gold-cream)', border: '1.5px solid var(--gold-deep)', borderRadius: 0, padding: '12px 14px', fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--gold-dark)', outline: 'none', boxSizing: 'border-box', resize: 'vertical' }}
+                  onFocus={e => (e.currentTarget.style.borderColor = 'var(--red)')}
+                  onBlur={e => (e.currentTarget.style.borderColor = 'var(--gold-deep)')}
                 />
-              </label>
-              
+              </div>
+
               {/* Status Messages */}
               {submitStatus === "success" && (
                 <div
-                  className="p-3 bg-green-100 border border-green-400 text-green-700 rounded-md"
+                  style={{ background: 'var(--gold-cream)', borderLeft: '6px solid var(--green)', padding: '16px 20px', fontFamily: 'var(--font-ui)', fontSize: 11, color: 'var(--green)', marginBottom: 20 }}
                   role="status"
                   aria-live="polite"
                   aria-atomic="true"
@@ -234,7 +238,7 @@ export default function ContactPage() {
               )}
               {submitStatus === "error" && (
                 <div
-                  className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-md"
+                  style={{ background: 'var(--gold-cream)', borderLeft: '6px solid var(--red)', padding: '16px 20px', fontFamily: 'var(--font-ui)', fontSize: 11, color: 'var(--red)', marginBottom: 20 }}
                   role="alert"
                   aria-live="assertive"
                   aria-atomic="true"
@@ -242,20 +246,31 @@ export default function ContactPage() {
                   There was an error sending your message. Please try again.
                 </div>
               )}
-              
-              <button 
-                className="btn btn-primary" 
-                type="submit" 
+
+              <button
+                type="submit"
                 disabled={isSubmitting || !recaptchaReady}
+                style={{
+                  background: 'var(--red)',
+                  color: 'var(--gold-cream)',
+                  fontFamily: 'var(--font-ui)',
+                  fontSize: 11,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  border: 'none',
+                  borderRadius: 0,
+                  padding: '12px 28px',
+                  cursor: isSubmitting || !recaptchaReady ? 'not-allowed' : 'pointer',
+                  opacity: isSubmitting || !recaptchaReady ? 0.6 : 1,
+                }}
               >
                 {isSubmitting ? "Sending..." : !recaptchaReady ? "Loading..." : "Send"}
               </button>
-              
+
               {/* Hidden fields for Formspree */}
               <input type="hidden" name="_subject" value="Contact Form Submission — The Island" />
               <input type="hidden" name="_gotcha" />
-            </div>
-          </form>
+            </form>
           )}
         </div>
       </div>

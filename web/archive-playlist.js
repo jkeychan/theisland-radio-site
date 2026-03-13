@@ -305,10 +305,11 @@ function main() {
     // Read existing playlists.ts
     let content = fs.readFileSync(playlistsFile, 'utf8');
 
-    // Check if playlist already exists
-    if (content.includes(`"${playlistId}"`)) {
-      print.warning(`Playlist with ID '${playlistId}' already exists in playlists.ts`);
-      print.warning('This script will update it, but you may want to review manually');
+    // Check if playlist already exists — skip to avoid duplicates
+    if (content.includes(`id: "${playlistId}"`)) {
+      print.warning(`Playlist with ID '${playlistId}' already exists in playlists.ts — skipping to avoid duplicate.`);
+      print.warning('Delete the existing entry first if you want to replace it.');
+      process.exit(0);
     }
 
     // Generate new playlists.ts content

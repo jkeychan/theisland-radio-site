@@ -12,3 +12,9 @@ web/*.log
 .env.*.local
 *.env
 
+db/radio.db
+db/__pycache__/
+db/**/*.pyc
+db/config.toml
+db/.venv/
+

@@ -1,0 +1,9 @@
+# Copy this file to config.toml and adjust as needed.
+# config.toml is gitignored — never commit it.
+
+[database]
+# Path to the SQLite database file. Relative paths resolve from db/
+path = "radio.db"
+
+# Uncomment and set DATABASE_URL to switch to Postgres (cloud migration)
+# DATABASE_URL = "postgresql://user:pass@host:5432/dbname"

@@ -90,7 +90,8 @@ CREATE TABLE tracks (
     -- Spotify/Exportify enrichment fields (all nullable — populated when available)
     spotify_id      TEXT    UNIQUE,       -- Spotify track URI/ID; enables dedup and deep linking
     duration_ms     INTEGER,              -- track length in milliseconds
-    release_date    TEXT,                 -- album release date (YYYY, YYYY-MM, or YYYY-MM-DD)
+    release_date    TEXT,                 -- album release date stored as-is from Spotify (YYYY, YYYY-MM, or YYYY-MM-DD);
+                                          --   all release-year queries extract the leading 4 characters: substr(release_date, 1, 4)
     bpm             REAL,                 -- tempo in beats per minute
     energy          REAL,                 -- Spotify audio feature: 0.0–1.0
     danceability    REAL,                 -- Spotify audio feature: 0.0–1.0
@@ -233,7 +234,7 @@ The importer is invoked via `shows import --source exportify --file <path>`. It 
 2. **Exact match on `(raw_artist, title)`** — case-insensitive
 3. **No match** — row is logged to stderr and skipped; never auto-created
 
-Enrichment is non-destructive — it only fills `NULL` columns. Pass `--overwrite` to replace existing values. Unmatched rows are summarized at the end of the run.
+Enrichment is non-destructive — it only fills `NULL` columns. Pass `--overwrite` to replace existing values for Exportify-mapped columns only (`spotify_id`, `duration_ms`, `release_date`, `bpm`, `energy`, `danceability`, `musical_key`, `mode`, `genres`, `album_image_url`). `--overwrite` never touches `raw_artist`, `title`, or `album`. Unmatched rows are summarized at the end of the run.
 
 ### Manual entry
 
@@ -277,7 +278,7 @@ When you want the GitHub Pages site to query live show data, or when you want to
 
 4. **Run the adapted `schema.sql`** against the new Postgres instance to initialize it.
 
-5. **Export from SQLite and import to Postgres** — use `python db/cli.py db export --format sql` to dump data as INSERT statements, then load into Postgres. Note: the SQL output targets SQLite syntax; minor manual adjustments may be needed for `release_date` partial strings (`YYYY`, `YYYY-MM`) and comma-separated `genres` text if you later normalize those columns in Postgres.
+5. **Export from SQLite and import to Postgres** — use `python db/cli.py db export --format sql` to dump data as INSERT statements, then load into Postgres. Note: the SQL output targets SQLite syntax; minor manual adjustments may be needed for `release_date` partial strings (`YYYY`, `YYYY-MM`) and comma-separated `genres` text if you later normalize those columns in Postgres. Additionally, after loading data, Postgres sequences for auto-increment columns must be reset to avoid `id` collisions on subsequent inserts: `SELECT setval('<table>_id_seq', (SELECT MAX(id) FROM <table>))` for each table.
 
 ### Public API layer (future phase)
 

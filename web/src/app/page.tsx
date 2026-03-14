@@ -1,7 +1,12 @@
-"use client";
-
+import type { Metadata } from "next";
 import { TracksThisWeek } from "@/components/TracksThisWeek";
 import { ListenLiveButton } from "@/components/ListenLiveButton";
+
+export const metadata: Metadata = {
+  title: "The Island • Reggae, Dub & Dancehall Radio on WART 95.5 FM",
+  description:
+    "Weekly reggae, dub, and dancehall radio show with DJ Dub Tractor. Live Fridays 6:30–8pm ET on WART 95.5 FM, Madison County NC. Stream online worldwide.",
+};
 
 function MetaStripe() {
   return (

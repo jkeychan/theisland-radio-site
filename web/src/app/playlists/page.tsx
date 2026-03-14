@@ -1,7 +1,9 @@
 import { PlaylistsList } from "@/components/PlaylistsList";
 
 export const metadata = {
-  title: "Playlists • The Island",
+  title: "Playlists & Recordings • The Island",
+  description:
+    "Browse every episode of The Island — track-by-track playlists and archive.org recordings of each broadcast.",
 };
 
 export default function PlaylistsPage() {

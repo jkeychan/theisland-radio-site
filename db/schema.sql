@@ -5,7 +5,7 @@
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS shows (
-    id                TEXT     PRIMARY KEY,  -- ISO date "2026-03-13"; one show per date by design
+    id                TEXT     PRIMARY KEY,  -- ISO date "2026-03-13" (one show per date by design)
     aired_at          DATE     NOT NULL,
     archive_url       TEXT,
     description       TEXT,

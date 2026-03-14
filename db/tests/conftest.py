@@ -10,7 +10,13 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 @pytest.fixture
 def tmp_db():
     """In-memory SQLite DB with full schema applied and FK pragma on."""
-    schema = (Path(__file__).parent.parent / "schema.sql").read_text()
+    # Strip inline comments before splitting on ";" to avoid semicolons in comments
+    # breaking the parse (e.g. "-- stored as-is; use substr()")
+    schema_lines = []
+    for line in (Path(__file__).parent.parent / "schema.sql").read_text().splitlines():
+        stripped = line.split("--")[0]
+        schema_lines.append(stripped)
+    schema = "\n".join(schema_lines)
     conn = sqlite3.connect(":memory:")
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")

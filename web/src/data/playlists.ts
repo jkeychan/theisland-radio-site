@@ -4,6 +4,7 @@ export const playlists: Playlist[] = [
   {
     id: "2026-03-13",
     title: "March 13, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-march-13-2026",
     tracks: [
       { artist: "The Upsetters", title: "Underground", album: "Super Ape" },
       { artist: "Dylan Judah, Scientist", title: "Loving Dub", album: "Loving Dub" },

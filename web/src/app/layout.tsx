@@ -3,6 +3,7 @@ import { Nunito, DM_Mono, Exo_2 } from 'next/font/google'
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { JsonLd } from "@/components/JsonLd";
 import Script from "next/script";
 
 const nunito = Nunito({
@@ -32,12 +33,27 @@ export const metadata: Metadata = {
   title: "The Island • WART 95.5 FM",
   description:
     "The Island on WART 95.5 FM — DJ Dub Tractor. Fridays 6:30–8pm ET.",
+  keywords: [
+    "reggae", "dub", "dancehall", "radio show", "WART FM", "WART 95.5 FM",
+    "Madison County", "North Carolina", "DJ Dub Tractor", "The Island",
+    "community radio", "reggae radio",
+  ],
   openGraph: {
     title: "The Island • WART 95.5 FM",
     description:
       "The Island on WART 95.5 FM — DJ Dub Tractor. Fridays 6:30–8pm ET.",
     type: "website",
     url: "https://theisland.radio.fm/",
+    siteName: "The Island",
+    locale: "en_US",
+    images: ["/images/main-banner.jpeg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Island • WART 95.5 FM",
+    description:
+      "The Island on WART 95.5 FM — DJ Dub Tractor. Fridays 6:30–8pm ET.",
+    images: ["/images/main-banner.jpeg"],
   },
   metadataBase: new URL("https://theisland.radio.fm"),
 };
@@ -49,6 +65,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <JsonLd />
+      </head>
       <body
         className={`${nunito.variable} ${dmMono.variable} ${exo2.variable} antialiased`}
       >

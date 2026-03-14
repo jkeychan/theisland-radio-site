@@ -1,12 +1,14 @@
 import type { MetadataRoute } from "next";
 
 export const dynamic = "force-static";
-export const revalidate = 86400; // 1 day
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://theisland.radio.fm";
-  const urls = ["/", "/playlists/", "/contact/"];
-  return urls.map((path) => ({ url: `${base}${path}`, changeFrequency: "weekly", priority: 0.7 }));
+  return [
+    { url: `${base}/`,           changeFrequency: "weekly",  priority: 1.0 },
+    { url: `${base}/playlists/`, changeFrequency: "weekly",  priority: 0.9 },
+    { url: `${base}/contact/`,   changeFrequency: "monthly", priority: 0.5 },
+  ];
 }
 
 

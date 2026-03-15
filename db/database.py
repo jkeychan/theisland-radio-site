@@ -12,7 +12,9 @@ def get_connection(db_path: str | None = None) -> sqlite3.Connection:
 
 
 def init_db(db_path: str | None = None) -> None:
-    schema = (Path(__file__).parent / "schema.sql").read_text()
+    # Strip inline -- comments before splitting on ";" to handle semicolons in comments
+    raw = (Path(__file__).parent / "schema.sql").read_text()
+    schema = "\n".join(line.split("--")[0] for line in raw.splitlines())
     conn = get_connection(db_path)
     for stmt in schema.split(";"):
         stmt = stmt.strip()

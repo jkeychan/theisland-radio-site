@@ -180,6 +180,30 @@ section { position: relative; }
   outline-offset: 2px;
 }
 
+/* ── Header responsive ── */
+.header-inner {
+  display: flex;
+  align-items: center;
+  height: 58px;
+  padding: 0 44px;
+}
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+@media (max-width: 639px) {
+  .header-inner {
+    padding: 0 16px;
+  }
+  .header-nav-links {
+    display: none;
+  }
+  .header-nav {
+    gap: 0;
+  }
+}
+
 /* ── Skip link ── */
 .skip-link {
   position: absolute;

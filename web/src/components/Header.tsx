@@ -21,14 +21,7 @@ export function Header() {
       }}
     >
       {/* Main nav row */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          height: 58,
-          padding: "0 44px",
-        }}
-      >
+      <div className="header-inner">
         {/* LEFT: logo + text */}
         <div
           style={{
@@ -81,29 +74,28 @@ export function Header() {
         </div>
 
         {/* CENTER/RIGHT: nav links */}
-        <nav
-          aria-label="Primary navigation"
-          style={{ display: "flex", alignItems: "center", gap: 30 }}
-        >
-          {navItems.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive ? "page" : undefined}
-                style={{
-                  fontFamily: "var(--font-ui)",
-                  fontSize: 10,
-                  letterSpacing: "0.1em",
-                  color: isActive ? "var(--gold)" : "var(--gold-mid)",
-                  textDecoration: "none",
-                }}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+        <nav aria-label="Primary navigation" className="header-nav">
+          <div className="header-nav-links" style={{ display: "flex", alignItems: "center", gap: 30 }}>
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  style={{
+                    fontFamily: "var(--font-ui)",
+                    fontSize: 10,
+                    letterSpacing: "0.1em",
+                    color: isActive ? "var(--gold)" : "var(--gold-mid)",
+                    textDecoration: "none",
+                  }}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
 
           {/* FAR RIGHT: Listen Live */}
           <a
@@ -112,7 +104,7 @@ export function Header() {
             rel="noreferrer noopener"
             aria-label="Listen to The Island live"
             style={{
-              marginLeft: 30,
+              marginLeft: 16,
               background: "var(--red)",
               color: "var(--gold-cream)",
               fontFamily: "var(--font-ui)",
@@ -124,6 +116,7 @@ export function Header() {
               alignItems: "center",
               gap: 7,
               textDecoration: "none",
+              whiteSpace: "nowrap",
             }}
           >
             <span className="live-dot" />

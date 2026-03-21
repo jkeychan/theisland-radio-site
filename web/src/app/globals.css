@@ -202,6 +202,13 @@ section { position: relative; }
   .header-nav {
     gap: 0;
   }
+  .header-station-link {
+    display: none;
+  }
+  .listen-live-btn {
+    padding: 6px 12px !important;
+    margin-left: 8px !important;
+  }
 }
 
 /* ── Skip link ── */

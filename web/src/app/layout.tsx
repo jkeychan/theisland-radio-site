@@ -56,6 +56,9 @@ export const metadata: Metadata = {
     images: ["/images/main-banner.jpeg"],
   },
   metadataBase: new URL("https://theisland.radio.fm"),
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -93,7 +96,6 @@ export default function RootLayout({
             </Script>
           </>
         ) : null}
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <Header />
         <main id="main-content" className="pb-0 min-h-[calc(100vh-200px)]">
           {children}

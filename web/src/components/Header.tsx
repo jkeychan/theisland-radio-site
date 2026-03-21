@@ -60,6 +60,7 @@ export function Header() {
               href="https://wartfm.org"
               target="_blank"
               rel="noreferrer noopener"
+              className="header-station-link"
               style={{
                 fontFamily: "var(--font-ui)",
                 fontSize: 9,
@@ -103,6 +104,7 @@ export function Header() {
             target="_blank"
             rel="noreferrer noopener"
             aria-label="Listen to The Island live"
+            className="listen-live-btn"
             style={{
               marginLeft: 16,
               background: "var(--red)",

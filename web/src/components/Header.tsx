@@ -76,7 +76,7 @@ export function Header() {
 
         {/* CENTER/RIGHT: nav links */}
         <nav aria-label="Primary navigation" className="header-nav">
-          <div className="header-nav-links" style={{ display: "flex", alignItems: "center", gap: 30 }}>
+          <div className="header-nav-links">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               return (

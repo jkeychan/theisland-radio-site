@@ -73,6 +73,7 @@ export const TracksThisWeek = () => {
   return (
     <section
       aria-labelledby="tracks-title"
+      className="tracks-grid"
       style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',

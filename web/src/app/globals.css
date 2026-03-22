@@ -217,6 +217,19 @@ section { position: relative; }
     padding: 6px 12px !important;
     margin-left: 8px !important;
   }
+  .hero-section {
+    flex-direction: column;
+    min-height: auto;
+  }
+  .hero-left {
+    padding: 40px 24px 36px !important;
+  }
+  .hero-map {
+    display: none;
+  }
+  .tracks-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* ── Skip link ── */

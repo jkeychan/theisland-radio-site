@@ -22,6 +22,7 @@ export default function Home() {
       {/* ── Hero ── */}
       <section
         aria-labelledby="hero-title"
+        className="hero-section"
         style={{
           background: "var(--gold)",
           display: "flex",
@@ -30,6 +31,7 @@ export default function Home() {
       >
         {/* Left panel */}
         <div
+          className="hero-left"
           style={{
             flex: 1,
             padding: "68px 52px 60px",
@@ -123,6 +125,7 @@ export default function Home() {
 
         {/* Right panel — static banner image */}
         <div
+          className="hero-map"
           style={{
             flex: "0 0 40%",
             minWidth: 0,

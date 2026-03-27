@@ -2,6 +2,37 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-03-27",
+    title: "March 27, 2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Channel One", title: "Revelation Rockers in Dub", album: "Raw Dubs, Vol. 1" },
+      { artist: "Steel Pulse", title: "Babylon Makes The Rules", album: "Reggae Greats" },
+      { artist: "WARAJI, Prince Fatty, COCOLO BLAND", title: "Shout of Dub - Prince Fatty Dub Remix", album: "Shout of Space (Prince Fatty Remix)" },
+      { artist: "Ticklah", title: "Nine Years", album: "Ticklah vs. Axelrod" },
+      { artist: "Rico Rodriguez", title: "Ramble", album: "Roots To The Bone" },
+      { artist: "Ticklah, Rob Symeonn", title: "Wicked Feeling", album: "Nah Bow Down" },
+      { artist: "Dub Specialist", title: "Banana Walk", album: "Downbeat The Ruler Killer Instrumentals From Studio One" },
+      { artist: "Scientist", title: "Enjoyment Dub", album: "At Channel One" },
+      { artist: "CHAPPA RANKS", title: "コマゲン", album: "コマゲン -Single" },
+      { artist: "Randy San Nicolas", title: "Love You More (Lani-Boo)", album: "Love You More (Lani-Boo)" },
+      { artist: "Capleton", title: "Zion", album: "Zion" },
+      { artist: "Queen Omega, Little Lion Sound", title: "No Love Dubplate", album: "No Love Dubplate" },
+      { artist: "Basta Lion, Gold Up, Little Lion Sound", title: "Dancehall Party", album: "Dancehall Party" },
+      { artist: "Joe Publik, Dubmatix", title: "Come Correct - Dubmatix Remix", album: "Come Correct (Dubmatix Remix)" },
+      { artist: "Crazy Baldhead, Jah Point", title: "Man Dub", album: "You Don't Hate Monday" },
+      { artist: "Dreadsquad, Don Fe, Craig Crofton, FootPrint System", title: "Misirlou", album: "Misirlou" },
+      { artist: "U Brown, Roberto Sanchez", title: "Fraud Ina Me Yaad", album: "Fraud Ina Me Yaad" },
+      { artist: "Burning Spear", title: "Black Wa-Da-Da (Invasion)", album: "Garvey’s Ghost" },
+      { artist: "Pablo Moses", title: "Give I Fe a Name", album: "Revolutionary Dream" },
+      { artist: "Capital Letters", title: "Fire", album: "Headline news" },
+      { artist: "Prince Far I", title: "Jah Do That", album: "Dubwise" },
+      { artist: "Unity Selekta", title: "You Got to Dub It", album: "You Got to Rebel" },
+      { artist: "I-Mitri, Slimmah Sound", title: "the moment", album: "Vocal and Dub Showcase (Volume 1)" },
+      { artist: "The Soul Adventurers, Chalart58", title: "The Trees", album: "Dub To Roots" }
+    ]
+  },
+{
     id: "2026-03-13",
     title: "March 13, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-march-13-2026",

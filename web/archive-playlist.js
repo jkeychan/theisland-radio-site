@@ -99,19 +99,25 @@ function escapeString(str) {
     .replace(/"/g, '\\"');   // Then escape double quotes
 }
 
-// Generate description text from tracklist records
+// Generate description for archive.org upload.
+// Produces HTML with backlinks to theisland.radio.fm and wartfm.org,
+// followed by the full pipe-delimited tracklist.
 function generateDescription(records, playlistTitle) {
-  const artists = [];
-  for (const r of records) {
-    const artist = (r.Artist || r.artist || '').split(',')[0].trim();
-    if (artist && !artists.includes(artist)) artists.push(artist);
-    if (artists.length >= 3) break;
-  }
-  const last = artists.pop();
-  const artistPhrase = artists.length > 0
-    ? `${artists.join(', ')}, and ${last}`
-    : last || 'various artists';
-  return `This is a broadcast from "The Island with Dub Tractor" on WART-FM 95.5, featuring a curated playlist from ${playlistTitle}. The show documents a reggae and dub music program that includes tracks spanning roots reggae, dub versions, and dancehall selections from artists including ${artistPhrase}, among others.`;
+  const trackLines = records
+    .map(r => {
+      const title  = (r.Title  || r.title  || '').trim();
+      const artist = (r.Artist || r.artist || '').trim();
+      const album  = (r.Album  || r.album  || '').trim();
+      return `${title} | ${artist} | ${album}`;
+    })
+    .filter(l => l !== ' |  | ' && l !== '||')
+    .join('<br />');
+
+  return (
+    '<a href="https://theisland.radio.fm/">The Island with Dub Tractor</a> on <a href="https://wartfm.org/">WART-FM 95.5</a>' +
+    `<br /><br />${playlistTitle} Playlist` +
+    `<br /><br />Title | Artist | Album<br />${trackLines}`
+  );
 }
 
 // Generate archive.org URL from a YYYY-MM-DD date string

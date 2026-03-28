@@ -99,19 +99,45 @@ function escapeString(str) {
     .replace(/"/g, '\\"');   // Then escape double quotes
 }
 
+// Generate description text from tracklist records
+function generateDescription(records, playlistTitle) {
+  const artists = [];
+  for (const r of records) {
+    const artist = (r.Artist || r.artist || '').split(',')[0].trim();
+    if (artist && !artists.includes(artist)) artists.push(artist);
+    if (artists.length >= 3) break;
+  }
+  const last = artists.pop();
+  const artistPhrase = artists.length > 0
+    ? `${artists.join(', ')}, and ${last}`
+    : last || 'various artists';
+  return `This is a broadcast from "The Island with Dub Tractor" on WART-FM 95.5, featuring a curated playlist from ${playlistTitle}. The show documents a reggae and dub music program that includes tracks spanning roots reggae, dub versions, and dancehall selections from artists including ${artistPhrase}, among others.`;
+}
+
+// Generate archive.org URL from a YYYY-MM-DD date string
+function generateArchiveUrl(dateStr) {
+  const date = new Date(dateStr + 'T00:00:00');
+  const month = date.toLocaleDateString('en-US', { month: 'long' }).toLowerCase();
+  const day = date.getDate();
+  const year = date.getFullYear();
+  return `https://archive.org/details/the-island-with-dub-tractor-${month}-${day}-${year}`;
+}
+
 // Generate TypeScript playlist object
-function generatePlaylistObject(records, playlistId, playlistTitle) {
+function generatePlaylistObject(records, playlistId, playlistTitle, archiveUrl) {
     const tracks = records.map(record => {
     const title = record.Title || record.title || '';
     const artist = record.Artist || record.artist || '';
     const album = record.Album || record.album || '';
-    
+
     return `      { artist: "${escapeString(artist)}", title: "${escapeString(title)}", album: "${escapeString(album)}" }`;
   }).join(',\n');
 
+  const archiveLine = archiveUrl ? `\n    archiveUrl: "${escapeString(archiveUrl)}",` : '';
+
   return `  {
     id: "${escapeString(playlistId)}",
-    title: "${escapeString(playlistTitle)}",
+    title: "${escapeString(playlistTitle)}",${archiveLine}
     description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
     tracks: [
 ${tracks}
@@ -184,39 +210,72 @@ function monthToNumber(monthName) {
   return monthMap[monthName.toLowerCase()] || '01';
 }
 
+function updatePlaylistsTs(playlistObject, playlistId, playlistsFilePath) {
+  if (!fs.existsSync(playlistsFilePath)) {
+    throw new Error(`Playlists file not found: ${playlistsFilePath}`);
+  }
+  const content = fs.readFileSync(playlistsFilePath, 'utf8');
+  if (content.includes(`id: "${playlistId}"`)) {
+    return { skipped: true };
+  }
+  const exportRegex = /export const playlists: Playlist\[\] = \[([\s\S]*?)\];/;
+  const match = content.match(exportRegex);
+  if (!match) throw new Error('Could not find export const playlists in file');
+  let existingContent = match[1].trim();
+  if (existingContent) {
+    existingContent = existingContent.endsWith(',') ? existingContent : existingContent + ',';
+    existingContent = existingContent + '\n';
+  }
+  const newContent = `import type { Playlist } from "@/types/content";\n\nexport const playlists: Playlist[] = [\n${playlistObject}\n${existingContent}];`;
+  fs.writeFileSync(playlistsFilePath, newContent);
+  return { skipped: false };
+}
+
 function main() {
   const args = process.argv.slice(2);
   
   if (args.length === 0) {
-    print.error('Usage: node archive-playlist.js <input.csv> [--date YYYY-MM-DD]');
+    print.error('Usage: node archive-playlist.js <input.csv> [options]');
+    console.log('');
+    console.log('Options:');
+    console.log('  --date YYYY-MM-DD     Override auto-detected date');
+    console.log('  --archive-url URL     Override auto-generated archive.org URL slug');
+    console.log('  --mp3 <file>          Path to the MP3 recording (for upload command)');
+    console.log('  --upload              Run ia upload automatically (requires --mp3 and `ia` CLI)');
     console.log('');
     console.log('This script archives a CSV playlist by:');
-    console.log('1. Converting CSV to TypeScript playlist format');
-    console.log('2. Adding it to playlists.ts (maintained in descending order)');
-    console.log('3. Creating Archive.org-compatible pipe-delimited format');
+    console.log('1. Converting CSV to TypeScript playlist format and updating playlists.ts');
+    console.log('2. Creating Archive.org-compatible pipe-delimited tracklist');
+    console.log('3. Auto-generating the archive.org description from the tracklist');
+    console.log('4. Printing (or running) a ready `ia upload` command with all metadata');
     console.log('');
-    console.log('Date Detection:');
-    console.log('• Automatically extracts date from filenames like "The Island September 26, 2025.csv"');
-    console.log('• Falls back to today\'s date if pattern detection fails');
-    console.log('• Use --date YYYY-MM-DD to override the auto-detected date');
-    console.log('');
-    console.log('Expected CSV format:');
-    console.log('Title,Artist,Album,Time');
-    console.log('"Song Title","Artist Name","Album Name",03:45');
+    console.log('The archive.org URL and description are auto-generated from the date and tracklist.');
+    console.log('Pass --upload with --mp3 to upload directly (install ia: uv tool install internetarchive).');
     console.log('');
     console.log('Example:');
-    console.log('node archive-playlist.js "The Island September 26, 2025.csv"');
+    console.log('node archive-playlist.js "The Island March 27, 2026.csv" --mp3 "March 27 2026.mp3" --upload');
     process.exit(1);
   }
 
   let inputFile = '';
   let customDate = '';
-  
+  let customArchiveUrl = '';
+  let mp3File = '';
+  let doUpload = false;
+
   // Parse arguments
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--date' && i + 1 < args.length) {
       customDate = args[i + 1];
-      i++; // skip next arg
+      i++;
+    } else if (args[i] === '--archive-url' && i + 1 < args.length) {
+      customArchiveUrl = args[i + 1];
+      i++;
+    } else if (args[i] === '--mp3' && i + 1 < args.length) {
+      mp3File = args[i + 1];
+      i++;
+    } else if (args[i] === '--upload') {
+      doUpload = true;
     } else if (!inputFile && !args[i].startsWith('--')) {
       inputFile = args[i];
     }
@@ -247,9 +306,16 @@ function main() {
   
   const playlistId = playlistDate;
   const playlistTitle = formatDate(playlistDate);
+  const archiveUrl = customArchiveUrl || generateArchiveUrl(playlistDate);
 
   print.status(`Processing playlist for date: ${playlistDate}`);
   print.status(`Playlist title: ${playlistTitle}`);
+  if (customArchiveUrl) {
+    print.status(`Archive.org URL (custom): ${archiveUrl}`);
+  } else {
+    print.status(`Archive.org URL (auto-generated): ${archiveUrl}`);
+    print.warning('Use --archive-url URL to override if archive.org used a different slug')
+  }
 
   // Check if input file exists
   if (!fs.existsSync(inputFile)) {
@@ -290,7 +356,7 @@ function main() {
     print.success('Generated TypeScript playlist object');
 
     // Create new playlist object
-    const playlistObject = generatePlaylistObject(records, playlistId, playlistTitle);
+    const playlistObject = generatePlaylistObject(records, playlistId, playlistTitle, archiveUrl);
 
     // Process playlists.ts file
     if (!fs.existsSync(playlistsFile)) {
@@ -302,44 +368,39 @@ function main() {
     const backupDate = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0];
     fs.copyFileSync(playlistsFile, `${playlistsFile}.backup.${backupDate}`);
 
-    // Read existing playlists.ts
-    let content = fs.readFileSync(playlistsFile, 'utf8');
-
-    // Check if playlist already exists — skip to avoid duplicates
-    if (content.includes(`id: "${playlistId}"`)) {
+    print.status('Generating updated playlists.ts...');
+    const updateResult = updatePlaylistsTs(playlistObject, playlistId, playlistsFile);
+    if (updateResult.skipped) {
       print.warning(`Playlist with ID '${playlistId}' already exists in playlists.ts — skipping to avoid duplicate.`);
       print.warning('Delete the existing entry first if you want to replace it.');
       process.exit(0);
     }
-
-    // Generate new playlists.ts content
-    print.status('Generating updated playlists.ts...');
-
-    // Find and replace the export array
-    const exportRegex = /export const playlists: Playlist\[\] = \[([\s\S]*?)\];/;
-    const match = content.match(exportRegex);
-
-    if (!match) {
-      print.error('Could not find export const playlists in file');
-      process.exit(1);
-    }
-
-    // Extract existing playlists (everything except the closing bracket)
-    let existingContent = match[1].trim();
-
-    // If there are existing playlists, add a comma after the last one
-    if (existingContent) {
-      existingContent = existingContent.endsWith(',') ? existingContent : existingContent + ',';
-      existingContent = existingContent + '\n';
-    }
-
-    // Create new content with the new playlist at the top
-    const newContent = `import type { Playlist } from "@/types/content";\n\nexport const playlists: Playlist[] = [\n${playlistObject}\n${existingContent}];`;
-
-    // Write the new content
-    fs.writeFileSync(playlistsFile, newContent);
-
     print.success(`Successfully updated playlists.ts with new playlist: ${playlistTitle}`);
+
+    // Build archive.org upload args
+    const description = generateDescription(records, playlistTitle);
+    const identifier = archiveUrl.split('/').pop();
+    const iaTitle = `The Island with Dub Tractor - ${playlistTitle}`;
+    const iaMetadataArgs = [
+      '--metadata=mediatype:audio',
+      `--metadata=title:${iaTitle}`,
+      `--metadata=description:${description}`,
+      '--metadata=subject:wartfm',
+      '--metadata=subject:dub',
+      '--metadata=subject:reggae',
+      '--metadata=subject:community radio',
+      `--metadata=date:${playlistDate}`,
+      '--metadata=collection:opensource_audio',
+    ];
+
+    // Print the equivalent shell command for reference
+    const mp3Display = mp3File ? `"${mp3File}"` : '<recording.mp3>';
+    const iaCmdDisplay = [
+      `ia upload ${identifier}`,
+      `  ${mp3Display}`,
+      `  "${archiveFilename}"`,
+      ...iaMetadataArgs.map(a => `  "${a}"`),
+    ].join(' \\\n');
 
     // Summary
     console.log('');
@@ -348,15 +409,47 @@ function main() {
     console.log('==================================================');
     console.log('');
     print.status('Files updated:');
-    console.log(`  📝 ${path.basename(playlistsFile)} (TypeScript playlist data)`);
-    console.log(`  📁 ${archiveFilename} (Archive.org pipe-delimited format)`);
+    console.log(`  ${path.basename(playlistsFile)} (TypeScript playlist data)`);
+    console.log(`  ${archiveFilename} (Archive.org pipe-delimited tracklist)`);
     console.log('');
-    print.status('Next steps:');
-    console.log('  1. Review the updated playlists.ts file');
-    console.log(`  2. Copy content from ${archiveFilename} to Archive.org`);
-    console.log('  3. Commit your changes:');
-    console.log(`     git add . && git commit -m "Archive playlist ${playlistTitle}"`);
-    console.log('     git push origin main');
+    print.status('Auto-generated description:');
+    console.log(`  ${description}`);
+    console.log('');
+    print.status('Archive.org upload command:');
+    console.log('');
+    console.log(iaCmdDisplay);
+    console.log('');
+
+    if (doUpload) {
+      if (!mp3File) {
+        print.error('--upload requires --mp3 <file>');
+      } else if (!fs.existsSync(mp3File)) {
+        print.error(`MP3 file not found: ${mp3File}`);
+      } else {
+        const { execFileSync } = require('child_process');
+        try {
+          execFileSync('ia', ['upload', identifier, mp3File, archiveOutput, ...iaMetadataArgs], { stdio: 'inherit' });
+          print.success('Upload complete!');
+        } catch (uploadErr) {
+          if (uploadErr.code === 'ENOENT') {
+            print.error('`ia` not found. Install and configure it first:');
+            console.log('  uv tool install internetarchive');
+            console.log('  ia configure');
+          } else {
+            throw uploadErr;
+          }
+        }
+      }
+    } else if (mp3File) {
+      print.status('Run with --upload to execute the command above automatically.');
+    } else {
+      print.status('Add --mp3 <file> --upload to upload automatically via `ia`.');
+    }
+
+    console.log('');
+    print.status('Commit your changes:');
+    console.log(`  git add . && git commit -m "Archive playlist ${playlistTitle}"`);
+    console.log('  git push origin main');
     console.log('');
 
   } catch (error) {
@@ -373,4 +466,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { parseCsv, generatePlaylistObject, formatDate };
+module.exports = { parseCsv, generatePlaylistObject, generateArchiveUrl, generateDescription, formatDate, updatePlaylistsTs };

@@ -339,10 +339,15 @@ function main() {
 
     const archiveTxtPath = path.join(cwd, `The Island ${playlistTitle}_archive.txt`);
     const identifier     = archiveUrl.split('/').pop();
+    const uploadFiles = [outputMp3Path];
+    if (fs.existsSync(archiveTxtPath)) {
+      uploadFiles.push(archiveTxtPath);
+    } else {
+      print.warning(`Archive txt not found — uploading MP3 only. Run without --no-website to include the tracklist.`);
+    }
     const iaArgs = [
       'upload', identifier,
-      outputMp3Path,
-      archiveTxtPath,
+      ...uploadFiles,
       '--metadata=mediatype:audio',
       `--metadata=title:${archiveOrgTitle}`,
       `--metadata=description:${description}`,

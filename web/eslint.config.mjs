@@ -37,6 +37,8 @@ const eslintConfig = [
       "jest.config.js",
       "archive-playlist.js",
       "csv-to-archive-converter.js",
+      "island-show.js",
+      "src/__tests__/island-show.test.js",
     ],
     rules: {
       "@typescript-eslint/no-require-imports": "off",

@@ -152,27 +152,108 @@ const print = {
 
 function parseArgs(argv) {
   const opts = {
-    csv: null, wart: null, trimStart: null, trimEnd: null,
-    noMp3: false, noWebsite: false, noUpload: false, noDb: false, forceMp3: false,
+    csv: null, spotifyUrl: null, wart: null, trimStart: null, trimEnd: null,
+    mp3Only: false, noMp3: false, noWebsite: false, noUpload: false, noDb: false, forceMp3: false,
   };
   for (let i = 0; i < argv.length; i++) {
-    if      (argv[i] === '--csv'         && argv[i+1]) opts.csv       = argv[++i];
-    else if (argv[i] === '--wart'        && argv[i+1]) opts.wart      = argv[++i];
-    else if (argv[i] === '--trim-start'  && argv[i+1]) opts.trimStart = argv[++i];
-    else if (argv[i] === '--trim-end'    && argv[i+1]) opts.trimEnd   = argv[++i];
-    else if (argv[i] === '--no-mp3')     opts.noMp3     = true;
-    else if (argv[i] === '--no-website') opts.noWebsite = true;
-    else if (argv[i] === '--no-upload')  opts.noUpload  = true;
-    else if (argv[i] === '--no-db')      opts.noDb      = true;
-    else if (argv[i] === '--force-mp3')  opts.forceMp3  = true;
+    if      (argv[i] === '--csv'          && argv[i+1]) opts.csv        = argv[++i];
+    else if (argv[i] === '--spotify-url'  && argv[i+1]) opts.spotifyUrl = argv[++i];
+    else if (argv[i] === '--wart'         && argv[i+1]) opts.wart       = argv[++i];
+    else if (argv[i] === '--trim-start'   && argv[i+1]) opts.trimStart  = argv[++i];
+    else if (argv[i] === '--trim-end'     && argv[i+1]) opts.trimEnd    = argv[++i];
+    else if (argv[i] === '--mp3-only')    opts.mp3Only   = true;
+    else if (argv[i] === '--no-mp3')      opts.noMp3     = true;
+    else if (argv[i] === '--no-website')  opts.noWebsite = true;
+    else if (argv[i] === '--no-upload')   opts.noUpload  = true;
+    else if (argv[i] === '--no-db')       opts.noDb      = true;
+    else if (argv[i] === '--force-mp3')   opts.forceMp3  = true;
   }
   return opts;
 }
 
+// ─── Spotify helpers ──────────────────────────────────────────────────────────
+
+function extractPlaylistId(urlOrId) {
+  const m = urlOrId.match(/playlist\/([A-Za-z0-9]+)/);
+  return m ? m[1] : urlOrId;
+}
+
+function readSpotifyConfig() {
+  const tomlPath = path.join(DB_DIR, 'config.toml');
+  if (!fs.existsSync(tomlPath)) return null;
+  const text = fs.readFileSync(tomlPath, 'utf8');
+  const id     = (text.match(/client_id\s*=\s*"([^"]+)"/)     || [])[1];
+  const secret = (text.match(/client_secret\s*=\s*"([^"]+)"/) || [])[1];
+  return (id && secret) ? { clientId: id, clientSecret: secret } : null;
+}
+
+function httpsPost(url, headers, body) {
+  const https = require('https');
+  const u = new URL(url);
+  return new Promise((resolve, reject) => {
+    const req = https.request(
+      { hostname: u.hostname, path: u.pathname + u.search, method: 'POST', headers },
+      (res) => { let d = ''; res.on('data', c => d += c); res.on('end', () => resolve({ status: res.statusCode, body: d })); },
+    );
+    req.on('error', reject);
+    req.write(body);
+    req.end();
+  });
+}
+
+function httpsGet(url, headers) {
+  const https = require('https');
+  const u = new URL(url);
+  return new Promise((resolve, reject) => {
+    const req = https.request(
+      { hostname: u.hostname, path: u.pathname + u.search, method: 'GET', headers },
+      (res) => { let d = ''; res.on('data', c => d += c); res.on('end', () => resolve({ status: res.statusCode, body: d })); },
+    );
+    req.on('error', reject);
+    req.end();
+  });
+}
+
+async function getSpotifyToken(clientId, clientSecret) {
+  const creds = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+  const body  = 'grant_type=client_credentials';
+  const res   = await httpsPost(
+    'https://accounts.spotify.com/api/token',
+    { 'Authorization': `Basic ${creds}`, 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': Buffer.byteLength(body) },
+    body,
+  );
+  const data = JSON.parse(res.body);
+  if (!data.access_token) throw new Error(`Spotify auth failed: ${res.body}`);
+  return data.access_token;
+}
+
+async function fetchSpotifyTracks(playlistId, token) {
+  const fields = encodeURIComponent('items(track(name,artists(name),album(name),duration_ms)),next');
+  const records = [];
+  let url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=100&fields=${fields}`;
+  while (url) {
+    const res = await httpsGet(url, { 'Authorization': `Bearer ${token}` });
+    if (res.status !== 200) throw new Error(`Spotify API ${res.status}: ${res.body}`);
+    const data = JSON.parse(res.body);
+    for (const item of data.items) {
+      const t = item && item.track;
+      if (!t || !t.name) continue;
+      records.push({
+        title:  t.name,
+        artist: t.artists.map(a => a.name).join(', '),
+        album:  (t.album && t.album.name) || '',
+      });
+    }
+    url = data.next || null;
+  }
+  return records;
+}
+
+// ─── CSV auto-detection ───────────────────────────────────────────────────────
+
 function detectCsv(cwd) {
   const csvs = fs.readdirSync(cwd).filter(f => f.endsWith('.csv'));
   if (csvs.length === 0) return null;
-  // Pick the exportify CSV: identifiable by having the most columns
   const scored = csvs.map(f => {
     try {
       const firstLine = fs.readFileSync(path.join(cwd, f), 'utf8').replace(/^\uFEFF/, '').split('\n')[0];
@@ -186,8 +267,21 @@ function detectCsv(cwd) {
   return scored[0].file;
 }
 
-function main() {
-  const { execFileSync }   = require('child_process');
+// Read track records from an _archive.txt file written by a previous playlist run.
+// Used in --mp3-only mode to generate the archive.org description.
+function readRecordsFromArchiveTxt(cwd) {
+  const file = fs.readdirSync(cwd).find(f => f.endsWith('_archive.txt'));
+  if (!file) return [];
+  return fs.readFileSync(path.join(cwd, file), 'utf8')
+    .split('\n').slice(1)           // skip "Title | Artist | Album" header
+    .map(l => l.trim()).filter(Boolean)
+    .map(l => { const [title, artist, album] = l.split(' | '); return { title: title || '', artist: artist || '', album: album || '' }; });
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+
+async function main() {
+  const { execFileSync } = require('child_process');
   const {
     generatePlaylistObject, generateArchiveUrl, generateDescription,
     formatDate, updatePlaylistsTs,
@@ -206,38 +300,86 @@ function main() {
   }
   print.status(`Show date: ${playlistDate}`);
 
-  // ── Detect and parse CSV ─────────────────────────────────────────────────────
-  const detected = opts.csv || detectCsv(cwd);
-  if (!detected) {
-    print.error('No CSV found in current directory. Use --csv <file>.');
-    process.exit(1);
-  }
-  if (detected && typeof detected === 'object' && detected.ambiguous) {
-    print.error('Multiple CSVs with the same column count — cannot auto-detect:');
-    detected.ambiguous.forEach(f => console.log(`  ${f}`));
-    print.error('Use --csv <file> to specify which one.');
-    process.exit(1);
-  }
-  const csvFile = detected;
-  const csvPath = path.isAbsolute(csvFile) ? csvFile : path.join(cwd, csvFile);
-  if (!fs.existsSync(csvPath)) {
-    print.error(`CSV not found: ${csvPath}`);
-    process.exit(1);
-  }
-  const csvText = fs.readFileSync(csvPath, 'utf8');
-  let records;
-  try {
-    records = parseExportifyCsv(csvText);
-  } catch (e) {
-    print.error(`CSV parse error: ${e.message}`);
-    process.exit(1);
-  }
-  if (records.length === 0) {
-    print.error('No tracks found in CSV.');
-    process.exit(1);
-  }
-  print.status(`CSV: ${csvFile} (${records.length} tracks)`);
+  // ── Get track records ─────────────────────────────────────────────────────────
+  // Three modes:
+  //   --spotify-url  fetch from Spotify (skips MP3 + upload)
+  //   --mp3-only     read from _archive.txt if present (skips website + DB)
+  //   default        detect/parse a CSV in the current directory
 
+  let records = [];
+  let csvPath = null;   // set when source is CSV (used for DB exportify-show import)
+  let dbSource = 'playlists-ts'; // default; set to 'exportify-show' for CSV source
+
+  if (opts.mp3Only) {
+    // Recording-only run — playlist data already in playlists.ts from a previous run
+    opts.noWebsite = true;
+    opts.noDb      = true;
+    records = readRecordsFromArchiveTxt(cwd);
+    if (records.length > 0) {
+      print.status(`Loaded ${records.length} tracks from archive.txt for description`);
+    } else {
+      print.warning('No archive.txt found — description will be generic');
+    }
+
+  } else if (opts.spotifyUrl) {
+    // Spotify playlist run — skip MP3 processing and upload (no recording yet)
+    opts.noMp3    = true;
+    opts.noUpload = true;
+    const playlistId = extractPlaylistId(opts.spotifyUrl);
+    const config = readSpotifyConfig();
+    if (!config) {
+      print.error(`Spotify credentials not found in ${path.join(DB_DIR, 'config.toml')}`);
+      process.exit(1);
+    }
+    print.status(`Fetching Spotify playlist: ${playlistId}`);
+    try {
+      const token = await getSpotifyToken(config.clientId, config.clientSecret);
+      records = await fetchSpotifyTracks(playlistId, token);
+    } catch (e) {
+      print.error(`Spotify fetch failed: ${e.message}`);
+      process.exit(1);
+    }
+    if (records.length === 0) {
+      print.error('No tracks found in Spotify playlist.');
+      process.exit(1);
+    }
+    print.status(`Fetched ${records.length} tracks from Spotify`);
+    dbSource = 'playlists-ts'; // DB updated via playlists.ts after website step
+
+  } else {
+    // CSV mode (exportify auto-detect or --csv)
+    const detected = opts.csv || detectCsv(cwd);
+    if (!detected) {
+      print.error('No playlist source. Use --spotify-url <url>, --csv <file>, or --mp3-only.');
+      process.exit(1);
+    }
+    if (typeof detected === 'object' && detected.ambiguous) {
+      print.error('Multiple CSVs with the same column count — cannot auto-detect:');
+      detected.ambiguous.forEach(f => console.log(`  ${f}`));
+      print.error('Use --csv <file> to specify which one.');
+      process.exit(1);
+    }
+    const csvFile = detected;
+    csvPath = path.isAbsolute(csvFile) ? csvFile : path.join(cwd, csvFile);
+    if (!fs.existsSync(csvPath)) {
+      print.error(`CSV not found: ${csvPath}`);
+      process.exit(1);
+    }
+    try {
+      records = parseExportifyCsv(fs.readFileSync(csvPath, 'utf8'));
+    } catch (e) {
+      print.error(`CSV parse error: ${e.message}`);
+      process.exit(1);
+    }
+    if (records.length === 0) {
+      print.error('No tracks found in CSV.');
+      process.exit(1);
+    }
+    print.status(`CSV: ${csvFile} (${records.length} tracks)`);
+    dbSource = 'exportify-show';
+  }
+
+  // ── Derived values ────────────────────────────────────────────────────────────
   const outputMp3Name   = buildOutputMp3Name(playlistDate);
   const outputMp3Path   = path.join(ARCHIVES, outputMp3Name);
   const id3Title        = buildId3Title(playlistDate);
@@ -247,11 +389,10 @@ function main() {
   const archiveOrgTitle = buildArchiveOrgTitle(playlistDate);
   const description     = generateDescription(records, playlistTitle);
 
-  // ── Step 1: Process MP3 ──────────────────────────────────────────────────────
+  // ── Step 1: Process MP3 ───────────────────────────────────────────────────────
   let mp3Status = 'skipped (--no-mp3)';
 
   if (!opts.noMp3) {
-    // Detect WART file
     let wartBasename = opts.wart;
     if (!wartBasename) {
       const matches = findWartFiles(playlistDate, WART_DIR);
@@ -276,23 +417,20 @@ function main() {
     }
 
     if (fs.existsSync(outputMp3Path) && !opts.forceMp3) {
-      print.warning(`Output MP3 already exists — skipping ffmpeg step.`);
+      print.warning('Output MP3 already exists — skipping ffmpeg step.');
       print.warning(`  ${outputMp3Name}`);
       print.warning('Use --force-mp3 to overwrite.');
       mp3Status = 'skipped (already exists)';
     } else {
       print.status(`Processing: ${wartBasename} → ${outputMp3Name}`);
       const ffmpegArgs = [];
-      if (opts.forceMp3) ffmpegArgs.push('-y');
+      if (opts.forceMp3)  ffmpegArgs.push('-y');
       if (opts.trimStart) ffmpegArgs.push('-ss', opts.trimStart);
       if (opts.trimEnd)   ffmpegArgs.push('-to', opts.trimEnd);
       ffmpegArgs.push(
-        '-i', wartPath,
-        '-i', LOGO,
-        '-map', '0:0',
-        '-map', '1:0',
-        '-c', 'copy',
-        '-id3v2_version', '3',
+        '-i', wartPath, '-i', LOGO,
+        '-map', '0:0', '-map', '1:0',
+        '-c', 'copy', '-id3v2_version', '3',
         '-metadata:s:v', 'title=Album cover',
         '-metadata:s:v', 'comment=Cover (front)',
         '-metadata', `title=${id3Title}`,
@@ -319,10 +457,9 @@ function main() {
   if (!opts.noWebsite) {
     const archiveTxtName = `The Island ${playlistTitle}_archive.txt`;
     const archiveTxtPath = path.join(cwd, archiveTxtName);
-    const pipeDelimited  = ['Title | Artist | Album',
-      ...records.map(r => `${r.title} | ${r.artist} | ${r.album}`)
-    ].join('\n');
-    fs.writeFileSync(archiveTxtPath, pipeDelimited);
+    fs.writeFileSync(archiveTxtPath, ['Title | Artist | Album',
+      ...records.map(r => `${r.title} | ${r.artist} | ${r.album}`),
+    ].join('\n'));
     print.status(`Wrote ${archiveTxtName}`);
 
     const playlistObject = generatePlaylistObject(records, playlistDate, playlistTitle, archiveUrl);
@@ -334,39 +471,30 @@ function main() {
   let uploadStatus = 'skipped (--no-upload)';
 
   if (!opts.noUpload) {
-    try {
-      execFileSync('ia', ['--version'], { stdio: 'ignore' });
-    } catch {
-      print.error('`ia` not found. Install and configure it:');
-      console.log('  uv tool install internetarchive');
-      console.log('  ia configure');
+    try { execFileSync('ia', ['--version'], { stdio: 'ignore' }); } catch {
+      print.error('`ia` not found. Install with: uv tool install internetarchive && ia configure');
       process.exit(1);
     }
-
     if (!fs.existsSync(outputMp3Path)) {
       print.error(`MP3 not found: ${outputMp3Path}`);
-      print.error('Run without --no-mp3 to process it first, or use --no-upload to skip uploading.');
+      print.error('Run --mp3-only (or without --no-mp3) to process it first.');
       process.exit(1);
     }
-
     const archiveTxtPath = path.join(cwd, `The Island ${playlistTitle}_archive.txt`);
     const identifier     = archiveUrl.split('/').pop();
-    const uploadFiles = [outputMp3Path];
+    const uploadFiles    = [outputMp3Path];
     if (fs.existsSync(archiveTxtPath)) {
       uploadFiles.push(archiveTxtPath);
     } else {
-      print.warning(`Archive txt not found — uploading MP3 only. Run without --no-website to include the tracklist.`);
+      print.warning('archive.txt not found — uploading MP3 only.');
     }
     const iaArgs = [
-      'upload', identifier,
-      ...uploadFiles,
+      'upload', identifier, ...uploadFiles,
       '--metadata=mediatype:audio',
       `--metadata=title:${archiveOrgTitle}`,
       `--metadata=description:${description}`,
-      '--metadata=subject:wartfm',
-      '--metadata=subject:dub',
-      '--metadata=subject:reggae',
-      '--metadata=subject:community radio',
+      '--metadata=subject:wartfm', '--metadata=subject:dub',
+      '--metadata=subject:reggae', '--metadata=subject:community radio',
       `--metadata=date:${playlistDate}`,
       '--metadata=collection:opensource_audio',
     ];
@@ -385,14 +513,17 @@ function main() {
 
   if (!opts.noDb) {
     const islandCli = path.join(DB_DIR, 'island');
-    const dbArgs = [
-      'shows', 'import',
-      '--source', 'exportify-show',
-      '--file', csvPath,
-      '--show-id', playlistDate,
-      '--archive-url', archiveUrl,
-    ];
-    print.status(`Updating database: show ${playlistDate}`);
+    let dbArgs;
+    if (dbSource === 'exportify-show') {
+      dbArgs = [
+        'shows', 'import', '--source', 'exportify-show',
+        '--file', csvPath, '--show-id', playlistDate, '--archive-url', archiveUrl,
+      ];
+    } else {
+      // playlists-ts: DB reads from the already-updated playlists.ts
+      dbArgs = ['shows', 'import', '--source', 'playlists-ts', '--file', PLAYLISTS_FILE];
+    }
+    print.status(`Updating database (${dbSource}): show ${playlistDate}`);
     try {
       execFileSync(islandCli, dbArgs, { stdio: 'inherit' });
       dbStatus = `show ${playlistDate} imported`;
@@ -421,5 +552,5 @@ function main() {
 }
 
 if (require.main === module) {
-  main();
+  main().catch(e => { console.error(`${C.RED}[ERROR]${C.NC} ${e.message}`); process.exit(1); });
 }

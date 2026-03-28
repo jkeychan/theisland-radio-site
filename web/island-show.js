@@ -6,6 +6,7 @@ const path = require('path');
 
 // ─── Fixed paths ─────────────────────────────────────────────────────────────
 const WEB_DIR        = '/Users/jeff/Documents/Code/Git-Managed/theisland/web';
+const DB_DIR         = '/Users/jeff/Documents/Code/Git-Managed/theisland/db';
 const ARCHIVES       = '/Users/jeff/Documents/The Island/SHOW ARCHIVES';
 const WART_DIR       = '/Users/jeff/Documents/The Island/SHOW ARCHIVES/downloaded from WART';
 const LOGO           = '/Users/jeff/Documents/The Island/SHOW ARCHIVES/dub-tractor-theisland-logo.png';
@@ -152,7 +153,7 @@ const print = {
 function parseArgs(argv) {
   const opts = {
     csv: null, wart: null, trimStart: null, trimEnd: null,
-    noMp3: false, noWebsite: false, noUpload: false, forceMp3: false,
+    noMp3: false, noWebsite: false, noUpload: false, noDb: false, forceMp3: false,
   };
   for (let i = 0; i < argv.length; i++) {
     if      (argv[i] === '--csv'         && argv[i+1]) opts.csv       = argv[++i];
@@ -162,6 +163,7 @@ function parseArgs(argv) {
     else if (argv[i] === '--no-mp3')     opts.noMp3     = true;
     else if (argv[i] === '--no-website') opts.noWebsite = true;
     else if (argv[i] === '--no-upload')  opts.noUpload  = true;
+    else if (argv[i] === '--no-db')      opts.noDb      = true;
     else if (argv[i] === '--force-mp3')  opts.forceMp3  = true;
   }
   return opts;
@@ -378,14 +380,37 @@ function main() {
     }
   }
 
+  // ── Step 4: Update database ───────────────────────────────────────────────────
+  let dbStatus = 'skipped (--no-db)';
+
+  if (!opts.noDb) {
+    const islandCli = path.join(DB_DIR, 'island');
+    const dbArgs = [
+      'shows', 'import',
+      '--source', 'exportify-show',
+      '--file', csvPath,
+      '--show-id', playlistDate,
+      '--archive-url', archiveUrl,
+    ];
+    print.status(`Updating database: show ${playlistDate}`);
+    try {
+      execFileSync(islandCli, dbArgs, { stdio: 'inherit' });
+      dbStatus = `show ${playlistDate} imported`;
+    } catch (e) {
+      print.error(`Database update failed: ${e.message}`);
+      dbStatus = 'FAILED';
+    }
+  }
+
   // ── Summary ───────────────────────────────────────────────────────────────────
   console.log('');
   console.log('==================================================');
   print.success('DONE');
   console.log('==================================================');
-  console.log(`  MP3:     ${mp3Status}`);
-  console.log(`  Website: ${websiteStatus}`);
-  console.log(`  Upload:  ${uploadStatus}`);
+  console.log(`  MP3:      ${mp3Status}`);
+  console.log(`  Website:  ${websiteStatus}`);
+  console.log(`  Upload:   ${uploadStatus}`);
+  console.log(`  Database: ${dbStatus}`);
   if (websiteStatus === 'playlists.ts updated') {
     console.log('');
     print.status('Commit your changes:');

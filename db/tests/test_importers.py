@@ -219,3 +219,72 @@ def test_enrich_unmatched_returns_count(tmp_db):
     rows = parse_exportify_csv(EXPORTIFY_FIXTURE)
     result = enrich_from_exportify(rows, tmp_db, overwrite=False)
     assert result["unmatched"] == 2  # no tracks in DB to match
+
+
+from importers.from_exportify_show import import_exportify_show
+
+
+def test_import_exportify_show_creates_show(tmp_db):
+    rows = parse_exportify_csv(EXPORTIFY_FIXTURE)
+    import_exportify_show(rows, "2026-03-28", "https://archive.org/details/test", tmp_db)
+    show = tmp_db.execute("SELECT * FROM shows WHERE id='2026-03-28'").fetchone()
+    assert show is not None
+    assert show["archive_url"] == "https://archive.org/details/test"
+
+
+def test_import_exportify_show_inserts_tracks(tmp_db):
+    rows = parse_exportify_csv(EXPORTIFY_FIXTURE)
+    result = import_exportify_show(rows, "2026-03-28", None, tmp_db)
+    assert result["tracks"] == 2
+    tracks = tmp_db.execute("SELECT * FROM tracks").fetchall()
+    assert len(tracks) == 2
+
+
+def test_import_exportify_show_populates_metadata(tmp_db):
+    rows = parse_exportify_csv(EXPORTIFY_FIXTURE)
+    import_exportify_show(rows, "2026-03-28", None, tmp_db)
+    track = tmp_db.execute(
+        "SELECT bpm, energy, spotify_id, genres FROM tracks WHERE title='Underground'"
+    ).fetchone()
+    assert track["bpm"] == 130.5
+    assert track["energy"] == 0.80
+    assert track["spotify_id"] == "spotify:track:abc123"
+    assert track["genres"] == "reggae"
+
+
+def test_import_exportify_show_creates_show_tracks(tmp_db):
+    rows = parse_exportify_csv(EXPORTIFY_FIXTURE)
+    import_exportify_show(rows, "2026-03-28", None, tmp_db)
+    st = tmp_db.execute("SELECT * FROM show_tracks WHERE show_id='2026-03-28'").fetchall()
+    assert len(st) == 2
+    assert [r["position"] for r in st] == [1, 2]
+
+
+def test_import_exportify_show_idempotent(tmp_db):
+    rows = parse_exportify_csv(EXPORTIFY_FIXTURE)
+    import_exportify_show(rows, "2026-03-28", None, tmp_db)
+    import_exportify_show(rows, "2026-03-28", None, tmp_db)
+    tracks = tmp_db.execute("SELECT * FROM tracks").fetchall()
+    assert len(tracks) == 2
+    st = tmp_db.execute("SELECT * FROM show_tracks").fetchall()
+    assert len(st) == 2
+
+
+def test_import_exportify_show_no_overwrite(tmp_db):
+    rows = parse_exportify_csv(EXPORTIFY_FIXTURE)
+    import_exportify_show(rows, "2026-03-28", None, tmp_db)
+    tmp_db.execute("UPDATE tracks SET bpm=999.0 WHERE title='Underground'")
+    tmp_db.commit()
+    import_exportify_show(rows, "2026-03-28", None, tmp_db, overwrite=False)
+    track = tmp_db.execute("SELECT bpm FROM tracks WHERE title='Underground'").fetchone()
+    assert track["bpm"] == 999.0
+
+
+def test_import_exportify_show_overwrite(tmp_db):
+    rows = parse_exportify_csv(EXPORTIFY_FIXTURE)
+    import_exportify_show(rows, "2026-03-28", None, tmp_db)
+    tmp_db.execute("UPDATE tracks SET bpm=999.0 WHERE title='Underground'")
+    tmp_db.commit()
+    import_exportify_show(rows, "2026-03-28", None, tmp_db, overwrite=True)
+    track = tmp_db.execute("SELECT bpm FROM tracks WHERE title='Underground'").fetchone()
+    assert track["bpm"] == 130.5

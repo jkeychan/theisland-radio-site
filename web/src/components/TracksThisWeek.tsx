@@ -106,6 +106,28 @@ export const TracksThisWeek = () => {
           {currentDateLabel}
         </p>
 
+        {currentPlaylist?.archiveUrl && (
+          <a
+            href={currentPlaylist.archiveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              fontFamily: 'var(--font-ui)',
+              fontSize: 10,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: 'var(--red)',
+              textDecoration: 'none',
+              borderBottom: '1px solid var(--red)',
+              paddingBottom: 1,
+              marginBottom: 20,
+            }}
+          >
+            ▶ Link to broadcast recording
+          </a>
+        )}
+
         {loading ? (
           <p style={{ fontFamily: 'var(--font-ui)', fontSize: 13, color: 'var(--gold-mid)' }}>
             Loading tracks…

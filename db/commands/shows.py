@@ -61,12 +61,15 @@ def shows_search(query, fmt):
 
 @shows.command("import")
 @click.option("--source", required=True,
-              type=click.Choice(["playlists-ts", "csv", "exportify"]))
+              type=click.Choice(["playlists-ts", "csv", "exportify", "exportify-show"]))
 @click.option("--file", "file_path", required=True, type=click.Path(exists=True))
-@click.option("--show-id", default=None, help="Show ID (required for --source csv).")
+@click.option("--show-id", default=None,
+              help="Show ID (required for --source csv and exportify-show).")
+@click.option("--archive-url", default=None,
+              help="Archive.org URL (optional for --source exportify-show).")
 @click.option("--overwrite", is_flag=True, default=False,
-              help="Overwrite existing enrichment fields (exportify only).")
-def shows_import(source, file_path, show_id, overwrite):
+              help="Overwrite existing enrichment fields (exportify sources only).")
+def shows_import(source, file_path, show_id, archive_url, overwrite):
     """Import show data from a file."""
     conn = get_connection()
     if source == "playlists-ts":
@@ -88,6 +91,14 @@ def shows_import(source, file_path, show_id, overwrite):
             f"Matched {result['matched']}, updated {result['updated']}, "
             f"unmatched {result['unmatched']}."
         )
+    elif source == "exportify-show":
+        if not show_id:
+            click.echo("--show-id is required for --source exportify-show", err=True)
+            conn.close()
+            sys.exit(1)
+        from importers.from_exportify_show import import_from_file
+        result = import_from_file(file_path, show_id, archive_url, conn, overwrite=overwrite)
+        click.echo(f"Imported show {show_id} with {result['tracks']} tracks.")
     conn.close()
 
 

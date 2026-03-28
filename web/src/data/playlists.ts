@@ -4,6 +4,7 @@ export const playlists: Playlist[] = [
   {
     id: "2026-03-27",
     title: "March 27, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-march-27-2026",
     description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
     tracks: [
       { artist: "Channel One", title: "Revelation Rockers in Dub", album: "Raw Dubs, Vol. 1" },

@@ -331,6 +331,12 @@ function main() {
       process.exit(1);
     }
 
+    if (!fs.existsSync(outputMp3Path)) {
+      print.error(`MP3 not found: ${outputMp3Path}`);
+      print.error('Run without --no-mp3 to process it first, or use --no-upload to skip uploading.');
+      process.exit(1);
+    }
+
     const archiveTxtPath = path.join(cwd, `The Island ${playlistTitle}_archive.txt`);
     const identifier     = archiveUrl.split('/').pop();
     const iaArgs = [

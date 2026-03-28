@@ -178,6 +178,9 @@ function detectCsv(cwd) {
     } catch { return { file: f, cols: 0 }; }
   });
   scored.sort((a, b) => b.cols - a.cols);
+  if (scored.length > 1 && scored[0].cols === scored[1].cols) {
+    return { ambiguous: scored.map(s => s.file) };
+  }
   return scored[0].file;
 }
 
@@ -202,11 +205,18 @@ function main() {
   print.status(`Show date: ${playlistDate}`);
 
   // ── Detect and parse CSV ─────────────────────────────────────────────────────
-  const csvFile = opts.csv || detectCsv(cwd);
-  if (!csvFile) {
+  const detected = opts.csv || detectCsv(cwd);
+  if (!detected) {
     print.error('No CSV found in current directory. Use --csv <file>.');
     process.exit(1);
   }
+  if (detected && typeof detected === 'object' && detected.ambiguous) {
+    print.error('Multiple CSVs with the same column count — cannot auto-detect:');
+    detected.ambiguous.forEach(f => console.log(`  ${f}`));
+    print.error('Use --csv <file> to specify which one.');
+    process.exit(1);
+  }
+  const csvFile = detected;
   const csvPath = path.isAbsolute(csvFile) ? csvFile : path.join(cwd, csvFile);
   if (!fs.existsSync(csvPath)) {
     print.error(`CSV not found: ${csvPath}`);

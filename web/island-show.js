@@ -40,10 +40,10 @@ function parseDateFromFolderName(name) {
  * No comma, no zero-padding on day.
  */
 function buildId3Title(dateStr) {
-  const d     = new Date(dateStr + 'T12:00:00');
-  const month = d.toLocaleDateString('en-US', { month: 'long' });
-  const day   = d.getDate();
-  const year  = d.getFullYear();
+  const d     = new Date(dateStr + 'T12:00:00Z');
+  const month = d.toLocaleDateString('en-US', { month: 'long', timeZone: 'UTC' });
+  const day   = d.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'UTC' });
+  const year  = d.toLocaleDateString('en-US', { year: 'numeric', timeZone: 'UTC' });
   return `The Island with Dub Tractor - ${month} ${day} ${year}`;
 }
 
@@ -52,10 +52,10 @@ function buildId3Title(dateStr) {
  * e.g. "2026-03-27" → "The Island with Dub Tractor - March 27, 2026"
  */
 function buildArchiveOrgTitle(dateStr) {
-  const d     = new Date(dateStr + 'T12:00:00');
-  const month = d.toLocaleDateString('en-US', { month: 'long' });
-  const day   = d.getDate();
-  const year  = d.getFullYear();
+  const d     = new Date(dateStr + 'T12:00:00Z');
+  const month = d.toLocaleDateString('en-US', { month: 'long', timeZone: 'UTC' });
+  const day   = d.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'UTC' });
+  const year  = d.toLocaleDateString('en-US', { year: 'numeric', timeZone: 'UTC' });
   return `The Island with Dub Tractor - ${month} ${day}, ${year}`;
 }
 
@@ -75,7 +75,7 @@ function buildOutputMp3Name(dateStr) {
  */
 function parseExportifyCsv(text) {
   const clean = text.replace(/^\uFEFF/, '');
-  const lines = clean.split('\n');
+  const lines = clean.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
   if (lines.length === 0) return [];
 
   const headers   = parseCsvRow(lines[0]);

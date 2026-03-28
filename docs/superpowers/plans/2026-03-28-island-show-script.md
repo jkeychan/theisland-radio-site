@@ -40,7 +40,7 @@ const fs   = require('fs');
 const os   = require('os');
 const path = require('path');
 
-const { updatePlaylistsTs } = require('../../../archive-playlist.js');
+const { updatePlaylistsTs } = require('../../archive-playlist.js');
 
 describe('updatePlaylistsTs', () => {
   let tmpFile;

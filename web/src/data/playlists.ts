@@ -2,6 +2,36 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-04-17",
+    title: "April 17, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-april-17-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Sly & The Revolutionaries, Jah Thomas", title: "White Rum - with Jah Thomas", album: "Black Ash Dub (with Jah Thomas)" },
+      { artist: "Lee \"Scratch\" Perry", title: "White Belly Rat", album: "The Best of Lee Perry" },
+      { artist: "King Tubby", title: "Turntable Dub", album: "King Tubby's Special" },
+      { artist: "Sly & Robbie", title: "Satan Fall", album: "Sly & Robbie + Groucho Smykle - Dubrising" },
+      { artist: "Radikal Guru, Dubbing Sun", title: "Dread Commandments - Dubbing Sun Remix", album: "Dread Commandments (Remastered)" },
+      { artist: "Vibronics, Joseph Lalibela, Mafia & Fluxy", title: "CHANT DOWN VERSION", album: "Chant Down Babylon" },
+      { artist: "Ras Teo, Roberto Sanchez", title: "Killamanjahro", album: "Killamanjahro" },
+      { artist: "Alpha Steppa, Pupajim", title: "Dear Friend", album: "Raise the Ark" },
+      { artist: "Ashanti Selah, Dan I Locks, Yaksha, King David Horns", title: "Vibes Up - Yaksha Dub", album: "Vibes Up (Yaksha Remix)" },
+      { artist: "Miniman", title: "Dub Danzante", album: "La Pepita Danzante" },
+      { artist: "Easy Star All-Stars", title: "Us And Them", album: "Dub Side Of The Moon" },
+      { artist: "Easy Star All-Stars", title: "An Airbag Saved My Dub", album: "Radiodread (Special Edition)" },
+      { artist: "Steel Pulse", title: "Steppin' Out", album: "Earth Crisis" },
+      { artist: "Buju Banton", title: "Butterflies", album: "Butterflies" },
+      { artist: "Mountaindub", title: "Lo Fi Cactus", album: "Ste and Lazer - Lo Fi Dubs" },
+      { artist: "Guts", title: "Ghetto in Paradise", album: "Paradise for All" },
+      { artist: "Gregory Isaacs", title: "Night Nurse", album: "Night Nurse" },
+      { artist: "Protoje", title: "BIG 45", album: "The Art of Acceptance" },
+      { artist: "U-Roy", title: "Wake the Town", album: "Wake the Town" },
+      { artist: "Burning Spear", title: "Black Wa-Da-Da (Invasion)", album: "Garvey’s Ghost" },
+      { artist: "Alvin Davis, Alien Dread", title: "My Homeland", album: "My Homeland" },
+      { artist: "Lee \"Scratch\" Perry, Mouse On Mars", title: "Rockcurry", album: "Rockcurry" }
+    ]
+  },
+{
     id: "2026-03-27",
     title: "March 27, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-march-27-2026",

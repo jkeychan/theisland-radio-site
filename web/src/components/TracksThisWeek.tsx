@@ -1,6 +1,5 @@
 "use client";
 
-import { useTracks } from "@/hooks/useTracks";
 import { usePlaylists } from "@/hooks/usePlaylists";
 import { TracksPlaceholder } from "@/components/TracksPlaceholder";
 
@@ -49,19 +48,15 @@ const MiniStripe = ({ reversed = false }: { reversed?: boolean }) => (
 );
 
 export const TracksThisWeek = () => {
-  const { data, loading } = useTracks();
   const { data: playlists } = usePlaylists();
-
-  if (!process.env.NEXT_PUBLIC_TRACKS_CSV_URL) return null;
-
-  const tracks = data ?? [];
 
   // Deduplicate by id, sort descending
   const sortedPlaylists = Array.from(new Map(playlists.map(p => [p.id, p])).values())
     .sort((a, b) => (a.id < b.id ? 1 : -1));
 
   const currentPlaylist = sortedPlaylists[0];
-  const pastPlaylists = sortedPlaylists.slice(1, 9); // show up to 8 past shows
+  const pastPlaylists = sortedPlaylists.slice(1, 9);
+  const tracks = currentPlaylist?.tracks ?? [];
 
   // Format playlist id (ISO date) to a readable date
   const formatDate = (id: string) => {
@@ -128,11 +123,7 @@ export const TracksThisWeek = () => {
           </a>
         )}
 
-        {loading ? (
-          <p style={{ fontFamily: 'var(--font-ui)', fontSize: 13, color: 'var(--gold-mid)' }}>
-            Loading tracks…
-          </p>
-        ) : tracks.length === 0 ? (
+        {tracks.length === 0 ? (
           <TracksPlaceholder />
         ) : (
           <ol style={{ listStyle: 'none', margin: 0, padding: 0 }}>

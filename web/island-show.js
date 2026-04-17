@@ -214,16 +214,115 @@ function httpsGet(url, headers) {
   });
 }
 
-async function getSpotifyToken(clientId, clientSecret) {
-  const creds = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
-  const body  = 'grant_type=client_credentials';
-  const res   = await httpsPost(
+const TOKEN_CACHE = path.join(DB_DIR, 'spotify_tokens.json');
+
+function readTokenCache() {
+  if (!fs.existsSync(TOKEN_CACHE)) return null;
+  try { return JSON.parse(fs.readFileSync(TOKEN_CACHE, 'utf8')); }
+  catch { return null; }
+}
+
+function writeTokenCache(data) {
+  fs.writeFileSync(TOKEN_CACHE, JSON.stringify(data, null, 2));
+}
+
+function generatePKCE() {
+  const crypto    = require('crypto');
+  const verifier  = crypto.randomBytes(32).toString('base64url');
+  const challenge = crypto.createHash('sha256').update(verifier).digest('base64url');
+  return { verifier, challenge };
+}
+
+async function refreshAccessToken(config, refreshToken) {
+  const body = new URLSearchParams({
+    grant_type:    'refresh_token',
+    refresh_token: refreshToken,
+    client_id:     config.clientId,
+  }).toString();
+  const res  = await httpsPost(
     'https://accounts.spotify.com/api/token',
-    { 'Authorization': `Basic ${creds}`, 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': Buffer.byteLength(body) },
+    { 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': Buffer.byteLength(body) },
     body,
   );
   const data = JSON.parse(res.body);
-  if (!data.access_token) throw new Error(`Spotify auth failed: ${res.body}`);
+  if (!data.access_token) throw new Error(`Token refresh failed: ${res.body}`);
+  return data;
+}
+
+async function runPKCEFlow(config) {
+  const { verifier, challenge } = generatePKCE();
+  const state  = require('crypto').randomBytes(8).toString('hex');
+  const params = new URLSearchParams({
+    response_type:         'code',
+    client_id:             config.clientId,
+    scope:                 'playlist-read-private playlist-read-collaborative',
+    redirect_uri:          'http://localhost:8888/callback',
+    state,
+    code_challenge_method: 'S256',
+    code_challenge:        challenge,
+  });
+  const authUrl = `https://accounts.spotify.com/authorize?${params}`;
+  console.log(`\n[AUTH] Opening browser for Spotify login...\n  ${authUrl}\n`);
+  require('child_process').execFile('open', [authUrl]);
+
+  const code = await new Promise((resolve, reject) => {
+    const server = require('http').createServer((req, res) => {
+      const url = new URL(req.url, 'http://localhost:8888');
+      if (url.pathname !== '/callback') return;
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      res.end('<html><body><h2>Auth complete — you can close this tab.</h2></body></html>');
+      server.close();
+      const gotState = url.searchParams.get('state');
+      const gotCode  = url.searchParams.get('code');
+      const err      = url.searchParams.get('error');
+      if (err)               return reject(new Error(`Spotify auth error: ${err}`));
+      if (gotState !== state) return reject(new Error('State mismatch'));
+      resolve(gotCode);
+    });
+    server.listen(8888);
+    server.on('error', reject);
+    setTimeout(() => { server.close(); reject(new Error('Auth timed out after 120s')); }, 120_000);
+  });
+
+  const body = new URLSearchParams({
+    grant_type:    'authorization_code',
+    code,
+    redirect_uri:  'http://localhost:8888/callback',
+    client_id:     config.clientId,
+    code_verifier: verifier,
+  }).toString();
+  const res  = await httpsPost(
+    'https://accounts.spotify.com/api/token',
+    { 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': Buffer.byteLength(body) },
+    body,
+  );
+  const data = JSON.parse(res.body);
+  if (!data.access_token) throw new Error(`Code exchange failed: ${res.body}`);
+  return data;
+}
+
+async function getUserToken(config) {
+  const cache = readTokenCache();
+  if (cache && cache.access_token && cache.expires_at > Date.now() + 60_000) {
+    return cache.access_token;
+  }
+  if (cache && cache.refresh_token) {
+    try {
+      const data = await refreshAccessToken(config, cache.refresh_token);
+      writeTokenCache({
+        access_token:  data.access_token,
+        refresh_token: data.refresh_token || cache.refresh_token,
+        expires_at:    Date.now() + (data.expires_in * 1000),
+      });
+      return data.access_token;
+    } catch { /* fall through to full PKCE flow */ }
+  }
+  const data = await runPKCEFlow(config);
+  writeTokenCache({
+    access_token:  data.access_token,
+    refresh_token: data.refresh_token,
+    expires_at:    Date.now() + (data.expires_in * 1000),
+  });
   return data.access_token;
 }
 
@@ -333,7 +432,7 @@ async function main() {
     }
     print.status(`Fetching Spotify playlist: ${playlistId}`);
     try {
-      const token = await getSpotifyToken(config.clientId, config.clientSecret);
+      const token = await getUserToken(config);
       records = await fetchSpotifyTracks(playlistId, token);
     } catch (e) {
       print.error(`Spotify fetch failed: ${e.message}`);
@@ -546,7 +645,7 @@ async function main() {
     console.log('');
     print.status('Commit your changes:');
     console.log(`  git -C "${WEB_DIR}" add . && git -C "${WEB_DIR}" commit -m "Archive playlist ${playlistTitle}"`);
-    console.log(`  git -C "${WEB_DIR}" push origin main`);
+    console.log(`  git -C "${WEB_DIR}" pull --rebase origin main && git -C "${WEB_DIR}" push origin main`);
   }
   console.log('');
 }

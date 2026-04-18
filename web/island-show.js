@@ -262,27 +262,26 @@ async function runPKCEFlow(config) {
     code_challenge:        challenge,
   });
   const authUrl = `https://accounts.spotify.com/authorize?${params}`;
-  console.log(`\n[AUTH] Opening browser for Spotify login...\n  ${authUrl}\n`);
+  console.log('\n[AUTH] Opening Spotify login in browser...');
+  console.log('[AUTH] After approving, your browser will show a connection error — that\'s expected.');
+  console.log('[AUTH] Copy the full URL from the address bar and paste it here.\n');
   require('child_process').execFile('open', [authUrl]);
 
-  const code = await new Promise((resolve, reject) => {
-    const server = require('http').createServer((req, res) => {
-      const url = new URL(req.url, 'http://localhost:8888');
-      if (url.pathname !== '/callback') return;
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.end('<html><body><h2>Auth complete — you can close this tab.</h2></body></html>');
-      server.close();
-      const gotState = url.searchParams.get('state');
-      const gotCode  = url.searchParams.get('code');
-      const err      = url.searchParams.get('error');
-      if (err)               return reject(new Error(`Spotify auth error: ${err}`));
-      if (gotState !== state) return reject(new Error('State mismatch'));
-      resolve(gotCode);
-    });
-    server.listen(8888);
-    server.on('error', reject);
-    setTimeout(() => { server.close(); reject(new Error('Auth timed out after 120s')); }, 120_000);
+  const pasted = await new Promise((resolve) => {
+    process.stdout.write('Paste redirect URL: ');
+    let buf = '';
+    process.stdin.setEncoding('utf8');
+    process.stdin.resume();
+    process.stdin.on('data', (chunk) => { buf += chunk; if (buf.includes('\n')) { process.stdin.pause(); resolve(buf.trim()); } });
   });
+
+  const redirectUrl = new URL(pasted);
+  const gotState = redirectUrl.searchParams.get('state');
+  const gotCode  = redirectUrl.searchParams.get('code');
+  const authErr  = redirectUrl.searchParams.get('error');
+  if (authErr)            throw new Error(`Spotify auth error: ${authErr}`);
+  if (gotState !== state) throw new Error('State mismatch — please try again');
+  const code = gotCode;
 
   const body = new URLSearchParams({
     grant_type:    'authorization_code',

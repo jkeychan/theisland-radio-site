@@ -584,7 +584,12 @@ async function main() {
     if (fs.existsSync(archiveTxtPath)) {
       uploadFiles.push(archiveTxtPath);
     } else {
-      print.warning('archive.txt not found — uploading MP3 only.');
+      print.warning('archive.txt not found — skipping playlist text upload.');
+    }
+    if (fs.existsSync(LOGO)) {
+      uploadFiles.push(LOGO);
+    } else {
+      print.warning(`Logo not found — skipping: ${LOGO}`);
     }
     const iaArgs = [
       'upload', identifier, ...uploadFiles,

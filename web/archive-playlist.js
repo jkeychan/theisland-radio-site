@@ -103,7 +103,10 @@ function escapeString(str) {
 // Produces HTML with backlinks to theisland.radio.fm and wartfm.org,
 // followed by the full pipe-delimited tracklist.
 function generateDescription(records, playlistTitle) {
-  const trackLines = records
+  const H2 = 'class="text-xl font-medium" style="font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;font-weight:500;line-height:1.4;color:rgb(44,44,44);margin:0px;font-size:30px;background-color:rgb(255,255,255);border:0px solid;padding:0px;"';
+  const LINK = 'style="background:transparent;color:rgb(75,100,255);"';
+
+  const trackDivs = records
     .map(r => {
       const title  = (r.Title  || r.title  || '').trim();
       const artist = (r.Artist || r.artist || '').trim();
@@ -111,12 +114,14 @@ function generateDescription(records, playlistTitle) {
       return `${title} | ${artist} | ${album}`;
     })
     .filter(l => l !== ' |  | ' && l !== '||')
-    .join('<br />');
+    .map(l => `<div>${l}</div>`)
+    .join('');
 
   return (
-    '<a href="https://theisland.radio.fm/">The Island with Dub Tractor</a> on <a href="https://wartfm.org/">WART-FM 95.5</a>' +
-    `<br /><br />${playlistTitle} Playlist` +
-    `<br /><br />Title | Artist | Album<br />${trackLines}`
+    `<h2 ${H2}><a href="https://theisland.radio.fm/" ${LINK} rel="ugc nofollow">The Island with Dub Tractor</a> on <a href="https://wartfm.org/" ${LINK} rel="ugc nofollow">WART-FM 95.5</a> </h2>` +
+    `<h2 ${H2}>${playlistTitle} Playlist</h2>` +
+    `<div><br /></div>` +
+    `<div><div>Title | Artist | Album</div>${trackDivs}</div>`
   );
 }
 

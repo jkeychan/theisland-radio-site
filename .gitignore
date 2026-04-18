@@ -18,5 +18,6 @@ db/radio.db
 db/__pycache__/
 db/**/*.pyc
 db/config.toml
+db/spotify_tokens.json
 db/.venv/
 

@@ -250,43 +250,54 @@ async function refreshAccessToken(config, refreshToken) {
 }
 
 async function runPKCEFlow(config) {
+  const http   = require('http');
   const { verifier, challenge } = generatePKCE();
   const state  = require('crypto').randomBytes(8).toString('hex');
   const params = new URLSearchParams({
     response_type:         'code',
     client_id:             config.clientId,
     scope:                 'playlist-read-private playlist-read-collaborative',
-    redirect_uri:          'http://localhost:8888/callback',
+    redirect_uri:          'http://127.0.0.1:8888/callback',
     state,
     code_challenge_method: 'S256',
     code_challenge:        challenge,
   });
   const authUrl = `https://accounts.spotify.com/authorize?${params}`;
-  console.log('\n[AUTH] Opening Spotify login in browser...');
-  console.log('[AUTH] After approving, your browser will show a connection error — that\'s expected.');
-  console.log('[AUTH] Copy the full URL from the address bar and paste it here.\n');
-  require('child_process').execFile('open', [authUrl]);
 
-  const pasted = await new Promise((resolve) => {
-    process.stdout.write('Paste redirect URL: ');
-    let buf = '';
-    process.stdin.setEncoding('utf8');
-    process.stdin.resume();
-    process.stdin.on('data', (chunk) => { buf += chunk; if (buf.includes('\n')) { process.stdin.pause(); resolve(buf.trim()); } });
+  const code = await new Promise((resolve, reject) => {
+    const server = http.createServer((req, res) => {
+      const url = new URL(req.url, 'http://127.0.0.1:8888');
+      if (url.pathname !== '/callback') { res.writeHead(404); res.end(); return; }
+
+      const gotState = url.searchParams.get('state');
+      const gotCode  = url.searchParams.get('code');
+      const authErr  = url.searchParams.get('error');
+
+      const html = (msg) => `<html><body style="font-family:sans-serif;padding:2em"><h2>${msg}</h2><p>You can close this tab.</p></body></html>`;
+
+      if (authErr) {
+        res.writeHead(200, { 'Content-Type': 'text/html' }); res.end(html('Authorization failed'));
+        server.close(); reject(new Error(`Spotify auth error: ${authErr}`)); return;
+      }
+      if (gotState !== state) {
+        res.writeHead(200, { 'Content-Type': 'text/html' }); res.end(html('State mismatch — try again'));
+        server.close(); reject(new Error('State mismatch')); return;
+      }
+      res.writeHead(200, { 'Content-Type': 'text/html' }); res.end(html('Authorized! Fetching playlist...'));
+      server.close(); resolve(gotCode);
+    });
+
+    server.on('error', (e) => reject(new Error(`Could not start local server on :8888 — ${e.message}`)));
+    server.listen(8888, '127.0.0.1', () => {
+      console.log('\n[AUTH] Opening Spotify login in browser — approve access, then return here.\n');
+      require('child_process').execFile('open', [authUrl]);
+    });
   });
-
-  const redirectUrl = new URL(pasted);
-  const gotState = redirectUrl.searchParams.get('state');
-  const gotCode  = redirectUrl.searchParams.get('code');
-  const authErr  = redirectUrl.searchParams.get('error');
-  if (authErr)            throw new Error(`Spotify auth error: ${authErr}`);
-  if (gotState !== state) throw new Error('State mismatch — please try again');
-  const code = gotCode;
 
   const body = new URLSearchParams({
     grant_type:    'authorization_code',
     code,
-    redirect_uri:  'http://localhost:8888/callback',
+    redirect_uri:  'http://127.0.0.1:8888/callback',
     client_id:     config.clientId,
     code_verifier: verifier,
   }).toString();
@@ -326,19 +337,18 @@ async function getUserToken(config) {
 }
 
 async function fetchSpotifyTracks(playlistId, token) {
-  const fields = encodeURIComponent('items(track(name,artists(name),album(name),duration_ms)),next');
   const records = [];
-  let url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=100&fields=${fields}`;
+  let url = `https://api.spotify.com/v1/playlists/${playlistId}/items?limit=100`;
   while (url) {
     const res = await httpsGet(url, { 'Authorization': `Bearer ${token}` });
     if (res.status !== 200) throw new Error(`Spotify API ${res.status}: ${res.body}`);
     const data = JSON.parse(res.body);
     for (const item of data.items) {
-      const t = item && item.track;
-      if (!t || !t.name) continue;
+      const t = item && item.item;
+      if (!t || !t.name || t.type !== 'track') continue;
       records.push({
         title:  t.name,
-        artist: t.artists.map(a => a.name).join(', '),
+        artist: (t.artists || []).map(a => a.name).join(', '),
         album:  (t.album && t.album.name) || '',
       });
     }

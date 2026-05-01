@@ -2,6 +2,37 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-05-02",
+    title: "May 2, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-may-2-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Roots Radics", title: "Quasar", album: "Linval Meets Invaders" },
+      { artist: "Perfect Giddimani", title: "Tongue", album: "Tongue" },
+      { artist: "Burning Spear", title: "I And I Survive (Slavery Days)", album: "Garvey’s Ghost" },
+      { artist: "Tenor Saw", title: "Golden Hen", album: "Tenor Saw Meets Nitty Gritty" },
+      { artist: "Anthony Johnson", title: "Gunshot", album: "Gunshot (Deluxe Edition)" },
+      { artist: "Junior Murvin", title: "Police & Thieves", album: "Police & Thieves" },
+      { artist: "Earl Sixteen, The Co-Operators, Cornerstone Horns", title: "Facts To Dub", album: "Concrete Rockers LP" },
+      { artist: "The Twinkle Brothers", title: "Free Us (Dub)", album: "Countrymen" },
+      { artist: "Prince Fatty, Horseman", title: "Shimmy Shimmy Ya", album: "Supersize" },
+      { artist: "Jesse Royal, Natural High Music", title: "Muddy Road", album: "Muddy Road Riddim" },
+      { artist: "Roots Makers", title: "There She Dubs", album: "Dubbers- EP" },
+      { artist: "Mr. Williamz, Reggae Roast", title: "Dubplate Daddy", album: "Dubplate Daddy" },
+      { artist: "Joe Yorke, The Co-Operators", title: "Dub On Cable Street", album: "Living Dead" },
+      { artist: "Mr. Williamz", title: "My World", album: "Soundkilla Mindset" },
+      { artist: "Max Romeo", title: "Valley Of Jehosaphat - Version", album: "Open the Iron Gate: 1973-1979" },
+      { artist: "Dean Fraser, Roots Radics", title: "Joker Smoker Dub", album: "Down In The Dub Vaults" },
+      { artist: "Junior Byles, Kojak & Liza", title: "Dreadlocks Time/ Fist To Fist", album: "Joe Gibbs 12\" Reggae Discomix Vol. 4" },
+      { artist: "Mikey Dread", title: "The Jumping Master", album: "World War III" },
+      { artist: "Protoje, Damian Marley", title: "At We Feet (with Damian Marley)", album: "The Art of Acceptance" },
+      { artist: "Steel Pulse", title: "Roller Skates", album: "Earth Crisis" },
+      { artist: "Telex", title: "Rock Around the Clock - 2022 Remaster", album: "Looking For Saint-Tropez (Remastered)" },
+      { artist: "Stinging Ray, Irie Ites, The Ligerians", title: "My Rizla Dub", album: "My Rizla" },
+      { artist: "Dawa HiFi, Roots Raid", title: "OG", album: "Red Light" }
+    ]
+  },
+{
     id: "2026-04-17",
     title: "April 17, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-april-17-2026",

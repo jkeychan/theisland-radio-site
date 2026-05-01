@@ -2,9 +2,9 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
-    id: "2026-05-02",
-    title: "May 2, 2026",
-    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-may-2-2026",
+    id: "2026-05-01",
+    title: "May 1, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-may-1-2026",
     description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
     tracks: [
       { artist: "Roots Radics", title: "Quasar", album: "Linval Meets Invaders" },

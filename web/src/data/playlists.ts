@@ -190,7 +190,7 @@ export const playlists: Playlist[] = [
   {
     id: "2026-02-06",
     title: "February 6, 2026",
-    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-february-6-2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-february-6-2026_202602",
     tracks: [
       { artist: "King Tubby", title: "Winter Dub", album: "King At The Control" },
       { artist: "Emancipator", title: "Winter Dub", album: "Baralku" },

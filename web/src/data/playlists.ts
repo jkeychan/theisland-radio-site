@@ -2,6 +2,39 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-05-15",
+    title: "May 15, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-may-15-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Thompson Sound, Linval Thompson", title: "Jumping For Joy Dub", album: "Jumping For Joy" },
+      { artist: "Deenucka, Sister Nancy", title: "Talk And Miss (Version)", album: "Dubs And Versions Vol. 2" },
+      { artist: "Buju Banton, COLORS", title: "Driver A - A COLORS SHOW", album: "Driver A - A COLORS SHOW" },
+      { artist: "Mr. Williamz, Reggae Roast", title: "True Expertise", album: "We Run The Scene" },
+      { artist: "The Mighty Rootsmen, Toots & The Maytals, Luciano, Mykal Rose", title: "With A Little Help From My Friends", album: "With A Little Help From My Friends" },
+      { artist: "Ziggy Marley, Big Boi", title: "Racism Is A Killa - Version 2", album: "Brightside" },
+      { artist: "Isded", title: "medium", album: "Medium EP" },
+      { artist: "Silva Bumpa, Specialist Moss", title: "Hypa", album: "Hypa" },
+      { artist: "Major Lazer, Lykke Li, Tokischa", title: "GUAYANDO - Lykke Li Remix", album: "GUAYANDO (Lykke Li Remix)" },
+      { artist: "Horace Andy, Ras Brando", title: "Stand Up Firm", album: "Skylarking (Skylarking Riddim)" },
+      { artist: "Capleton, Derrick Sound", title: "Prayers Up", album: "Prayers Up" },
+      { artist: "Blackout JA, Coozie Millers, The Viceroys", title: "Give Thanks", album: "Give Thanks" },
+      { artist: "Micah Shemaiah, The 18th Parallel", title: "Freedom Dub", album: "All Fruits Ripe" },
+      { artist: "Pascal Pressure, Arqane, Bunny Lee, EchoSlim", title: "Roll The Dice", album: "Roll The Dice" },
+      { artist: "Dennis Brown, King Jammy", title: "It's Magic - Hypocrites Dub Version", album: "It's Magic" },
+      { artist: "Dr. Alimantado", title: "Best Dressed Chicken in Town", album: "Best Dressed Chicken in Town" },
+      { artist: "Dr. Alimantado", title: "On This Dub", album: "Feeling Dub" },
+      { artist: "Junior Murvin", title: "Rescue Jah Children", album: "Police & Thieves" },
+      { artist: "Dr. Alimantado", title: "Oil Crisis", album: "Born for a Purpose (Aka Sons of Thunder)" },
+      { artist: "Max Romeo", title: "Fire Fe The Vatican", album: "Open the Iron Gate: 1973-1979" },
+      { artist: "Dillinger", title: "CB 200", album: "Mr. Isaacs" },
+      { artist: "Alborosie", title: "Kingston Town", album: "Soul Pirate" },
+      { artist: "O.B.F, Sr. Wilson", title: "Rub A Dub Mood (feat. Sr. Wilson)", album: "O.B.F feat. Sr. Wilson" },
+      { artist: "Peter Tosh", title: "Downpressor Man", album: "Equal Rights (Legacy Edition)" },
+      { artist: "Mungo's Hi Fi, Sugar Minott", title: "Scrub a Dub Style", album: "Scrub a Dub Style - Single (Prince Fatty Versus Mungo's Hi Fi)" }
+    ]
+  },
+{
     id: "2026-05-01",
     title: "May 1, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-may-1-2026",

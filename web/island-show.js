@@ -150,6 +150,41 @@ const print = {
   error:   (m) => console.error(`${C.RED}[ERROR]${C.NC} ${m}`),
 };
 
+function printHelp() {
+  console.log(`island-show — archive a show: process MP3, update website, upload to archive.org, update database
+
+USAGE
+  Run from a show folder named "The Island <Month> <Day> <Year>" (e.g. "The Island May 15 2026").
+  The folder name determines the show date.
+
+MODES (pick one playlist source)
+  --spotify-url <url>   Fetch tracks from a Spotify playlist. Implies --no-mp3 and --no-upload.
+  --csv <file>          Use the given exportify CSV. If omitted, a CSV in the current dir is auto-detected.
+  --mp3-only            Recording-only run; reads tracks from <show>_archive.txt. Implies --no-website and --no-db.
+
+MP3 PROCESSING
+  --wart <filename>     Override WART recording (defaults to YYMMDD match in SHOW ARCHIVES/downloaded from WART).
+  --trim-start <time>   ffmpeg -ss value (e.g. 00:00:30).
+  --trim-end   <time>   ffmpeg -to value.
+  --force-mp3           Overwrite the output MP3 if it already exists.
+
+STEP SKIPS
+  --no-mp3              Skip ffmpeg processing.
+  --no-website          Skip playlists.ts + archive.txt update.
+  --no-upload           Skip archive.org upload.
+  --no-db               Skip database import.
+
+OTHER
+  -h, --help            Show this help and exit.
+
+EXAMPLES
+  island-show --csv playlist.csv
+  island-show --spotify-url https://open.spotify.com/playlist/XXXX
+  island-show --mp3-only
+  island-show --no-website --no-db --force-mp3
+`);
+}
+
 function parseArgs(argv) {
   const opts = {
     csv: null, spotifyUrl: null, wart: null, trimStart: null, trimEnd: null,
@@ -389,6 +424,11 @@ function readRecordsFromArchiveTxt(cwd) {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
+  if (process.argv.includes('--help') || process.argv.includes('-h')) {
+    printHelp();
+    process.exit(0);
+  }
+
   const { execFileSync } = require('child_process');
   const {
     generatePlaylistObject, generateArchiveUrl, generateDescription,

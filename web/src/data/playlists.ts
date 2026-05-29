@@ -2,6 +2,36 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-05-29",
+    title: "May 29, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-may-29-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Creation Rebel", title: "Dub From Creation", album: "On-U Sound Present Reggae Archive Volume 1" },
+      { artist: "The Upsetters", title: "Pick Folk Kinkiest", album: "Funk the Reggae Beat" },
+      { artist: "Voltage, TJB, Natty D", title: "Check It", album: "Check It / Dats Beef" },
+      { artist: "Earl Sixteen, Poorman Dub Sound", title: "Spiritual Connection", album: "Spiritual Connection / Dub Connection" },
+      { artist: "Sly & Robbie, Barrington Levy", title: "True Love - Version", album: "Power House Dub" },
+      { artist: "Sly Dunbar", title: "Inner City Blues", album: "Sly-Go-Ville" },
+      { artist: "Stand High Patrol, Mad Professor", title: "LSD Explosion - Mad Professor Dub Mix", album: "Skanking & Jacking" },
+      { artist: "The Congos", title: "Congoman", album: "Heart Of The Congos" },
+      { artist: "Dr. Alimantado", title: "Best Dressed Chicken in Town", album: "Best Dressed Chicken in Town" },
+      { artist: "Yako 440, Godbody 108", title: "Dubaliscious", album: "Dubaliscious" },
+      { artist: "The Mighty Dreadnaut", title: "Guns Out (Bloods Gonna Run) - Original Mix", album: "Jungle Wars(You Been Called Out)" },
+      { artist: "Asher Senator", title: "Tick Tick Boom", album: "Tick Tick Boom" },
+      { artist: "Bim Sherman", title: "Golden Locks", album: "On-U Sound Present Reggae Archive Volume 1" },
+      { artist: "Prince Far I", title: "Throw Away Your Gun - 1991 Digital Remaster", album: "Dubwise" },
+      { artist: "Mafia & Fluxy & Mad Professor", title: "Hypocrites & Parasites", album: "Mafia & Flux Meet Mad Professor" },
+      { artist: "The Twinkle Brothers", title: "Jahovah In Dub Majesty", album: "Dub Massacre Part 1 & Part 2" },
+      { artist: "Anthony B, Chezidek, Brother Culture, Little Lion Sound", title: "Champion Sound", album: "Champion Sound" },
+      { artist: "D-Operation Drop, Al Campbell", title: "Pon Pause", album: "Pon Pause" },
+      { artist: "Artikal Sound System", title: "Changes", album: "Time" },
+      { artist: "Pinky Dread, Vintage Reggae Soundsystem", title: "Ironic", album: "Sunset Vibes" },
+      { artist: "Mr. Williamz, Reggae Roast", title: "We Run The Scene Dub", album: "We Run The Scene" },
+      { artist: "BLACKBOARD JUNGLE, The Rockers Disciples", title: "Universal Love - Dub Version", album: "Blackboard Jungle Discomix, Vol. 26" }
+    ]
+  },
+{
     id: "2026-05-15",
     title: "May 15, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-may-15-2026",

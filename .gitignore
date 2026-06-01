@@ -8,6 +8,11 @@ web/out/
 web/build/
 web/dist/
 web/*.log
+web/island-record.js
+
+# show recorder docs (local only)
+docs/superpowers/plans/2026-05-29-island-record.md
+docs/superpowers/specs/2026-05-29-island-record-design.md
 **/.DS_Store
 .env
 .env.local

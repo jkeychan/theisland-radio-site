@@ -2,6 +2,37 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-06-19",
+    title: "June 19, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-june-19-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Lone Ark Riddim Force, Ras Tweed, Roberto Sanchez", title: "Bide Up Dub", album: "Bide Up Dub" },
+      { artist: "The Expanders", title: "Merciless Dub", album: "Merciless Dub" },
+      { artist: "Marko Kattilakoski, West11", title: "Reggae Noir", album: "Reggae Noir" },
+      { artist: "The Black Seeds", title: "8 BIT - Dr Lee Dub", album: "8 BIT" },
+      { artist: "Aston Barrett Jr., Joe Ariwa", title: "Tell the People the Truth Dub", album: "Tell the People the Truth Dub" },
+      { artist: "Sly & Robbie", title: "Westchester", album: "The Ring Craft Posse St. Catherine In Dub 1972-1984" },
+      { artist: "Dawa HiFi, Roots Raid", title: "Tapage", album: "Tapage" },
+      { artist: "Russ D, Taitu Records, Johnny Clarke", title: "Jah Jah Dub", album: "Johnny Clarke - Conqueror EP" },
+      { artist: "Indica Dubs, Morgana Souljah", title: "Prevailing Dub", album: "Peace Must Prevail" },
+      { artist: "Mr. Woodwicker", title: "Spiritual Drop", album: "Spiritual Drop" },
+      { artist: "Sinky Beatz", title: "Megalithic Riddim", album: "Megalithic Riddim" },
+      { artist: "Armin, Buriman, Paolo Baldini DubFiles, Sax n Dub", title: "Sax Alert", album: "Be Alert" },
+      { artist: "Akae Beka, Good Over Evil", title: "Dub Around Man Yard", album: "Living Testament Dub" },
+      { artist: "BLACKBOARD JUNGLE, The Rockers Disciples, Benjammin", title: "Continuous Creation", album: "Blackboard Jungle Discomix, Vol. 25" },
+      { artist: "Miniman, Alguacil Dubkilla", title: "Dub in Bogota", album: "Vibes in Bogota" },
+      { artist: "Reggae Roast, Ruben Da Silva, Murray Man", title: "Sensi Skank (feat. Ruben Da Silva) - Version", album: "Sensi Skank (feat. Ruben Da Silva)" },
+      { artist: "Young Warrior", title: "10 Steps to Africa", album: "Young Warrior Presents Dub Box" },
+      { artist: "Komagens, Namoy Budaya", title: "Nervous Namoy Steppa", album: "(Heavy Steppa) On the Edge" },
+      { artist: "R-Juna", title: "Give Thanks", album: "Dubs and Praises" },
+      { artist: "Akae Beka, Protoje", title: "Mek A Menshun (feat. Protoje)", album: "Mek A Menshun" },
+      { artist: "Weedax, Dr. Rude, Mysticwood", title: "Open Your Dub", album: "Open Your Eyes" },
+      { artist: "Jahtari Riddim Force", title: "One Armed Swordsman", album: "Jahtarian Dubbers, Vol. 3" },
+      { artist: "Alpha Steppa, Lee \"Scratch\" Perry", title: "Open Door - Dub", album: "Alpha Steppa Meets Joe Ariwa" }
+    ]
+  },
+{
     id: "2026-05-29",
     title: "May 29, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-may-29-2026",

@@ -200,10 +200,33 @@ async function fetchPlaylistName(playlistId, token) {
   return JSON.parse(res.body).name;
 }
 
+function extractTrackId(urlOrId) {
+  const m = urlOrId.match(/track\/([A-Za-z0-9]+)/);
+  return m ? m[1] : urlOrId;
+}
+
+async function fetchTrack(trackId, token) {
+  const res = await httpsGet(
+    `https://api.spotify.com/v1/tracks/${trackId}`,
+    { 'Authorization': `Bearer ${token}` },
+  );
+  if (res.status !== 200) throw new Error(`Spotify API ${res.status}: ${res.body}`);
+  const t = JSON.parse(res.body);
+  return {
+    title:       t.name,
+    artist:      (t.artists || []).map(a => a.name).join(', '),
+    album:       (t.album && t.album.name) || '',
+    uri:         t.uri,
+    duration_ms: t.duration_ms || 0,
+  };
+}
+
 module.exports = {
   extractPlaylistId,
+  extractTrackId,
   readSpotifyConfig,
   getUserToken,
   fetchSpotifyTracks,
   fetchPlaylistName,
+  fetchTrack,
 };

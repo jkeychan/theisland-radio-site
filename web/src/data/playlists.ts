@@ -2,6 +2,35 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-06-26",
+    title: "June 26, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-june-26-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Mungo's HiFi", title: "Lost At Sea Dub", album: "Serious Dubs" },
+      { artist: "Mungo's HiFi", title: "Cannae Dub It", album: "Serious Dubs" },
+      { artist: "Mungo's HiFi", title: "Traveller Dub", album: "Serious Dubs" },
+      { artist: "Sly & Robbie, Sugar Minott", title: "Version", album: "Powerhouse Dub Strictly Sensi" },
+      { artist: "Danny T & Tradesman", title: "Dance A Gwaan Riddim", album: "Built for Sound Versions" },
+      { artist: "Danny T & Tradesman", title: "My Life Riddim", album: "Built for Sound Versions" },
+      { artist: "Danny T & Tradesman", title: "Badboy Patrol Riddim", album: "Built for Sound Versions" },
+      { artist: "Capleton & L'Entourloop", title: "Burn Dem Down L' Entourloop Remix", album: "Heights of Fire" },
+      { artist: "Culture", title: "Calling Rasta for I", album: "Two Sevens Clash" },
+      { artist: "Culture", title: "I'm alone in the Wilderness", album: "Two Sevens Clash" },
+      { artist: "Culture", title: "Pirate Days", album: "Two Sevens Clash" },
+      { artist: "Culture", title: "Two Sevens Clash", album: "Two Sevens Clash" },
+      { artist: "Jahtari Riddim Force", title: "Total Protonic Reversal", album: "Jahtarian Dubbers Vol. 4" },
+      { artist: "Bob Marley and the Wailers", title: "Get Up Stand Up (Live)", album: "Rebel Music" },
+      { artist: "The Twinkle Brothers", title: "Since I Threw the Comb Away", album: "Countrymen" },
+      { artist: "Mungo's HiFi & Eva Lazarus", title: "Amsterdam (Flight Mode Mix)", album: "Soundsystem Champions II" },
+      { artist: "Mungo's HiFi & Solo Banton", title: "Bubble N Wine", album: "Soundsystem Champions II" },
+      { artist: "Poorman Dub Sound, Mama Saarna, Studiored", title: "War Dub", album: "Roots Mash Up" },
+      { artist: "Mungo's HiFi & Cian Finn", title: "Rainbow Country", album: "Soundsystem Champions II" },
+      { artist: "The Tighters, Efia Abu, Roberto Sanchez", title: "Ex-spell dub", album: "Swedish Connection" },
+      { artist: "Truths and Rights", title: "Black Plight", album: "Time For Us to Unite" }
+    ]
+  },
+  {
     id: "2026-06-19",
     title: "June 19, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-june-19-2026",

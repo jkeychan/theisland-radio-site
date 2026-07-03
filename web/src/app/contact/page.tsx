@@ -157,10 +157,6 @@ export default function ContactPage() {
       {/* Page body */}
       <div style={{ background: 'var(--gold)', padding: 44 }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
-          <p style={{ fontFamily: 'var(--font-ui)', fontSize: 11, color: 'var(--gold-mid)', marginBottom: 32 }}>
-            Request line: 828-222-6317
-          </p>
-
           {!contactFormConfigured ? (
             <div style={{ background: 'var(--gold-cream)', padding: '16px 20px', fontFamily: 'var(--font-ui)', fontSize: 11, color: 'var(--gold-mid)' }}>
               Contact form is not configured. Set <code>NEXT_PUBLIC_RECAPTCHA_SITE_KEY</code> and <code>NEXT_PUBLIC_FORMSPREE_FORM_ID</code> in your environment (see <code>.env.example</code>).

@@ -2,6 +2,34 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-07-10",
+    title: "July 10, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-july-10-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Roots Radics, GachaMedz, NINJAH ROCKERZ", title: "RUNTZ DUB", album: "RUNTZ DUB" },
+      { artist: "Roots Radics, NINJAH ROCKERZ, GachaMedz", title: "CUSS CUSS DUB", album: "CUSS CUSS DUB" },
+      { artist: "Prince Fatty, Shniece McMenamin", title: "Black Rabbit", album: "Black Rabbit" },
+      { artist: "KONG", title: "Chain of Ponds", album: "The Yellow King's Revenge" },
+      { artist: "Young Culture Band", title: "Generation (Ben Mckone Dub Mix)", album: "Generation" },
+      { artist: "Jah Rej", title: "Good & Evil", album: "Dub Masters, Vol. 2 (Reasoning)" },
+      { artist: "Quasi Dub Development, Ed Rich", title: "Supper Dub", album: "4 Remixes" },
+      { artist: "Raga, Chris St. Hilaire", title: "Leaving You for Dub", album: "Tell Dem" },
+      { artist: "Chris St. Hilaire", title: "Breadfruit Dub", album: "Praise and Blame" },
+      { artist: "Vibration Lab", title: "Musical Crown - Original", album: "Vibration Creations, Vol.1 E.P" },
+      { artist: "Vibration Lab", title: "In the Groove", album: "The Brass Plant EP" },
+      { artist: "Blind Prophet, Tenor Youthman", title: "Marijuana Burns Capitalism", album: "Marijuana Burns Capitalism" },
+      { artist: "OMEGA NEBULA", title: "Desire", album: "Desire" },
+      { artist: "O.B.F", title: "Soundman Session", album: "Wild Series #1" },
+      { artist: "Hempress Sativa", title: "Boom (Wah da da Deng)", album: "Unconquerebel" },
+      { artist: "Kandee, Twan Tee", title: "No Trouble Inna Dance", album: "No Trouble Inna Dance" },
+      { artist: "Tubby Isiah", title: "Titch", album: "Chanting Lion Ep" },
+      { artist: "Sekkleman, Baptiste", title: "Dancehall Graveyard", album: "Descending Babylon / Dancehall Graveyard" },
+      { artist: "Mungo's Hi Fi, Charlie P", title: "Rules of the Dance - Kahn Remix", album: "Rules of the Dance" },
+      { artist: "Dubkasm, Luciano", title: "Jah Victory", album: "Jah Victory EP" }
+    ]
+  },
+{
     id: "2026-06-26",
     title: "June 26, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-june-26-2026",

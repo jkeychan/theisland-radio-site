@@ -2,6 +2,35 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-07-17",
+    title: "July 17, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-july-17-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Augustus Pablo", title: "King Tubby's Meets Rockers Uptown", album: "King Tubbys Meets Rockers Uptown" },
+      { artist: "New Age Steppers", title: "Fade Away", album: "New Age Steppers" },
+      { artist: "Perfect Giddimani, Sinky Beatz", title: "Hand Cart Bwoy - 25th Anniversary Edition", album: "Hand Cart Bwoy (25th Anniversary Edition)" },
+      { artist: "Lymie Murray, Galaxy Soundstation", title: "Champion Sound (Dubplate)", album: "Free Jah Jah Children Riddim" },
+      { artist: "Augustus Pablo", title: "Western Kingston Style", album: "Africa Must Be Free By 1983 Dub" },
+      { artist: "Delton Screechie", title: "Rocka Dem", album: "Rocka Dem" },
+      { artist: "i-taweh", title: "Papa Try", album: "Rasta Inna Middle" },
+      { artist: "Ras Army", title: "Dredlocks Time", album: "Dredlocks Time" },
+      { artist: "Pato Banton", title: "Gwarn!", album: "The Best Of Pato Banton" },
+      { artist: "The Bush Chemists", title: "Top Dub Special", album: "30 Years of Counter Culture" },
+      { artist: "Biga*Ranx", title: "Mountain Top", album: "RAINSHINE" },
+      { artist: "Easy Star All-Stars", title: "Great Dub In The Sky", album: "Dub Side Of The Moon" },
+      { artist: "Niney The Observer", title: "A Dub Classic", album: "Soul Syndicate: Dub Classics" },
+      { artist: "The Aggrovators", title: "Rocker's Almighty Dub", album: "Rocker's Almighty Dub" },
+      { artist: "Rhythm & Sound", title: "King Version", album: "The Versions" },
+      { artist: "Jackie Mittoo", title: "Wall Street", album: "The Keyboard King at Studio One" },
+      { artist: "King Tubby", title: "King Tubby's Special", album: "King At The Control" },
+      { artist: "Richie Culture", title: "Bag A Dub", album: "Bag Of Herb" },
+      { artist: "Truths and Rights", title: "Acid Rain - Dub", album: "Time for Us to Unite" },
+      { artist: "Adrian Sherwood", title: "Starship Bahia", album: "Survival & Resistance" },
+      { artist: "Alpha Steppa, Nai-Jah, Pupajim, Ras Tinny", title: "Dub Taking Over", album: "Crowned Eagle" }
+    ]
+  },
+{
     id: "2026-07-10",
     title: "July 10, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-july-10-2026",

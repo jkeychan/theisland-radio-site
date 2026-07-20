@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { usePlaylists } from "@/hooks/usePlaylists";
 import { TracksPlaceholder } from "@/components/TracksPlaceholder";
+import { PlaylistCard, formatDate } from "@/components/PlaylistCard";
 
 const tripleStripeBorder = {
   position: 'absolute' as const,
@@ -49,20 +51,16 @@ const MiniStripe = ({ reversed = false }: { reversed?: boolean }) => (
 
 export const TracksThisWeek = () => {
   const { data: playlists } = usePlaylists();
+  const [thisWeekOpen, setThisWeekOpen] = useState(false);
 
   // Deduplicate by id, sort descending
   const sortedPlaylists = Array.from(new Map(playlists.map(p => [p.id, p])).values())
     .sort((a, b) => (a.id < b.id ? 1 : -1));
 
   const currentPlaylist = sortedPlaylists[0];
-  const pastPlaylists = sortedPlaylists.slice(1, 9);
+  const pastPlaylists = sortedPlaylists.slice(1, 5);
   const tracks = currentPlaylist?.tracks ?? [];
 
-  // Format playlist id (ISO date) to a readable date
-  const formatDate = (id: string) => {
-    const d = new Date(id + "T12:00:00");
-    return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-  };
   const currentDateLabel = currentPlaylist ? formatDate(currentPlaylist.id) : "";
 
   return (
@@ -101,65 +99,117 @@ export const TracksThisWeek = () => {
           {currentDateLabel}
         </p>
 
-        {currentPlaylist?.archiveUrl && (
-          <a
-            href={currentPlaylist.archiveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+        <button
+          onClick={() => setThisWeekOpen(o => !o)}
+          aria-expanded={thisWeekOpen}
+          style={{
+            display: 'flex',
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: 10,
+            padding: '10px 16px',
+            marginBottom: thisWeekOpen ? 20 : 0,
+            background: 'var(--gold-cream)',
+            border: '1px solid rgba(200,168,0,0.3)',
+            cursor: 'pointer',
+            textAlign: 'left',
+          }}
+        >
+          <span
             style={{
-              display: 'inline-block',
               fontFamily: 'var(--font-ui)',
-              fontSize: 10,
-              letterSpacing: '0.1em',
+              fontSize: 11,
+              letterSpacing: '0.08em',
               textTransform: 'uppercase',
               color: 'var(--red)',
-              textDecoration: 'none',
-              borderBottom: '1px solid var(--red)',
-              paddingBottom: 1,
-              marginBottom: 20,
+              fontWeight: 600,
             }}
           >
-            ▶ Link to broadcast recording
-          </a>
-        )}
+            {thisWeekOpen ? 'Hide tracklist' : "View this week's tracklist"}
+          </span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'var(--gold-mid)', letterSpacing: '0.08em' }}>
+              {tracks.length} track{tracks.length !== 1 ? 's' : ''}
+            </span>
+            <span
+              style={{
+                fontFamily: 'var(--font-ui)',
+                fontSize: 11,
+                color: 'var(--red)',
+                transform: thisWeekOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'transform 0.2s',
+                display: 'inline-block',
+              }}
+            >
+              ▾
+            </span>
+          </span>
+        </button>
 
-        {tracks.length === 0 ? (
-          <TracksPlaceholder />
-        ) : (
-          <ol style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-            {tracks.map((t, i) => (
-              <li
-                key={`${t.artist}-${t.title}-${i}`}
+        {thisWeekOpen && (
+          <>
+            {currentPlaylist?.archiveUrl && (
+              <a
+                href={currentPlaylist.archiveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: '32px 1fr',
-                  gap: 8,
-                  padding: '11px 0',
-                  borderBottom: '1px dashed rgba(61,46,0,0.18)',
-                  alignItems: 'start',
+                  display: 'inline-block',
+                  fontFamily: 'var(--font-ui)',
+                  fontSize: 10,
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  color: 'var(--red)',
+                  textDecoration: 'none',
+                  borderBottom: '1px solid var(--red)',
+                  paddingBottom: 1,
+                  marginBottom: 20,
                 }}
               >
-                <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'rgba(61,46,0,0.3)', paddingTop: 2 }}>
-                  {i + 1}
-                </span>
-                <span>
-                  <span style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: 14, color: 'var(--gold-dark)', display: 'block' }}>
-                    {t.artist}
-                  </span>
-                  {t.title && (
-                    <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'var(--gold-mid)', letterSpacing: '0.04em', display: 'block' }}>
-                      {t.title}
+                ▶ Link to broadcast recording
+              </a>
+            )}
+
+            {tracks.length === 0 ? (
+              <TracksPlaceholder />
+            ) : (
+              <ol style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                {tracks.map((t, i) => (
+                  <li
+                    key={`${t.artist}-${t.title}-${i}`}
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: '32px 1fr',
+                      gap: 8,
+                      padding: '11px 0',
+                      borderBottom: '1px dashed rgba(61,46,0,0.18)',
+                      alignItems: 'start',
+                    }}
+                  >
+                    <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'rgba(61,46,0,0.3)', paddingTop: 2 }}>
+                      {i + 1}
                     </span>
-                  )}
-                  {t.album && (
-                    <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'var(--gold-mid)', display: 'block' }}>
-                      {t.album}
+                    <span>
+                      <span style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: 14, color: 'var(--gold-dark)', display: 'block' }}>
+                        {t.artist}
+                      </span>
+                      {t.title && (
+                        <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'var(--gold-mid)', letterSpacing: '0.04em', display: 'block' }}>
+                          {t.title}
+                        </span>
+                      )}
+                      {t.album && (
+                        <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'var(--gold-mid)', display: 'block' }}>
+                          {t.album}
+                        </span>
+                      )}
                     </span>
-                  )}
-                </span>
-              </li>
-            ))}
-          </ol>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </>
         )}
       </div>
 
@@ -177,57 +227,28 @@ export const TracksThisWeek = () => {
             No past shows yet.
           </p>
         ) : (
-          pastPlaylists.map((p) => (
+          <>
+            {pastPlaylists.map((p) => (
+              <PlaylistCard key={p.id} playlist={p} />
+            ))}
             <a
-              key={p.id}
               href="/playlists/"
               style={{
-                display: 'block',
+                display: 'inline-block',
+                fontFamily: 'var(--font-ui)',
+                fontSize: 10,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                color: 'var(--red)',
                 textDecoration: 'none',
-                color: 'inherit',
-                padding: '11px 16px',
-                marginBottom: 9,
-                background: 'var(--gold-cream)',
-                position: 'relative',
-                borderTop: '1px solid rgba(200,168,0,0.3)',
-                borderBottom: '1px solid rgba(200,168,0,0.3)',
+                borderBottom: '1px solid var(--red)',
+                paddingBottom: 1,
+                marginTop: 8,
               }}
             >
-              {/* Left stripe */}
-              <div
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  bottom: 0,
-                  width: 6,
-                  background: 'linear-gradient(180deg, var(--red) 0% 33%, var(--gold-deep) 33% 66%, var(--green) 66% 100%)',
-                }}
-              />
-              {/* Right stripe */}
-              <div
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  right: 0,
-                  top: 0,
-                  bottom: 0,
-                  width: 6,
-                  background: 'linear-gradient(180deg, var(--green) 0% 33%, var(--gold-deep) 33% 66%, var(--red) 66% 100%)',
-                }}
-              />
-              {/* Content */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: 13, color: 'var(--gold-dark)', paddingLeft: 6 }}>
-                  {formatDate(p.id)}
-                </span>
-                <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'var(--gold-mid)', paddingRight: 6 }}>
-                  {p.tracks.length} track{p.tracks.length !== 1 ? 's' : ''}
-                </span>
-              </div>
+              View full archive →
             </a>
-          ))
+          </>
         )}
       </div>
     </section>

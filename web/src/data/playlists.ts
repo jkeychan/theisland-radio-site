@@ -2,6 +2,36 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-07-24",
+    title: "July 24, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-july-24-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Barrington Levy", title: "Under Mi Sensi - Sensi Dub 2023 Remaster", album: "Under Mi Sensi" },
+      { artist: "Cham", title: "Ghetto Story", album: "Ghetto Story (Explicit Content U.S. Version)" },
+      { artist: "L'Entourloop, Eesah, Hollow Point, Danny English, Bunny General, Echo Minott, Triston Palma", title: "Muffin Kings", album: "Muffin Kings" },
+      { artist: "Aswad", title: "Dub Fire", album: "New Chapter Of Dub" },
+      { artist: "Papa Michigan & General Smiley", title: "Diseases", album: "Downpression" },
+      { artist: "EchoSlim, Bunny Lee, King Tubby, Tommy McCook, The Aggrovators", title: "Ama Tubby Uptempo Dub", album: "Ama Tubby Uptempo Dub" },
+      { artist: "Beenie Man", title: "Bookshelf", album: "The Doctor" },
+      { artist: "Mad Professor", title: "Kunta Kinte", album: "The Inspirational Sounds Of Mad Professor" },
+      { artist: "Damian Marley, Bounty Killer, Eek-A-Mouse", title: "Khaki Suit", album: "Welcome to Jamrock" },
+      { artist: "Shabba Ranks", title: "Trailor Load a Girls", album: "As Raw As Ever" },
+      { artist: "Half Pint", title: "Greetings", album: "Greetings" },
+      { artist: "Super Cat", title: "Jamaica Jamaica", album: "Dancehall's Golden Era Vol.1" },
+      { artist: "Chaka Demus & Pliers", title: "Bam Bam", album: "Tease Me" },
+      { artist: "Alpha Steppa, Nai-Jah, Pupajim, Ras Tinny", title: "Nature Taking Over", album: "Crowned Eagle" },
+      { artist: "Capleton, Damian Marley, Stephen Marley, Derrick Sound", title: "Babylon So Evil", album: "Heights Of Fire" },
+      { artist: "Burning Spear", title: "Black Wa-Da-Da (Invasion)", album: "Garvey’s Ghost" },
+      { artist: "Junior Byles", title: "Fade Away", album: "Reggae Anthology: The Channel One Story" },
+      { artist: "Cocoa Tea", title: "Rocking Dolly", album: "Weh Dem A Go Do...Can't Stop Cocoa Tea" },
+      { artist: "Richie Spice", title: "Youth Dem Cold", album: "In The Streets To Africa" },
+      { artist: "Scientist", title: "Drum Song Dub", album: "Scientific Dub" },
+      { artist: "UB40", title: "Homeless Dub", album: "UB45 (Ultimate Edition)" },
+      { artist: "Stephen Marley", title: "Don't Let Me Down", album: "Old Soul" }
+    ]
+  },
+{
     id: "2026-07-17",
     title: "July 17, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-july-17-2026",

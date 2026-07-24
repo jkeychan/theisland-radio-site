@@ -99,6 +99,11 @@ function escapeString(str) {
     .replace(/"/g, '\\"');   // Then escape double quotes
 }
 
+// Escape a string for use inside a RegExp
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 // Generate description for archive.org upload.
 // Produces HTML with backlinks to theisland.radio.fm and wartfm.org,
 // followed by the full pipe-delimited tracklist.
@@ -226,9 +231,25 @@ function updatePlaylistsTs(playlistObject, playlistId, playlistsFilePath) {
     throw new Error(`Playlists file not found: ${playlistsFilePath}`);
   }
   const content = fs.readFileSync(playlistsFilePath, 'utf8');
-  if (content.includes(`id: "${playlistId}"`)) {
-    return { skipped: true };
+
+  // An entry for this show may already exist (e.g. a track was added to the
+  // Spotify playlist after the first run today). Replace it in place instead
+  // of skipping, so re-runs pick up tracklist changes.
+  const entryRegex = new RegExp(
+    `\\{\\s*\\n\\s*id: "${escapeRegExp(playlistId)}"[\\s\\S]*?\\n\\s*\\},`
+  );
+  const existingMatch = content.match(entryRegex);
+  if (existingMatch) {
+    const oldEntry = existingMatch[0];
+    const newEntry = playlistObject.trim().replace(/,$/, '') + ',';
+    if (oldEntry.replace(/\s+/g, ' ') === newEntry.replace(/\s+/g, ' ')) {
+      return { skipped: true };
+    }
+    const updatedContent = content.replace(oldEntry, () => newEntry);
+    fs.writeFileSync(playlistsFilePath, updatedContent);
+    return { skipped: false };
   }
+
   const exportRegex = /export const playlists: Playlist\[\] = \[([\s\S]*?)\];/;
   const match = content.match(exportRegex);
   if (!match) throw new Error('Could not find export const playlists in file');

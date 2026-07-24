@@ -10,6 +10,7 @@ export const playlists: Playlist[] = [
       { artist: "Barrington Levy", title: "Under Mi Sensi - Sensi Dub 2023 Remaster", album: "Under Mi Sensi" },
       { artist: "Cham", title: "Ghetto Story", album: "Ghetto Story (Explicit Content U.S. Version)" },
       { artist: "L'Entourloop, Eesah, Hollow Point, Danny English, Bunny General, Echo Minott, Triston Palma", title: "Muffin Kings", album: "Muffin Kings" },
+      { artist: "Buju Banton", title: "Heavy Hitters", album: "Too Too Bad" },
       { artist: "Aswad", title: "Dub Fire", album: "New Chapter Of Dub" },
       { artist: "Papa Michigan & General Smiley", title: "Diseases", album: "Downpression" },
       { artist: "EchoSlim, Bunny Lee, King Tubby, Tommy McCook, The Aggrovators", title: "Ama Tubby Uptempo Dub", album: "Ama Tubby Uptempo Dub" },

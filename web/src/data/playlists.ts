@@ -2,6 +2,37 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-07-31",
+    title: "July 31, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-july-31-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Scientist", title: "Taxi to Baltimore", album: "The Scientist - Scientific Dub" },
+      { artist: "Joe Yorke, The Co-Operators", title: "Living Dead", album: "Living Dead" },
+      { artist: "Tiwony, Anthony B, Kross & Buss", title: "Nah Tek No Talk", album: "Dancehall Frequency" },
+      { artist: "The Mighty Rootsmen, Toots & The Maytals, Luciano, Mykal Rose", title: "Sundown", album: "Sundown" },
+      { artist: "Capleton, Derrick Sound", title: "Prayers Up", album: "Prayers Up" },
+      { artist: "Perfect Giddimani, Sinky Beatz", title: "Weed Wi Want Dub", album: "Burnhard Spliffington (B.A.K.E) Bachelor Of Arts In Kush Education" },
+      { artist: "O.B.F, Santa Salut", title: "TRANKILA", album: "TRANKILA" },
+      { artist: "O.B.F, Nazamba", title: "Raw Born Reggae", album: "Guide & Protect" },
+      { artist: "Roots Radics", title: "Gunman", album: "Radicfaction" },
+      { artist: "The Upsetters", title: "Dollar in the Teeth", album: "A Live Injection: Anthology 1968-1979" },
+      { artist: "Nick Headon's Dub Kitchen", title: "Tootawan Dub", album: "The Dub Return EP" },
+      { artist: "Lone Ark, The 18th Parallel", title: "Man Kill Man", album: "Man Kill Man" },
+      { artist: "Jahnny Minott, Dub Shepherds", title: "If I Ever Do You Wrong", album: "Mileage" },
+      { artist: "O.B.F, Junior Roy", title: "BABYLON CORNER", album: "BABYLON CORNER" },
+      { artist: "U Brown, Roberto Sanchez", title: "Fraud Ina Me Yaad", album: "Fraud Ina Me Yaad" },
+      { artist: "Macca Dread, Marky Lyrical", title: "Higher Reasoning", album: "Higher Reasoning" },
+      { artist: "Linval Thompson, The Dubmill", title: "Run Ghetto Youth", album: "Run Ghetto Youth" },
+      { artist: "Mr. Woodwicker, Forelock", title: "Meditation", album: "Meditation" },
+      { artist: "Bob Marley & The Wailers", title: "Rat Race - Live At The Roxy", album: "Rastaman Vibration" },
+      { artist: "MediSun, Adam Prescott", title: "Scorcher", album: "Scorcher" },
+      { artist: "Soul Rebel Sound, MediSun, King Mas", title: "Flip the Script", album: "Count Your Blessings Riddim" },
+      { artist: "McAnuff Family, The Ligerians, Winston McAnuff", title: "Lock Up", album: "Africa My Destiny" },
+      { artist: "Alpha Steppa, Lee \"Scratch\" Perry", title: "Open Door - Dub", album: "Alpha Steppa Meets Joe Ariwa" }
+    ]
+  },
+{
     id: "2026-07-24",
     title: "July 24, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-july-24-2026",

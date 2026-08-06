@@ -33,6 +33,10 @@ def import_csv(content: str, show_id: str, conn: sqlite3.Connection) -> dict[str
     tracks = parse_csv(content)
     tracks_inserted = 0
 
+    # Replace this show's tracklist wholesale so re-imports after edits don't
+    # leave stale rows behind (see from_playlists_ts.import_playlists_ts).
+    conn.execute("DELETE FROM show_tracks WHERE show_id=?", (show_id,))
+
     for pos, track in enumerate(tracks, start=1):
         conn.execute(
             """INSERT INTO tracks (title, raw_artist, album, duration_ms)

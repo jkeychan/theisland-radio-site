@@ -29,6 +29,10 @@ def import_exportify_show(
         (show_id, show_id, archive_url),
     )
 
+    # Replace this show's tracklist wholesale so re-imports after edits don't
+    # leave stale rows behind (see from_playlists_ts.import_playlists_ts).
+    conn.execute("DELETE FROM show_tracks WHERE show_id=?", (show_id,))
+
     tracks_inserted = 0
     for pos, row in enumerate(rows, start=1):
         title = row.get("title", "").strip()

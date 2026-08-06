@@ -33,19 +33,27 @@ def parse_playlists_ts(content: str) -> list[dict[str, Any]]:
         archive_url = archive_match.group(1) if archive_match else None
 
         # Extract tracks block — everything between `tracks: [` and the matching `]`
-        tracks_match = re.search(r'tracks:\s*\[(.*?)\]', block, re.DOTALL)
+        # `.*?\]` (non-greedy) would stop at the first literal "]" anywhere in the
+        # block, including one inside a track's own title/album (e.g. "[Live]").
+        # Requiring the "]" to start its own line matches this file's formatting
+        # and only matches the array's real closing bracket.
+        tracks_match = re.search(r'tracks:\s*\[(.*?)\n\s*\]', block, re.DOTALL)
         tracks = []
         if tracks_match:
             tracks_block = tracks_match.group(1)
+            # Quoted-string capture allows escaped quotes (e.g. Lee \"Scratch\" Perry);
+            # a plain [^"]+ stops at the first escaped quote and drops the whole track.
+            qstr = r'"((?:[^"\\]|\\.)*)"'
             for tm in re.finditer(
-                r'\{\s*artist:\s*"([^"]+)"\s*,\s*title:\s*"([^"]+)"'
-                r'(?:\s*,\s*album:\s*"([^"]*)")?',
+                r'\{\s*artist:\s*' + qstr + r'\s*,\s*title:\s*' + qstr +
+                r'(?:\s*,\s*album:\s*' + qstr + r')?',
                 tracks_block,
             ):
                 tracks.append({
-                    "artist": tm.group(1),
-                    "title": tm.group(2),
-                    "album": tm.group(3) if tm.group(3) is not None else None,
+                    "artist": tm.group(1).replace('\\"', '"').replace("\\\\", "\\"),
+                    "title": tm.group(2).replace('\\"', '"').replace("\\\\", "\\"),
+                    "album": tm.group(3).replace('\\"', '"').replace("\\\\", "\\")
+                             if tm.group(3) is not None else None,
                 })
 
         playlists.append({
@@ -99,6 +107,11 @@ def import_playlists_ts(content: str, conn: sqlite3.Connection) -> dict[str, int
             (playlist["id"], playlist["id"], playlist.get("archive_url")),
         )
         shows_inserted += 1
+
+        # Replace this show's tracklist wholesale — without this, a show whose
+        # tracklist changed between two import runs keeps stale rows around,
+        # since ON CONFLICT(show_id, track_id, position) only catches exact repeats.
+        conn.execute("DELETE FROM show_tracks WHERE show_id=?", (playlist["id"],))
 
         for pos, track in enumerate(playlist["tracks"], start=1):
             track_id = _upsert_track(conn, track["title"], track["artist"], track.get("album"))

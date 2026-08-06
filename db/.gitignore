@@ -1,0 +1,5 @@
+config.toml
+spotify_tokens.json
+*.db
+__pycache__/
+*.pyc

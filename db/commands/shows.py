@@ -1,11 +1,14 @@
 """Shows command group."""
 import json
 import sys
+from pathlib import Path
 import click
 import requests
 from commands import output_options
 from database import get_connection
 from output import print_output
+
+DEFAULT_PLAYLISTS_TS = Path(__file__).parent.parent.parent / "web" / "src" / "data" / "playlists.ts"
 
 MONTH_MAP = {
     "january": "01", "february": "02", "march": "03", "april": "04",
@@ -187,3 +190,64 @@ def shows_update(show_id, archive_url, description, duration_seconds):
                  (*updates.values(), show_id))
     conn.commit()
     click.echo(f"Updated show {show_id}.")
+
+
+@shows.command("verify")
+@click.option("--playlists-file", default=None, type=click.Path(exists=True),
+              help="Path to playlists.ts (defaults to web/src/data/playlists.ts in this repo).")
+@click.option("--check-archive/--no-check-archive", default=True,
+              help="Also confirm each show's archive_url resolves on archive.org.")
+def shows_verify(playlists_file, check_archive):
+    """Cross-check radio.db against playlists.ts and archive.org.
+
+    playlists.ts is the source of truth for what's on the live site (it's what
+    Next.js statically imports at build time), so any show whose track count
+    disagrees with radio.db, or whose archive_url 404s, points at a real import
+    or data-entry bug rather than a site problem.
+    """
+    from importers.from_playlists_ts import parse_playlists_ts
+
+    path = Path(playlists_file) if playlists_file else DEFAULT_PLAYLISTS_TS
+    conn = get_connection()
+    problems = []
+
+    ts_shows = parse_playlists_ts(path.read_text(encoding="utf-8"))
+    ts_ids = {s["id"] for s in ts_shows}
+    db_ids = {r[0] for r in conn.execute("SELECT id FROM shows").fetchall()}
+
+    for s in ts_shows:
+        expected = len(s["tracks"])
+        actual = conn.execute(
+            "SELECT COUNT(*) FROM show_tracks WHERE show_id=?", (s["id"],)
+        ).fetchone()[0]
+        if actual != expected:
+            problems.append(f"{s['id']}: playlists.ts has {expected} tracks, db has {actual}")
+
+    for show_id in sorted(db_ids - ts_ids):
+        problems.append(f"{show_id}: in db but not in playlists.ts")
+
+    if check_archive:
+        for show_id in sorted(db_ids):
+            row = conn.execute(
+                "SELECT archive_url FROM shows WHERE id=?", (show_id,)
+            ).fetchone()
+            if not row["archive_url"]:
+                continue  # not archived yet — not a sync problem
+            identifier = row["archive_url"].rstrip("/").split("/")[-1]
+            try:
+                resp = requests.get(f"https://archive.org/metadata/{identifier}", timeout=10)
+                resp.raise_for_status()
+                if not resp.json():
+                    problems.append(f"{show_id}: archive.org item '{identifier}' not found")
+            except requests.RequestException as e:
+                problems.append(f"{show_id}: archive.org check failed ({e})")
+
+    conn.close()
+
+    if problems:
+        for p in problems:
+            click.echo(f"✗ {p}", err=True)
+        click.echo(f"\n{len(problems)} problem(s) found.", err=True)
+        sys.exit(1)
+
+    click.echo(f"In sync — {len(db_ids)} shows match across db, playlists.ts, and archive.org.")

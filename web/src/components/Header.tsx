@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { href: "/playlists/", label: "Playlists / Recordings" },
+  { href: "/subscribe/", label: "Subscribe" },
   { href: "/contact/", label: "Contact" },
 ];
 
@@ -48,8 +49,8 @@ export function Header() {
             <span
               style={{
                 fontFamily: "var(--font-ui)",
-                fontSize: 11,
-                letterSpacing: "0.16em",
+                fontSize: 13,
+                letterSpacing: "0.14em",
                 textTransform: "uppercase",
                 color: "var(--gold)",
               }}
@@ -63,8 +64,8 @@ export function Header() {
               className="header-station-link"
               style={{
                 fontFamily: "var(--font-ui)",
-                fontSize: 9,
-                letterSpacing: "0.1em",
+                fontSize: 11,
+                letterSpacing: "0.08em",
                 color: "var(--gold-mid)",
                 textDecoration: "none",
               }}
@@ -86,8 +87,8 @@ export function Header() {
                   aria-current={isActive ? "page" : undefined}
                   style={{
                     fontFamily: "var(--font-ui)",
-                    fontSize: 10,
-                    letterSpacing: "0.1em",
+                    fontSize: 12,
+                    letterSpacing: "0.08em",
                     color: isActive ? "var(--gold)" : "var(--gold-mid)",
                     textDecoration: "none",
                   }}
@@ -110,8 +111,8 @@ export function Header() {
               background: "var(--red)",
               color: "var(--gold-cream)",
               fontFamily: "var(--font-ui)",
-              fontSize: 9,
-              letterSpacing: "0.14em",
+              fontSize: 11,
+              letterSpacing: "0.1em",
               textTransform: "uppercase",
               padding: "8px 16px",
               display: "flex",

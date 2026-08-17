@@ -230,6 +230,13 @@ section { position: relative; }
   .tracks-grid {
     grid-template-columns: 1fr !important;
   }
+  .footer-row {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  .footer-links {
+    gap: 16px !important;
+  }
 }
 
 /* ── Skip link ── */

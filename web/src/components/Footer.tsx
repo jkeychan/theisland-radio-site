@@ -23,10 +23,13 @@ export function Footer() {
 
       {/* Content row */}
       <div
+        className="footer-row"
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          flexWrap: "wrap",
+          gap: 12,
           paddingTop: 7,
         }}
       >
@@ -34,8 +37,8 @@ export function Footer() {
         <p
           style={{
             fontFamily: "var(--font-ui)",
-            fontSize: 9,
-            letterSpacing: "0.08em",
+            fontSize: 11,
+            letterSpacing: "0.06em",
             color: "var(--gold-mid)",
             margin: 0,
           }}
@@ -45,12 +48,15 @@ export function Footer() {
 
         {/* RIGHT: links */}
         <div
+          className="footer-links"
           style={{
             display: "flex",
-            gap: 24,
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: 20,
             fontFamily: "var(--font-ui)",
-            fontSize: 9,
-            letterSpacing: "0.08em",
+            fontSize: 11,
+            letterSpacing: "0.06em",
             color: "var(--gold-mid)",
           }}
         >
@@ -71,10 +77,22 @@ export function Footer() {
             archive.org
           </a>
           <a
-            href="/podcast.xml"
-            style={{ color: "var(--gold-mid)", textDecoration: "none" }}
+            href="/subscribe/"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 5,
+              color: "var(--gold)",
+              textDecoration: "none",
+              fontWeight: 600,
+            }}
           >
-            rss
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <circle cx="4.5" cy="15.5" r="2" fill="currentColor" />
+              <path d="M3 8.5C8.799 8.5 13.5 13.2 13.5 19" stroke="currentColor" strokeWidth="2.2" fill="none" />
+              <path d="M3 2.5C12.1127 2.5 19.5 9.887 19.5 19" stroke="currentColor" strokeWidth="2.2" fill="none" />
+            </svg>
+            subscribe
           </a>
           <a
             href="/contact/"

@@ -38,6 +38,7 @@ const eslintConfig = [
       "archive-playlist.js",
       "csv-to-archive-converter.js",
       "island-show.js",
+      "island-record.js",
       "generate-podcast-feed.js",
       "spotify-api.js",
       "src/__tests__/island-show.test.js",

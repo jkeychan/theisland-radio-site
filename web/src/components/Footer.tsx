@@ -71,6 +71,12 @@ export function Footer() {
             archive.org
           </a>
           <a
+            href="/podcast.xml"
+            style={{ color: "var(--gold-mid)", textDecoration: "none" }}
+          >
+            rss
+          </a>
+          <a
             href="/contact/"
             style={{ color: "var(--gold-mid)", textDecoration: "none" }}
           >

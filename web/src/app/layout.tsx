@@ -69,6 +69,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="The Island with Dub Tractor"
+          href="/podcast.xml"
+        />
         <JsonLd />
       </head>
       <body

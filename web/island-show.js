@@ -173,6 +173,7 @@ STEP SKIPS
   --no-website          Skip playlists.ts + archive.txt update.
   --no-upload           Skip archive.org upload.
   --no-db               Skip database import.
+  --no-podcast          Skip podcast.xml regeneration.
 
 OTHER
   -h, --help            Show this help and exit.
@@ -188,7 +189,7 @@ EXAMPLES
 function parseArgs(argv) {
   const opts = {
     csv: null, spotifyUrl: null, wart: null, trimStart: null, trimEnd: null,
-    mp3Only: false, noMp3: false, noWebsite: false, noUpload: false, noDb: false, forceMp3: false,
+    mp3Only: false, noMp3: false, noWebsite: false, noUpload: false, noDb: false, noPodcast: false, forceMp3: false,
   };
   for (let i = 0; i < argv.length; i++) {
     if      (argv[i] === '--csv'          && argv[i+1]) opts.csv        = argv[++i];
@@ -201,6 +202,7 @@ function parseArgs(argv) {
     else if (argv[i] === '--no-website')  opts.noWebsite = true;
     else if (argv[i] === '--no-upload')   opts.noUpload  = true;
     else if (argv[i] === '--no-db')       opts.noDb      = true;
+    else if (argv[i] === '--no-podcast')  opts.noPodcast = true;
     else if (argv[i] === '--force-mp3')   opts.forceMp3  = true;
   }
   return opts;
@@ -471,6 +473,9 @@ async function main() {
       `--metadata=description:${description}`,
       '--metadata=subject:wartfm', '--metadata=subject:dub',
       '--metadata=subject:reggae', '--metadata=subject:community radio',
+      '--metadata=subject:dancehall', '--metadata=subject:radio show',
+      '--metadata=subject:reggae radio', '--metadata=subject:north carolina',
+      '--metadata=subject:madison county',
       `--metadata=date:${playlistDate}`,
       '--metadata=collection:opensource_audio',
     ];
@@ -509,6 +514,20 @@ async function main() {
     }
   }
 
+  // ── Step 5: Regenerate podcast feed ───────────────────────────────────────────
+  let podcastStatus = 'skipped (--no-podcast)';
+
+  if (!opts.noPodcast) {
+    print.status('Regenerating podcast.xml');
+    try {
+      execFileSync('node', [path.join(WEB_DIR, 'generate-podcast-feed.js')], { stdio: 'inherit' });
+      podcastStatus = 'podcast.xml updated';
+    } catch (e) {
+      print.error(`Podcast feed regeneration failed: ${e.message}`);
+      podcastStatus = 'FAILED';
+    }
+  }
+
   // ── Summary ───────────────────────────────────────────────────────────────────
   console.log('');
   console.log('==================================================');
@@ -518,6 +537,7 @@ async function main() {
   console.log(`  Website:  ${websiteStatus}`);
   console.log(`  Upload:   ${uploadStatus}`);
   console.log(`  Database: ${dbStatus}`);
+  console.log(`  Podcast:  ${podcastStatus}`);
   if (websiteStatus === 'playlists.ts updated') {
     console.log('');
     print.status('Commit your changes:');

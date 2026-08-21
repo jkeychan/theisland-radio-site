@@ -31,7 +31,9 @@ function secondsToHms(totalSeconds) {
   return [h, m, sec].map((n, i) => (i === 0 ? String(n) : String(n).padStart(2, '0'))).join(':');
 }
 
-async function fetchItemAudio(identifier) {
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+async function fetchItemAudioOnce(identifier) {
   const res = await fetch(`https://archive.org/metadata/${identifier}`);
   if (!res.ok) throw new Error(`metadata fetch failed: ${res.status}`);
   const data = await res.json();
@@ -43,6 +45,19 @@ async function fetchItemAudio(identifier) {
     duration: parseFloat(mp3.length || '0'),
     date:     data.metadata.date, // YYYY-MM-DD
   };
+}
+
+const RETRY_DELAYS_MS = [1000, 2000, 4000];
+
+async function fetchItemAudio(identifier) {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await fetchItemAudioOnce(identifier);
+    } catch (e) {
+      if (attempt >= RETRY_DELAYS_MS.length) throw e;
+      await sleep(RETRY_DELAYS_MS[attempt]);
+    }
+  }
 }
 
 function buildItemXml(playlist, identifier, audio) {

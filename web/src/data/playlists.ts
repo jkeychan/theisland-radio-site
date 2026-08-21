@@ -2,6 +2,37 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-08-21",
+    title: "August 21, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-august-21-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Alpha Steppa, Lee \"Scratch\" Perry", title: "Open Door - Dub", album: "Alpha Steppa Meets Joe Ariwa" },
+      { artist: "Gregory Morris", title: "No Ice Cream Dub", album: "Universal Love Showcase" },
+      { artist: "Dbc3, Dandy Dizzle", title: "Love Is the Law", album: "Dub Barn Lockdown" },
+      { artist: "Gentleman's Dub Club, Mungo's Hi Fi, Solo Banton", title: "Good Good", album: "Good Good" },
+      { artist: "Buju Banton, Kirk Davis", title: "Don't Waste Your Time", album: "Escalade Riddim" },
+      { artist: "Sean Paul", title: "Stand On Business", album: "Stand On Business" },
+      { artist: "Admiral Bailey", title: "Horse Tonic", album: "King Jammy's: Selector's Choice Vol. 2" },
+      { artist: "Ariwa Posse, Mad Professor, Susan Cadogan", title: "Bob", album: "Ariwa Aloha/ Hawaii Tour" },
+      { artist: "Tiwony, Anthony B, Kross & Buss", title: "Nah Tek No Talk", album: "Dancehall Frequency" },
+      { artist: "Guinney Pepper", title: "King Street", album: "King Street" },
+      { artist: "Manudigital, Joseph Cotton", title: "Only Just Begun", album: "Only Just Begun" },
+      { artist: "Hollow Point, Little Lion Sound", title: "Godfather", album: "Godfather" },
+      { artist: "Joseph Cotton, Basque Dub Foundation, Heartical Sound", title: "Show Time", album: "Show Time" },
+      { artist: "Kingston Express, Cheshire Cat, Solo Banton, Earl Sixteen, Horseman", title: "Don't Stop The Music", album: "Unfinished Business" },
+      { artist: "Delroy Wilson", title: "Island In The Stream", album: "Reggae Classics" },
+      { artist: "Earl Sixteen", title: "Justice - Rub-A-Dub Mix", album: "Justice" },
+      { artist: "Jah Wobble, Tian Qiyi", title: "Norwegian Wood", album: "Mystic Liverpool: The Beatles Psychedelic Psongbook" },
+      { artist: "Dubglow", title: "LoFi Steppers", album: "LoFi HiFi (Dusty Dub and Chill)" },
+      { artist: "Tian Qiyi, Jah Wobble", title: "Mongolian Dub", album: "Songs For Workers" },
+      { artist: "Peter Tosh", title: "Dubbing Buk-In-Hamm Palace - 2002 Remastered Version", album: "Mystic Man" },
+      { artist: "Tippa Lee, Naram", title: "Educate and Teach", album: "Tippa Lee meets the Naram Rhythm Section - Musically Bad" },
+      { artist: "Horseman, Kingston Express", title: "Mr Big Man", album: "Mr Big Man" },
+      { artist: "Pachedub Collective", title: "Shelter (Dub Version)", album: "Pachedub Collective Meets Dee Dub Music (Kunidub)" }
+    ]
+  },
+{
     id: "2026-07-31",
     title: "July 31, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-july-31-2026",

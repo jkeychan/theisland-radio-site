@@ -423,6 +423,7 @@ function main() {
       '--metadata=subject:community radio',
       `--metadata=date:${playlistDate}`,
       '--metadata=collection:opensource_audio',
+      '--metadata=licenseurl:https://creativecommons.org/licenses/by-nc-nd/4.0/',
     ];
 
     // Print the equivalent shell command for reference

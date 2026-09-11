@@ -2,6 +2,38 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-09-11",
+    title: "September 11, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-september-11-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Irie Yute", title: "Cornaz Dub", album: "Cornaz Dub" },
+      { artist: "Willie Williams", title: "Armageddon Time", album: "Soul Jazz Records Presents 100% Dynamite! Ska, Soul, Rocksteady and Funk in Jamaica" },
+      { artist: "Paul Fox, Brother Culture", title: "Ital Sounds Revisited", album: "Ital Sounds Revisited" },
+      { artist: "Augustus Pablo", title: "King Tubby's Meets Rockers Uptown", album: "King Tubbys Meets Rockers Uptown" },
+      { artist: "Ti Manyel, Sinky Beatz", title: "Pardonne - Version DUB", album: "Pardonne" },
+      { artist: "Earl Sixteen", title: "Dance On The Corner", album: "Dance On The Corner" },
+      { artist: "Fellow G, Dubmatix", title: "Cold Breeze", album: "Cold Breeze" },
+      { artist: "Brother Culture, Volume A", title: "Face The Storm", album: "Face The Storm" },
+      { artist: "Volume A", title: "Face The Storm Riddim", album: "Face The Storm" },
+      { artist: "Daddy Freddy, Ruedany", title: "Retas Reggae", album: "Retas Reggae" },
+      { artist: "Sly & Robbie, Zoyan, GachaMedz", title: "Killing Me Softly Dub", album: "Killing Me Softly Dub" },
+      { artist: "Sinky Beatz", title: "Good Times DUB", album: "Good Times DUB" },
+      { artist: "Cutty Ranks", title: "Brain Drop Riddim", album: "Brain Drop Riddim" },
+      { artist: "Roll & Record, Natto, William Spring", title: "Forward Again", album: "Forward Again" },
+      { artist: "Sly & Robbie, Zoyan, GachaMedz, Mr. Williamz, Burro Banton", title: "BAD BOY (feat. MR. WILLIAMZ & Burro Banton)", album: "BAD BOY (feat. MR. WILLIAMZ & Burro Banton)" },
+      { artist: "Everything Is Recorded, Jah Wobble", title: "Cut Off Your Nose", album: "Cut Off Your Nose" },
+      { artist: "J.O.E, Kwazar, Gagarin", title: "Herbsman Hustling", album: "Herbsman Hustling (The Missing Remixes)" },
+      { artist: "Soulfyah Productions", title: "Radical - Riddim", album: "Reggae Riddims, Vol. 14" },
+      { artist: "Piper Street Sound, Naram, General Pecos", title: "Under Siege - Naram's Dub Version", album: "Under Siege" },
+      { artist: "Macka B", title: "Muzikal Warriahz", album: "Muzikal Warriahz-Session One" },
+      { artist: "BLACKBOARD JUNGLE, Marky Lyrical, Slimmah Sound", title: "Jah Keep We", album: "Blackboard Jungle Discomix, Vol. 27" },
+      { artist: "Jahdan Blakkamore, RSD", title: "Can't Tolerate (RSD Remix)", album: "Neighborhood Remixes" },
+      { artist: "Kirk \"Kirkledove\" Bennett", title: "Brown Bottle", album: "Straight 4 to the Crown" },
+      { artist: "Aldubb, Big Finga", title: "Elefant Dub", album: "BigDubb" }
+    ]
+  },
+{
     id: "2026-08-21",
     title: "August 21, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-august-21-2026",

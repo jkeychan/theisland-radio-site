@@ -13,8 +13,7 @@ type PlaylistsListProps = {
 export function PlaylistsList({ showAll = false, excludeCurrent = false, limit }: PlaylistsListProps) {
   const { data } = usePlaylists();
 
-  const unique = Array.from(new Map(data.map(p => [p.id, p])).values());
-  let playlistsToRender: Playlist[] = [...unique].sort((a, b) => (a.id < b.id ? 1 : -1));
+  let playlistsToRender: Playlist[] = data;
 
   if (excludeCurrent && playlistsToRender.length > 0) {
     playlistsToRender = playlistsToRender.slice(1);

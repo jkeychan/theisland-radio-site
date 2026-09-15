@@ -4,6 +4,7 @@ import { useState } from "react";
 import { usePlaylists } from "@/hooks/usePlaylists";
 import { TracksPlaceholder } from "@/components/TracksPlaceholder";
 import { PlaylistCard, formatDate } from "@/components/PlaylistCard";
+import { TrackList } from "@/components/TrackList";
 
 const tripleStripeBorder = {
   position: 'absolute' as const,
@@ -53,12 +54,8 @@ export const TracksThisWeek = () => {
   const { data: playlists } = usePlaylists();
   const [thisWeekOpen, setThisWeekOpen] = useState(false);
 
-  // Deduplicate by id, sort descending
-  const sortedPlaylists = Array.from(new Map(playlists.map(p => [p.id, p])).values())
-    .sort((a, b) => (a.id < b.id ? 1 : -1));
-
-  const currentPlaylist = sortedPlaylists[0];
-  const pastPlaylists = sortedPlaylists.slice(1, 5);
+  const currentPlaylist = playlists[0];
+  const pastPlaylists = playlists.slice(1, 5);
   const tracks = currentPlaylist?.tracks ?? [];
 
   const currentDateLabel = currentPlaylist ? formatDate(currentPlaylist.id) : "";
@@ -174,40 +171,7 @@ export const TracksThisWeek = () => {
             {tracks.length === 0 ? (
               <TracksPlaceholder />
             ) : (
-              <ol style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-                {tracks.map((t, i) => (
-                  <li
-                    key={`${t.artist}-${t.title}-${i}`}
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: '32px 1fr',
-                      gap: 8,
-                      padding: '11px 0',
-                      borderBottom: '1px dashed rgba(61,46,0,0.18)',
-                      alignItems: 'start',
-                    }}
-                  >
-                    <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'rgba(61,46,0,0.3)', paddingTop: 2 }}>
-                      {i + 1}
-                    </span>
-                    <span>
-                      <span style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: 14, color: 'var(--gold-dark)', display: 'block' }}>
-                        {t.artist}
-                      </span>
-                      {t.title && (
-                        <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'var(--gold-mid)', letterSpacing: '0.04em', display: 'block' }}>
-                          {t.title}
-                        </span>
-                      )}
-                      {t.album && (
-                        <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'var(--gold-mid)', display: 'block' }}>
-                          {t.album}
-                        </span>
-                      )}
-                    </span>
-                  </li>
-                ))}
-              </ol>
+              <TrackList tracks={tracks} indexWidth={32} rowPadding="11px 0" borderOpacity={0.18} />
             )}
           </>
         )}

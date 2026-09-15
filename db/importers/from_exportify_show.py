@@ -42,58 +42,34 @@ def import_exportify_show(
 
         album = row.get("album") or None
 
-        if overwrite:
-            conn.execute(
-                """INSERT INTO tracks
-                       (title, raw_artist, album, spotify_id, duration_ms,
-                        release_date, bpm, energy, danceability,
-                        musical_key, mode, genres, album_image_url)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                   ON CONFLICT(raw_artist, title, album) DO UPDATE SET
-                       spotify_id     = COALESCE(excluded.spotify_id, tracks.spotify_id),
-                       duration_ms    = COALESCE(excluded.duration_ms, tracks.duration_ms),
-                       release_date   = COALESCE(excluded.release_date, tracks.release_date),
-                       bpm            = COALESCE(excluded.bpm, tracks.bpm),
-                       energy         = COALESCE(excluded.energy, tracks.energy),
-                       danceability   = COALESCE(excluded.danceability, tracks.danceability),
-                       musical_key    = COALESCE(excluded.musical_key, tracks.musical_key),
-                       mode           = COALESCE(excluded.mode, tracks.mode),
-                       genres         = COALESCE(excluded.genres, tracks.genres),
-                       album_image_url= COALESCE(excluded.album_image_url, tracks.album_image_url)""",
-                (
-                    title, raw_artist, album,
-                    row.get("spotify_id"), row.get("duration_ms"),
-                    row.get("release_date"), row.get("bpm"), row.get("energy"),
-                    row.get("danceability"), row.get("musical_key"), row.get("mode"),
-                    row.get("genres"), row.get("album_image_url"),
-                ),
-            )
-        else:
-            conn.execute(
-                """INSERT INTO tracks
-                       (title, raw_artist, album, spotify_id, duration_ms,
-                        release_date, bpm, energy, danceability,
-                        musical_key, mode, genres, album_image_url)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                   ON CONFLICT(raw_artist, title, album) DO UPDATE SET
-                       spotify_id     = COALESCE(tracks.spotify_id,      excluded.spotify_id),
-                       duration_ms    = COALESCE(tracks.duration_ms,     excluded.duration_ms),
-                       release_date   = COALESCE(tracks.release_date,    excluded.release_date),
-                       bpm            = COALESCE(tracks.bpm,             excluded.bpm),
-                       energy         = COALESCE(tracks.energy,          excluded.energy),
-                       danceability   = COALESCE(tracks.danceability,    excluded.danceability),
-                       musical_key    = COALESCE(tracks.musical_key,     excluded.musical_key),
-                       mode           = COALESCE(tracks.mode,            excluded.mode),
-                       genres         = COALESCE(tracks.genres,          excluded.genres),
-                       album_image_url= COALESCE(tracks.album_image_url, excluded.album_image_url)""",
-                (
-                    title, raw_artist, album,
-                    row.get("spotify_id"), row.get("duration_ms"),
-                    row.get("release_date"), row.get("bpm"), row.get("energy"),
-                    row.get("danceability"), row.get("musical_key"), row.get("mode"),
-                    row.get("genres"), row.get("album_image_url"),
-                ),
-            )
+        # overwrite=True prefers the new (excluded) value; overwrite=False keeps the existing one.
+        new, old = ("excluded", "tracks") if overwrite else ("tracks", "excluded")
+        coalesce = lambda col: f"COALESCE({new}.{col}, {old}.{col})"
+        conn.execute(
+            f"""INSERT INTO tracks
+                    (title, raw_artist, album, spotify_id, duration_ms,
+                     release_date, bpm, energy, danceability,
+                     musical_key, mode, genres, album_image_url)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(raw_artist, title, album) DO UPDATE SET
+                    spotify_id      = {coalesce("spotify_id")},
+                    duration_ms     = {coalesce("duration_ms")},
+                    release_date    = {coalesce("release_date")},
+                    bpm             = {coalesce("bpm")},
+                    energy          = {coalesce("energy")},
+                    danceability    = {coalesce("danceability")},
+                    musical_key     = {coalesce("musical_key")},
+                    mode            = {coalesce("mode")},
+                    genres          = {coalesce("genres")},
+                    album_image_url = {coalesce("album_image_url")}""",
+            (
+                title, raw_artist, album,
+                row.get("spotify_id"), row.get("duration_ms"),
+                row.get("release_date"), row.get("bpm"), row.get("energy"),
+                row.get("danceability"), row.get("musical_key"), row.get("mode"),
+                row.get("genres"), row.get("album_image_url"),
+            ),
+        )
 
         track_row = conn.execute(
             "SELECT id FROM tracks WHERE raw_artist=? AND title=? AND album IS ?",

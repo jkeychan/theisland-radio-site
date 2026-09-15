@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Playlist } from "@/types/content";
+import { TrackList } from "@/components/TrackList";
 
 export const formatDate = (id: string) => {
   const d = new Date(id + "T12:00:00");
@@ -122,46 +123,9 @@ export function PlaylistCard({ playlist: p, defaultOpen = false }: { playlist: P
             </a>
           </div>
         )}
-        <ol
-          style={{
-            listStyle: 'none',
-            margin: 0,
-            padding: '0 22px 14px',
-          }}
-        >
-          {p.tracks.map((t, i) => (
-            <li
-              key={`${t.artist}-${t.title}-${i}`}
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '28px 1fr',
-                gap: 8,
-                padding: '8px 0',
-                borderBottom: '1px dashed rgba(61,46,0,0.12)',
-                alignItems: 'start',
-              }}
-            >
-              <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'rgba(61,46,0,0.3)', paddingTop: 2 }}>
-                {i + 1}
-              </span>
-              <span>
-                <span style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: 14, color: 'var(--gold-dark)', display: 'block' }}>
-                  {t.artist}
-                </span>
-                {t.title && (
-                  <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'var(--gold-mid)', letterSpacing: '0.04em', display: 'block' }}>
-                    {t.title}
-                  </span>
-                )}
-                {t.album && (
-                  <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'var(--gold-mid)', display: 'block' }}>
-                    {t.album}
-                  </span>
-                )}
-              </span>
-            </li>
-          ))}
-        </ol>
+        <div style={{ padding: '0 22px 14px' }}>
+          <TrackList tracks={p.tracks} />
+        </div>
         </>
       )}
     </div>

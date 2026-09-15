@@ -1,6 +1,7 @@
 """Shows command group."""
 import json
 import sys
+from datetime import datetime
 from pathlib import Path
 import click
 import requests
@@ -10,11 +11,12 @@ from output import print_output
 
 DEFAULT_PLAYLISTS_TS = Path(__file__).parent.parent.parent / "web" / "src" / "data" / "playlists.ts"
 
-MONTH_MAP = {
-    "january": "01", "february": "02", "march": "03", "april": "04",
-    "may": "05", "june": "06", "july": "07", "august": "08",
-    "september": "09", "october": "10", "november": "11", "december": "12",
-}
+
+def _month_number(name: str) -> str | None:
+    try:
+        return f"{datetime.strptime(name, '%B').month:02d}"
+    except ValueError:
+        return None
 
 
 @click.group()
@@ -44,7 +46,7 @@ def shows_search(query, fmt):
     """Search shows by date prefix (2026-03) or month name (march)."""
     conn = get_connection()
     q = query.strip().lower()
-    month = MONTH_MAP.get(q)
+    month = _month_number(q.capitalize())
     if month:
         rows = conn.execute(
             "SELECT id, aired_at, archive_url FROM shows "

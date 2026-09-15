@@ -5,8 +5,14 @@ import type { Playlist } from "@/types/content";
 import { playlists as localPlaylists } from "@/data/playlists";
 import { fetchPlaylistsFromCsv } from "@/lib/feeds";
 
+function dedupeAndSort(playlists: Playlist[]): Playlist[] {
+  return Array.from(new Map(playlists.map((p) => [p.id, p])).values()).sort((a, b) =>
+    a.id < b.id ? 1 : -1
+  );
+}
+
 export function usePlaylists(): { data: Playlist[]; loading: boolean; error: string | null } {
-  const [data, setData] = useState<Playlist[]>(localPlaylists);
+  const [data, setData] = useState<Playlist[]>(() => dedupeAndSort(localPlaylists));
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,8 +25,7 @@ export function usePlaylists(): { data: Playlist[]; loading: boolean; error: str
     fetchPlaylistsFromCsv(url)
       .then((remote) => {
         if (!cancelled && Array.isArray(remote) && remote.length > 0) {
-          remote.sort((a, b) => (a.id < b.id ? 1 : -1));
-          setData(remote);
+          setData(dedupeAndSort(remote));
         }
       })
       .catch((err) => {

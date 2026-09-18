@@ -2,6 +2,38 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-09-18",
+    title: "September 18, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-september-18-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Alpha Steppa, Nai-Jah", title: "Dubman", album: "Weatherman" },
+      { artist: "O.B.F, Mr. Williamz, Lady Ice", title: "RING THE ALARM", album: "RING THE ALARM" },
+      { artist: "Los Fabulosos Cadillacs", title: "Te Tiraré Del Altar - Remasterizado 2008", album: "El Ritmo Mundial" },
+      { artist: "Paul Fox, Brother Culture", title: "Ital Dub Revisited", album: "Ital Dub Revisited" },
+      { artist: "Irie Ites", title: "Dub in Jamaica", album: "Down in Jamaica Riddim" },
+      { artist: "Barrington Levy", title: "Black Roses", album: "Original Ragga Muffin, Pt.1" },
+      { artist: "The 4'20' Sound, General G", title: "Gyal Dem a Bubble", album: "Gyal Dem a Bubble" },
+      { artist: "Ashtech, Gaudi, Cheshire Cat, Vibronics", title: "Beat Da Drum, Gringo! - Vibronics Remix", album: "Dub Target" },
+      { artist: "Toots & The Maytals", title: "Funky Kingston", album: "Funky Kingston" },
+      { artist: "Cedric Myton, The Congos", title: "Food For The Rainy Day", album: "Image Of Africa" },
+      { artist: "Lady Saw", title: "Allegations - Anything For You Riddim", album: "Anything For You Riddim" },
+      { artist: "Richie Spice, Mr. G", title: "Free up Di Youth's Dem", album: "Free up Di Youth's Dem" },
+      { artist: "Anthony B", title: "King Rastafari", album: "King Rastafari" },
+      { artist: "Dylan Judah, Scientist", title: "First Class Dub", album: "First Class Dub" },
+      { artist: "Jozannah, Sizzla", title: "Let The Music Play", album: "Let The Music Play" },
+      { artist: "Fidel Nadal", title: "Lava de volcán", album: "Original Sound" },
+      { artist: "Aba-Ariginal, Lee \"Scratch\" Perry", title: "Isabel - Stone Head Remix", album: "Anthem" },
+      { artist: "J.O.E, Kwazar, Gagarin", title: "Herbsman Hustling", album: "Herbsman Hustling (The Missing Remixes)" },
+      { artist: "Solo Banton", title: "Old Raggamuffin", album: "Old Raggamuffin" },
+      { artist: "Telly*, Biga*Ranx", title: "Big in Japan", album: "Big in Japan" },
+      { artist: "Tippa Lee, Naram", title: "Reggae a mi Girl", album: "Tippa Lee meets the Naram Rhythm Section - Musically Bad" },
+      { artist: "Cayetano, Valia", title: "Feel", album: "The Big Fall" },
+      { artist: "Daddy Cookiz, Slim Levy", title: "wavy", album: "wavy" },
+      { artist: "2 Bad Card", title: "Noise Polluters", album: "Chainstore Massacre" }
+    ]
+  },
+{
     id: "2026-09-11",
     title: "September 11, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-september-11-2026",

@@ -32,8 +32,8 @@ html { font-size: 16px; }
 body {
   background: var(--gold);
   color: var(--gold-dark);
-  font-family: var(--font-ui);
-  font-size: 14px;
+  font-family: var(--font-body);
+  font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -65,36 +65,6 @@ body {
   );
 }
 
-
-/* ── Stripe badge (inline vertical triple stripe) ── */
-.stripe-badge {
-  display: inline-flex;
-  height: 14px;
-  gap: 3px;
-  align-items: stretch;
-  flex-shrink: 0;
-}
-.stripe-badge span {
-  display: block;
-  width: 4px;
-  border-radius: 1px;
-}
-.stripe-badge .s-r  { background: var(--red); }
-.stripe-badge .s-g  { background: var(--gold-deep); }
-.stripe-badge .s-gr { background: var(--green); }
-
-/* ── Meta stripe (tiny inline separator) ── */
-.meta-stripe {
-  display: inline-flex;
-  gap: 2px;
-  height: 10px;
-  align-items: stretch;
-  flex-shrink: 0;
-}
-.meta-stripe span { display: block; width: 2px; }
-.meta-stripe .s-r  { background: var(--red); opacity: 0.5; }
-.meta-stripe .s-g  { background: var(--gold-deep); opacity: 0.5; }
-.meta-stripe .s-gr { background: var(--green); opacity: 0.5; }
 
 /* ── Mini stripe (for section subheads) ── */
 .mini-stripe {
@@ -223,8 +193,9 @@ section { position: relative; }
   .tracks-grid {
     grid-template-columns: 1fr !important;
   }
-  .tracks-divider {
-    display: none;
+  .tracks-col + .tracks-col {
+    border-left: none;
+    border-top: 1px solid rgba(61, 46, 0, 0.18);
   }
   .footer-row {
     flex-direction: column;
@@ -233,6 +204,11 @@ section { position: relative; }
   .footer-links {
     gap: 16px !important;
   }
+}
+
+/* ── Home tracks columns ── */
+.tracks-col + .tracks-col {
+  border-left: 1px solid rgba(61, 46, 0, 0.18);
 }
 
 /* ── Skip link ── */
@@ -253,3 +229,8 @@ section { position: relative; }
 /* ── Hero video/image fade ── */
 .fade-in  { opacity: 1; transition: opacity 2s ease-in-out; }
 .fade-out { opacity: 0; transition: opacity 2s ease-in-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot { animation: none; }
+  .fade-in, .fade-out { transition: none; }
+}

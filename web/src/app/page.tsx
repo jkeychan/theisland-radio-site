@@ -8,14 +8,6 @@ export const metadata: Metadata = {
     "Weekly reggae, dub, and dancehall radio show with DJ Dub Tractor. Live Fridays 6:30–8pm ET on WART 95.5 FM, Madison County NC. Stream online worldwide.",
 };
 
-function MetaStripe() {
-  return (
-    <span className="meta-stripe">
-      <span className="s-r" /><span className="s-g" /><span className="s-gr" />
-    </span>
-  );
-}
-
 export default function Home() {
   return (
     <div>
@@ -40,28 +32,6 @@ export default function Home() {
             justifyContent: "center",
           }}
         >
-          {/* Eyebrow */}
-          <div
-            style={{
-              fontFamily: "var(--font-ui)",
-              fontSize: "11px",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "var(--gold-mid)",
-              marginBottom: "14px",
-              display: "flex",
-              alignItems: "center",
-              gap: "12px",
-            }}
-          >
-            <div className="stripe-badge">
-              <span className="s-r" />
-              <span className="s-g" />
-              <span className="s-gr" />
-            </div>
-            Dub · Reggae · Dancehall
-          </div>
-
           {/* Title */}
           <h1
             id="hero-title"
@@ -96,22 +66,16 @@ export default function Home() {
           {/* Meta */}
           <p
             style={{
-              fontFamily: "var(--font-ui)",
-              fontSize: "11px",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "var(--gold-mid)",
-              marginBottom: "32px",
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
+              fontFamily: "var(--font-body)",
+              fontSize: "17px",
+              lineHeight: 1.5,
+              color: "var(--gold-dark)",
+              margin: "0 0 32px",
             }}
           >
-            DJ Dub Tractor
-            <MetaStripe />
-            Fridays 6:30–8pm ET
-            <MetaStripe />
-            Madison County, NC
+            Dub, reggae and dancehall with DJ Dub Tractor.
+            <br />
+            Fridays 6:30–8pm ET on WART 95.5 FM, Madison County, NC.
           </p>
 
           {/* CTA row */}
@@ -137,21 +101,6 @@ export default function Home() {
             backgroundPosition: "center",
           }}
         >
-          {/* Left edge triple-stripe */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              bottom: 0,
-              width: "9px",
-              background:
-                "linear-gradient(180deg, var(--red) 0% 33%, var(--gold) 33% 66%, var(--green) 66% 100%)",
-              zIndex: 2,
-            }}
-          />
-
           {/* Diagonal pinstripe overlay */}
           <div
             aria-hidden="true"

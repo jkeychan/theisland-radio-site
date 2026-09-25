@@ -79,9 +79,6 @@ export default function SubscribePage() {
           position: 'absolute', bottom: 0, left: 0, right: 0, height: 6,
           background: 'linear-gradient(90deg, var(--red) 0% 33%, var(--gold-deep) 33% 66%, var(--green) 66% 100%)'
         }} />
-        <p style={{ fontFamily: 'var(--font-ui)', fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold-mid)', marginBottom: 8 }}>
-          The Island · WART 95.5 FM
-        </p>
         <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(48px, 8vw, 80px)', lineHeight: 0.9, letterSpacing: '-0.02em', color: 'var(--gold)' }}>
           Subscribe
         </h1>
@@ -112,9 +109,7 @@ export default function SubscribePage() {
                 display: 'flex',
                 gap: 16,
                 background: 'var(--gold-cream)',
-                borderLeft: '6px solid transparent',
-                borderRight: '6px solid transparent',
-                borderImage: 'linear-gradient(180deg, var(--red) 0% 33%, var(--gold-deep) 33% 66%, var(--green) 66% 100%) 1',
+                borderLeft: '4px solid var(--green)',
                 padding: '16px 20px',
               }}
             >
@@ -136,7 +131,7 @@ export default function SubscribePage() {
           ))}
         </ol>
 
-        <p style={{ fontFamily: 'var(--font-ui)', fontSize: 12, letterSpacing: '0.04em', color: 'var(--gold-mid)', marginTop: 40 }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', marginTop: 40 }}>
           Prefer to browse by hand? Every episode is also archived on{" "}
           <a
             href="https://archive.org/details/@dubtractor/lists/1/the-island-wart-fm-radio-archive"

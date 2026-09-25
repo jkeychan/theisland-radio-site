@@ -146,9 +146,6 @@ export default function ContactPage() {
           position: 'absolute', bottom: 0, left: 0, right: 0, height: 6,
           background: 'linear-gradient(90deg, var(--red) 0% 33%, var(--gold-deep) 33% 66%, var(--green) 66% 100%)'
         }} />
-        <p style={{ fontFamily: 'var(--font-ui)', fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold-mid)', marginBottom: 8 }}>
-          The Island · WART 95.5 FM
-        </p>
         <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(48px, 8vw, 80px)', lineHeight: 0.9, letterSpacing: '-0.02em', color: 'var(--gold)' }}>
           Contact
         </h1>
@@ -158,13 +155,13 @@ export default function ContactPage() {
       <div style={{ background: 'var(--gold)', padding: 44 }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
           {!contactFormConfigured ? (
-            <div style={{ background: 'var(--gold-cream)', padding: '16px 20px', fontFamily: 'var(--font-ui)', fontSize: 11, color: 'var(--gold-mid)' }}>
+            <div style={{ background: 'var(--gold-cream)', padding: '16px 20px', fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)' }}>
               Contact form is not configured. Set <code>NEXT_PUBLIC_RECAPTCHA_SITE_KEY</code> and <code>NEXT_PUBLIC_FORMSPREE_FORM_ID</code> in your environment (see <code>.env.example</code>).
             </div>
           ) : (
             <form ref={formRef} onSubmit={handleSubmit}>
               <div style={{ marginBottom: 20 }}>
-                <label style={{ fontFamily: 'var(--font-ui)', fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--gold-mid)', display: 'block', marginBottom: 6 }}>
+                <label style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
                   Name
                 </label>
                 <input
@@ -178,7 +175,7 @@ export default function ContactPage() {
               </div>
 
               <div style={{ marginBottom: 20 }}>
-                <label style={{ fontFamily: 'var(--font-ui)', fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--gold-mid)', display: 'block', marginBottom: 6 }}>
+                <label style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
                   Email
                 </label>
                 <input
@@ -193,7 +190,7 @@ export default function ContactPage() {
               </div>
 
               <div style={{ marginBottom: 20 }}>
-                <label style={{ fontFamily: 'var(--font-ui)', fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--gold-mid)', display: 'block', marginBottom: 6 }}>
+                <label style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
                   Subject
                 </label>
                 <input
@@ -207,7 +204,7 @@ export default function ContactPage() {
               </div>
 
               <div style={{ marginBottom: 20 }}>
-                <label style={{ fontFamily: 'var(--font-ui)', fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--gold-mid)', display: 'block', marginBottom: 6 }}>
+                <label style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
                   Message
                 </label>
                 <textarea
@@ -224,7 +221,7 @@ export default function ContactPage() {
               {/* Status Messages */}
               {submitStatus === "success" && (
                 <div
-                  style={{ background: 'var(--gold-cream)', borderLeft: '6px solid var(--green)', padding: '16px 20px', fontFamily: 'var(--font-ui)', fontSize: 11, color: 'var(--green)', marginBottom: 20 }}
+                  style={{ background: 'var(--gold-cream)', borderLeft: '6px solid var(--green)', padding: '16px 20px', fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--green)', marginBottom: 20 }}
                   role="status"
                   aria-live="polite"
                   aria-atomic="true"
@@ -234,7 +231,7 @@ export default function ContactPage() {
               )}
               {submitStatus === "error" && (
                 <div
-                  style={{ background: 'var(--gold-cream)', borderLeft: '6px solid var(--red)', padding: '16px 20px', fontFamily: 'var(--font-ui)', fontSize: 11, color: 'var(--red)', marginBottom: 20 }}
+                  style={{ background: 'var(--gold-cream)', borderLeft: '6px solid var(--red)', padding: '16px 20px', fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--red)', marginBottom: 20 }}
                   role="alert"
                   aria-live="assertive"
                   aria-atomic="true"

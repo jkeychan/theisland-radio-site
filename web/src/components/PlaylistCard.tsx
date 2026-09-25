@@ -20,33 +20,9 @@ export function PlaylistCard({ playlist: p, defaultOpen = false }: { playlist: P
         position: 'relative',
         borderTop: '1px solid rgba(200,168,0,0.3)',
         borderBottom: '1px solid rgba(200,168,0,0.3)',
+        borderLeft: '4px solid var(--green)',
       }}
     >
-      {/* Left stripe */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          bottom: 0,
-          width: 6,
-          background: 'linear-gradient(180deg, var(--red) 0% 33%, var(--gold-deep) 33% 66%, var(--green) 66% 100%)',
-        }}
-      />
-      {/* Right stripe */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          right: 0,
-          top: 0,
-          bottom: 0,
-          width: 6,
-          background: 'linear-gradient(180deg, var(--green) 0% 33%, var(--gold-deep) 33% 66%, var(--red) 66% 100%)',
-        }}
-      />
-
       {/* Header row — clickable */}
       <button
         onClick={() => setOpen(o => !o)}
@@ -66,8 +42,8 @@ export function PlaylistCard({ playlist: p, defaultOpen = false }: { playlist: P
         <span
           style={{
             fontFamily: 'var(--font-body)',
-            fontWeight: 300,
-            fontSize: 15,
+            fontWeight: 400,
+            fontSize: 16,
             color: 'var(--gold-dark)',
           }}
         >
@@ -76,10 +52,9 @@ export function PlaylistCard({ playlist: p, defaultOpen = false }: { playlist: P
         <span style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span
             style={{
-              fontFamily: 'var(--font-ui)',
-              fontSize: 9,
+              fontFamily: 'var(--font-body)',
+              fontSize: 13,
               color: 'var(--gold-mid)',
-              letterSpacing: '0.08em',
             }}
           >
             {p.tracks.length} track{p.tracks.length !== 1 ? 's' : ''}
@@ -109,17 +84,15 @@ export function PlaylistCard({ playlist: p, defaultOpen = false }: { playlist: P
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                fontFamily: 'var(--font-ui)',
-                fontSize: 10,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
+                fontFamily: 'var(--font-body)',
+                fontSize: 14,
                 color: 'var(--red)',
                 textDecoration: 'none',
                 borderBottom: '1px solid var(--red)',
                 paddingBottom: 1,
               }}
             >
-              ▶ Link to broadcast recording
+              Listen to the recording
             </a>
           </div>
         )}

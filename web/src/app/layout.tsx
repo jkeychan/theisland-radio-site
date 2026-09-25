@@ -23,7 +23,7 @@ const dmMono = DM_Mono({
 
 const exo2 = Exo_2({
   subsets: ['latin'],
-  weight: ['200', '300', '400'],
+  weight: ['200', '300', '400', '600'],
   style: ['normal', 'italic'],
   variable: '--font-exo2',
   display: 'swap',

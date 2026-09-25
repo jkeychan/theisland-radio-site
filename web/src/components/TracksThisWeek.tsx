@@ -35,7 +35,7 @@ const textLinkStyle = {
   paddingBottom: 1,
 };
 
-const PREVIEW_COUNT = 10;
+const PREVIEW_COUNT = 5;
 
 export const TracksThisWeek = () => {
   const { data: playlists } = usePlaylists();

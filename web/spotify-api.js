@@ -4,7 +4,7 @@
 const fs   = require('fs');
 const path = require('path');
 
-const DB_DIR     = '/Users/jeff/Documents/Code/Git-Managed/theisland/db';
+const DB_DIR      = path.join(__dirname, '..', 'db');
 const TOKEN_CACHE = path.join(DB_DIR, 'spotify_tokens.json');
 
 function extractPlaylistId(urlOrId) {
@@ -21,31 +21,10 @@ function readSpotifyConfig() {
   return (id && secret) ? { clientId: id, clientSecret: secret } : null;
 }
 
-function httpsPost(url, headers, body) {
-  const https = require('https');
-  const u = new URL(url);
-  return new Promise((resolve, reject) => {
-    const req = https.request(
-      { hostname: u.hostname, path: u.pathname + u.search, method: 'POST', headers },
-      (res) => { let d = ''; res.on('data', c => d += c); res.on('end', () => resolve({ status: res.statusCode, body: d })); },
-    );
-    req.on('error', reject);
-    req.write(body);
-    req.end();
-  });
-}
-
-function httpsGet(url, headers) {
-  const https = require('https');
-  const u = new URL(url);
-  return new Promise((resolve, reject) => {
-    const req = https.request(
-      { hostname: u.hostname, path: u.pathname + u.search, method: 'GET', headers },
-      (res) => { let d = ''; res.on('data', c => d += c); res.on('end', () => resolve({ status: res.statusCode, body: d })); },
-    );
-    req.on('error', reject);
-    req.end();
-  });
+async function spotifyGet(url, token) {
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+  if (!res.ok) throw new Error(`Spotify API ${res.status}: ${await res.text()}`);
+  return res.json();
 }
 
 function readTokenCache() {
@@ -70,14 +49,10 @@ async function refreshAccessToken(config, refreshToken) {
     grant_type:    'refresh_token',
     refresh_token: refreshToken,
     client_id:     config.clientId,
-  }).toString();
-  const res  = await httpsPost(
-    'https://accounts.spotify.com/api/token',
-    { 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': Buffer.byteLength(body) },
-    body,
-  );
-  const data = JSON.parse(res.body);
-  if (!data.access_token) throw new Error(`Token refresh failed: ${res.body}`);
+  });
+  const res  = await fetch('https://accounts.spotify.com/api/token', { method: 'POST', body });
+  const data = await res.json();
+  if (!data.access_token) throw new Error(`Token refresh failed: ${JSON.stringify(data)}`);
   return data;
 }
 
@@ -132,14 +107,10 @@ async function runPKCEFlow(config) {
     redirect_uri:  'http://127.0.0.1:8888/callback',
     client_id:     config.clientId,
     code_verifier: verifier,
-  }).toString();
-  const res  = await httpsPost(
-    'https://accounts.spotify.com/api/token',
-    { 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': Buffer.byteLength(body) },
-    body,
-  );
-  const data = JSON.parse(res.body);
-  if (!data.access_token) throw new Error(`Code exchange failed: ${res.body}`);
+  });
+  const res  = await fetch('https://accounts.spotify.com/api/token', { method: 'POST', body });
+  const data = await res.json();
+  if (!data.access_token) throw new Error(`Code exchange failed: ${JSON.stringify(data)}`);
   return data;
 }
 
@@ -172,9 +143,7 @@ async function fetchSpotifyTracks(playlistId, token) {
   const records = [];
   let url = `https://api.spotify.com/v1/playlists/${playlistId}/items?limit=100`;
   while (url) {
-    const res = await httpsGet(url, { 'Authorization': `Bearer ${token}` });
-    if (res.status !== 200) throw new Error(`Spotify API ${res.status}: ${res.body}`);
-    const data = JSON.parse(res.body);
+    const data = await spotifyGet(url, token);
     for (const item of data.items) {
       const t = item && item.item;
       if (!t || !t.name || t.type !== 'track') continue;
@@ -192,12 +161,7 @@ async function fetchSpotifyTracks(playlistId, token) {
 }
 
 async function fetchPlaylistName(playlistId, token) {
-  const res = await httpsGet(
-    `https://api.spotify.com/v1/playlists/${playlistId}?fields=name`,
-    { 'Authorization': `Bearer ${token}` },
-  );
-  if (res.status !== 200) throw new Error(`Spotify API ${res.status}: ${res.body}`);
-  return JSON.parse(res.body).name;
+  return (await spotifyGet(`https://api.spotify.com/v1/playlists/${playlistId}?fields=name`, token)).name;
 }
 
 function extractTrackId(urlOrId) {
@@ -206,12 +170,7 @@ function extractTrackId(urlOrId) {
 }
 
 async function fetchTrack(trackId, token) {
-  const res = await httpsGet(
-    `https://api.spotify.com/v1/tracks/${trackId}`,
-    { 'Authorization': `Bearer ${token}` },
-  );
-  if (res.status !== 200) throw new Error(`Spotify API ${res.status}: ${res.body}`);
-  const t = JSON.parse(res.body);
+  const t = await spotifyGet(`https://api.spotify.com/v1/tracks/${trackId}`, token);
   return {
     title:       t.name,
     artist:      (t.artists || []).map(a => a.name).join(', '),

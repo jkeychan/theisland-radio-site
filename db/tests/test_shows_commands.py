@@ -164,14 +164,7 @@ def test_shows_verify_detects_broken_archive_link(runner, tmp_db, verify_ts_file
     insert_show_track(tmp_db, "2026-03-13", t2, 2)
     monkeypatch.setattr("commands.shows.get_connection", lambda: tmp_db)
 
-    class FakeResp:
-        def raise_for_status(self):
-            pass
-
-        def json(self):
-            return {}
-
-    monkeypatch.setattr("commands.shows.requests.get", lambda *a, **k: FakeResp())
+    monkeypatch.setattr("commands.shows._archive_meta", lambda identifier: {})
 
     result = runner.invoke(cli, ["shows", "verify", "--playlists-file", verify_ts_file])
     assert result.exit_code == 1
@@ -189,7 +182,7 @@ def test_shows_verify_skips_shows_without_archive_url(runner, tmp_db, verify_ts_
     def fail_if_called(*a, **k):
         raise AssertionError("should not check archive.org when archive_url is unset")
 
-    monkeypatch.setattr("commands.shows.requests.get", fail_if_called)
+    monkeypatch.setattr("commands.shows._archive_meta", fail_if_called)
 
     result = runner.invoke(cli, ["shows", "verify", "--playlists-file", verify_ts_file])
     assert result.exit_code == 0

@@ -3,13 +3,18 @@ import json
 import sys
 from datetime import datetime
 from pathlib import Path
+import urllib.request
 import click
-import requests
 from commands import output_options
 from database import get_connection
 from output import print_output
 
 DEFAULT_PLAYLISTS_TS = Path(__file__).parent.parent.parent / "web" / "src" / "data" / "playlists.ts"
+
+
+def _archive_meta(identifier: str) -> dict:
+    with urllib.request.urlopen(f"https://archive.org/metadata/{identifier}", timeout=10) as resp:
+        return json.load(resp)
 
 
 def _month_number(name: str) -> str | None:
@@ -65,45 +70,14 @@ def shows_search(query, fmt):
 
 
 @shows.command("import")
-@click.option("--source", required=True,
-              type=click.Choice(["playlists-ts", "csv", "exportify", "exportify-show"]))
-@click.option("--file", "file_path", required=True, type=click.Path(exists=True))
-@click.option("--show-id", default=None,
-              help="Show ID (required for --source csv and exportify-show).")
-@click.option("--archive-url", default=None,
-              help="Archive.org URL (optional for --source exportify-show).")
-@click.option("--overwrite", is_flag=True, default=False,
-              help="Overwrite existing enrichment fields (exportify sources only).")
-def shows_import(source, file_path, show_id, archive_url, overwrite):
-    """Import show data from a file."""
+@click.option("--file", "file_path", default=str(DEFAULT_PLAYLISTS_TS),
+              type=click.Path(exists=True), help="playlists.ts to import from.")
+def shows_import(file_path):
+    """Import shows and tracks from playlists.ts."""
+    from importers.from_playlists_ts import import_from_file
     conn = get_connection()
-    if source == "playlists-ts":
-        from importers.from_playlists_ts import import_from_file
-        result = import_from_file(file_path, conn)
-        click.echo(f"Imported {result['shows']} shows, {result['tracks']} tracks.")
-    elif source == "csv":
-        if not show_id:
-            click.echo("--show-id is required for --source csv", err=True)
-            conn.close()
-            sys.exit(1)
-        from importers.from_csv import import_from_file
-        result = import_from_file(file_path, show_id, conn)
-        click.echo(f"Imported {result['tracks']} tracks into show {show_id}.")
-    elif source == "exportify":
-        from importers.from_exportify_csv import enrich_from_file
-        result = enrich_from_file(file_path, conn, overwrite=overwrite)
-        click.echo(
-            f"Matched {result['matched']}, updated {result['updated']}, "
-            f"unmatched {result['unmatched']}."
-        )
-    elif source == "exportify-show":
-        if not show_id:
-            click.echo("--show-id is required for --source exportify-show", err=True)
-            conn.close()
-            sys.exit(1)
-        from importers.from_exportify_show import import_from_file
-        result = import_from_file(file_path, show_id, archive_url, conn, overwrite=overwrite)
-        click.echo(f"Imported show {show_id} with {result['tracks']} tracks.")
+    result = import_from_file(file_path, conn)
+    click.echo(f"Imported {result['shows']} shows, {result['tracks']} tracks.")
     conn.close()
 
 
@@ -119,12 +93,9 @@ def shows_fetch_meta(show_id):
         sys.exit(1)
 
     identifier = row["archive_url"].rstrip("/").split("/")[-1]
-    api_url = f"https://archive.org/metadata/{identifier}"
 
     try:
-        resp = requests.get(api_url, timeout=10)
-        resp.raise_for_status()
-        meta = resp.json()
+        meta = _archive_meta(identifier)
     except Exception as e:
         click.echo(f"Failed to fetch metadata: {e}", err=True)
         conn.close()
@@ -237,11 +208,9 @@ def shows_verify(playlists_file, check_archive):
                 continue  # not archived yet — not a sync problem
             identifier = row["archive_url"].rstrip("/").split("/")[-1]
             try:
-                resp = requests.get(f"https://archive.org/metadata/{identifier}", timeout=10)
-                resp.raise_for_status()
-                if not resp.json():
+                if not _archive_meta(identifier):
                     problems.append(f"{show_id}: archive.org item '{identifier}' not found")
-            except requests.RequestException as e:
+            except OSError as e:
                 problems.append(f"{show_id}: archive.org check failed ({e})")
 
     conn.close()

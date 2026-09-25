@@ -33,16 +33,16 @@ describe('TracksThisWeek', () => {
     expect(screen.queryByText(/Show all/)).not.toBeInTheDocument();
   });
 
-  it('previews the first 10 tracks and expands to show all', () => {
-    const tracks = Array.from({ length: 12 }, (_, i) => ({ artist: `Artist ${i + 1}`, title: `Song ${i + 1}` }));
+  it('previews the first 5 tracks and expands to show all', () => {
+    const tracks = Array.from({ length: 7 }, (_, i) => ({ artist: `Artist ${i + 1}`, title: `Song ${i + 1}` }));
     (usePlaylists as jest.Mock).mockReturnValue({
       data: [{ id: '2026-03-13', title: 'March 13, 2026', tracks }],
     });
     render(<TracksThisWeek />);
-    expect(screen.getByText('Artist 10')).toBeInTheDocument();
-    expect(screen.queryByText('Artist 11')).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText('Show all 12 tracks'));
-    expect(screen.getByText('Artist 12')).toBeInTheDocument();
+    expect(screen.getByText('Artist 5')).toBeInTheDocument();
+    expect(screen.queryByText('Artist 6')).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText('Show all 7 tracks'));
+    expect(screen.getByText('Artist 7')).toBeInTheDocument();
     expect(screen.getByText('Show fewer tracks')).toBeInTheDocument();
   });
 

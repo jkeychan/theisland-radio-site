@@ -3,10 +3,14 @@
 
 const fs   = require('fs');
 const path = require('path');
+const {
+  generatePlaylistObject, generateArchiveUrl, generateDescription,
+  formatDate, updatePlaylistsTs,
+} = require('./archive-playlist.js');
 
 // ─── Fixed paths ─────────────────────────────────────────────────────────────
-const WEB_DIR        = '/Users/jeff/Documents/Code/Git-Managed/theisland/web';
-const DB_DIR         = '/Users/jeff/Documents/Code/Git-Managed/theisland/db';
+const WEB_DIR        = __dirname;
+const DB_DIR         = path.join(__dirname, '..', 'db');
 const ARCHIVES       = '/Users/jeff/Documents/The Island/SHOW ARCHIVES';
 const WART_DIR       = '/Users/jeff/Documents/The Island/SHOW ARCHIVES/downloaded from WART';
 const LOGO           = '/Users/jeff/Documents/The Island/SHOW ARCHIVES/dub-tractor-theisland-logo.png';
@@ -36,90 +40,19 @@ function parseDateFromFolderName(name) {
 }
 
 /**
- * Build the ID3 title tag and output filename base.
- * e.g. "2026-03-27" → "The Island with Dub Tractor - March 27 2026"
- * No comma, no zero-padding on day.
- */
-function buildId3Title(dateStr) {
-  const d     = new Date(dateStr + 'T12:00:00Z');
-  const month = d.toLocaleDateString('en-US', { month: 'long', timeZone: 'UTC' });
-  const day   = d.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'UTC' });
-  const year  = d.toLocaleDateString('en-US', { year: 'numeric', timeZone: 'UTC' });
-  return `The Island with Dub Tractor - ${month} ${day} ${year}`;
-}
-
-/**
- * Build the archive.org item title (has comma after day).
+ * Build the archive.org item title.
  * e.g. "2026-03-27" → "The Island with Dub Tractor - March 27, 2026"
  */
 function buildArchiveOrgTitle(dateStr) {
-  const d     = new Date(dateStr + 'T12:00:00Z');
-  const month = d.toLocaleDateString('en-US', { month: 'long', timeZone: 'UTC' });
-  const day   = d.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'UTC' });
-  const year  = d.toLocaleDateString('en-US', { year: 'numeric', timeZone: 'UTC' });
-  return `The Island with Dub Tractor - ${month} ${day}, ${year}`;
+  return `The Island with Dub Tractor - ${formatDate(dateStr)}`;
 }
 
 /**
- * Build the output MP3 filename.
- * e.g. "2026-03-27" → "The Island with Dub Tractor - March 27 2026.mp3"
+ * Build the ID3 title tag and output filename base (archive.org title without the comma).
+ * e.g. "2026-03-27" → "The Island with Dub Tractor - March 27 2026"
  */
-function buildOutputMp3Name(dateStr) {
-  return buildId3Title(dateStr) + '.mp3';
-}
-
-/**
- * Parse a raw exportify CSV into track records.
- * Handles UTF-8 BOM, extracts Track Name / Artist Name(s) / Album Name,
- * and replaces semicolons in artist names with ", ".
- * Throws if the file is not an exportify CSV.
- */
-function parseExportifyCsv(text) {
-  const clean = text.replace(/^\uFEFF/, '');
-  const lines = clean.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
-  if (lines.length === 0) return [];
-
-  const headers   = parseCsvRow(lines[0]);
-  const titleIdx  = headers.indexOf('Track Name');
-  const artistIdx = headers.indexOf('Artist Name(s)');
-  const albumIdx  = headers.indexOf('Album Name');
-
-  if (titleIdx === -1 || artistIdx === -1) {
-    throw new Error('Not an exportify CSV: missing "Track Name" or "Artist Name(s)" columns');
-  }
-
-  const records = [];
-  for (let i = 1; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (!line) continue;
-    const cols   = parseCsvRow(line);
-    const title  = (cols[titleIdx]  || '').trim();
-    const artist = (cols[artistIdx] || '').replace(/;/g, ', ').trim();
-    const album  = albumIdx !== -1 ? (cols[albumIdx] || '').trim() : '';
-    if (!title && !artist) continue;
-    records.push({ title, artist, album });
-  }
-  return records;
-}
-
-function parseCsvRow(line) {
-  const fields = [];
-  let current  = '';
-  let inQuotes = false;
-  for (let i = 0; i < line.length; i++) {
-    const c = line[i];
-    if (c === '"') {
-      if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
-      else inQuotes = !inQuotes;
-    } else if (c === ',' && !inQuotes) {
-      fields.push(current);
-      current = '';
-    } else {
-      current += c;
-    }
-  }
-  fields.push(current);
-  return fields;
+function buildId3Title(dateStr) {
+  return buildArchiveOrgTitle(dateStr).replace(',', '');
 }
 
 /**
@@ -136,8 +69,7 @@ function findWartFiles(dateStr, wartDir) {
 }
 
 module.exports = {
-  parseDateFromFolderName, buildId3Title, buildArchiveOrgTitle,
-  buildOutputMp3Name, parseExportifyCsv, findWartFiles,
+  parseDateFromFolderName, buildId3Title, buildArchiveOrgTitle, findWartFiles,
   ARCHIVES, WART_DIR, LOGO, PLAYLISTS_FILE,
 };
 
@@ -159,7 +91,6 @@ USAGE
 
 MODES (pick one playlist source)
   --spotify-url <url>   Fetch tracks from a Spotify playlist. Implies --no-mp3 and --no-upload.
-  --csv <file>          Use the given exportify CSV. If omitted, a CSV in the current dir is auto-detected.
   --mp3-only            Recording-only run; reads tracks from <show>_archive.txt. Implies --no-website and --no-db.
 
 MP3 PROCESSING
@@ -179,21 +110,19 @@ OTHER
   -h, --help            Show this help and exit.
 
 EXAMPLES
-  island-show --csv playlist.csv
   island-show --spotify-url https://open.spotify.com/playlist/XXXX
   island-show --mp3-only
-  island-show --no-website --no-db --force-mp3
+  island-show --mp3-only --no-upload --force-mp3
 `);
 }
 
 function parseArgs(argv) {
   const opts = {
-    csv: null, spotifyUrl: null, wart: null, trimStart: null, trimEnd: null,
+    spotifyUrl: null, wart: null, trimStart: null, trimEnd: null,
     mp3Only: false, noMp3: false, noWebsite: false, noUpload: false, noDb: false, noPodcast: false, forceMp3: false,
   };
   for (let i = 0; i < argv.length; i++) {
-    if      (argv[i] === '--csv'          && argv[i+1]) opts.csv        = argv[++i];
-    else if (argv[i] === '--spotify-url'  && argv[i+1]) opts.spotifyUrl = argv[++i];
+    if      (argv[i] === '--spotify-url'  && argv[i+1]) opts.spotifyUrl = argv[++i];
     else if (argv[i] === '--wart'         && argv[i+1]) opts.wart       = argv[++i];
     else if (argv[i] === '--trim-start'   && argv[i+1]) opts.trimStart  = argv[++i];
     else if (argv[i] === '--trim-end'     && argv[i+1]) opts.trimEnd    = argv[++i];
@@ -213,24 +142,6 @@ function parseArgs(argv) {
 const {
   extractPlaylistId, readSpotifyConfig, getUserToken, fetchSpotifyTracks,
 } = require('./spotify-api.js');
-
-// ─── CSV auto-detection ───────────────────────────────────────────────────────
-
-function detectCsv(cwd) {
-  const csvs = fs.readdirSync(cwd).filter(f => f.endsWith('.csv'));
-  if (csvs.length === 0) return null;
-  const scored = csvs.map(f => {
-    try {
-      const firstLine = fs.readFileSync(path.join(cwd, f), 'utf8').replace(/^\uFEFF/, '').split('\n')[0];
-      return { file: f, cols: firstLine.split(',').length };
-    } catch { return { file: f, cols: 0 }; }
-  });
-  scored.sort((a, b) => b.cols - a.cols);
-  if (scored.length > 1 && scored[0].cols === scored[1].cols) {
-    return { ambiguous: scored.map(s => s.file) };
-  }
-  return scored[0].file;
-}
 
 // Read track records from an _archive.txt file written by a previous playlist run.
 // Used in --mp3-only mode to generate the archive.org description.
@@ -252,10 +163,6 @@ async function main() {
   }
 
   const { execFileSync } = require('child_process');
-  const {
-    generatePlaylistObject, generateArchiveUrl, generateDescription,
-    formatDate, updatePlaylistsTs,
-  } = require('./archive-playlist.js');
 
   const opts       = parseArgs(process.argv.slice(2));
   const cwd        = process.cwd();
@@ -271,14 +178,11 @@ async function main() {
   print.status(`Show date: ${playlistDate}`);
 
   // ── Get track records ─────────────────────────────────────────────────────────
-  // Three modes:
+  // Two modes:
   //   --spotify-url  fetch from Spotify (skips MP3 + upload)
   //   --mp3-only     read from _archive.txt if present (skips website + DB)
-  //   default        detect/parse a CSV in the current directory
 
   let records = [];
-  let csvPath = null;   // set when source is CSV (used for DB exportify-show import)
-  let dbSource = 'playlists-ts'; // default; set to 'exportify-show' for CSV source
 
   if (opts.mp3Only) {
     // Recording-only run — playlist data already in playlists.ts from a previous run
@@ -314,45 +218,16 @@ async function main() {
       process.exit(1);
     }
     print.status(`Fetched ${records.length} tracks from Spotify`);
-    dbSource = 'playlists-ts'; // DB updated via playlists.ts after website step
 
   } else {
-    // CSV mode (exportify auto-detect or --csv)
-    const detected = opts.csv || detectCsv(cwd);
-    if (!detected) {
-      print.error('No playlist source. Use --spotify-url <url>, --csv <file>, or --mp3-only.');
-      process.exit(1);
-    }
-    if (typeof detected === 'object' && detected.ambiguous) {
-      print.error('Multiple CSVs with the same column count — cannot auto-detect:');
-      detected.ambiguous.forEach(f => console.log(`  ${f}`));
-      print.error('Use --csv <file> to specify which one.');
-      process.exit(1);
-    }
-    const csvFile = detected;
-    csvPath = path.isAbsolute(csvFile) ? csvFile : path.join(cwd, csvFile);
-    if (!fs.existsSync(csvPath)) {
-      print.error(`CSV not found: ${csvPath}`);
-      process.exit(1);
-    }
-    try {
-      records = parseExportifyCsv(fs.readFileSync(csvPath, 'utf8'));
-    } catch (e) {
-      print.error(`CSV parse error: ${e.message}`);
-      process.exit(1);
-    }
-    if (records.length === 0) {
-      print.error('No tracks found in CSV.');
-      process.exit(1);
-    }
-    print.status(`CSV: ${csvFile} (${records.length} tracks)`);
-    dbSource = 'exportify-show';
+    print.error('No playlist source. Use --spotify-url <url> or --mp3-only.');
+    process.exit(1);
   }
 
   // ── Derived values ────────────────────────────────────────────────────────────
-  const outputMp3Name   = buildOutputMp3Name(playlistDate);
-  const outputMp3Path   = path.join(ARCHIVES, outputMp3Name);
   const id3Title        = buildId3Title(playlistDate);
+  const outputMp3Name   = `${id3Title}.mp3`;
+  const outputMp3Path   = path.join(ARCHIVES, outputMp3Name);
   const year            = playlistDate.split('-')[0];
   const playlistTitle   = formatDate(playlistDate);
   const archiveUrl      = generateArchiveUrl(playlistDate);
@@ -494,17 +369,8 @@ async function main() {
 
   if (!opts.noDb) {
     const islandCli = path.join(DB_DIR, 'island');
-    let dbArgs;
-    if (dbSource === 'exportify-show') {
-      dbArgs = [
-        'shows', 'import', '--source', 'exportify-show',
-        '--file', csvPath, '--show-id', playlistDate, '--archive-url', archiveUrl,
-      ];
-    } else {
-      // playlists-ts: DB reads from the already-updated playlists.ts
-      dbArgs = ['shows', 'import', '--source', 'playlists-ts', '--file', PLAYLISTS_FILE];
-    }
-    print.status(`Updating database (${dbSource}): show ${playlistDate}`);
+    const dbArgs    = ['shows', 'import', '--file', PLAYLISTS_FILE];
+    print.status(`Updating database: show ${playlistDate}`);
     try {
       execFileSync(islandCli, dbArgs, { stdio: 'inherit' });
       dbStatus = `show ${playlistDate} imported`;

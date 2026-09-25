@@ -1,5 +1,5 @@
 -- The Island Radio Show Database
--- SQLite schema. For Postgres: replace INTEGER PRIMARY KEY with SERIAL PRIMARY KEY.
+-- SQLite schema.
 -- Initialise with: python db/cli.py db init
 
 PRAGMA foreign_keys = ON;

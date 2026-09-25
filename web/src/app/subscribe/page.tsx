@@ -45,7 +45,6 @@ function CopyFeedLink() {
     >
       <code
         style={{
-          fontFamily: "var(--font-ui)",
           fontSize: 14,
           color: "var(--gold-cream)",
           flex: "1 1 260px",
@@ -79,14 +78,14 @@ export default function SubscribePage() {
           position: 'absolute', bottom: 0, left: 0, right: 0, height: 6,
           background: 'linear-gradient(90deg, var(--red) 0% 33%, var(--gold-deep) 33% 66%, var(--green) 66% 100%)'
         }} />
-        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(48px, 8vw, 80px)', lineHeight: 0.9, letterSpacing: '-0.02em', color: 'var(--gold)' }}>
+        <h1 style={{ fontWeight: 900, fontSize: 'clamp(48px, 8vw, 80px)', lineHeight: 0.9, letterSpacing: '-0.02em', color: 'var(--gold)' }}>
           Subscribe
         </h1>
       </div>
 
       {/* Page body */}
       <div style={{ background: 'var(--gold)', padding: 44, maxWidth: 720 }}>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: 16, lineHeight: 1.6, color: 'var(--gold-dark)', marginTop: 0 }}>
+        <p style={{ fontSize: 16, lineHeight: 1.6, color: 'var(--gold-dark)', marginTop: 0 }}>
           New episodes land here the moment they&apos;re archived — full mixes, tracklists,
           and all the dub, reggae, and dancehall from WART 95.5 FM. Add the link below to
           your podcast app and every future show shows up automatically.
@@ -95,7 +94,7 @@ export default function SubscribePage() {
         <CopyFeedLink />
 
         <h2 style={{
-          fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 22,
+          fontWeight: 900, fontSize: 22,
           color: 'var(--gold-dark)', marginTop: 40, marginBottom: 20,
         }}>
           How to add it
@@ -114,16 +113,16 @@ export default function SubscribePage() {
               }}
             >
               <span style={{
-                fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 22,
+                fontWeight: 900, fontSize: 22,
                 color: 'var(--gold-deep)', lineHeight: 1.3, flexShrink: 0,
               }}>
                 {i + 1}
               </span>
               <div>
-                <p style={{ fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: 15, color: 'var(--gold-dark)', margin: '0 0 4px' }}>
+                <p style={{ fontWeight: 600, fontSize: 15, color: 'var(--gold-dark)', margin: '0 0 4px' }}>
                   {step.label}
                 </p>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--gold-mid)', margin: 0 }}>
+                <p style={{ fontSize: 14, color: 'var(--gold-mid)', margin: 0 }}>
                   {step.body}
                 </p>
               </div>
@@ -131,7 +130,7 @@ export default function SubscribePage() {
           ))}
         </ol>
 
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', marginTop: 40 }}>
+        <p style={{ fontSize: 15, color: 'var(--gold-dark)', marginTop: 40 }}>
           Prefer to browse by hand? Every episode is also archived on{" "}
           <a
             href="https://archive.org/details/@dubtractor/lists/1/the-island-wart-fm-radio-archive"

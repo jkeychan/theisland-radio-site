@@ -4,7 +4,7 @@
 const fs   = require('fs');
 const path = require('path');
 
-const WEB_DIR         = '/Users/jeff/Documents/Code/Git-Managed/theisland/web';
+const WEB_DIR         = __dirname;
 const PLAYLISTS_FILE  = path.join(WEB_DIR, 'src', 'data', 'playlists.ts');
 const OUTPUT_FILE     = path.join(WEB_DIR, 'public', 'podcast.xml');
 

@@ -33,10 +33,8 @@ const eslintConfig = [
   // Node/CLI scripts: allow CommonJS require and console
   {
     files: [
-      "scripts/**/*.js",
       "jest.config.js",
       "archive-playlist.js",
-      "csv-to-archive-converter.js",
       "island-show.js",
       "island-record.js",
       "generate-podcast-feed.js",

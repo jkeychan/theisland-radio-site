@@ -1,33 +1,9 @@
 import type { Metadata } from "next";
-import { Nunito, DM_Mono, Exo_2 } from 'next/font/google'
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import Script from "next/script";
-
-const nunito = Nunito({
-  subsets: ['latin'],
-  weight: ['800', '900'],
-  variable: '--font-nunito',
-  display: 'swap',
-})
-
-const dmMono = DM_Mono({
-  subsets: ['latin'],
-  weight: ['300', '400'],
-  style: ['normal', 'italic'],
-  variable: '--font-dm-mono',
-  display: 'swap',
-})
-
-const exo2 = Exo_2({
-  subsets: ['latin'],
-  weight: ['200', '300', '400', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-exo2',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: "The Island • WART 95.5 FM",
@@ -77,9 +53,7 @@ export default function RootLayout({
         />
         <JsonLd />
       </head>
-      <body
-        className={`${nunito.variable} ${dmMono.variable} ${exo2.variable} antialiased`}
-      >
+      <body>
         <a
           href="#main-content"
           className="skip-link"
@@ -103,7 +77,7 @@ export default function RootLayout({
           </>
         ) : null}
         <Header />
-        <main id="main-content" className="pb-0 min-h-[calc(100vh-200px)]">
+        <main id="main-content">
           {children}
         </main>
         <Footer />

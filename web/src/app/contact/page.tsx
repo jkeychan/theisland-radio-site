@@ -146,7 +146,7 @@ export default function ContactPage() {
           position: 'absolute', bottom: 0, left: 0, right: 0, height: 6,
           background: 'linear-gradient(90deg, var(--red) 0% 33%, var(--gold-deep) 33% 66%, var(--green) 66% 100%)'
         }} />
-        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(48px, 8vw, 80px)', lineHeight: 0.9, letterSpacing: '-0.02em', color: 'var(--gold)' }}>
+        <h1 style={{ fontWeight: 900, fontSize: 'clamp(48px, 8vw, 80px)', lineHeight: 0.9, letterSpacing: '-0.02em', color: 'var(--gold)' }}>
           Contact
         </h1>
       </div>
@@ -155,13 +155,13 @@ export default function ContactPage() {
       <div style={{ background: 'var(--gold)', padding: 44 }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
           {!contactFormConfigured ? (
-            <div style={{ background: 'var(--gold-cream)', padding: '16px 20px', fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)' }}>
+            <div style={{ background: 'var(--gold-cream)', padding: '16px 20px', fontSize: 15, color: 'var(--gold-dark)' }}>
               Contact form is not configured. Set <code>NEXT_PUBLIC_RECAPTCHA_SITE_KEY</code> and <code>NEXT_PUBLIC_FORMSPREE_FORM_ID</code> in your environment (see <code>.env.example</code>).
             </div>
           ) : (
             <form ref={formRef} onSubmit={handleSubmit}>
               <div style={{ marginBottom: 20 }}>
-                <label htmlFor="contact-name" style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
+                <label htmlFor="contact-name" style={{ fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
                   Name
                 </label>
                 <input
@@ -169,14 +169,14 @@ export default function ContactPage() {
                   name="name"
                   required
                   disabled={isSubmitting}
-                  style={{ width: '100%', background: 'var(--gold-cream)', border: '1.5px solid var(--gold-deep)', borderRadius: 0, padding: '12px 14px', fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--gold-dark)', outline: 'none', boxSizing: 'border-box' }}
+                  style={{ width: '100%', background: 'var(--gold-cream)', border: '1.5px solid var(--gold-deep)', borderRadius: 0, padding: '12px 14px', fontSize: 14, color: 'var(--gold-dark)', outline: 'none', boxSizing: 'border-box' }}
                   onFocus={e => (e.currentTarget.style.borderColor = 'var(--red)')}
                   onBlur={e => (e.currentTarget.style.borderColor = 'var(--gold-deep)')}
                 />
               </div>
 
               <div style={{ marginBottom: 20 }}>
-                <label htmlFor="contact-email" style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
+                <label htmlFor="contact-email" style={{ fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
                   Email
                 </label>
                 <input
@@ -185,14 +185,14 @@ export default function ContactPage() {
                   type="email"
                   required
                   disabled={isSubmitting}
-                  style={{ width: '100%', background: 'var(--gold-cream)', border: '1.5px solid var(--gold-deep)', borderRadius: 0, padding: '12px 14px', fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--gold-dark)', outline: 'none', boxSizing: 'border-box' }}
+                  style={{ width: '100%', background: 'var(--gold-cream)', border: '1.5px solid var(--gold-deep)', borderRadius: 0, padding: '12px 14px', fontSize: 14, color: 'var(--gold-dark)', outline: 'none', boxSizing: 'border-box' }}
                   onFocus={e => (e.currentTarget.style.borderColor = 'var(--red)')}
                   onBlur={e => (e.currentTarget.style.borderColor = 'var(--gold-deep)')}
                 />
               </div>
 
               <div style={{ marginBottom: 20 }}>
-                <label htmlFor="contact-subject" style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
+                <label htmlFor="contact-subject" style={{ fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
                   Subject
                 </label>
                 <input
@@ -200,14 +200,14 @@ export default function ContactPage() {
                   name="subject"
                   required
                   disabled={isSubmitting}
-                  style={{ width: '100%', background: 'var(--gold-cream)', border: '1.5px solid var(--gold-deep)', borderRadius: 0, padding: '12px 14px', fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--gold-dark)', outline: 'none', boxSizing: 'border-box' }}
+                  style={{ width: '100%', background: 'var(--gold-cream)', border: '1.5px solid var(--gold-deep)', borderRadius: 0, padding: '12px 14px', fontSize: 14, color: 'var(--gold-dark)', outline: 'none', boxSizing: 'border-box' }}
                   onFocus={e => (e.currentTarget.style.borderColor = 'var(--red)')}
                   onBlur={e => (e.currentTarget.style.borderColor = 'var(--gold-deep)')}
                 />
               </div>
 
               <div style={{ marginBottom: 20 }}>
-                <label htmlFor="contact-message" style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
+                <label htmlFor="contact-message" style={{ fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
                   Message
                 </label>
                 <textarea
@@ -216,7 +216,7 @@ export default function ContactPage() {
                   required
                   rows={6}
                   disabled={isSubmitting}
-                  style={{ width: '100%', background: 'var(--gold-cream)', border: '1.5px solid var(--gold-deep)', borderRadius: 0, padding: '12px 14px', fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--gold-dark)', outline: 'none', boxSizing: 'border-box', resize: 'vertical' }}
+                  style={{ width: '100%', background: 'var(--gold-cream)', border: '1.5px solid var(--gold-deep)', borderRadius: 0, padding: '12px 14px', fontSize: 14, color: 'var(--gold-dark)', outline: 'none', boxSizing: 'border-box', resize: 'vertical' }}
                   onFocus={e => (e.currentTarget.style.borderColor = 'var(--red)')}
                   onBlur={e => (e.currentTarget.style.borderColor = 'var(--gold-deep)')}
                 />
@@ -225,7 +225,7 @@ export default function ContactPage() {
               {/* Status Messages */}
               {submitStatus === "success" && (
                 <div
-                  style={{ background: 'var(--gold-cream)', borderLeft: '6px solid var(--green)', padding: '16px 20px', fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--green)', marginBottom: 20 }}
+                  style={{ background: 'var(--gold-cream)', borderLeft: '6px solid var(--green)', padding: '16px 20px', fontSize: 15, color: 'var(--green)', marginBottom: 20 }}
                   role="status"
                   aria-live="polite"
                   aria-atomic="true"
@@ -235,7 +235,7 @@ export default function ContactPage() {
               )}
               {submitStatus === "error" && (
                 <div
-                  style={{ background: 'var(--gold-cream)', borderLeft: '6px solid var(--red)', padding: '16px 20px', fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--red)', marginBottom: 20 }}
+                  style={{ background: 'var(--gold-cream)', borderLeft: '6px solid var(--red)', padding: '16px 20px', fontSize: 15, color: 'var(--red)', marginBottom: 20 }}
                   role="alert"
                   aria-live="assertive"
                   aria-atomic="true"
@@ -250,7 +250,6 @@ export default function ContactPage() {
                 style={{
                   background: 'var(--red)',
                   color: 'var(--gold-cream)',
-                  fontFamily: 'var(--font-ui)',
                   fontSize: 11,
                   letterSpacing: '0.14em',
                   textTransform: 'uppercase',

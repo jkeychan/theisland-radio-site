@@ -41,7 +41,6 @@ export function PlaylistCard({ playlist: p, defaultOpen = false }: { playlist: P
       >
         <span
           style={{
-            fontFamily: 'var(--font-body)',
             fontWeight: 400,
             fontSize: 16,
             color: 'var(--gold-dark)',
@@ -52,7 +51,6 @@ export function PlaylistCard({ playlist: p, defaultOpen = false }: { playlist: P
         <span style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span
             style={{
-              fontFamily: 'var(--font-body)',
               fontSize: 13,
               color: 'var(--gold-mid)',
             }}
@@ -61,7 +59,6 @@ export function PlaylistCard({ playlist: p, defaultOpen = false }: { playlist: P
           </span>
           <span
             style={{
-              fontFamily: 'var(--font-ui)',
               fontSize: 11,
               color: 'var(--gold-mid)',
               transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -84,7 +81,6 @@ export function PlaylistCard({ playlist: p, defaultOpen = false }: { playlist: P
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                fontFamily: 'var(--font-body)',
                 fontSize: 14,
                 color: 'var(--red)',
                 textDecoration: 'none',

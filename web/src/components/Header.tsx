@@ -49,7 +49,8 @@ export function Header() {
             <span
               style={{
                 fontFamily: "var(--font-ui)",
-                fontSize: 13,
+                fontSize: 16,
+                fontWeight: 400,
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
                 color: "var(--gold)",
@@ -64,9 +65,9 @@ export function Header() {
               className="header-station-link"
               style={{
                 fontFamily: "var(--font-ui)",
-                fontSize: 11,
+                fontSize: 12,
                 letterSpacing: "0.08em",
-                color: "var(--gold-mid)",
+                color: "var(--gold-soft)",
                 textDecoration: "none",
               }}
             >
@@ -87,9 +88,12 @@ export function Header() {
                   aria-current={isActive ? "page" : undefined}
                   style={{
                     fontFamily: "var(--font-ui)",
-                    fontSize: 12,
-                    letterSpacing: "0.08em",
-                    color: isActive ? "var(--gold)" : "var(--gold-mid)",
+                    fontSize: 14,
+                    fontWeight: 400,
+                    letterSpacing: "0.06em",
+                    color: isActive ? "var(--gold)" : "var(--gold-soft)",
+                    borderBottom: isActive ? "2px solid var(--gold)" : "2px solid transparent",
+                    paddingBottom: 2,
                     textDecoration: "none",
                   }}
                 >
@@ -111,7 +115,7 @@ export function Header() {
               background: "var(--red)",
               color: "var(--gold-cream)",
               fontFamily: "var(--font-ui)",
-              fontSize: 11,
+              fontSize: 12,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
               padding: "8px 16px",
@@ -134,7 +138,7 @@ export function Header() {
         style={{
           height: 7,
           background:
-            "linear-gradient(90deg, var(--red) 0% 33.33%, var(--gold) 33.33% 66.66%, var(--green) 66.66% 100%)",
+            "linear-gradient(90deg, var(--red) 0% 33.33%, var(--gold-deep) 33.33% 66.66%, var(--green) 66.66% 100%)",
         }}
       />
     </header>

@@ -7,6 +7,7 @@
   --gold-dark:   #3D2E00;
   --gold-mid:    #7A6200;
   --gold-cream:  #FBF4CC;
+  --gold-soft:   #E6CF72;
   --red:         #B22020;
   --green:       #1A5C28;
 
@@ -64,14 +65,6 @@ body {
   );
 }
 
-.stripe-bar-reversed {
-  height: 8px;
-  background: linear-gradient(90deg,
-    var(--green)     0%      33.33%,
-    var(--gold-deep) 33.33%  66.66%,
-    var(--red)       66.66%  100%
-  );
-}
 
 /* ── Stripe badge (inline vertical triple stripe) ── */
 .stripe-badge {
@@ -166,7 +159,7 @@ body {
 /* ── Wave break (dark separator with SVG waves) ── */
 .wave-break {
   position: relative;
-  height: 56px;
+  height: 64px;
   overflow: hidden;
   background: var(--gold-dark);
 }
@@ -229,6 +222,9 @@ section { position: relative; }
   }
   .tracks-grid {
     grid-template-columns: 1fr !important;
+  }
+  .tracks-divider {
+    display: none;
   }
   .footer-row {
     flex-direction: column;

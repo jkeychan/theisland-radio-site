@@ -2,6 +2,37 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-09-25",
+    title: "September 25, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-september-25-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Sinky Beatz", title: "Gravity Riddim", album: "Gravity Riddim" },
+      { artist: "King Tubby", title: "Roots of Dub", album: "Tribute To Studio One" },
+      { artist: "Pupajim, The Co-Operators, Cornerstone Horns", title: "Falling Dub", album: "Rising" },
+      { artist: "Manudigital, OMEGA NEBULA, ROYAL", title: "Our Story", album: "Our Story" },
+      { artist: "Blackout JA, Johnnyn", title: "I & I", album: "I & I" },
+      { artist: "Serial Killaz, YT Reggae", title: "Insane World", album: "Insane World" },
+      { artist: "Serial Killaz, Traumatize, Sahala, Fatman D", title: "Bad Girl", album: "Bad Girl" },
+      { artist: "Mungo's Hi Fi, Soom T", title: "Jump Up Quickly", album: "Listening Bug EP" },
+      { artist: "Soom T, Helgeland 8-bit Squad", title: "Booma Shiva", album: "Ode to a Karrot" },
+      { artist: "MSDOS", title: "Drum Of Jah", album: "Drum Of Jah / Spiritual kingdom" },
+      { artist: "Spragga Benz", title: "She Nuh Ready Yet (hype Up)", album: "Fully Loaded" },
+      { artist: "Mr. Vegas", title: "Heads High", album: "Heads High" },
+      { artist: "Beenie Man", title: "Slam", album: "Blessed" },
+      { artist: "Kabanjak", title: "Revelation Dub", album: "Fantastic Freeriding The Next Chapter" },
+      { artist: "10 Ft. Ganja Plant", title: "Chalwa", album: "Presents" },
+      { artist: "Black Uhuru", title: "Dub You Haffe Dub", album: "Brutal Dub" },
+      { artist: "Wackies", title: "Freedom Dub", album: "African Roots Act 1" },
+      { artist: "Dub-Stuy, Blakkamoore", title: "Absolutely", album: "The Linkage EP" },
+      { artist: "The Hempolics", title: "Love to Sing", album: "Love to Sing" },
+      { artist: "Mungo's Hi Fi, Kenny Knots", title: "Gimme Gimme", album: "Forward Ever" },
+      { artist: "Congo Natty, Jinx In Dub", title: "Nu Beginningz - Jinx in Dub Steppa Remix", album: "Jungle Revolution in Dub" },
+      { artist: "Mungo's Hi Fi, Johnny Osbourne", title: "Ice Cream Love", album: "Ice Cream Love" },
+      { artist: "Danny T & Tradesman, Lutan Fyah", title: "Dance a Gwan", album: "Built for Sound" }
+    ]
+  },
+{
     id: "2026-09-18",
     title: "September 18, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-september-18-2026",

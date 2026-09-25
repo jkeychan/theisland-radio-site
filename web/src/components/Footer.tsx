@@ -17,7 +17,7 @@ export function Footer() {
           right: 0,
           height: 7,
           background:
-            "linear-gradient(90deg, var(--red) 0% 33.33%, var(--gold) 33.33% 66.66%, var(--green) 66.66% 100%)",
+            "linear-gradient(90deg, var(--red) 0% 33.33%, var(--gold-deep) 33.33% 66.66%, var(--green) 66.66% 100%)",
         }}
       />
 
@@ -37,9 +37,9 @@ export function Footer() {
         <p
           style={{
             fontFamily: "var(--font-ui)",
-            fontSize: 11,
+            fontSize: 13,
             letterSpacing: "0.06em",
-            color: "var(--gold-mid)",
+            color: "var(--gold-soft)",
             margin: 0,
           }}
         >
@@ -55,16 +55,16 @@ export function Footer() {
             flexWrap: "wrap",
             gap: 20,
             fontFamily: "var(--font-ui)",
-            fontSize: 11,
+            fontSize: 13,
             letterSpacing: "0.06em",
-            color: "var(--gold-mid)",
+            color: "var(--gold-soft)",
           }}
         >
           <a
             href="https://wartfm.org"
             target="_blank"
             rel="noreferrer noopener"
-            style={{ color: "var(--gold-mid)", textDecoration: "none" }}
+            style={{ color: "var(--gold-soft)", textDecoration: "none" }}
           >
             wartfm.org
           </a>
@@ -72,7 +72,7 @@ export function Footer() {
             href="https://archive.org/details/@dubtractor/lists/1/the-island-wart-fm-radio-archive"
             target="_blank"
             rel="noreferrer noopener"
-            style={{ color: "var(--gold-mid)", textDecoration: "none" }}
+            style={{ color: "var(--gold-soft)", textDecoration: "none" }}
           >
             archive.org
           </a>
@@ -96,7 +96,7 @@ export function Footer() {
           </a>
           <a
             href="/contact/"
-            style={{ color: "var(--gold-mid)", textDecoration: "none" }}
+            style={{ color: "var(--gold-soft)", textDecoration: "none" }}
           >
             contact
           </a>

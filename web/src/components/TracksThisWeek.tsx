@@ -74,6 +74,7 @@ export const TracksThisWeek = () => {
       {/* Column divider */}
       <div
         aria-hidden="true"
+        className="tracks-divider"
         style={{
           position: 'absolute',
           left: '50%',

@@ -167,51 +167,26 @@ export default function Home() {
       </section>
 
       {/* ── Wave break ── */}
-      <div className="stripe-bar-reversed" />
-
       <div className="wave-break">
-        {/* Corner stripe SVG */}
         <svg
-          style={{
-            position: "absolute",
-            right: 0,
-            bottom: 0,
-            width: 140,
-            height: 140,
-            overflow: "hidden",
-            pointerEvents: "none",
-          }}
-          viewBox="0 0 140 140"
-        >
-          <g transform="rotate(-38, 70, 70)">
-            <rect x="-20" y="30" width="200" height="12" fill="#B22020" opacity="0.6" />
-            <rect x="-20" y="46" width="200" height="12" fill="#C8A800" opacity="0.6" />
-            <rect x="-20" y="62" width="200" height="12" fill="#1A5C28" opacity="0.6" />
-          </g>
-        </svg>
-
-        {/* Wave SVG */}
-        <svg
-          style={{ position: "absolute", bottom: 0, width: "100%" }}
-          viewBox="0 0 1200 56"
+          aria-hidden="true"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+          viewBox="0 0 1200 64"
           preserveAspectRatio="none"
-          height="56"
         >
-          <path
-            d="M0,0 L1200,0 L1200,18 Q900,32 600,18 Q300,4 0,18 Z"
-            fill="#B22020"
-            opacity="0.55"
-          />
-          <path
-            d="M0,18 Q300,4 600,18 Q900,32 1200,18 L1200,36 Q900,50 600,36 Q300,22 0,36 Z"
-            fill="#C8A800"
-            opacity="0.5"
-          />
-          <path
-            d="M0,36 Q300,22 600,36 Q900,50 1200,36 L1200,56 L0,56 Z"
-            fill="#1A5C28"
-            opacity="0.55"
-          />
+          {[
+            { y: 18, color: "var(--red)" },
+            { y: 32, color: "var(--gold-deep)" },
+            { y: 46, color: "var(--green)" },
+          ].map(({ y, color }) => (
+            <path
+              key={y}
+              d={`M-10,${y} Q150,${y - 12} 300,${y} T600,${y} T900,${y} T1210,${y}`}
+              stroke={color}
+              strokeWidth={12}
+              fill="none"
+            />
+          ))}
         </svg>
       </div>
 

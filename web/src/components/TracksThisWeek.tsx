@@ -12,7 +12,6 @@ const columnStyle = {
 };
 
 const headingStyle = {
-  fontFamily: 'var(--font-display)',
   fontWeight: 900,
   fontSize: 'clamp(36px, 5vw, 60px)',
   lineHeight: 1,
@@ -22,7 +21,6 @@ const headingStyle = {
 };
 
 const subheadStyle = {
-  fontFamily: 'var(--font-body)',
   fontSize: 16,
   color: 'var(--gold-dark)',
   margin: '6px 0 26px',
@@ -30,7 +28,6 @@ const subheadStyle = {
 
 const textLinkStyle = {
   display: 'inline-block',
-  fontFamily: 'var(--font-body)',
   fontSize: 15,
   color: 'var(--red)',
   textDecoration: 'none',
@@ -82,7 +79,7 @@ export const TracksThisWeek = () => {
           <TracksPlaceholder />
         ) : (
           <>
-            <TrackList tracks={visibleTracks} indexWidth={32} rowPadding="11px 0" borderOpacity={0.18} />
+            <TrackList tracks={visibleTracks} />
             {tracks.length > PREVIEW_COUNT && (
               <button
                 onClick={() => setShowAll(a => !a)}
@@ -109,7 +106,7 @@ export const TracksThisWeek = () => {
         <h2 style={{ ...headingStyle, marginBottom: 26 }}>Past Shows</h2>
 
         {pastPlaylists.length === 0 ? (
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)' }}>
+          <p style={{ fontSize: 15, color: 'var(--gold-dark)' }}>
             No past shows yet.
           </p>
         ) : (

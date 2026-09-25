@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { TracksThisWeek } from "@/components/TracksThisWeek";
-import { ListenLiveButton } from "@/components/ListenLiveButton";
+import { STREAM_URL } from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "The Island • Reggae, Dub & Dancehall Radio on WART 95.5 FM",
@@ -36,7 +36,6 @@ export default function Home() {
           <h1
             id="hero-title"
             style={{
-              fontFamily: "var(--font-display)",
               fontWeight: 900,
               fontSize: "clamp(100px, 13vw, 168px)",
               lineHeight: 0.88,
@@ -51,7 +50,6 @@ export default function Home() {
           {/* Tagline */}
           <p
             style={{
-              fontFamily: "var(--font-body)",
               fontStyle: "italic",
               fontWeight: 200,
               fontSize: "20px",
@@ -66,7 +64,6 @@ export default function Home() {
           {/* Meta */}
           <p
             style={{
-              fontFamily: "var(--font-body)",
               fontSize: "17px",
               lineHeight: 1.5,
               color: "var(--gold-dark)",
@@ -80,7 +77,10 @@ export default function Home() {
 
           {/* CTA row */}
           <div style={{ display: "flex", gap: "12px" }}>
-            <ListenLiveButton />
+            <a href={STREAM_URL} target="_blank" rel="noopener" className="btn-live">
+              <span className="live-dot" />
+              Listen Live
+            </a>
             <a href="/playlists/" className="btn-secondary">
               Show Archive
             </a>

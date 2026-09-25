@@ -22,6 +22,4 @@ jest.mock('next/navigation', () => ({
   },
 }))
 
-// Mock environment variables
-process.env.NEXT_PUBLIC_TRACKS_CSV_URL = 'https://example.com/tracks.csv'
 

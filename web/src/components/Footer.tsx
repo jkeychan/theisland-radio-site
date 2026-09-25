@@ -36,14 +36,21 @@ export function Footer() {
         {/* LEFT: copyright */}
         <p
           style={{
-            fontFamily: "var(--font-ui)",
             fontSize: 13,
             letterSpacing: "0.06em",
             color: "var(--gold-soft)",
             margin: 0,
           }}
         >
-          © 2026 The Island with DJ Dub Tractor on WART 95.5 FM, Madison County, NC
+          © 2026 The Island with DJ Dub Tractor on{" "}
+          <a
+            href="https://wartfm.org"
+            target="_blank"
+            rel="noreferrer noopener"
+            style={{ color: "var(--gold)" }}
+          >
+            WART 95.5 FM, Madison County, NC
+          </a>
         </p>
 
         {/* RIGHT: links */}
@@ -54,7 +61,6 @@ export function Footer() {
             alignItems: "center",
             flexWrap: "wrap",
             gap: 20,
-            fontFamily: "var(--font-ui)",
             fontSize: 13,
             letterSpacing: "0.06em",
             color: "var(--gold-soft)",

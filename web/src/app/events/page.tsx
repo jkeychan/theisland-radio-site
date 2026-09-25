@@ -18,7 +18,7 @@ export default function EventsPage() {
           position: 'absolute', bottom: 0, left: 0, right: 0, height: 6,
           background: 'linear-gradient(90deg, var(--red) 0% 33%, var(--gold-deep) 33% 66%, var(--green) 66% 100%)'
         }} />
-        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(48px, 8vw, 80px)', lineHeight: 0.9, letterSpacing: '-0.02em', color: 'var(--gold)' }}>
+        <h1 style={{ fontWeight: 900, fontSize: 'clamp(48px, 8vw, 80px)', lineHeight: 0.9, letterSpacing: '-0.02em', color: 'var(--gold)' }}>
           Events
         </h1>
       </div>
@@ -31,7 +31,7 @@ export default function EventsPage() {
             borderLeft: '4px solid var(--green)',
             padding: '20px 20px 20px 26px',
           }}>
-            <p style={{ fontFamily: 'var(--font-body)', color: 'var(--gold-dark)', margin: 0 }}>
+            <p style={{ color: 'var(--gold-dark)', margin: 0 }}>
               No upcoming events. Stay tuned.
             </p>
           </div>
@@ -43,17 +43,17 @@ export default function EventsPage() {
                 borderLeft: '4px solid var(--green)',
                 padding: '20px 20px 20px 26px',
               }}>
-                <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 20, color: 'var(--gold-dark)', margin: '0 0 4px' }}>{e.title}</h2>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', margin: '0 0 4px' }}>{e.date}</p>
-                <div style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)' }}>
+                <h2 style={{ fontWeight: 900, fontSize: 20, color: 'var(--gold-dark)', margin: '0 0 4px' }}>{e.title}</h2>
+                <p style={{ fontSize: 15, color: 'var(--gold-dark)', margin: '0 0 4px' }}>{e.date}</p>
+                <div style={{ fontSize: 15, color: 'var(--gold-dark)' }}>
                   {[e.venue, e.location].filter(Boolean).join(", ")}
                 </div>
                 {e.description ? (
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--gold-dark)', marginTop: 8 }}>{e.description}</p>
+                  <p style={{ fontSize: 14, color: 'var(--gold-dark)', marginTop: 8 }}>{e.description}</p>
                 ) : null}
                 {e.url ? (
                   <a
-                    style={{ display: 'inline-block', marginTop: 12, fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--red)', textDecoration: 'underline' }}
+                    style={{ display: 'inline-block', marginTop: 12, fontSize: 15, color: 'var(--red)', textDecoration: 'underline' }}
                     href={e.url}
                     target="_blank"
                     rel="noreferrer noopener"

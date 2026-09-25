@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+export const STREAM_URL = "https://station.voscast.com/5530050e0a38b/";
+
 const navItems = [
   { href: "/playlists/", label: "Playlists / Recordings" },
   { href: "/subscribe/", label: "Subscribe" },
@@ -48,7 +50,6 @@ export function Header() {
           <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <span
               style={{
-                fontFamily: "var(--font-ui)",
                 fontSize: 16,
                 fontWeight: 400,
                 letterSpacing: "0.14em",
@@ -64,7 +65,6 @@ export function Header() {
               rel="noreferrer noopener"
               className="header-station-link"
               style={{
-                fontFamily: "var(--font-ui)",
                 fontSize: 12,
                 letterSpacing: "0.08em",
                 color: "var(--gold-soft)",
@@ -87,7 +87,6 @@ export function Header() {
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
                   style={{
-                    fontFamily: "var(--font-ui)",
                     fontSize: 14,
                     fontWeight: 400,
                     letterSpacing: "0.06em",
@@ -105,7 +104,7 @@ export function Header() {
 
           {/* FAR RIGHT: Listen Live */}
           <a
-            href="https://station.voscast.com/5530050e0a38b/"
+            href={STREAM_URL}
             target="_blank"
             rel="noreferrer noopener"
             aria-label="Listen to The Island live"
@@ -114,7 +113,6 @@ export function Header() {
               marginLeft: 16,
               background: "var(--red)",
               color: "var(--gold-cream)",
-              fontFamily: "var(--font-ui)",
               fontSize: 12,
               letterSpacing: "0.1em",
               textTransform: "uppercase",

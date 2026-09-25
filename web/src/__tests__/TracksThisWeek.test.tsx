@@ -1,4 +1,4 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { TracksThisWeek } from '@/components/TracksThisWeek';
 import { usePlaylists } from '@/hooks/usePlaylists';
 
@@ -25,14 +25,25 @@ describe('TracksThisWeek', () => {
     (usePlaylists as jest.Mock).mockReturnValue({ data: mockPlaylists });
   });
 
-  it('renders tracks from the most recent playlist once expanded', async () => {
+  it('renders tracks from the most recent playlist without expanding', () => {
     render(<TracksThisWeek />);
-    fireEvent.click(screen.getByText("View this week's tracklist"));
-    await waitFor(() => {
-      expect(screen.getByText('The Upsetters')).toBeInTheDocument();
-      expect(screen.getByText('Underground')).toBeInTheDocument();
-      expect(screen.getByText('Bob Marley')).toBeInTheDocument();
+    expect(screen.getByText('The Upsetters')).toBeInTheDocument();
+    expect(screen.getByText('Underground')).toBeInTheDocument();
+    expect(screen.getByText('Bob Marley')).toBeInTheDocument();
+    expect(screen.queryByText(/Show all/)).not.toBeInTheDocument();
+  });
+
+  it('previews the first 10 tracks and expands to show all', () => {
+    const tracks = Array.from({ length: 12 }, (_, i) => ({ artist: `Artist ${i + 1}`, title: `Song ${i + 1}` }));
+    (usePlaylists as jest.Mock).mockReturnValue({
+      data: [{ id: '2026-03-13', title: 'March 13, 2026', tracks }],
     });
+    render(<TracksThisWeek />);
+    expect(screen.getByText('Artist 10')).toBeInTheDocument();
+    expect(screen.queryByText('Artist 11')).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText('Show all 12 tracks'));
+    expect(screen.getByText('Artist 12')).toBeInTheDocument();
+    expect(screen.getByText('Show fewer tracks')).toBeInTheDocument();
   });
 
   it('renders the current show date', () => {
@@ -50,7 +61,6 @@ describe('TracksThisWeek', () => {
       data: [{ id: '2026-03-13', title: 'March 13, 2026', tracks: [] }],
     });
     render(<TracksThisWeek />);
-    fireEvent.click(screen.getByText("View this week's tracklist"));
     expect(screen.getByText('No tracks yet — check back Friday')).toBeInTheDocument();
   });
 });

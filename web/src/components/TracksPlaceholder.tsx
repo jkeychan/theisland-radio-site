@@ -2,9 +2,9 @@ export function TracksPlaceholder() {
   return (
     <div style={{
       textAlign: 'center',
-      fontFamily: 'var(--font-ui)',
-      fontSize: 13,
-      color: 'var(--gold-mid)',
+      fontFamily: 'var(--font-body)',
+      fontSize: 15,
+      color: 'var(--gold-dark)',
     }}>
       No tracks yet — check back Friday
     </div>

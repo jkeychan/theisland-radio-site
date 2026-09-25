@@ -43,7 +43,7 @@ export function Footer() {
             margin: 0,
           }}
         >
-          © 2026 The Island · WART 95.5 FM · Madison County, NC · DJ Dub Tractor
+          © 2026 The Island with DJ Dub Tractor on WART 95.5 FM, Madison County, NC
         </p>
 
         {/* RIGHT: links */}

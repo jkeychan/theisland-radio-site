@@ -25,20 +25,20 @@ export function TrackList({
             alignItems: 'start',
           }}
         >
-          <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'rgba(61,46,0,0.3)', paddingTop: 2 }}>
+          <span style={{ fontFamily: 'var(--font-ui)', fontSize: 11, color: 'rgba(61,46,0,0.5)', paddingTop: 3 }}>
             {i + 1}
           </span>
           <span>
-            <span style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: 14, color: 'var(--gold-dark)', display: 'block' }}>
+            <span style={{ fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: 15, color: 'var(--gold-dark)', display: 'block' }}>
               {t.artist}
             </span>
             {t.title && (
-              <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'var(--gold-mid)', letterSpacing: '0.04em', display: 'block' }}>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--gold-dark)', display: 'block' }}>
                 {t.title}
               </span>
             )}
             {t.album && (
-              <span style={{ fontFamily: 'var(--font-ui)', fontSize: 9, color: 'var(--gold-mid)', display: 'block' }}>
+              <span style={{ fontFamily: 'var(--font-body)', fontStyle: 'italic', fontSize: 13, color: 'var(--gold-mid)', display: 'block' }}>
                 {t.album}
               </span>
             )}

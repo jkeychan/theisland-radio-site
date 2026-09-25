@@ -161,10 +161,11 @@ export default function ContactPage() {
           ) : (
             <form ref={formRef} onSubmit={handleSubmit}>
               <div style={{ marginBottom: 20 }}>
-                <label style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
+                <label htmlFor="contact-name" style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
                   Name
                 </label>
                 <input
+                  id="contact-name"
                   name="name"
                   required
                   disabled={isSubmitting}
@@ -175,10 +176,11 @@ export default function ContactPage() {
               </div>
 
               <div style={{ marginBottom: 20 }}>
-                <label style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
+                <label htmlFor="contact-email" style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
                   Email
                 </label>
                 <input
+                  id="contact-email"
                   name="email"
                   type="email"
                   required
@@ -190,10 +192,11 @@ export default function ContactPage() {
               </div>
 
               <div style={{ marginBottom: 20 }}>
-                <label style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
+                <label htmlFor="contact-subject" style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
                   Subject
                 </label>
                 <input
+                  id="contact-subject"
                   name="subject"
                   required
                   disabled={isSubmitting}
@@ -204,10 +207,11 @@ export default function ContactPage() {
               </div>
 
               <div style={{ marginBottom: 20 }}>
-                <label style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
+                <label htmlFor="contact-message" style={{ fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--gold-dark)', display: 'block', marginBottom: 6 }}>
                   Message
                 </label>
                 <textarea
+                  id="contact-message"
                   name="message"
                   required
                   rows={6}

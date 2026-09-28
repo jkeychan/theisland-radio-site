@@ -1,2 +1,4 @@
 #!/bin/bash
+# Artist-credit splitting calls TypeSafe; pull its key from the keychain if not in env.
+export TYPESAFE_API_KEY="${TYPESAFE_API_KEY:-$(security find-generic-password -s TYPESAFE_API_KEY -w 2>/dev/null)}"
 exec "$(dirname "$0")/.venv/bin/python" "$(dirname "$0")/cli.py" "$@"

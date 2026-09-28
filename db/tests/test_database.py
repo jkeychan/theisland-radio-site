@@ -7,11 +7,11 @@ import pytest
 
 
 def test_init_db_creates_tables(tmp_db):
-    """init_db() creates all 5 expected tables."""
+    """init_db() creates all 7 expected tables."""
     tables = {row[0] for row in tmp_db.execute(
         "SELECT name FROM sqlite_master WHERE type='table'"
     ).fetchall()}
-    assert tables == {"shows", "tracks", "artists", "track_artists", "show_tracks"}
+    assert tables == {"shows", "tracks", "artists", "track_artists", "show_tracks", "artist_splits", "artist_aliases"}
 
 
 def test_foreign_keys_enforced(tmp_db):

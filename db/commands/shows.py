@@ -78,6 +78,10 @@ def shows_import(file_path):
     conn = get_connection()
     result = import_from_file(file_path, conn)
     click.echo(f"Imported {result['shows']} shows, {result['tracks']} tracks.")
+    if result["review"]:
+        click.echo("\nLow-confidence artist splits (fix with: island db split CREDIT ACT...):")
+        for credit, acts, confidence in result["review"]:
+            click.echo(f"  {confidence:.2f}  {credit}  ->  {' | '.join(json.loads(acts))}")
     conn.close()
 
 

@@ -10,7 +10,7 @@ This avoids nested-brace matching entirely.
 import re
 import sqlite3
 from typing import Any
-from importers.artist_parser import parse_artists
+from importers.artist_parser import REVIEW_BELOW, parse_artists
 
 
 def parse_playlists_ts(content: str) -> list[dict[str, Any]]:
@@ -81,7 +81,9 @@ def _upsert_track(conn: sqlite3.Connection, title: str, raw_artist: str, album: 
 
 
 def _upsert_artists(conn: sqlite3.Connection, track_id: int, raw_artist: str) -> None:
-    for name in parse_artists(raw_artist):
+    # Relink from scratch so a changed split doesn't leave stale links behind
+    conn.execute("DELETE FROM track_artists WHERE track_id=?", (track_id,))
+    for name in parse_artists(raw_artist, conn):
         conn.execute(
             "INSERT INTO artists (name) VALUES (?) ON CONFLICT DO NOTHING", (name,)
         )
@@ -94,8 +96,8 @@ def _upsert_artists(conn: sqlite3.Connection, track_id: int, raw_artist: str) ->
         )
 
 
-def import_playlists_ts(content: str, conn: sqlite3.Connection) -> dict[str, int]:
-    """Import parsed playlists into the DB. Returns counts."""
+def import_playlists_ts(content: str, conn: sqlite3.Connection) -> dict[str, Any]:
+    """Import parsed playlists into the DB. Returns counts and low-confidence splits."""
     playlists = parse_playlists_ts(content)
     shows_inserted = tracks_inserted = 0
 
@@ -124,10 +126,17 @@ def import_playlists_ts(content: str, conn: sqlite3.Connection) -> dict[str, int
             )
             _upsert_artists(conn, track_id, track["artist"])
 
+    # playlists.ts is the only source: drop tracks no show plays, then artists no track credits
+    conn.execute("DELETE FROM tracks WHERE id NOT IN (SELECT track_id FROM show_tracks)")
+    conn.execute("DELETE FROM artists WHERE id NOT IN (SELECT artist_id FROM track_artists)")
     conn.commit()
-    return {"shows": shows_inserted, "tracks": tracks_inserted}
+    review = conn.execute(
+        "SELECT credit, acts, confidence FROM artist_splits WHERE confidence < ? ORDER BY credit",
+        (REVIEW_BELOW,),
+    ).fetchall()
+    return {"shows": shows_inserted, "tracks": tracks_inserted, "review": [tuple(r) for r in review]}
 
 
-def import_from_file(ts_path: str, conn: sqlite3.Connection) -> dict[str, int]:
+def import_from_file(ts_path: str, conn: sqlite3.Connection) -> dict[str, Any]:
     content = open(ts_path, encoding="utf-8").read()
     return import_playlists_ts(content, conn)

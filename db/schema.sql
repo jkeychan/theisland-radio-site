@@ -49,3 +49,18 @@ CREATE TABLE IF NOT EXISTS show_tracks (
     position INTEGER NOT NULL,
     UNIQUE(show_id, track_id, position)  -- enables idempotent re-import via ON CONFLICT DO NOTHING
 );
+
+-- Cached artist-credit splits decided by TypeSafe Jev (see importers/artist_parser.py).
+-- acts is a JSON array of names. confidence 1.0 means set by hand via `island db split`.
+CREATE TABLE IF NOT EXISTS artist_splits (
+    credit     TEXT PRIMARY KEY,
+    acts       TEXT NOT NULL,
+    confidence REAL NOT NULL
+);
+
+-- Alternate spellings of an artist name, mapped to the one name we store.
+-- Filled by `island db find-aliases --apply` (TypeSafe Jev) or `island db alias`.
+CREATE TABLE IF NOT EXISTS artist_aliases (
+    alias     TEXT PRIMARY KEY,
+    canonical TEXT NOT NULL
+);

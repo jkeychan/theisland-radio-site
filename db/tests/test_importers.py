@@ -88,3 +88,18 @@ def test_import_playlists_ts_idempotent(tmp_db):
     assert len(shows) == 2
     show_tracks = tmp_db.execute("SELECT * FROM show_tracks").fetchall()
     assert len(show_tracks) == 3
+
+
+def test_import_drops_tracks_and_artists_not_on_a_show(tmp_db):
+    tmp_db.execute("INSERT INTO tracks (title, raw_artist) VALUES ('Orphan', 'Nobody')")
+    tmp_db.execute("INSERT INTO artists (name) VALUES ('Nobody')")
+    import_playlists_ts(FIXTURE_TS, tmp_db)
+    assert tmp_db.execute("SELECT count(*) FROM tracks WHERE title='Orphan'").fetchone()[0] == 0
+    assert tmp_db.execute("SELECT count(*) FROM artists WHERE name='Nobody'").fetchone()[0] == 0
+
+
+def test_import_maps_aliases_to_canonical_name(tmp_db):
+    tmp_db.execute("INSERT INTO artist_aliases (alias, canonical) VALUES ('The Upsetters', 'Upsetters')")
+    import_playlists_ts(FIXTURE_TS, tmp_db)
+    names = {r[0] for r in tmp_db.execute("SELECT name FROM artists")}
+    assert "Upsetters" in names and "The Upsetters" not in names

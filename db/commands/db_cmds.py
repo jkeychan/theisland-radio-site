@@ -5,7 +5,7 @@ import sys
 import click
 from database import get_connection, init_db
 
-TABLES = ["shows", "tracks", "artists", "track_artists", "show_tracks"]
+TABLES = ["shows", "tracks", "artists", "track_artists", "show_tracks", "artist_splits", "artist_aliases"]
 
 
 @click.group("db")
@@ -18,6 +18,67 @@ def db_init():
     """Initialize (or re-initialize) the database schema."""
     init_db()
     click.echo("Database initialized.")
+
+
+@db.command("split")
+@click.argument("credit")
+@click.argument("acts", nargs=-1, required=True)
+def db_split(credit, acts):
+    """Set how an artist credit splits into acts, e.g. split "Jahtari and Pupajim" Jahtari Pupajim.
+
+    Re-run `island shows import` afterwards to relink tracks.
+    """
+    conn = get_connection()
+    conn.execute(
+        "INSERT INTO artist_splits (credit, acts, confidence) VALUES (?, ?, 1.0) "
+        "ON CONFLICT(credit) DO UPDATE SET acts=excluded.acts, confidence=1.0",
+        (credit, json.dumps(list(acts))),
+    )
+    conn.commit()
+    conn.close()
+    click.echo(f"{credit} -> {' | '.join(acts)}")
+
+
+@db.command("alias")
+@click.argument("alias")
+@click.argument("canonical")
+def db_alias(alias, canonical):
+    """Record ALIAS as another spelling of CANONICAL. Re-run `island shows import` after."""
+    conn = get_connection()
+    conn.execute(
+        "INSERT INTO artist_aliases (alias, canonical) VALUES (?, ?) "
+        "ON CONFLICT(alias) DO UPDATE SET canonical=excluded.canonical",
+        (alias, canonical),
+    )
+    # Keep lookups one hop: anything pointing at ALIAS now points at CANONICAL
+    conn.execute("UPDATE artist_aliases SET canonical=? WHERE canonical=?", (canonical, alias))
+    conn.execute("DELETE FROM artist_aliases WHERE alias=canonical")
+    conn.commit()
+    conn.close()
+    click.echo(f"{alias} -> {canonical}")
+
+
+@db.command("find-aliases")
+@click.option("--apply", is_flag=True, help="Save the proposed merges.")
+def db_find_aliases(apply):
+    """Use TypeSafe Jev to find duplicate/misspelled artist names."""
+    from importers.artist_parser import find_aliases
+    conn = get_connection()
+    merges, rejected = find_aliases(conn)
+    for alias, canonical, conf in merges:
+        click.echo(f"merge  {alias}  ->  {canonical}   (spelling conf {conf:.2f})")
+    for a, b, p in rejected:
+        label = "review" if p >= 0.4 else "keep  "
+        click.echo(f"{label} {a}  /  {b}   (same-act p={p:.2f})")
+    if apply:
+        conn.executemany(
+            "INSERT INTO artist_aliases (alias, canonical) VALUES (?, ?) "
+            "ON CONFLICT(alias) DO UPDATE SET canonical=excluded.canonical",
+            [(a, c) for a, c, _ in merges],
+        )
+        conn.commit()
+        click.echo(f"Saved {len(merges)} aliases. Run `island shows import` to relink.")
+    conn.close()
 
 
 @db.command("export")

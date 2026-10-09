@@ -2,6 +2,35 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-10-09",
+    title: "October 9, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-october-9-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Earl Sixteen, Poorman Dub Sound", title: "Dub Connection", album: "Spiritual Connection / Dub Connection" },
+      { artist: "Roberto Sanchez, Lone Ark Riddim Force", title: "Good Meditation Dub", album: "Good Vibration" },
+      { artist: "Iternal, Meditative Sounds", title: "Cutting Down Our Dub", album: "Wicked World" },
+      { artist: "Alpha Steppa, Queenie Moy", title: "Need To Dub", album: "Need to Flow" },
+      { artist: "Alpha Steppa, I-Sarana", title: "Dub Am I", album: "Collision of an Ancient Mind and a Modern World" },
+      { artist: "O.B.F, Mr. Williamz, Lady Ice", title: "RING THE ALARM", album: "RING THE ALARM" },
+      { artist: "Blood Sisters", title: "Ring My Bell", album: "Soul Jazz Records Presents HUSTLE! Reggae Disco - Kingston, London, New York" },
+      { artist: "Selecta J-Man, Sukuward", title: "Couple Guinness - VIP", album: "Couple Guinness (VIP)" },
+      { artist: "Alpha Steppa, Fikir Amlak, Dubmonk", title: "Jah Will Provide Dub", album: "Zion Higher Realm" },
+      { artist: "Mafia & Fluxy, The Pharmacist", title: "1st Trumpet", album: "Introducing the Pharmacist (feat. The Pharmacist)" },
+      { artist: "Carol Cool", title: "Upside Down", album: "Soul Jazz Records Presents HUSTLE! Reggae Disco - Kingston, London, New York" },
+      { artist: "Stalawa, Ponchita Peligros", title: "Rock & Come In", album: "Rock & Come in Riddim" },
+      { artist: "Earl Zero, Cultural Warriors", title: "Righteous Dub", album: "Righteous Work" },
+      { artist: "Meditative Sounds", title: "Ghetto Dub", album: "Meditative Sounds Singles Collection 2005-2010" },
+      { artist: "Truesounds, Brother Culture, Dougie Conscious", title: "Rally Round (Snake Charmer Riddim) - Conscious Dub 1", album: "Rally Round (Snake Charmer Riddim)" },
+      { artist: "Dub Cavern, Leo Lore", title: "Saving All My Dub For You", album: "Saving All My Love For You" },
+      { artist: "Coldcut, On-U Sound, Lee \"Scratch\" Perry, Junior Reid, Elan, Adrian Sherwood", title: "Divide and Rule", album: "Outside The Echo Chamber" },
+      { artist: "Coldcut, On-U Sound, Adrian Sherwood", title: "Livid Hip Hop", album: "Outside The Echo Chamber" },
+      { artist: "Bodhi", title: "Quaresma Dub", album: "Quaresma Dub" },
+      { artist: "Kimyan, Robert Manos", title: "Run Ames", album: "Coeur Calme" },
+      { artist: "Stevo the Bass, Ras Tinny", title: "Just One Day Inna March", album: "Just One Day Inna March" }
+    ]
+  },
+{
     id: "2026-09-25",
     title: "September 25, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-september-25-2026",

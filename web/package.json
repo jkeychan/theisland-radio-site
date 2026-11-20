@@ -22,6 +22,10 @@
   },
   "overrides": {
     "flatted": "^3.4.2",
+    "glob": "^14.0.6",
+    "test-exclude": {
+      "minimatch": "^11.0.5"
+    },
     "picomatch": "^4.0.4",
     "postcss": "^8.5.10",
     "sharp": "^0.35.0"

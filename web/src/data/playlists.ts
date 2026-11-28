@@ -2,6 +2,35 @@ import type { Playlist } from "@/types/content";
 
 export const playlists: Playlist[] = [
   {
+    id: "2026-11-27",
+    title: "November 27, 2026",
+    archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-november-27-2026",
+    description: "Dub Tractor's Island vibes with classic reggae, dub, and dancehall tracks",
+    tracks: [
+      { artist: "Lee \"Scratch\" Perry", title: "City Too Hot", album: "The Best of Lee Perry" },
+      { artist: "Roni Size, Reprazent, Peter Kruder", title: "Heroes - Kruder Long Loose Bossa / Edit", album: "New Forms (20th Anniversary Edition)" },
+      { artist: "Don Carlos, Robert Owens", title: "Inspired - Dub Mix", album: "Inspired" },
+      { artist: "Perfect Giddimani, Sinky Beatz", title: "Carry on Dub", album: "Carry On" },
+      { artist: "Air", title: "Modular Mix", album: "Premiers Symptômes" },
+      { artist: "Prince Far I", title: "Back Weh", album: "Cry Tuff Dub Encounter Chapter 3" },
+      { artist: "Junior Murvin", title: "Police & Thieves", album: "Police & Thieves" },
+      { artist: "Roots Radics", title: "Dangerous Match One", album: "Junjo Presents: Wins The World Cup" },
+      { artist: "Jackie Mittoo", title: "Drum Song", album: "The Dub Express, Vol. 5 (Platinum Edition)" },
+      { artist: "Bunny Lee, Prince Jammy, The Aggrovators", title: "Dubbing in the Front Yard", album: "Dubbing in the Front Yard & Conflict Dub" },
+      { artist: "Hollie Cook", title: "The Beat Goes On Dub", album: "Hollie Cook in Dub (Prince Fatty Presents)" },
+      { artist: "Harry Mudie", title: "Dub With a Difference", album: "Harry Mudie Meet King Tubby In Dub Confrence Volume One" },
+      { artist: "Sly & The Revolutionaries, Jah Thomas", title: "Marijuana - with Jah Thomas", album: "Black Ash Dub (with Jah Thomas)" },
+      { artist: "Hermanos Gutiérrez", title: "Low Sun", album: "Sonido Cósmico" },
+      { artist: "The Twinkle Brothers", title: "Jahovah In Dub Majesty", album: "Dub Massacre Part 1 & Part 2" },
+      { artist: "Joe Gibbs & The Professionals", title: "Treasure Dub", album: "African Dub All-Mighty Chapter 1" },
+      { artist: "SHY FX, Mr. Williamz, Ms. Dynamite", title: "Dance Haffi Nice (feat. Ms. Dynamite)", album: "Rudeboy Design Soundtape" },
+      { artist: "Jô, Derrick Sound", title: "Voz Do Som", album: "Voz Do Som" },
+      { artist: "Brother Culture, Radikal Vibration", title: "Jump up Pon It", album: "Code Name" },
+      { artist: "Lone Ark, The 18th Parallel", title: "Money", album: "Money" },
+      { artist: "King Tubby", title: "Roots Of Dub", album: "The Roots Of Dub" }
+    ]
+  },
+{
     id: "2026-11-20",
     title: "November 20, 2026",
     archiveUrl: "https://archive.org/details/the-island-with-dub-tractor-november-20-2026",
